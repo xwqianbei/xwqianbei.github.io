@@ -189,7 +189,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-01-29 21:03:55" itemprop="dateModified" datetime="2024-01-29T21:03:55+08:00">2024-01-29</time>
+      <time title="修改时间：2024-02-11 00:34:56" itemprop="dateModified" datetime="2024-02-11T00:34:56+08:00">2024-02-11</time>
     </span>
 
   
@@ -199,7 +199,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.8k</span>
+      <span>2.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -227,8 +227,7 @@
 </ol>
 </li>
 </ul>
- <img src="/2024/01/27/MARL/01/27/MARL/1706346629825.png" class width="1706346629825">
-
+<p> <img src="/2024/01/27/MARL/1706346629825.png" alt="1706346629825"></p>
 <ul>
 <li>按照任务特性可以把多智能体系统划分为</li>
 </ul>
@@ -261,9 +260,7 @@
 <li>R -&gt; R表示每个智能体的奖励函数：S × A × N Ri表示智能体i对应的奖励函数</li>
 <li>γ -&gt; γ表示折扣因子</li>
 </ul>
-<p><strong>过程</strong>：在每一个时间步，智能体i 处于 状态s , 选择动作ai 属于 Ai, 构成联合动作 a &#x3D; {a1, a2, … , an}并执行，环境转移到下一个状态s’~P(·|s, a)， 智能体i得到奖励Ri(s, a)， 每个智能体通过优化自身的策略函数 πi : S -&gt; Δ(Ai)最大化以其期望累计奖赏，以状态价值函数的形式表达如下：</p>
-<img src="/2024/01/27/MARL/01/27/MARL/1706412112570.png" class width="1706412112570">
-
+<p><strong>过程</strong>：在每一个时间步，智能体i 处于 状态s , 选择动作ai 属于 Ai, 构成联合动作 a &#x3D; {a1, a2, … , an}并执行，环境转移到下一个状态s’~P(·|s, a)， 智能体i得到奖励Ri(s, a)， 每个智能体通过优化自身的策略函数 πi : S -&gt; Δ(Ai)最大化以其期望累计奖赏，以状态价值函数的形式表达如下：<br><img src="/2024/01/27/MARL/1706412112570.png" alt="1706412112570"></p>
 <ul>
 <li>上述的符号 i 代表除了智能体 i 之外的其他智能体。与单智能体强化学习中智能体仅仅需要考虑自身对环境的影响不同，多智能体系统中智能体之间也会相互影响，他们共同决策并且同时更新策略。</li>
 <li>当系统中的其他智能体的策略固定时，智能体 i 可以最大化自己的收益函数，以寻找到相对于其他智能体的策略的最优策略 π∗</li>
@@ -273,8 +270,7 @@
 </ul>
 </li>
 </ul>
-<img src="/2024/01/27/MARL/01/27/MARL/1706412808069.png" class width="1706412808069">
-
+<p><img src="/2024/01/27/MARL/1706412808069.png" alt="1706412808069"></p>
 <ul>
 <li><p>部分可观测随机博弈：定义为 M &#x3D; {N, S, A, P, R, γ, Ω, O}</p>
 <ul>
@@ -302,7 +298,7 @@
 <ul>
 <li>DTDE 分布式训练分布式执行</li>
 <li>CTCE 集中式训练集中式执行</li>
-<li>CTDE 集中式训练分布式执行<img src="/2024/01/27/MARL/01/27/MARL/1706421213707.png" class width="1706421213707"></li>
+<li>CTDE 集中式训练分布式执行<br><img src="/2024/01/27/MARL/1706421213707.png" alt="1706421213707"></li>
 </ul>
 </li>
 <li><p>分布式训练分布式执行 DTDE：每个智能体<strong>仅利用自己的局部信息独立地进行策略更新和策略实现</strong>，不涉及到信息的交换<br>πi: Ωi -&gt; ∆(Ai)<br>IQL: 是基于DTDE的典型算法</p>
@@ -333,11 +329,25 @@
 <li>通信什么内容</li>
 <li>何时通信</li>
 </ul>
-<img src="/2024/01/27/MARL/01/27/MARL/1706431067761.png" class width="1706431067761">
-
+<p><img src="/2024/01/27/MARL/1706431067761.png" alt="1706431067761"></p>
 <p>通信内容：1. 直接把自身局部信息发送给其他智能体 -&gt; 信息冗余、带宽损耗 2. <strong>发送者提取出最有用的信息</strong><br>通信时机：1. 每时每刻通信 2. <strong>关键时刻通信</strong> 更高效</p>
-<h2 id="经典环境下的协作多智能体强化学习"><a href="#经典环境下的协作多智能体强化学习" class="headerlink" title="经典环境下的协作多智能体强化学习"></a>经典环境下的协作多智能体强化学习</h2><ul>
-<li>基于策略梯度的多智能体协作</li>
+<h2 id="经典环境下的协作多智能体强化学习"><a href="#经典环境下的协作多智能体强化学习" class="headerlink" title="经典环境下的协作多智能体强化学习"></a>经典环境下的协作多智能体强化学习</h2><h3 id="基于值函数的多智能体协作"><a href="#基于值函数的多智能体协作" class="headerlink" title="基于值函数的多智能体协作"></a>基于值函数的多智能体协作</h3><ol>
+<li><p>IQL<br><img src="/2024/01/27/MARL/IQL.png" alt="IQL"></p>
+</li>
+<li><p>VDN<br><img src="/2024/01/27/MARL/VDN.png" alt="VDN"></p>
+</li>
+<li><p>QMIX<br><img src="/2024/01/27/MARL/QMIX.png" alt="QMIX"></p>
+</li>
+<li><p>QTRAN<br><img src="/2024/01/27/MARL/QTRAN.png" alt="QTRAN"></p>
+</li>
+</ol>
+<ul>
+<li>参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/203164554">https://zhuanlan.zhihu.com/p/203164554</a></li>
+</ul>
+<h3 id="MADDPG"><a href="#MADDPG" class="headerlink" title="MADDPG"></a>MADDPG</h3><p><img src="/2024/01/27/MARL/MADDPG.png" alt="MADDPG"></p>
+<h3 id="COMA"><a href="#COMA" class="headerlink" title="COMA"></a>COMA</h3><p><img src="/2024/01/27/MARL/COMA.png" alt="COMA"></p>
+<ul>
+<li>参考：<a target="_blank" rel="noopener" href="https://hub.baai.ac.cn/view/13622">https://hub.baai.ac.cn/view/13622</a></li>
 </ul>
 
       
