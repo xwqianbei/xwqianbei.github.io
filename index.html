@@ -121,13 +121,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -144,6 +144,165 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米兰的小铁酱">
+      <meta itemprop="description" content="attention is all you need">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 米兰的小铁酱">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/" class="post-title-link" itemprop="url">Contrastive Identity-Aware Learning for Multi-Agent Value Decomposition</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-02-23 10:34:54" itemprop="dateCreated datePublished" datetime="2024-02-23T10:34:54+08:00">2024-02-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-24 17:18:48" itemprop="dateModified" datetime="2024-02-24T17:18:48+08:00">2024-02-24</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition-AAAI-23-Zhejiang-University-MARL-Contrastive-Learning"><a href="#Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition-AAAI-23-Zhejiang-University-MARL-Contrastive-Learning" class="headerlink" title="Contrastive Identity-Aware Learning for Multi-Agent Value Decomposition &#x2F;AAAI-23&#x2F;Zhejiang University&#x2F;MARL + Contrastive Learning"></a>Contrastive Identity-Aware Learning for Multi-Agent Value Decomposition &#x2F;AAAI-23&#x2F;Zhejiang University&#x2F;MARL + Contrastive Learning</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li><strong>Challenges:</strong> 挑战在于促进多智能体之间的多样性行为</li>
+<li><strong>Existing Methodes</strong>: 现有方法直接鼓励通过各种策略学习多样的agent network</li>
+<li><strong>Shortcoming</strong>: 专门设计agent network的方法受到无法区分的indistinguishable VD network限制 -&gt; 导致智能体行为<strong>同质化</strong>，进而降低合作能力<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">One of the main challenges in VD is to promote diverse behaviors among agents, </span><br><span class="line">while existing methods directly encourage the diversity oflearned agent networks with various strategies. </span><br><span class="line">However, we argue that these dedicated designs for agent networks are still limited by the indistinguishable VD network, </span><br><span class="line">leading to homogeneous agent behaviors and thus downgrading the cooperation capability.</span><br></pre></td></tr></table></figure></li>
+<li><strong>In this paper</strong>: Contrastive Identity-Aware learning (CIA) method(对比身份意识学习) -&gt; 提高VD network信用等级区分能力 -&gt; 多智能体行文更加多样性</li>
+<li><strong>CIA</strong>: 利用对比学习最大化不同智能体的<strong>时间信用和身份表征</strong>之间的互信息 -&gt; 信用分配的充分表现和进一步突显个性</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In this paper, we propose a novel Contrastive Identity-Aware learning (CIA) method, </span><br><span class="line">explicitly boosting the credit-level distinguishability of the VD network to break the bottleneck of multi-agent diversity.</span><br><span class="line">Specifically, our approach leverages contrastive learning to maximize the mutual information </span><br><span class="line">between the temporal credits and identity representations of different agents, </span><br><span class="line">encouraging the full expressiveness of credit assignment and further the emergence of individualities.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Experiment</strong>:  CIA 模块的算法实现简单而有效，可以轻松合并到各种 VD 架构中</li>
+<li><strong>Code</strong>: <a target="_blank" rel="noopener" href="https://github.com/liushunyu/CIA">https://github.com/liushunyu/CIA</a></li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li><p><strong>shortcoming of VD methods</strong>: 智能体不可避免的学习相似的行为 -&gt; 导致很容易阻碍高效的探索 进而陷入局部最优解</p>
+</li>
+<li><p><strong>Existing Methods</strong>: 1. <strong>归因agent之间的相似性</strong> 通过参数共享来同质化policy network &#x2F; 2. 设计<strong>辅助的目标(+ loss)<strong>在policy network上解决</strong>agent-level</strong>的多样性 &#x2F; 3. 为<strong>每个agent引入特定的networks</strong> 不惜牺牲完全参数共享的优势</p>
+</li>
+<li><p><strong>Motivation</strong>: 现有的方法都忽略了agents 的 policy networks 都是通过VD network来评估和改进的这一事实 -&gt; agents 行为的多样性实际上是依赖于信用分配的区分性 -&gt; 本文认为追逐agents policies的多样性依然受限到VD network 提供模糊的信用分配来证明不同agent的贡献<br><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1708666648057.png" alt="1708666648057"></p>
+</li>
+<li><p><strong>In this paper</strong>: 本文从信用分配的新颖角度研究multi-agent的多样性 提出contrastive identity-aware learning method, termed as CIA -&gt; 鼓励credit-level 区分性</p>
+</li>
+<li><p><strong>Method</strong>: </p>
+<ol>
+<li><strong>利用基于梯度的归因来表示每个智能体的信用</strong>， 并且采用完整轨迹的时序信用来进一步考虑智能体的长期行为</li>
+<li>最大化互不同智能体的时序信用和可学习身份表征之间的互信息</li>
+<li>本文定制一个对比学习目标来导出互信息的易于处理的下界，因为估计和最大化神经网络的互信息通常很棘手</li>
+</ol>
+</li>
+</ul>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Credit-Indistinguishability-Analysis"><a href="#Credit-Indistinguishability-Analysis" class="headerlink" title="Credit Indistinguishability Analysis"></a>Credit Indistinguishability Analysis</h3><ul>
+<li>信用分配模糊：如果可学习的信用对于agent身份来说是不变的说明信用分配是模糊的</li>
+<li>方法：QMIX(RS)在每个训练epoch，随机打乱输入到min network的values的顺序 &#x2F; 计算训练后的网络采样的轨迹的<strong>KL散度距离表示信用分布的相似性</strong></li>
+<li>结论：QMIX(RS)和original QMIX的性能一样，且两者的KL散度距离很小， 但是QMIX(CIA)的性能优于QMIX，且两者KL散度较大 -&gt; 说明CIA改善了QMIX的信用分配模糊问题<br><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1708688325540.png" alt="1708688325540"><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Interestingly, even with the ambiguous credit assignment, the random-shuffle variant can </span><br><span class="line">still achieve the performance on par with those obtained by original QMIX. </span><br><span class="line">The KL-divergence distance also shows that the credit distribution of QMIX </span><br><span class="line">is similar as its random-shuffle variant, indicating that QMIX are insensitive to the identity of agents.</span><br><span class="line">Thus, its learned credits may be ambiguous, which limits the diverse behaviors of agents and damages the final performance.</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Contrastive-Identity-Aware-Learning"><a href="#Contrastive-Identity-Aware-Learning" class="headerlink" title="Contrastive Identity-Aware Learning"></a>Contrastive Identity-Aware Learning</h3><ol>
+<li>Temporal Credit Attribution</li>
+</ol>
+<ul>
+<li><p>key issue: 如何定义一个通用的信用来表示单个智能体的贡献</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Before promoting the distinguishability of credits, one key issue to be considered is: </span><br><span class="line">how to define a universal credit to represent the contributions of individual agents in different VD methods.</span><br></pre></td></tr></table></figure></li>
+<li><p>method: 使用 gradient-based attribution mechanism（基于梯度的归因机制） 提取信用分配信息</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Towards addressing this problem, we consider a gradient-based attribution mechanism </span><br><span class="line">to extract the credit assignment information in the mixing network.</span><br></pre></td></tr></table></figure></li>
+<li><p>gradient-based attribution mechanism: 计算output对于input的偏导数 -&gt; 揭示输入对于输出的影响程度 -&gt; 使用joint-action value 和 individual value之间的偏导数表示信用 -&gt; 确定每个agent的贡献<br>$$<br>x_{t}^{k} &#x3D; \partial Q_{t}^{tot} &#x2F; \partial Q_{t}^{k}  \in R<br>$$<br><em>越大的归因值对应的agent对最终结果影响越大</em></p>
+</li>
+<li><p>在贯序决策中，推断一个agent的贡献仅靠单个时间步的行为是不够的 -&gt; 采用时序信用归因 整个轨迹trajectory<br>$$<br>x_{\tau}^{k} &#x3D; [x_{1}^{k}, x_{2}^{k}, … ,x_{N}^{k}] \in R^{N}<br>X_{\tau} \in R^(K \times N)<br>$$<br><em>N 是所有采样的τ具有的最大长度， 如果某个τ提前终止 则用 0 填充</em></p>
+</li>
+<li><p>结论： $X_{\tau \in R^{K \times N}}$ 时序信用归因考虑了agent长期的行为 -&gt; 进而更加稳定的衡量了agent的贡献</p>
+</li>
+</ul>
+<ol start="2">
+<li>Contrastive Identity-Aware Distinguishability（对比身份意识可区分性）</li>
+</ol>
+<p>temporal credit attribution解决了信用的表示，还要进一步区分credit -&gt; 但是很难直接限制不同可学习的credit之间的距离<br>-&gt; 本文提出近似方法： 提出潜在身份表示作为agent的中间变量，并且通过这些表示调控独自的时序信用 -&gt; 实现身份意识的区分性</p>
+<ul>
+<li><p>identity representation: 每个agent对应一个可学习的随机初始化的身份表示 $ w^{k} \in R^{N} $ </p>
+</li>
+<li><p>最大化temporal credits 和 identity representation的互信息 -&gt; 最大化identity representation 和 temporal credit的关联程度<br>$$<br>I_{x;w} &#x3D; E_{x, w}[log(P(x|w) &#x2F; P(x))]<br>$$<br><em>然后优化$I_{x,w}$ 十分困难，因为估算互信息是不可解的</em></p>
+</li>
+<li><p>对比学习：$ I(x;w) &gt;&#x3D; log(K) - L_{CL} $<br><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1708760818204.png" alt="1708760818204"><br>-&gt; $ w_{k} $ 会和 $ x_{k} $ 靠近，并且和其他$ x_{k-} $ 远离<br>公式中$ g(x_{\tau}^{k}, w^{k}) $ 表示 $ x_{\tau}^{k} $ 和 $ w^{k} $ 相似性，本文中使用点积运算表示</p>
+</li>
+<li><p>结论：<strong>这种身份层面的对比学习loss 1. 限制了学习到的身份表示均分分布在一个特定的超球面 而不会发散 2. 并且对应的时序信用也会分布在对应的身份表示周围</strong><br>-&gt; agent credits的身份意识之间的区分性 提供更加有区分度的信用分配</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">As shown in Figure 3(d), this identitywise contrastive learning </span><br><span class="line">loss constrains the learned identity representations to uniformly</span><br><span class="line">distribute on a specific creditidentity hypersphere without divergence, </span><br><span class="line">where the temporal credits distribute around their corresponding</span><br><span class="line">identity representation (Wang and Isola 2020). With the contrastive learning loss, </span><br><span class="line">CIA directly encourages the identity-awaredistinguishability among agent credits, </span><br><span class="line">providing a more discriminative credit assignment for multi-agent diversity.</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1708762823185.png" alt="1708762823185"></p>
+</li>
+<li><p>从分类的角度解释： 可以看成一个分类问题，input是temporal credits 那么identity是分类网络的参数 想要最小化这个loss 要么样本空间十分简单，要么模型足够复杂，但是网络结构仅包含一层线性层nn.Linear(N, K)则施加了一个强约束了输入的credits是线性可分的 <strong>需要注意的是这里输入的样本temporal credits也是可以学的，通过反向传播更新MIX Network</strong></p>
+</li>
+</ul>
+<p>$$<br>L_{all} &#x3D; L_{TD} + \alpha L_{CL}<br>$$<br>*$\alpha$是一个trade off</p>
+<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -891,13 +1050,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">8k</span>
+    <span title="站点总字数">13k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">14 分钟</span>
+    <span title="站点阅读时长">22 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
