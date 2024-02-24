@@ -189,7 +189,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-24 17:18:48" itemprop="dateModified" datetime="2024-02-24T17:18:48+08:00">2024-02-24</time>
+      <time title="修改时间：2024-02-24 17:25:21" itemprop="dateModified" datetime="2024-02-24T17:25:21+08:00">2024-02-24</time>
     </span>
 
   
@@ -199,7 +199,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5k</span>
+      <span>4.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -217,7 +217,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition-AAAI-23-Zhejiang-University-MARL-Contrastive-Learning"><a href="#Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition-AAAI-23-Zhejiang-University-MARL-Contrastive-Learning" class="headerlink" title="Contrastive Identity-Aware Learning for Multi-Agent Value Decomposition &#x2F;AAAI-23&#x2F;Zhejiang University&#x2F;MARL + Contrastive Learning"></a>Contrastive Identity-Aware Learning for Multi-Agent Value Decomposition &#x2F;AAAI-23&#x2F;Zhejiang University&#x2F;MARL + Contrastive Learning</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+          <h1 id="Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition-AAAI-23-Zhejiang-University-MARL-Contrastive-Learning"><a href="#Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition-AAAI-23-Zhejiang-University-MARL-Contrastive-Learning" class="headerlink" title="Contrastive Identity-Aware Learning for Multi-Agent Value Decomposition /AAAI-23/Zhejiang University/MARL + Contrastive Learning"></a>Contrastive Identity-Aware Learning for Multi-Agent Value Decomposition /AAAI-23/Zhejiang University/MARL + Contrastive Learning</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li><strong>Challenges:</strong> 挑战在于促进多智能体之间的多样性行为</li>
 <li><strong>Existing Methodes</strong>: 现有方法直接鼓励通过各种策略学习多样的agent network</li>
 <li><strong>Shortcoming</strong>: 专门设计agent network的方法受到无法区分的indistinguishable VD network限制 -&gt; 导致智能体行为<strong>同质化</strong>，进而降低合作能力<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">One of the main challenges in VD is to promote diverse behaviors among agents, </span><br><span class="line">while existing methods directly encourage the diversity oflearned agent networks with various strategies. </span><br><span class="line">However, we argue that these dedicated designs for agent networks are still limited by the indistinguishable VD network, </span><br><span class="line">leading to homogeneous agent behaviors and thus downgrading the cooperation capability.</span><br></pre></td></tr></table></figure></li>
@@ -225,22 +225,18 @@
 <li><strong>CIA</strong>: 利用对比学习最大化不同智能体的<strong>时间信用和身份表征</strong>之间的互信息 -&gt; 信用分配的充分表现和进一步突显个性</li>
 </ul>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In this paper, we propose a novel Contrastive Identity-Aware learning (CIA) method, </span><br><span class="line">explicitly boosting the credit-level distinguishability of the VD network to break the bottleneck of multi-agent diversity.</span><br><span class="line">Specifically, our approach leverages contrastive learning to maximize the mutual information </span><br><span class="line">between the temporal credits and identity representations of different agents, </span><br><span class="line">encouraging the full expressiveness of credit assignment and further the emergence of individualities.</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><strong>Experiment</strong>:  CIA 模块的算法实现简单而有效，可以轻松合并到各种 VD 架构中</li>
 <li><strong>Code</strong>: <a target="_blank" rel="noopener" href="https://github.com/liushunyu/CIA">https://github.com/liushunyu/CIA</a></li>
 </ul>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li><p><strong>shortcoming of VD methods</strong>: 智能体不可避免的学习相似的行为 -&gt; 导致很容易阻碍高效的探索 进而陷入局部最优解</p>
-</li>
-<li><p><strong>Existing Methods</strong>: 1. <strong>归因agent之间的相似性</strong> 通过参数共享来同质化policy network &#x2F; 2. 设计<strong>辅助的目标(+ loss)<strong>在policy network上解决</strong>agent-level</strong>的多样性 &#x2F; 3. 为<strong>每个agent引入特定的networks</strong> 不惜牺牲完全参数共享的优势</p>
-</li>
+<li><strong>shortcoming of VD methods</strong>: 智能体不可避免的学习相似的行为 -&gt; 导致很容易阻碍高效的探索 进而陷入局部最优解</li>
+<li><strong>Existing Methods</strong>: 1. <strong>归因agent之间的相似性</strong> 通过参数共享来同质化policy network / 2. 设计<strong>辅助的目标(+ loss)</strong>在policy network上解决<strong>agent-level</strong>的多样性 / 3. 为<strong>每个agent引入特定的networks</strong> 不惜牺牲完全参数共享的优势</li>
 <li><p><strong>Motivation</strong>: 现有的方法都忽略了agents 的 policy networks 都是通过VD network来评估和改进的这一事实 -&gt; agents 行为的多样性实际上是依赖于信用分配的区分性 -&gt; 本文认为追逐agents policies的多样性依然受限到VD network 提供模糊的信用分配来证明不同agent的贡献<br><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1708666648057.png" alt="1708666648057"></p>
 </li>
 <li><p><strong>In this paper</strong>: 本文从信用分配的新颖角度研究multi-agent的多样性 提出contrastive identity-aware learning method, termed as CIA -&gt; 鼓励credit-level 区分性</p>
 </li>
-<li><p><strong>Method</strong>: </p>
-<ol>
+<li><strong>Method</strong>: <ol>
 <li><strong>利用基于梯度的归因来表示每个智能体的信用</strong>， 并且采用完整轨迹的时序信用来进一步考虑智能体的长期行为</li>
 <li>最大化互不同智能体的时序信用和可学习身份表征之间的互信息</li>
 <li>本文定制一个对比学习目标来导出互信息的易于处理的下界，因为估计和最大化神经网络的互信息通常很棘手</li>
@@ -249,43 +245,46 @@
 </ul>
 <h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Credit-Indistinguishability-Analysis"><a href="#Credit-Indistinguishability-Analysis" class="headerlink" title="Credit Indistinguishability Analysis"></a>Credit Indistinguishability Analysis</h3><ul>
 <li>信用分配模糊：如果可学习的信用对于agent身份来说是不变的说明信用分配是模糊的</li>
-<li>方法：QMIX(RS)在每个训练epoch，随机打乱输入到min network的values的顺序 &#x2F; 计算训练后的网络采样的轨迹的<strong>KL散度距离表示信用分布的相似性</strong></li>
-<li>结论：QMIX(RS)和original QMIX的性能一样，且两者的KL散度距离很小， 但是QMIX(CIA)的性能优于QMIX，且两者KL散度较大 -&gt; 说明CIA改善了QMIX的信用分配模糊问题<br><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1708688325540.png" alt="1708688325540"><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Interestingly, even with the ambiguous credit assignment, the random-shuffle variant can </span><br><span class="line">still achieve the performance on par with those obtained by original QMIX. </span><br><span class="line">The KL-divergence distance also shows that the credit distribution of QMIX </span><br><span class="line">is similar as its random-shuffle variant, indicating that QMIX are insensitive to the identity of agents.</span><br><span class="line">Thus, its learned credits may be ambiguous, which limits the diverse behaviors of agents and damages the final performance.</span><br></pre></td></tr></table></figure></li>
+<li>方法：QMIX(RS)在每个训练epoch，随机打乱输入到min network的values的顺序 / 计算训练后的网络采样的轨迹的<strong>KL散度距离表示信用分布的相似性</strong></li>
+<li>结论：QMIX(RS)和original QMIX的性能一样，且两者的KL散度距离很小， 但是QMIX(CIA)的性能优于QMIX，且两者KL散度较大 -&gt; 说明CIA改善了QMIX的信用分配模糊问题<br><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1708688325540.png" alt="1708688325540"><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Interestingly, even with the ambiguous credit assignment, the random-shuffle variant can </span><br><span class="line">still achieve the performance on par with those obtained by original QMIX. </span><br><span class="line">The KL-divergence distance also shows that the credit distribution of QMIX </span><br><span class="line">is similar as its random-shuffle variant, indicating that QMIX are insensitive to the identity of agents.</span><br><span class="line">Thus, its learned credits may be ambiguous, which limits the diverse behaviors of agents and damages the final performance.</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <h3 id="Contrastive-Identity-Aware-Learning"><a href="#Contrastive-Identity-Aware-Learning" class="headerlink" title="Contrastive Identity-Aware Learning"></a>Contrastive Identity-Aware Learning</h3><ol>
 <li>Temporal Credit Attribution</li>
 </ol>
 <ul>
-<li><p>key issue: 如何定义一个通用的信用来表示单个智能体的贡献</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Before promoting the distinguishability of credits, one key issue to be considered is: </span><br><span class="line">how to define a universal credit to represent the contributions of individual agents in different VD methods.</span><br></pre></td></tr></table></figure></li>
-<li><p>method: 使用 gradient-based attribution mechanism（基于梯度的归因机制） 提取信用分配信息</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Towards addressing this problem, we consider a gradient-based attribution mechanism </span><br><span class="line">to extract the credit assignment information in the mixing network.</span><br></pre></td></tr></table></figure></li>
-<li><p>gradient-based attribution mechanism: 计算output对于input的偏导数 -&gt; 揭示输入对于输出的影响程度 -&gt; 使用joint-action value 和 individual value之间的偏导数表示信用 -&gt; 确定每个agent的贡献<br>$$<br>x_{t}^{k} &#x3D; \partial Q_{t}^{tot} &#x2F; \partial Q_{t}^{k}  \in R<br>$$<br><em>越大的归因值对应的agent对最终结果影响越大</em></p>
-</li>
-<li><p>在贯序决策中，推断一个agent的贡献仅靠单个时间步的行为是不够的 -&gt; 采用时序信用归因 整个轨迹trajectory<br>$$<br>x_{\tau}^{k} &#x3D; [x_{1}^{k}, x_{2}^{k}, … ,x_{N}^{k}] \in R^{N}<br>X_{\tau} \in R^(K \times N)<br>$$<br><em>N 是所有采样的τ具有的最大长度， 如果某个τ提前终止 则用 0 填充</em></p>
+<li>key issue: 如何定义一个通用的信用来表示单个智能体的贡献<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Before promoting the distinguishability of credits, one key issue to be considered is: </span><br><span class="line">how to define a universal credit to represent the contributions of individual agents in different VD methods.</span><br></pre></td></tr></table></figure></li>
+<li>method: 使用 gradient-based attribution mechanism（基于梯度的归因机制） 提取信用分配信息<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Towards addressing this problem, we consider a gradient-based attribution mechanism </span><br><span class="line">to extract the credit assignment information in the mixing network.</span><br></pre></td></tr></table></figure></li>
+<li>gradient-based attribution mechanism: 计算output对于input的偏导数 -&gt; 揭示输入对于输出的影响程度 -&gt; 使用joint-action value 和 individual value之间的偏导数表示信用 -&gt; 确定每个agent的贡献<script type="math/tex; mode=display">
+x_{t}^{k} = \partial Q_{t}^{tot} / \partial Q_{t}^{k}  \in R</script><em>越大的归因值对应的agent对最终结果影响越大</em></li>
+<li><p>在贯序决策中，推断一个agent的贡献仅靠单个时间步的行为是不够的 -&gt; 采用时序信用归因 整个轨迹trajectory</p>
+<script type="math/tex; mode=display">
+x_{\tau}^{k} = [x_{1}^{k}, x_{2}^{k}, ... ,x_{N}^{k}] \in R^{N}
+X_{\tau} \in R^(K \times N)</script><p><em>N 是所有采样的τ具有的最大长度， 如果某个τ提前终止 则用 0 填充</em></p>
 </li>
 <li><p>结论： $X_{\tau \in R^{K \times N}}$ 时序信用归因考虑了agent长期的行为 -&gt; 进而更加稳定的衡量了agent的贡献</p>
 </li>
 </ul>
-<ol start="2">
+<ol>
 <li>Contrastive Identity-Aware Distinguishability（对比身份意识可区分性）</li>
 </ol>
 <p>temporal credit attribution解决了信用的表示，还要进一步区分credit -&gt; 但是很难直接限制不同可学习的credit之间的距离<br>-&gt; 本文提出近似方法： 提出潜在身份表示作为agent的中间变量，并且通过这些表示调控独自的时序信用 -&gt; 实现身份意识的区分性</p>
 <ul>
-<li><p>identity representation: 每个agent对应一个可学习的随机初始化的身份表示 $ w^{k} \in R^{N} $ </p>
-</li>
-<li><p>最大化temporal credits 和 identity representation的互信息 -&gt; 最大化identity representation 和 temporal credit的关联程度<br>$$<br>I_{x;w} &#x3D; E_{x, w}[log(P(x|w) &#x2F; P(x))]<br>$$<br><em>然后优化$I_{x,w}$ 十分困难，因为估算互信息是不可解的</em></p>
-</li>
-<li><p>对比学习：$ I(x;w) &gt;&#x3D; log(K) - L_{CL} $<br><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1708760818204.png" alt="1708760818204"><br>-&gt; $ w_{k} $ 会和 $ x_{k} $ 靠近，并且和其他$ x_{k-} $ 远离<br>公式中$ g(x_{\tau}^{k}, w^{k}) $ 表示 $ x_{\tau}^{k} $ 和 $ w^{k} $ 相似性，本文中使用点积运算表示</p>
+<li>identity representation: 每个agent对应一个可学习的随机初始化的身份表示 $ w^{k} \in R^{N} $ </li>
+<li>最大化temporal credits 和 identity representation的互信息 -&gt; 最大化identity representation 和 temporal credit的关联程度<script type="math/tex; mode=display">
+I_{x;w} = E_{x, w}[log(P(x|w) / P(x))]</script><em>然后优化$I_{x,w}$ 十分困难，因为估算互信息是不可解的</em></li>
+<li><p>对比学习：$ I(x;w) &gt;= log(K) - L<em>{CL} $<br><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1708760818204.png" alt="1708760818204"><br>-&gt; $ w</em>{k} $ 会和 $ x<em>{k} $ 靠近，并且和其他$ x</em>{k-} $ 远离<br>公式中$ g(x<em>{\tau}^{k}, w^{k}) $ 表示 $ x</em>{\tau}^{k} $ 和 $ w^{k} $ 相似性，本文中使用点积运算表示</p>
 </li>
 <li><p>结论：<strong>这种身份层面的对比学习loss 1. 限制了学习到的身份表示均分分布在一个特定的超球面 而不会发散 2. 并且对应的时序信用也会分布在对应的身份表示周围</strong><br>-&gt; agent credits的身份意识之间的区分性 提供更加有区分度的信用分配</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">As shown in Figure 3(d), this identitywise contrastive learning </span><br><span class="line">loss constrains the learned identity representations to uniformly</span><br><span class="line">distribute on a specific creditidentity hypersphere without divergence, </span><br><span class="line">where the temporal credits distribute around their corresponding</span><br><span class="line">identity representation (Wang and Isola 2020). With the contrastive learning loss, </span><br><span class="line">CIA directly encourages the identity-awaredistinguishability among agent credits, </span><br><span class="line">providing a more discriminative credit assignment for multi-agent diversity.</span><br></pre></td></tr></table></figure>
 <p><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1708762823185.png" alt="1708762823185"></p>
 </li>
-<li><p>从分类的角度解释： 可以看成一个分类问题，input是temporal credits 那么identity是分类网络的参数 想要最小化这个loss 要么样本空间十分简单，要么模型足够复杂，但是网络结构仅包含一层线性层nn.Linear(N, K)则施加了一个强约束了输入的credits是线性可分的 <strong>需要注意的是这里输入的样本temporal credits也是可以学的，通过反向传播更新MIX Network</strong></p>
-</li>
 </ul>
-<p>$$<br>L_{all} &#x3D; L_{TD} + \alpha L_{CL}<br>$$<br>*$\alpha$是一个trade off</p>
+<ul>
+<li>从分类的角度解释： 可以看成一个分类问题，input是temporal credits 那么identity是分类网络的参数 想要最小化这个loss 要么样本空间十分简单，要么模型足够复杂，但是网络结构仅包含一层线性层nn.Linear(N, K)则施加了一个强约束了输入的credits是线性可分的 <strong>需要注意的是这里输入的样本temporal credits也是可以学的，通过反向传播更新MIX Network</strong></li>
+</ul>
+<script type="math/tex; mode=display">
+L_{all} = L_{TD} + \alpha L_{CL}</script><p>*$\alpha$是一个trade off</p>
 <h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2>
       
     </div>
@@ -380,26 +379,21 @@
 <li>继承nn.Sequential按照层的顺序构建模型：这种方式仅仅适用于简单的模型，<br>-&gt; 按层顺序构建模型无需定义forward方法<br>(1) add_module方法</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn </span><br><span class="line">import torch.nn.functional as F</span><br><span class="line"></span><br><span class="line">class Xnet():</span><br><span class="line">    def __init__(self, input_dim, hidden_dim, output_dim):</span><br><span class="line">        net = nn.Sequential()</span><br><span class="line">        net.add_module(&quot;linear1&quot;, nn.Linear(input_dim, hidden_dim))</span><br><span class="line">        net.add_module(&quot;relu1&quot;, nn.ReLU())</span><br><span class="line">        net.add_module(&quot;linear2&quot;, nn.Linear(hidden_dim, output_dim))</span><br><span class="line">        self.net = net</span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    model1 = Xnet(10, 128, 2)</span><br><span class="line">    print(model1.net)</span><br><span class="line"></span><br><span class="line">#Sequential(</span><br><span class="line">#  (linear1): Linear(in_features=10, out_features=128, bias=True)</span><br><span class="line">#  (relu1): ReLU()</span><br><span class="line">#  (linear2): Linear(in_features=128, out_features=2, bias=True)</span><br><span class="line">#)</span><br></pre></td></tr></table></figure>
-
 <p>(2) 利用变长参数</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">net = nn.Sequential(</span><br><span class="line">    nn.Linear(input_dim, hidden_dim),</span><br><span class="line">    nn.Relu(),</span><br><span class="line">    nn.Linear(hidden_dim, output_dim),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <p>(3) 使用OrderedDict</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">from collections import OrderedDict</span><br><span class="line">import torch </span><br><span class="line">import torch.nn as nn</span><br><span class="line">import torch.nn.functional as F</span><br><span class="line"></span><br><span class="line">class XNet():</span><br><span class="line"></span><br><span class="line">    def __init__(self, input_dim, hidden_dim, output_dim):</span><br><span class="line">        net = nn.Sequential(OrderedDict([</span><br><span class="line">            (&#x27;linear1&#x27;, nn.Linear(input_dim, hidden_dim)),</span><br><span class="line">            (&#x27;Relu&#x27;, nn.ReLU()),</span><br><span class="line">            (&#x27;linear2&#x27;, nn.Linear(hidden_dim, output_dim)),</span><br><span class="line">        ]))</span><br><span class="line">        self.net = net</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    net = XNet(4, 128, 2)</span><br><span class="line">    print(net.net)</span><br></pre></td></tr></table></figure>
-
-
-<ol start="2">
+<ol>
 <li>继承nn.Module基类构建自定义模型</li>
 </ol>
 <ul>
-<li>模型的层在__init__函数中定义，然后再forward函数中定义正向传播的逻辑<br>-&gt; 需要forward方法</li>
+<li>模型的层在<strong>init</strong>函数中定义，然后再forward函数中定义正向传播的逻辑<br>-&gt; 需要forward方法</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn </span><br><span class="line">import torch.nn.functional as F</span><br><span class="line"></span><br><span class="line">class Xnet(nn.Module):</span><br><span class="line">    def __init__(self, input_dim, hidden_dim, output_dim):</span><br><span class="line">        super(Xnet, self).__init__()</span><br><span class="line">        self.fc1 = nn.Linear(input_dim, hidden_dim)</span><br><span class="line">        self.fc2 = nn.Linear(hidden_dim, output_dim)</span><br><span class="line">    def forward(self, x):</span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        return self.fc2(x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    model1 = Xnet(10, 128, 2)</span><br><span class="line">    print(model1)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Xnet(</span><br><span class="line">#   (fc1): Linear(in_features=10, out_features=128, bias=True)</span><br><span class="line">#   (fc2): Linear(in_features=128, out_features=2, bias=True)</span><br><span class="line"># )</span><br></pre></td></tr></table></figure>
-<ol start="3">
+<ol>
 <li>继承nn.Module基类构建模型，并用模型容器进行封装<br>-&gt; 结合前两种方法<br>(1) nn.Sequential作为模型容器</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Net(nn.Module):</span><br><span class="line">    </span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        self.conv = nn.Sequential(</span><br><span class="line">            nn.Conv2d(in_channels=3,out_channels=32,kernel_size = 3),</span><br><span class="line">            nn.MaxPool2d(kernel_size = 2,stride = 2),</span><br><span class="line">            nn.Conv2d(in_channels=32,out_channels=64,kernel_size = 5),</span><br><span class="line">            nn.MaxPool2d(kernel_size = 2,stride = 2),</span><br><span class="line">            nn.Dropout2d(p = 0.1),</span><br><span class="line">            nn.AdaptiveMaxPool2d((1,1))</span><br><span class="line">        )</span><br><span class="line">        self.dense = nn.Sequential(</span><br><span class="line">            nn.Flatten(),</span><br><span class="line">            nn.Linear(64,32),</span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.Linear(32,1),</span><br><span class="line">            nn.Sigmoid()</span><br><span class="line">        )</span><br><span class="line">    def forward(self,x):</span><br><span class="line">        x = self.conv(x)</span><br><span class="line">        y = self.dense(x)</span><br><span class="line">        return y </span><br><span class="line">    </span><br><span class="line">net = Net()</span><br><span class="line">print(net)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>这里Sequential模块内部的layer是在内部就实现了forward的，所以只需要在Sequential模块之间实现forward函数就行了</li>
 </ul>
@@ -409,9 +403,7 @@
 <li>ModuleList有和List相似的方法：append(module), extend(module), insert(index, module)</li>
 <li>ModuleList没有顺序（不用保证List中相邻Layer的维度匹配，所以需要自己定义forward函数</li>
 </ul>
-<p>(3) nn.ModuleDict作为模型容器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Net(nn.Module):</span><br><span class="line">    </span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        self.layers_dict = nn.ModuleDict(</span><br><span class="line">        	  &#123;&quot;conv1&quot;:nn.Conv2d(in_channels=3,out_channels=32,kernel_size = 3),</span><br><span class="line">               &quot;pool&quot;: nn.MaxPool2d(kernel_size = 2,stride = 2),</span><br><span class="line">               &quot;conv2&quot;:nn.Conv2d(in_channels=32,out_channels=64,kernel_size = 5),</span><br><span class="line">               &quot;dropout&quot;: nn.Dropout2d(p = 0.1),</span><br><span class="line">               &quot;adaptive&quot;:nn.AdaptiveMaxPool2d((1,1)),</span><br><span class="line">               &quot;flatten&quot;: nn.Flatten(),</span><br><span class="line">               &quot;linear1&quot;: nn.Linear(64,32),</span><br><span class="line">               &quot;relu&quot;:nn.ReLU(),</span><br><span class="line">               &quot;linear2&quot;: nn.Linear(32,1),</span><br><span class="line">               &quot;sigmoid&quot;: nn.Sigmoid()</span><br><span class="line">              &#125;)</span><br><span class="line">    def forward(self,x):</span><br><span class="line">        layers = [&quot;conv1&quot;,&quot;pool&quot;,&quot;conv2&quot;,&quot;pool&quot;,&quot;dropout&quot;,&quot;adaptive&quot;,</span><br><span class="line">                  &quot;flatten&quot;,&quot;linear1&quot;,&quot;relu&quot;,&quot;linear2&quot;,&quot;sigmoid&quot;]</span><br><span class="line">        for layer in layers:</span><br><span class="line">            x = self.layers_dict[layer](x)</span><br><span class="line">        return x</span><br><span class="line">net = Net()</span><br><span class="line">print(net)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<p>(3) nn.ModuleDict作为模型容器<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Net(nn.Module):</span><br><span class="line">    </span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        self.layers_dict = nn.ModuleDict(</span><br><span class="line">        	  &#123;&quot;conv1&quot;:nn.Conv2d(in_channels=3,out_channels=32,kernel_size = 3),</span><br><span class="line">               &quot;pool&quot;: nn.MaxPool2d(kernel_size = 2,stride = 2),</span><br><span class="line">               &quot;conv2&quot;:nn.Conv2d(in_channels=32,out_channels=64,kernel_size = 5),</span><br><span class="line">               &quot;dropout&quot;: nn.Dropout2d(p = 0.1),</span><br><span class="line">               &quot;adaptive&quot;:nn.AdaptiveMaxPool2d((1,1)),</span><br><span class="line">               &quot;flatten&quot;: nn.Flatten(),</span><br><span class="line">               &quot;linear1&quot;: nn.Linear(64,32),</span><br><span class="line">               &quot;relu&quot;:nn.ReLU(),</span><br><span class="line">               &quot;linear2&quot;: nn.Linear(32,1),</span><br><span class="line">               &quot;sigmoid&quot;: nn.Sigmoid()</span><br><span class="line">              &#125;)</span><br><span class="line">    def forward(self,x):</span><br><span class="line">        layers = [&quot;conv1&quot;,&quot;pool&quot;,&quot;conv2&quot;,&quot;pool&quot;,&quot;dropout&quot;,&quot;adaptive&quot;,</span><br><span class="line">                  &quot;flatten&quot;,&quot;linear1&quot;,&quot;relu&quot;,&quot;linear2&quot;,&quot;sigmoid&quot;]</span><br><span class="line">        for layer in layers:</span><br><span class="line">            x = self.layers_dict[layer](x)</span><br><span class="line">        return x</span><br><span class="line">net = Net()</span><br><span class="line">print(net)</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>ModuleDict具有普通字典的属性：clear(), items(), keys(), pop(key), update(modules)</li>
 <li>ModuleDict定义的layers也不包含顺序性，需要自己定义forward函数</li>
@@ -509,16 +501,16 @@
           <h1 id="MARL综述"><a href="#MARL综述" class="headerlink" title="MARL综述"></a>MARL综述</h1><h2 id="多智能体系统"><a href="#多智能体系统" class="headerlink" title="多智能体系统"></a>多智能体系统</h2><ul>
 <li>多智能体系统：包含m个智能体，智能体共享环境，智能体之间会相互影响 -&gt; 智能体会影响环境，从而影响其他智能体</li>
 <li>和单智能体系统的区别：单智能体的环境是稳态的，状态转移概率和奖励函数是不变的， 而多智能体系统中，智能体在与环境交互的同时也间接或直接的和其他智能体进行交互</li>
-<li>多智能体强化学习的难点：<ol>
+<li><p>多智能体强化学习的难点：</p>
+<ol>
 <li>因为环境是非稳态的，导致智能体在相同状态执行相同动作，得到的状态转移概率和奖励函数的分布不同</li>
 <li>多智能体的训练是多目标的，不同智能体需要最大化自己的回报</li>
 <li>训练评估复杂度提升</li>
 </ol>
+<p><img src="/2024/01/27/MARL/1706346629825.png" alt="1706346629825"></p>
 </li>
-</ul>
-<p> <img src="/2024/01/27/MARL/1706346629825.png" alt="1706346629825"></p>
-<ul>
-<li>按照任务特性可以把多智能体系统划分为</li>
+<li><p>按照任务特性可以把多智能体系统划分为</p>
+</li>
 </ul>
 <ol>
 <li>完全协作：智能体拥有一个共同目标</li>
@@ -526,17 +518,16 @@
 <li>混合关系：组内合作，组间竞争，例如球类比赛</li>
 </ol>
 <h2 id="博弈论简介"><a href="#博弈论简介" class="headerlink" title="博弈论简介"></a>博弈论简介</h2><ul>
-<li><p>将智能体之间的协作和竞争建模为博弈问题， 通常将问题建模为正则博弈</p>
-</li>
+<li>将智能体之间的协作和竞争建模为博弈问题， 通常将问题建模为正则博弈</li>
 <li><p>正则式博弈 -&gt; (N, A, Q)</p>
 <ul>
 <li>N -&gt; N表示有限智能体的集合：大小为n, 每个智能体用i {1, 2, 3,…,n} 索引表示</li>
-<li>A -&gt; A表示动作组合空间： A &#x3D; A1 × A2 × … × An（笛卡尔积） 其中Ai 表示智能体i可以做的动作 a &#x3D; (a1, a2, … , an) 表示一个动作组合</li>
-<li>Q -&gt; Q表示效益：Q &#x3D; {Q1, Q2, … , Qn} Qi 表示智能体i的收益函数<br>注意：这里Qi可能不仅仅取决于ai, 它往往可能被其他的智能体动作影响，所以Qi取决于动作组合a</li>
+<li>A -&gt; A表示动作组合空间： A = A1 × A2 × … × An（笛卡尔积） 其中Ai 表示智能体i可以做的动作 a = (a1, a2, … , an) 表示一个动作组合</li>
+<li>Q -&gt; Q表示效益：Q = {Q1, Q2, … , Qn} Qi 表示智能体i的收益函数<br>注意：这里Qi可能不仅仅取决于ai, 它往往可能被其他的智能体动作影响，所以Qi取决于动作组合a</li>
 </ul>
 </li>
 </ul>
-<p>情景：仅有两个智能体，且是完全竞争<br>-&gt; 二人零和博弈：此时收益函数满足Q1(a) + Q2(a) &#x3D; 0</p>
+<p>情景：仅有两个智能体，且是完全竞争<br>-&gt; 二人零和博弈：此时收益函数满足Q1(a) + Q2(a) = 0</p>
 <h2 id="多智能体强化学习"><a href="#多智能体强化学习" class="headerlink" title="多智能体强化学习"></a>多智能体强化学习</h2><p>单智能体强化学习将多步决策建模为MDP，多智能体强化学习一般被建模为随机博弈</p>
 <ul>
 <li>随机博弈： -&gt; {N, S, A, P, R, γ}</li>
@@ -544,12 +535,12 @@
 <ul>
 <li>N -&gt; N表示有限智能体的集合</li>
 <li>S -&gt; S表示环境中所有智能体共享的状态空间</li>
-<li>A -&gt; A表示联合动作空间： Ai表示智能体i的动作空间， A &#x3D; A1 × A2 × … × An a &#x3D; (a1, a2, … , an) 表示一个动作组合</li>
+<li>A -&gt; A表示联合动作空间： Ai表示智能体i的动作空间， A = A1 × A2 × … × An a = (a1, a2, … , an) 表示一个动作组合</li>
 <li>P -&gt; P表示状态转移函数：S × A 映射了在每个时间步，给定一个动作组合a 属于 A, 环境从s 属于 S 转移到 s’ 属于 S 的概率</li>
 <li>R -&gt; R表示每个智能体的奖励函数：S × A × N Ri表示智能体i对应的奖励函数</li>
 <li>γ -&gt; γ表示折扣因子</li>
 </ul>
-<p><strong>过程</strong>：在每一个时间步，智能体i 处于 状态s , 选择动作ai 属于 Ai, 构成联合动作 a &#x3D; {a1, a2, … , an}并执行，环境转移到下一个状态s’~P(·|s, a)， 智能体i得到奖励Ri(s, a)， 每个智能体通过优化自身的策略函数 πi : S -&gt; Δ(Ai)最大化以其期望累计奖赏，以状态价值函数的形式表达如下：<br><img src="/2024/01/27/MARL/1706412112570.png" alt="1706412112570"></p>
+<p><strong>过程</strong>：在每一个时间步，智能体i 处于 状态s , 选择动作ai 属于 Ai, 构成联合动作 a = {a1, a2, … , an}并执行，环境转移到下一个状态s’~P(·|s, a)， 智能体i得到奖励Ri(s, a)， 每个智能体通过优化自身的策略函数 πi : S -&gt; Δ(Ai)最大化以其期望累计奖赏，以状态价值函数的形式表达如下：<br><img src="/2024/01/27/MARL/1706412112570.png" alt="1706412112570"></p>
 <ul>
 <li>上述的符号 i 代表除了智能体 i 之外的其他智能体。与单智能体强化学习中智能体仅仅需要考虑自身对环境的影响不同，多智能体系统中智能体之间也会相互影响，他们共同决策并且同时更新策略。</li>
 <li>当系统中的其他智能体的策略固定时，智能体 i 可以最大化自己的收益函数，以寻找到相对于其他智能体的策略的最优策略 π∗</li>
@@ -561,14 +552,13 @@
 </ul>
 <p><img src="/2024/01/27/MARL/1706412808069.png" alt="1706412808069"></p>
 <ul>
-<li><p>部分可观测随机博弈：定义为 M &#x3D; {N, S, A, P, R, γ, Ω, O}</p>
+<li><p>部分可观测随机博弈：定义为 M = {N, S, A, P, R, γ, Ω, O}</p>
 <ul>
-<li>Ω -&gt; Ω表示所有智能体的联合观测空间 Ω &#x3D; Ω1 × Ω2 × … × Ωn, Ωi 表示智能体i的观测空间</li>
+<li>Ω -&gt; Ω表示所有智能体的联合观测空间 Ω = Ω1 × Ω2 × … × Ωn, Ωi 表示智能体i的观测空间</li>
 <li>O -&gt; O表示观测函数：S -&gt; Δ(Ω) O(Ω|s),指在给定状态 s 后关于联合观测 Ω 的函数概率</li>
 </ul>
 </li>
-<li><p><strong>在协作任务场景</strong>, 可以进一步建模为 -&gt; 分布式局部可观测马尔可夫决策过程（Decentralized Partially Observable MDP, Dec-POMDP），-&gt; 每个智能体的奖赏函数相同</p>
-</li>
+<li><strong>在协作任务场景</strong>, 可以进一步建模为 -&gt; 分布式局部可观测马尔可夫决策过程（Decentralized Partially Observable MDP, Dec-POMDP），-&gt; 每个智能体的奖赏函数相同</li>
 </ul>
 <h2 id="多智能体强化学习训练范式"><a href="#多智能体强化学习训练范式" class="headerlink" title="多智能体强化学习训练范式"></a>多智能体强化学习训练范式</h2><ol>
 <li>智能体更新自身策略是否需要其他智能体信息：<ul>
@@ -590,12 +580,9 @@
 <li>CTDE 集中式训练分布式执行<br><img src="/2024/01/27/MARL/1706421213707.png" alt="1706421213707"></li>
 </ul>
 </li>
-<li><p>分布式训练分布式执行 DTDE：每个智能体<strong>仅利用自己的局部信息独立地进行策略更新和策略实现</strong>，不涉及到信息的交换<br>πi: Ωi -&gt; ∆(Ai)<br>IQL: 是基于DTDE的典型算法</p>
-</li>
-<li><p>集中式训练集中式执行 CTCE：<strong>智能体学习一个集中式的联合策略</strong><br>π: Ω -&gt; ∆(A).<br><strong>在CTCE框架下，可以使用任意一种单智能体强化学习算法训练多智能体系统</strong><br>-&gt; 算法的复杂度随状态和动作的维度增长呈维度爆炸 -&gt; 可通过策略分解 或者 值分解 来解决<br>-&gt; 无法评估每个智能体间的相互影响 -&gt; 信度分配问题会给学习效率带来较严重的影响 -&gt; 未解决</p>
-</li>
-<li><p>集中式训练分布式执行 CTDE：<strong>在训练阶段，智能体通过拿到其他智能体的信息甚至是全局信息以优化自己的局部策略</strong> <strong>在执行过程仅使用自己的局部信息进行决策</strong><br>πi: Ωi -&gt; ∆(A).<br>优势：</p>
-</li>
+<li>分布式训练分布式执行 DTDE：每个智能体<strong>仅利用自己的局部信息独立地进行策略更新和策略实现</strong>，不涉及到信息的交换<br>πi: Ωi -&gt; ∆(Ai)<br>IQL: 是基于DTDE的典型算法</li>
+<li>集中式训练集中式执行 CTCE：<strong>智能体学习一个集中式的联合策略</strong><br>π: Ω -&gt; ∆(A).<br><strong>在CTCE框架下，可以使用任意一种单智能体强化学习算法训练多智能体系统</strong><br>-&gt; 算法的复杂度随状态和动作的维度增长呈维度爆炸 -&gt; 可通过策略分解 或者 值分解 来解决<br>-&gt; 无法评估每个智能体间的相互影响 -&gt; 信度分配问题会给学习效率带来较严重的影响 -&gt; 未解决</li>
+<li>集中式训练分布式执行 CTDE：<strong>在训练阶段，智能体通过拿到其他智能体的信息甚至是全局信息以优化自己的局部策略</strong> <strong>在执行过程仅使用自己的局部信息进行决策</strong><br>πi: Ωi -&gt; ∆(A).<br>优势：</li>
 </ul>
 <ol>
 <li>在训练过程中，拿到全局信息，可以缓解非稳态性</li>
@@ -608,10 +595,8 @@
 <li>随着智能体同时进行更新，经验回放池中的数据会过时<br>-&gt; 对对手或者队友进行建模<br>-&gt; 对回放数据进行重采样</li>
 </ul>
 </li>
-<li><p>可拓展性：为了解决非稳态，多智能体往往需要考虑环境中的所有智能体的联合动作，联合动作会随着智能体的数量呈指数上升<br>-&gt; 同质智能体共享神经网络、异质智能体间独立训练<br>-&gt; 迁移学习</p>
-</li>
-<li><p>部分可观测性：考虑到环境中传感器的限制等因素，智能体往往很难获得全局状态，一般只能拿到部分信息，我 们一般把多智能体强化学习建模为 POSG 部分可观测随机博弈：定义为 M &#x3D; {N, S, A, P, R, γ, Ω, O}<br>-&gt; 环境不再遵循马尔可夫性<br>-&gt; 多智能体通信：智能体之间通过信息传递，缓解多智能体的局部观测问题 则需定义</p>
-</li>
+<li>可拓展性：为了解决非稳态，多智能体往往需要考虑环境中的所有智能体的联合动作，联合动作会随着智能体的数量呈指数上升<br>-&gt; 同质智能体共享神经网络、异质智能体间独立训练<br>-&gt; 迁移学习</li>
+<li>部分可观测性：考虑到环境中传感器的限制等因素，智能体往往很难获得全局状态，一般只能拿到部分信息，我 们一般把多智能体强化学习建模为 POSG 部分可观测随机博弈：定义为 M = {N, S, A, P, R, γ, Ω, O}<br>-&gt; 环境不再遵循马尔可夫性<br>-&gt; 多智能体通信：智能体之间通过信息传递，缓解多智能体的局部观测问题 则需定义</li>
 </ol>
 <ul>
 <li>与谁通信</li>
@@ -882,7 +867,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>550</span>
+      <span>545</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -900,13 +885,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Actor-Critic-Advantage-Actor-Critic-A2C"><a href="#Actor-Critic-Advantage-Actor-Critic-A2C" class="headerlink" title="Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)"></a>Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)</h1><ul>
+          <h1 id="Actor-Critic-amp-amp-Advantage-Actor-Critic-A2C"><a href="#Actor-Critic-amp-amp-Advantage-Actor-Critic-A2C" class="headerlink" title="Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)"></a>Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)</h1><ul>
 <li><p>基本思想：相比于Policy Gradient, Actor Critic就是使用Critic网络代替了R(episode), 使用一个Critic模型来估计episode的长期回报<br><img src="/2024/01/22/Actor-Critic-A2C/1705906493223.png" alt="1705906493223"></p>
 </li>
 <li><p>Advantage Actor Critic<br>Advantage 是指减去baseline作为交叉熵的权重<br><img src="/2024/01/22/Actor-Critic-A2C/1705906817564.png" alt="1705906817564"><br>如果奖励全是正的，那么每个episode对应的奖励就都是大于0的，那么p𝜃(at|st)都是上升的，这样看过去没有太大问题，因为累积奖励越大，对应的概率就提升越大，那么最后归一化还是往累积奖励大的方向去更新参数𝜃的，只不过收敛的慢。<br>但是在实际中，采样意味着有的动作是采样不到的，那可能本来最优动作是a，但是没有采样到a, 只采样到了b,c,那b c对应的概率升高，导致a的概率降低，这样产生恶性循环。</p>
 </li>
 </ul>
-<p>因此定义Advantage function &#x3D; R - baseline</p>
+<p>因此定义Advantage function = R - baseline</p>
 <ul>
 <li>基本流程：<br>把Advantage function定义为r(t + 1) + V(s_t+1) - V(s_t)<br>这里使用时序差分来代替累积奖励，牺牲一部分偏差换取模型的方差减小<br>r(t + 1) + V(s_t+1)代表当前策略的期望奖励，V(s_t)表示baseline，代表平均值。<br><img src="/2024/01/22/Actor-Critic-A2C/1705908998891.png" alt="1705908998891"><br><img src="/2024/01/22/Actor-Critic-A2C/1705909008374.png" alt="1705909008374"></li>
 </ul>
@@ -1090,6 +1075,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

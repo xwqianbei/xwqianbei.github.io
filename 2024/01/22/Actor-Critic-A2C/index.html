@@ -117,7 +117,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Actor-Critic-Advantage-Actor-Critic-A2C"><span class="nav-number">1.</span> <span class="nav-text">Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Actor-Critic-amp-amp-Advantage-Actor-Critic-A2C"><span class="nav-number">1.</span> <span class="nav-text">Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -203,7 +203,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>550</span>
+      <span>545</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -220,13 +220,13 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="Actor-Critic-Advantage-Actor-Critic-A2C"><a href="#Actor-Critic-Advantage-Actor-Critic-A2C" class="headerlink" title="Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)"></a>Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)</h1><ul>
+    <div class="post-body" itemprop="articleBody"><h1 id="Actor-Critic-amp-amp-Advantage-Actor-Critic-A2C"><a href="#Actor-Critic-amp-amp-Advantage-Actor-Critic-A2C" class="headerlink" title="Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)"></a>Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)</h1><ul>
 <li><p>基本思想：相比于Policy Gradient, Actor Critic就是使用Critic网络代替了R(episode), 使用一个Critic模型来估计episode的长期回报<br><img src="/2024/01/22/Actor-Critic-A2C/1705906493223.png" alt="1705906493223"></p>
 </li>
 <li><p>Advantage Actor Critic<br>Advantage 是指减去baseline作为交叉熵的权重<br><img src="/2024/01/22/Actor-Critic-A2C/1705906817564.png" alt="1705906817564"><br>如果奖励全是正的，那么每个episode对应的奖励就都是大于0的，那么p𝜃(at|st)都是上升的，这样看过去没有太大问题，因为累积奖励越大，对应的概率就提升越大，那么最后归一化还是往累积奖励大的方向去更新参数𝜃的，只不过收敛的慢。<br>但是在实际中，采样意味着有的动作是采样不到的，那可能本来最优动作是a，但是没有采样到a, 只采样到了b,c,那b c对应的概率升高，导致a的概率降低，这样产生恶性循环。</p>
 </li>
 </ul>
-<p>因此定义Advantage function &#x3D; R - baseline</p>
+<p>因此定义Advantage function = R - baseline</p>
 <ul>
 <li>基本流程：<br>把Advantage function定义为r(t + 1) + V(s_t+1) - V(s_t)<br>这里使用时序差分来代替累积奖励，牺牲一部分偏差换取模型的方差减小<br>r(t + 1) + V(s_t+1)代表当前策略的期望奖励，V(s_t)表示baseline，代表平均值。<br><img src="/2024/01/22/Actor-Critic-A2C/1705908998891.png" alt="1705908998891"><br><img src="/2024/01/22/Actor-Critic-A2C/1705909008374.png" alt="1705909008374"></li>
 </ul>
@@ -337,6 +337,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 
