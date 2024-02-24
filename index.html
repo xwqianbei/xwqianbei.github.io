@@ -189,7 +189,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-24 17:39:58" itemprop="dateModified" datetime="2024-02-24T17:39:58+08:00">2024-02-24</time>
+      <time title="修改时间：2024-02-24 17:47:25" itemprop="dateModified" datetime="2024-02-24T17:47:25+08:00">2024-02-24</time>
     </span>
 
   
@@ -265,14 +265,11 @@
 <ul>
 <li>gradient-based attribution mechanism: 计算output对于input的偏导数 -&gt; 揭示输入对于输出的影响程度 -&gt; 使用joint-action value 和 individual value之间的偏导数表示信用 -&gt; 确定每个agent的贡献</li>
 </ul>
-<script type="math/tex; mode=display">
-x_{t}^{k} = \partial Q_{t}^{tot} / \partial Q_{t}^{k}  \in R</script><p><em>越大的归因值对应的agent对最终结果影响越大</em></p>
+<script type="math/tex; mode=display">x_{t}^{k} = \partial Q_{t}^{tot} / \partial Q_{t}^{k}  \in R</script><p><em>越大的归因值对应的agent对最终结果影响越大</em></p>
 <ul>
 <li>在贯序决策中，推断一个agent的贡献仅靠单个时间步的行为是不够的 -&gt; 采用时序信用归因 整个轨迹trajectory</li>
 </ul>
-<script type="math/tex; mode=display">
-x_{\tau}^{k} = [x_{1}^{k}, x_{2}^{k}, ... ,x_{N}^{k}] \in R^{N}
-X_{\tau} \in R^(K \times N)</script><p><em>N 是所有采样的τ具有的最大长度， 如果某个τ提前终止 则用 0 填充</em></p>
+<script type="math/tex; mode=display">x_{\tau}^{k} = [x_{1}^{k}, x_{2}^{k}, ... ,x_{N}^{k}] \in R^{N}</script><script type="math/tex; mode=display">X_{\tau} \in R^(K \times N)</script><p><em>N 是所有采样的τ具有的最大长度， 如果某个τ提前终止 则用 0 填充</em></p>
 <ul>
 <li>结论： $X_{\tau \in R^{K \times N}}$ 时序信用归因考虑了agent长期的行为 -&gt; 进而更加稳定的衡量了agent的贡献</li>
 </ul>
@@ -284,8 +281,7 @@ X_{\tau} \in R^(K \times N)</script><p><em>N 是所有采样的τ具有的最大
 <li>identity representation: 每个agent对应一个可学习的随机初始化的身份表示 $ w^{k} \in R^{N} $</li>
 <li>最大化temporal credits 和 identity representation的互信息 -&gt; 最大化identity representation 和 temporal credit的关联程度</li>
 </ul>
-<script type="math/tex; mode=display">
-I_{x;w} = E_{x, w}[log(P(x|w) / P(x))]</script><p>然而优化 $I_{x,w}$ 十分困难，因为估算互信息是不可解的</p>
+<script type="math/tex; mode=display">I_{x;w} = E_{x, w}[log(P(x|w) / P(x))]</script><p>然而优化 $I_{x,w}$ 十分困难，因为估算互信息是不可解的</p>
 <ul>
 <li>对比学习：$ I(x;w) &gt;= log(K) - L_{CL} $<br><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1708760818204.png" alt="1708760818204"><br>-&gt; $w_{k}$ 会和 $x_{k}$ 靠近，并且和其他 $x_{k-}$ 远离<br>公式中$g(x_{\tau}^{k}, w^{k}) $ 表示 $ x_{\tau}^{k} $ 和 $ w^{k} $ 相似性，本文中使用点积运算表示</li>
 <li>结论：<strong>这种身份层面的对比学习loss 1. 限制了学习到的身份表示均分分布在一个特定的超球面 而不会发散 2. 并且对应的时序信用也会分布在对应的身份表示周围</strong><br>-&gt; agent credits的身份意识之间的区分性 提供更加有区分度的信用分配</li>
@@ -295,8 +291,7 @@ I_{x;w} = E_{x, w}[log(P(x|w) / P(x))]</script><p>然而优化 $I_{x,w}$ 十分�
 <ul>
 <li>从分类的角度解释： 可以看成一个分类问题，input是temporal credits 那么identity是分类网络的参数 想要最小化这个loss 要么样本空间十分简单，要么模型足够复杂，但是网络结构仅包含一层线性层nn.Linear(N, K)则施加了一个强约束了输入的credits是线性可分的 <strong>需要注意的是这里输入的样本temporal credits也是可以学的，通过反向传播更新MIX Network</strong></li>
 </ul>
-<script type="math/tex; mode=display">
-L_{all} = L_{TD} + \alpha L_{CL}</script><p>*$\alpha$是一个trade off</p>
+<script type="math/tex; mode=display">L_{all} = L_{TD} + \alpha L_{CL}</script><p>*$\alpha$是一个trade off</p>
 <h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2>
       
     </div>
