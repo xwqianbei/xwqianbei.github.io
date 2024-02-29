@@ -27,8 +27,18 @@
 <meta property="og:description" content="Consensus Learning for Cooperative Multi-Agent Reinforcement LearningAbstract shortcoming: agent 缺乏共享信号 在执行动作时仅考虑了局部的观察 inspired by: viewpoint invariance（试图不变性） + contrastive learning consensus learni">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://xwqianbei.github.io/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1708834968206.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194106907.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194151157.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/image.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194310765.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194473121.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194546681.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194567201.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194594721.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194625724.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194655396.png">
 <meta property="article:published_time" content="2024-02-24T12:25:35.000Z">
-<meta property="article:modified_time" content="2024-02-25T11:33:57.234Z">
+<meta property="article:modified_time" content="2024-02-29T08:17:49.468Z">
 <meta property="article:author" content="Wei">
 <meta property="article:tag" content="论文阅读">
 <meta name="twitter:card" content="summary">
@@ -114,7 +124,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning"><span class="nav-number">1.</span> <span class="nav-text">Consensus Learning for Cooperative Multi-Agent Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.2.</span> <span class="nav-text">Introduction</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning"><span class="nav-number">1.</span> <span class="nav-text">Consensus Learning for Cooperative Multi-Agent Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-number">1.3.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Contrastive-Learning"><span class="nav-number">1.3.1.</span> <span class="nav-text">Contrastive Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Knowledge-Distillation-with-No-Labels"><span class="nav-number">1.3.2.</span> <span class="nav-text">Knowledge Distillation with No Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#COLA-Architecture"><span class="nav-number">1.3.3.</span> <span class="nav-text">COLA Architecture</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiment"><span class="nav-number">1.4.</span> <span class="nav-text">Experiment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Performance-Comparison"><span class="nav-number">1.4.1.</span> <span class="nav-text">Performance Comparison</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Case-Study-and-Visualization"><span class="nav-number">1.4.2.</span> <span class="nav-text">Case Study and Visualization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ablation-Study"><span class="nav-number">1.4.3.</span> <span class="nav-text">Ablation Study</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -196,7 +206,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-25 19:33:57" itemprop="dateModified" datetime="2024-02-25T19:33:57+08:00">2024-02-25</time>
+      <time title="修改时间：2024-02-29 16:17:49" itemprop="dateModified" datetime="2024-02-29T16:17:49+08:00">2024-02-29</time>
     </span>
 
   
@@ -206,14 +216,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.6k</span>
+      <span>3.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -232,18 +242,62 @@
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li><strong>motivation</strong>: 尽管每个智能体的局部观察是独特的, 但是不同智能体对应的是相同的全局状体的不同表示 -&gt; 就像一个多视角问题 -&gt; 如果智能体可以意识到这个不变性，智能体就可以在执行时通过推断的共同意识来进行合作</li>
 </ul>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">the observations of all agents at the same moment are different representations of the same global state, </span><br><span class="line">as shown in Figure 1. It is like a multi-view problem (Xu, Tao, and Xu 2013), </span><br><span class="line">where the same object can look different from various viewpoints.</span><br></pre></td></tr></table></figure>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">If the agents are aware of the invariance, they can explicitly select</span><br><span class="line">cooperative actions by inferring the same consensus on the state from their </span><br><span class="line">different local observations during the decentralized execution.</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">the observations of all agents at the same moment are different representations of the same global state,</span><br><span class="line"></span><br><span class="line">as shown in Figure 1. It is like a multi-view problem (Xu, Tao, and Xu 2013),</span><br><span class="line"></span><br><span class="line">where the same object can look different from various viewpoints.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">If the agents are aware of the invariance, they can explicitly select</span><br><span class="line"></span><br><span class="line">cooperative actions by inferring the same consensus on the state from their</span><br><span class="line"></span><br><span class="line">different local observations during the decentralized execution.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1708834968206.png" alt="1708834968206"></p>
 <ul>
-<li><strong>consensus</strong>: 怎么定义consensus -&gt; 最简单的方法就是把real global state作为consensus， 但是local observation infer global state 很难实现 -&gt; 采用对比学习</li>
+<li><p><strong>consensus</strong>: 怎么定义consensus -&gt; 最简单的方法就是把real global state作为consensus， 但是local observation infer global state 很难实现 -&gt; 采用对比学习</p>
+</li>
+<li><p><strong>COLA (COnsensus LeArning)</strong>: 利用对比学习通过不变性的形式将局部观察编码到离散的潜空间中 即使在同一时刻不同智能体之间的local observation非常不相似，在训练consensus representation model时依然会把他们作为相似的对待 -&gt; 这样可以让COLA中的agent收到完全不同的局部观察时，agent在执行时依然可以推断出相同的离散状态潜在变量</p>
+</li>
 </ul>
-<ul>
-<li><strong>COLA (COnsensus LeArning)</strong>: 利用对比学习通过不变性的形式将局部观察编码到离散的潜空间中 即使在同一时刻不同智能体之间的local observation非常不相似，在训练consensus representation model时依然会把他们作为相似的对待 -&gt; 这样可以让COLA中的agent收到完全不同的局部观察时，agent在执行时依然可以推断出相同的离散状态潜在变量</li>
-</ul>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">COLA utilizes contrastive learning to encode local observations into discrete latent spaces through the form of invariances. </span><br><span class="line">Even though the local observations between agents at the same moment may be quite dissimilar, </span><br><span class="line">we still treat them as similar when training the consensus representation model. </span><br><span class="line">Thus, even if agents in COLA receive entirely different local observations, </span><br><span class="line">they can still infer the same discrete state latent variables during execution.</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">COLA utilizes contrastive learning to encode local observations into discrete latent spaces through the form of invariances.</span><br><span class="line"></span><br><span class="line">Even though the local observations between agents at the same moment may be quite dissimilar,</span><br><span class="line"></span><br><span class="line">we still treat them as similar when training the consensus representation model.</span><br><span class="line"></span><br><span class="line">Thus, even if agents in COLA receive entirely different local observations,</span><br><span class="line"></span><br><span class="line">they can still infer the same discrete state latent variables during execution.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>Intuitive interpretation</strong>: COLA 赋能 agent学习到人类社会中的“默契” 智能体之间没有实质的交流 但是依然能达到一个处于相同state的共识</li>
+</ul>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h3 id="Contrastive-Learning"><a href="#Contrastive-Learning" class="headerlink" title="Contrastive Learning"></a>Contrastive Learning</h3><ul>
+<li><p>Constrastive Learning</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A dataset in contrastive learning tasks is typically organized by similar and dissimilar pairs. Then contrastive learning methods are trained by reducing the distance between augmented views of the same sample and increasing it between different ones (Wang and Isola 2020). In this way, contrastive learning enables the representation model to learn the general knowledge contained in the dataset.</span><br></pre></td></tr></table></figure>
+<p><strong>负样本的选择对对比学习的性能影响很大</strong>  -&gt; 因此通常由人工来选择负样本 这样就限制了对比学习的开发 -&gt; <strong>new work： 通过类似聚类的技术 取消显示加入负样本</strong> 但是依然可以得到不错的性能 并且避免了塌陷(collapse)</p>
+</li>
+<li><p>Contrastive Learning in Reinforcement Learning: 通过比较不同时间的状态， <strong>对比学习可以将复杂的状态映射到低维的潜在空间 进而去除和学习无关的信息</strong></p>
+<h3 id="Knowledge-Distillation-with-No-Labels"><a href="#Knowledge-Distillation-with-No-Labels" class="headerlink" title="Knowledge Distillation with No Labels"></a>Knowledge Distillation with No Labels</h3></li>
+<li><p>**self-train and knowledge distillation: </p>
+<ol>
+<li>利用已标记的数据训练一个教师模型</li>
+<li>教师模型对未标记的数据生成伪标签（软标签）</li>
+<li>将生成为标签的数据与原始数据相结合 训练学生模型</li>
+</ol>
+</li>
+<li><strong>self-DIstillation with NO labels</strong>:  <ol>
+<li>完全没有带标签的数据 不存在预训练好的教师模型</li>
+<li>教师模型和学生模型的结构完全一样</li>
+<li>教师模型的参数是随机初始化的， 使用EMA的方式从学生模型上更新参数 </li>
+</ol>
+</li>
+<li><strong>Emerging Properties in Self-Supervised Vision Transformers</strong>: 发表在ICCV-2021上提出DINO模型  及  伪代码</li>
+</ul>
+<p><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194106907.png" alt="1709194106907"><br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194151157.png" alt="1709194151157"></p>
+<ul>
+<li><strong>consensus builder 模型结构：</strong><br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/image.png" alt="alt text"></li>
+<li><strong>loss损失函数：</strong> K 是共识类别的数量<br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194310765.png" alt="1709194310765"></li>
+</ul>
+<h3 id="COLA-Architecture"><a href="#COLA-Architecture" class="headerlink" title="COLA Architecture"></a>COLA Architecture</h3><ul>
+<li><strong>We concatenate local observations with the one-hot consensus and feed them into the network.</strong></li>
+<li><strong>loss:</strong> $L_{RL} = (y_{tot} - Q_{tot}(\tau , c, u))$<br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194473121.png" alt="1709194473121"></li>
+</ul>
+<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><h3 id="Performance-Comparison"><a href="#Performance-Comparison" class="headerlink" title="Performance Comparison"></a>Performance Comparison</h3><p><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194546681.png" alt="1709194546681"><br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194567201.png" alt="1709194567201"></p>
+<h3 id="Case-Study-and-Visualization"><a href="#Case-Study-and-Visualization" class="headerlink" title="Case Study and Visualization"></a>Case Study and Visualization</h3><ul>
+<li>模型参数分析：<br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194594721.png" alt="1709194594721"></li>
+<li><p><strong>Result of Consensus Learning</strong>: </p>
+<ol>
+<li>in the 2D t-SNE embedding of states, the states with the same consensus generated by the agent tend to cluster together.</li>
+<li>states with the same consensus often have similar estimated values or true returns.<br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194625724.png" alt="1709194625724"><h3 id="Ablation-Study"><a href="#Ablation-Study" class="headerlink" title="Ablation Study"></a>Ablation Study</h3></li>
+</ol>
+</li>
+<li><p>How does the hyperparameter K affect the performance of COLA?<br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194655396.png" alt="1709194655396"></p>
+</li>
+<li><strong>conclusion</strong>: we conclude that the choice of K depends on the difficulty of the task. We should pick a higher K value when the reinforcement learning task is complex and vice versa.</li>
 </ul>
 
     </div>
@@ -312,13 +366,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">17k</span>
+    <span title="站点总字数">19k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">28 分钟</span>
+    <span title="站点阅读时长">31 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
