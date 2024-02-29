@@ -19,35 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"xwqianbei.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Policy Gradient 基本思路：使用神经网络对策略函数进行建模   input：某个状态 output：动作的概率分布 目标：调整Actor的策略π(即更新参数𝜃)，使得期望奖励最大化   基本流程：使用当前的策略π(𝜃), 与环境进行交互，直到状态到达终止状态为一个episode，如下图：因为策略π(𝜃)是随机策略，所以需要采样N个episode算期望    数学推导：  直觉上">
+    <meta name="description" content="RACE: Improve Multi-Agent Reinforcement Learning with Representation Asymmetry and Collaborative EvolutionAbstract challenge: MARL 在合作方面 挣扎在低质量的奖励信号和高不稳定性 Evolutionary Algorithm(EA): 更好的收敛、更加健壮鲁棒、对奖励信">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Policy Gradient">
-<meta property="og:url" content="http://xwqianbei.github.io/2024/01/22/Policy-Gradient/index.html">
+<meta property="og:title" content="RACE">
+<meta property="og:url" content="http://xwqianbei.github.io/2024/02/26/RACE/index.html">
 <meta property="og:site_name" content="米兰的小铁酱">
-<meta property="og:description" content="Policy Gradient 基本思路：使用神经网络对策略函数进行建模   input：某个状态 output：动作的概率分布 目标：调整Actor的策略π(即更新参数𝜃)，使得期望奖励最大化   基本流程：使用当前的策略π(𝜃), 与环境进行交互，直到状态到达终止状态为一个episode，如下图：因为策略π(𝜃)是随机策略，所以需要采样N个episode算期望    数学推导：  直觉上">
+<meta property="og:description" content="RACE: Improve Multi-Agent Reinforcement Learning with Representation Asymmetry and Collaborative EvolutionAbstract challenge: MARL 在合作方面 挣扎在低质量的奖励信号和高不稳定性 Evolutionary Algorithm(EA): 更好的收敛、更加健壮鲁棒、对奖励信">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://xwqianbei.github.io/2024/01/22/Policy-Gradient/1705902014807.png">
-<meta property="og:image" content="http://xwqianbei.github.io/2024/01/22/Policy-Gradient/1705902335731.png">
-<meta property="og:image" content="http://xwqianbei.github.io/2024/01/22/Policy-Gradient/1705902838575.png">
-<meta property="og:image" content="http://xwqianbei.github.io/2024/01/22/Policy-Gradient/1705903738661.png">
-<meta property="og:image" content="http://xwqianbei.github.io/2024/01/22/Policy-Gradient/1705902985289.png">
-<meta property="og:image" content="http://xwqianbei.github.io/2024/01/22/Policy-Gradient/1705903047698.png">
-<meta property="article:published_time" content="2024-01-22T05:29:38.000Z">
-<meta property="article:modified_time" content="2024-01-22T10:27:00.601Z">
+<meta property="article:published_time" content="2024-02-26T12:57:10.000Z">
+<meta property="article:modified_time" content="2024-02-27T09:18:13.613Z">
 <meta property="article:author" content="Wei">
-<meta property="article:tag" content="RL">
+<meta property="article:tag" content="论文阅读">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://xwqianbei.github.io/2024/01/22/Policy-Gradient/1705902014807.png">
 
 
-<link rel="canonical" href="http://xwqianbei.github.io/2024/01/22/Policy-Gradient/">
+<link rel="canonical" href="http://xwqianbei.github.io/2024/02/26/RACE/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://xwqianbei.github.io/2024/01/22/Policy-Gradient/","path":"2024/01/22/Policy-Gradient/","title":"Policy Gradient"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://xwqianbei.github.io/2024/02/26/RACE/","path":"2024/02/26/RACE/","title":"RACE"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Policy Gradient | 米兰的小铁酱</title>
+<title>RACE | 米兰的小铁酱</title>
   
 
 
@@ -119,7 +112,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Policy-Gradient"><span class="nav-number">1.</span> <span class="nav-text">Policy Gradient</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RACE-Improve-Multi-Agent-Reinforcement-Learning-with-Representation-Asymmetry-and-Collaborative-Evolution"><span class="nav-number">1.</span> <span class="nav-text">RACE: Improve Multi-Agent Reinforcement Learning with Representation Asymmetry and Collaborative Evolution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">3.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">3.1.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shared-Observation-Representation-Learning"><span class="nav-number">3.1.1.</span> <span class="nav-text">Shared Observation Representation Learning</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -165,7 +158,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/01/22/Policy-Gradient/">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/02/26/RACE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -178,12 +171,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Policy Gradient | 米兰的小铁酱">
+      <meta itemprop="name" content="RACE | 米兰的小铁酱">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Policy Gradient
+          RACE
         </h1>
 
         <div class="post-meta-container">
@@ -193,9 +186,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-01-22 13:29:38 / 修改时间：18:27:00" itemprop="dateCreated datePublished" datetime="2024-01-22T13:29:38+08:00">2024-01-22</time>
+      <time title="创建时间：2024-02-26 20:57:10" itemprop="dateCreated datePublished" datetime="2024-02-26T20:57:10+08:00">2024-02-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-27 17:18:13" itemprop="dateModified" datetime="2024-02-27T17:18:13+08:00">2024-02-27</time>
     </span>
 
   
@@ -205,14 +204,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>354</span>
+      <span>2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -222,25 +221,32 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="Policy-Gradient"><a href="#Policy-Gradient" class="headerlink" title="Policy Gradient"></a>Policy Gradient</h1><ul>
-<li>基本思路：使用神经网络对策略函数进行建模</li>
+    <div class="post-body" itemprop="articleBody"><h1 id="RACE-Improve-Multi-Agent-Reinforcement-Learning-with-Representation-Asymmetry-and-Collaborative-Evolution"><a href="#RACE-Improve-Multi-Agent-Reinforcement-Learning-with-Representation-Asymmetry-and-Collaborative-Evolution" class="headerlink" title="RACE: Improve Multi-Agent Reinforcement Learning with Representation Asymmetry and Collaborative Evolution"></a>RACE: Improve Multi-Agent Reinforcement Learning with Representation Asymmetry and Collaborative Evolution</h1><h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><ul>
+<li><strong>challenge</strong>: MARL 在合作方面 挣扎在低质量的奖励信号和高不稳定性</li>
+<li><strong>Evolutionary Algorithm(EA)</strong>: 更好的收敛、更加健壮鲁棒、对奖励信号不敏感</li>
+<li><strong>in this paper</strong>: 本文提出一个混合框架： Representation Asymmetry and Collaboration Evolution (RACE) -&gt; 将EA和MARL结合 以达到高效的合作</li>
+<li><strong>method</strong>: RACE 维持一个MARL team和一群EA teams. 为了高效的知识共享和策略探索 -&gt; RACE 把不同team控制相同agent的 policies 分解成 1. shared nonlinear observation representation encoder（共享的非线性观察表示编码器encoder） 2. individual linear policy representations.（独立的线性策略表示） trick1: 为了解决部分观察的问题, 本文引入Value-Aware Mutual Information Maximization （价值感知 互信息最大化）-&gt; 利用有关全局状态的有用信息增强共享表示    trick2: 为了促进协调 -&gt; 使用新颖的 agent-level 交叉和变异算子来进化种群 -&gt; 为MARL提供多样化的经验  trick3: MARL优化它的策略并且将它们注入到种群中进化</li>
 </ul>
-<ol>
-<li>input：某个状态</li>
-<li>output：动作的概率分布</li>
-<li>目标：调整Actor的策略π(即更新参数𝜃)，使得期望奖励最大化<br><img src="/2024/01/22/Policy-Gradient/1705902014807.png" alt="1705902014807"></li>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><ul>
+<li><strong>motivation</strong>: EA has strong exploration ability, good robustness, and stable convergence. EA offers numerous strengths that can complement the weaknesses of MARL.</li>
+<li><strong>challenge</strong>: 独立维持和优化每个team的policy是非常不高效的 并且这样无法利用其他team获得的有价值的知识 在广阔的非线性策略空间探索合作是非常低效的</li>
+<li><strong>methods</strong>: 提出两级团队策略测结构 1. 共享的非线性观察表示(shared observation represention encoder) 2. 独立的线性策略表示(independent policy representions)</li>
+<li><strong>represention asymmetry</strong>: independent policy构建的不同表示范围</li>
+<li><strong>observation representation encoder</strong>: 负责共享任务相关和合作相关的知识 -&gt; 通过价值函数最大化的集成（涉及所有的EA team 和 MARL team）更新方向进行优化</li>
+<li><strong>Value-Aware Mutual Information Maximization</strong>: 最大化共享观察表示(shared observation representations) 和全局状态的互信息(MI)。 -&gt; 在低价值状态下进行最大化可能导致对共享观察表示(shared observation representation)的负面影响 -&gt; 导致合作不理想 -&gt; Value-Aware MI: 归一化状态价值函数作为权重 已到达 提取全局状态信息加入共享观察表示(shared observation representations)</li>
+<li><strong>independent linear policy</strong>: 在更加紧凑和有利的线性空间 policy的探索更加有效 从而促进合作</li>
+<li><strong>EA</strong>: EA进化种群 生成多样性的经验 -&gt; 被MARL使用 -&gt; 反过来，MARL team通过收集的样本进行优化 并且定期加入种群进化</li>
+<li>**agent-level 交叉变异 -&gt; 交换两个team的individual policy representation -&gt; 探索更好的团队合作</li>
+</ul>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><ol>
+<li>Representation Asymmetry of team construction</li>
+<li>How to learn the shared observation representation encoders</li>
+<li>How to improve MARL with Collaborative Evolution</li>
 </ol>
 <ul>
-<li>基本流程：使用当前的策略π(𝜃), 与环境进行交互，直到状态到达终止状态为一个episode，如下图：<br><img src="/2024/01/22/Policy-Gradient/1705902335731.png" alt="1705902335731"><br>因为策略π(𝜃)是随机策略，所以需要采样N个episode算期望<br><img src="/2024/01/22/Policy-Gradient/1705902838575.png" alt="1705902838575"></li>
+<li><strong>motivation</strong>: 每个team 独立的策略构建限制了teams之间的知识共享和在策略空间上的探索 -&gt; inspired by ERL-Re -&gt; 本文提出Representation-Asymmetry Team Construction(RATC) 使能够高效的知识共享和策略探索</li>
 </ul>
-<p><img src="/2024/01/22/Policy-Gradient/1705903738661.png" alt="1705903738661"></p>
-<ul>
-<li><p>数学推导：<br><img src="/2024/01/22/Policy-Gradient/1705902985289.png" alt="1705902985289"></p>
-</li>
-<li><p>直觉上理解：<br><img src="/2024/01/22/Policy-Gradient/1705903047698.png" alt="1705903047698"><br>和监督学习里面的多分类所不同的是，这里我们并不知道ground-truth，即我们并不知道当然所选取的action是不是最优的action。因为我们需要对其再增加一个置信度的系数，也就是之前我们所计算出来的return值。直观理解就是，如果当前action可以为我们带来更多收益，我们的网络就更应该朝着选择当前action的方向去更新。</p>
-</li>
-</ul>
-
+<h3 id="Shared-Observation-Representation-Learning"><a href="#Shared-Observation-Representation-Learning" class="headerlink" title="Shared Observation Representation Learning"></a>Shared Observation Representation Learning</h3>
     </div>
 
     
@@ -262,18 +268,18 @@
 <div style="text-align: center"><span id="jrsc" >正在加载今日诗词....</span></div>
 
           <div class="post-tags">
-              <a href="/tags/RL/" rel="tag"># RL</a>
+              <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" rel="tag"># 论文阅读</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2024/02/26/NA2Q/" rel="prev" title="NA2Q">
+                  <i class="fa fa-angle-left"></i> NA2Q
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/01/22/Actor-Critic-A2C/" rel="next" title="Actor-Critic && A2C">
-                  Actor-Critic && A2C <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
