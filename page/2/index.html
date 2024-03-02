@@ -22,7 +22,7 @@
     <meta name="description" content="attention is all you need">
 <meta property="og:type" content="website">
 <meta property="og:title" content="米兰的小铁酱">
-<meta property="og:url" content="http://xwqianbei.github.io/tags/RL/index.html">
+<meta property="og:url" content="http://xwqianbei.github.io/page/2/index.html">
 <meta property="og:site_name" content="米兰的小铁酱">
 <meta property="og:description" content="attention is all you need">
 <meta property="og:locale" content="zh_CN">
@@ -30,14 +30,14 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://xwqianbei.github.io/tags/RL/">
+<link rel="canonical" href="http://xwqianbei.github.io/page/2/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"tags/RL/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"page/2/index.html","title":""}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>标签: RL | 米兰的小铁酱</title>
+<title>米兰的小铁酱</title>
   
 
 
@@ -70,7 +70,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">米兰的小铁酱</p>
+      <h1 class="site-title">米兰的小铁酱</h1>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -143,130 +143,113 @@
 
     </div>
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner index posts-expand">
+
+    
 
 
+<div class="post-block">
   
   
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/01/22/Policy-Gradient/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米兰的小铁酱">
+      <meta itemprop="description" content="attention is all you need">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 米兰的小铁酱">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/01/22/Policy-Gradient/" class="post-title-link" itemprop="url">Policy Gradient</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-01-22 13:29:38 / 修改时间：18:27:00" itemprop="dateCreated datePublished" datetime="2024-01-22T13:29:38+08:00">2024-01-22</time>
+    </span>
+
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">RL
-          <small>标签</small>
-        </h1>
-      </div>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>354</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Policy-Gradient"><a href="#Policy-Gradient" class="headerlink" title="Policy Gradient"></a>Policy Gradient</h1><ul>
+<li>基本思路：使用神经网络对策略函数进行建模</li>
+</ul>
+<ol>
+<li>input：某个状态</li>
+<li>output：动作的概率分布</li>
+<li>目标：调整Actor的策略π(即更新参数𝜃)，使得期望奖励最大化<br><img src="/2024/01/22/Policy-Gradient/1705902014807.png" alt="1705902014807"></li>
+</ol>
+<ul>
+<li>基本流程：使用当前的策略π(𝜃), 与环境进行交互，直到状态到达终止状态为一个episode，如下图：<br><img src="/2024/01/22/Policy-Gradient/1705902335731.png" alt="1705902335731"><br>因为策略π(𝜃)是随机策略，所以需要采样N个episode算期望<br><img src="/2024/01/22/Policy-Gradient/1705902838575.png" alt="1705902838575"></li>
+</ul>
+<p><img src="/2024/01/22/Policy-Gradient/1705903738661.png" alt="1705903738661"></p>
+<ul>
+<li><p>数学推导：<br><img src="/2024/01/22/Policy-Gradient/1705902985289.png" alt="1705902985289"></p>
+</li>
+<li><p>直觉上理解：<br><img src="/2024/01/22/Policy-Gradient/1705903047698.png" alt="1705903047698"><br>和监督学习里面的多分类所不同的是，这里我们并不知道ground-truth，即我们并不知道当然所选取的action是不是最优的action。因为我们需要对其再增加一个置信度的系数，也就是之前我们所计算出来的return值。直观理解就是，如果当前action可以为我们带来更多收益，我们的网络就更应该朝着选择当前action的方向去更新。</p>
+</li>
+</ul>
 
       
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-01-27T16:55:17+08:00"
-              content="2024-01-27">
-          01-27
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2024/01/27/MARL/" itemprop="url">
-          <span itemprop="name">MARL</span>
-        </a>
-      </div>
-
+    <footer class="post-footer">
+        <div class="post-eof"></div>
       
-    </header>
+    </footer>
   </article>
+</div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-01-22T16:11:29+08:00"
-              content="2024-01-22">
-          01-22
-        </time>
-      </div>
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2024/01/22/PPO/" itemprop="url">
-          <span itemprop="name">PPO</span>
-        </a>
-      </div>
 
-      
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-01-22T15:37:06+08:00"
-              content="2024-01-22">
-          01-22
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2024/01/22/A3C/" itemprop="url">
-          <span itemprop="name">A3C</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-01-22T14:35:32+08:00"
-              content="2024-01-22">
-          01-22
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2024/01/22/Actor-Critic-A2C/" itemprop="url">
-          <span itemprop="name">Actor-Critic && A2C</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-01-22T13:29:38+08:00"
-              content="2024-01-22">
-          01-22
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2024/01/22/Policy-Gradient/" itemprop="url">
-          <span itemprop="name">Policy Gradient</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-    </div>
-  </div>
-  
-  
-  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 </div>
   </main>

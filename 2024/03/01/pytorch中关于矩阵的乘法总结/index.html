@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xwqianbei.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="pytorch中关于矩阵的乘法总结torch.mul(), *, torch.mm(), @, torch.bmm(), torch.dot(), torch.mv(), torch.matmul(), torch.einsum() 1 torch.mul(x, y) 和 * 运算 表示两个矩阵对应位置上的元素相乘，可以广播12345import torchx &#x3D; torch.ones(2, 2)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pytorch中关于矩阵的乘法总结">
+<meta property="og:url" content="http://xwqianbei.github.io/2024/03/01/pytorch%E4%B8%AD%E5%85%B3%E4%BA%8E%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%98%E6%B3%95%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="米兰的小铁酱">
+<meta property="og:description" content="pytorch中关于矩阵的乘法总结torch.mul(), *, torch.mm(), @, torch.bmm(), torch.dot(), torch.mv(), torch.matmul(), torch.einsum() 1 torch.mul(x, y) 和 * 运算 表示两个矩阵对应位置上的元素相乘，可以广播12345import torchx &#x3D; torch.ones(2, 2)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/03/01/pytorch%E4%B8%AD%E5%85%B3%E4%BA%8E%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%98%E6%B3%95%E6%80%BB%E7%BB%93/1709381483833.png">
+<meta property="article:published_time" content="2024-03-01T11:50:57.000Z">
+<meta property="article:modified_time" content="2024-03-02T12:26:17.142Z">
+<meta property="article:author" content="Wei">
+<meta property="article:tag" content="pytorch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xwqianbei.github.io/2024/03/01/pytorch%E4%B8%AD%E5%85%B3%E4%BA%8E%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%98%E6%B3%95%E6%80%BB%E7%BB%93/1709381483833.png">
+
+
+<link rel="canonical" href="http://xwqianbei.github.io/2024/03/01/pytorch%E4%B8%AD%E5%85%B3%E4%BA%8E%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%98%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://xwqianbei.github.io/2024/03/01/pytorch%E4%B8%AD%E5%85%B3%E4%BA%8E%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%98%E6%B3%95%E6%80%BB%E7%BB%93/","path":"2024/03/01/pytorch中关于矩阵的乘法总结/","title":"pytorch中关于矩阵的乘法总结"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>pytorch中关于矩阵的乘法总结 | 米兰的小铁酱</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">米兰的小铁酱</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pytorch%E4%B8%AD%E5%85%B3%E4%BA%8E%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%98%E6%B3%95%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">pytorch中关于矩阵的乘法总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-torch-mul-x-y-%E5%92%8C-%E8%BF%90%E7%AE%97"><span class="nav-number">1.1.</span> <span class="nav-text">1 torch.mul(x, y) 和 * 运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-torch-mm-x-y-%E5%92%8C-%E8%BF%90%E7%AE%97"><span class="nav-number">1.2.</span> <span class="nav-text">2 torch.mm(x, y) 和 @运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-torch-bmm-x-y"><span class="nav-number">1.3.</span> <span class="nav-text">3 torch.bmm(x, y)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-torch-dot-x-y-gt-tensor-scalar"><span class="nav-number">2.</span> <span class="nav-text">4 torch.dot(x, y) -&gt; tensor (scalar)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-torch-mv-x-y-gt-Tensor"><span class="nav-number">3.</span> <span class="nav-text">5 torch.mv(x, y) -&gt; Tensor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-torch-matmul-x-y-gt-tensor"><span class="nav-number">4.</span> <span class="nav-text">6 torch.matmul(x, y) -&gt; tensor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-torch-einsum-gt-%E7%88%B1%E5%9B%A0%E6%96%AF%E5%9D%A6%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A"><span class="nav-number">5.</span> <span class="nav-text">7 torch.einsum() -&gt; 爱因斯坦求和约定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">8 总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wei</p>
+  <div class="site-description" itemprop="description">attention is all you need</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/03/01/pytorch%E4%B8%AD%E5%85%B3%E4%BA%8E%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%98%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米兰的小铁酱">
+      <meta itemprop="description" content="attention is all you need">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="pytorch中关于矩阵的乘法总结 | 米兰的小铁酱">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          pytorch中关于矩阵的乘法总结
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-01 19:50:57" itemprop="dateCreated datePublished" datetime="2024-03-01T19:50:57+08:00">2024-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-02 20:26:17" itemprop="dateModified" datetime="2024-03-02T20:26:17+08:00">2024-03-02</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="pytorch中关于矩阵的乘法总结"><a href="#pytorch中关于矩阵的乘法总结" class="headerlink" title="pytorch中关于矩阵的乘法总结"></a>pytorch中关于矩阵的乘法总结</h1><p><strong>torch.mul(), *, torch.mm(), @, torch.bmm(), torch.dot(), torch.mv(), torch.matmul(), torch.einsum()</strong></p>
+<h2 id="1-torch-mul-x-y-和-运算"><a href="#1-torch-mul-x-y-和-运算" class="headerlink" title="1 torch.mul(x, y) 和 * 运算"></a>1 torch.mul(x, y) 和 * 运算</h2><ul>
+<li>表示两个矩阵对应位置上的元素相乘，可以广播<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.ones(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">y = <span class="number">2</span></span><br><span class="line">z = torch.mul(x, y)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125;\n&#123;&#125;\n&#123;&#125;\n&#123;&#125;\n&#x27;</span>.<span class="built_in">format</span>(x, y, x * y, z))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tensor([[<span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">1.</span>]])</span><br><span class="line"><span class="number">2</span></span><br><span class="line">tensor([[<span class="number">2.</span>, <span class="number">2.</span>],</span><br><span class="line">        [<span class="number">2.</span>, <span class="number">2.</span>]])</span><br><span class="line">tensor([[<span class="number">2.</span>, <span class="number">2.</span>],</span><br><span class="line">        [<span class="number">2.</span>, <span class="number">2.</span>]])</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-torch-mm-x-y-和-运算"><a href="#2-torch-mm-x-y-和-运算" class="headerlink" title="2 torch.mm(x, y) 和 @运算"></a>2 torch.mm(x, y) 和 @运算</h2><ul>
+<li>线性代数中的矩阵乘法 x 和 y只能是二维 x = (n, m) y = (m, p) torch.mm(x, y) = (n, p) <strong>不支持广播</strong><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x = torch.randn(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">y = torch.randn(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">z = torch.mm(x, y)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125;\n&#123;&#125;\n&#123;&#125;\n&#123;&#125;\n&#x27;</span>.<span class="built_in">format</span>(x, y, x @ y, z))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tensor([[-<span class="number">0.6012</span>,  <span class="number">1.4065</span>, -<span class="number">0.8835</span>],</span><br><span class="line">        [ <span class="number">0.4794</span>,  <span class="number">0.7086</span>,  <span class="number">0.6491</span>]])</span><br><span class="line">tensor([[ <span class="number">0.4244</span>, -<span class="number">0.4029</span>,  <span class="number">1.6911</span>,  <span class="number">0.5680</span>],</span><br><span class="line">        [ <span class="number">2.0811</span>,  <span class="number">0.4253</span>, -<span class="number">0.9852</span>,  <span class="number">0.8593</span>],</span><br><span class="line">        [-<span class="number">0.5978</span>,  <span class="number">0.7914</span>, -<span class="number">0.7826</span>,  <span class="number">0.4671</span>]])</span><br><span class="line">tensor([[ <span class="number">3.2000</span>,  <span class="number">0.1413</span>, -<span class="number">1.7111</span>,  <span class="number">0.4544</span>],</span><br><span class="line">        [ <span class="number">1.2901</span>,  <span class="number">0.6219</span>, -<span class="number">0.3954</span>,  <span class="number">1.1845</span>]])</span><br><span class="line">tensor([[ <span class="number">3.2000</span>,  <span class="number">0.1413</span>, -<span class="number">1.7111</span>,  <span class="number">0.4544</span>],</span><br><span class="line">        [ <span class="number">1.2901</span>,  <span class="number">0.6219</span>, -<span class="number">0.3954</span>,  <span class="number">1.1845</span>]])</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="3-torch-bmm-x-y"><a href="#3-torch-bmm-x-y" class="headerlink" title="3 torch.bmm(x, y)"></a>3 torch.bmm(x, y)</h2><ul>
+<li>执行一个batch的矩阵乘法 <strong>x 和 y 必须是3-D张量 且是x = (b, n, m) y = (b, n, p)</strong> <strong>不支持广播</strong><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x = torch.randn(<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">y = torch.randn(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">z = torch.bmm(x, y) <span class="comment"># [2, 2, 4]</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125;\n&#123;&#125;\n&#123;&#125;\n&#x27;</span>.<span class="built_in">format</span>(x, y, z))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">tensor([[[ <span class="number">0.4304</span>,  <span class="number">0.9056</span>,  <span class="number">0.4578</span>],</span><br><span class="line">         [-<span class="number">3.1024</span>,  <span class="number">0.1185</span>,  <span class="number">0.8143</span>]],</span><br><span class="line"></span><br><span class="line">        [[-<span class="number">0.1249</span>, -<span class="number">0.7876</span>, -<span class="number">0.0426</span>],</span><br><span class="line">         [-<span class="number">1.5175</span>, -<span class="number">1.0602</span>,  <span class="number">2.4620</span>]]])</span><br><span class="line">tensor([[[-<span class="number">0.2403</span>, -<span class="number">0.5954</span>,  <span class="number">1.2178</span>, -<span class="number">1.3661</span>],</span><br><span class="line">         [ <span class="number">0.7626</span>, -<span class="number">0.0728</span>,  <span class="number">0.2353</span>,  <span class="number">0.0733</span>],</span><br><span class="line">         [-<span class="number">0.1070</span>, -<span class="number">0.3414</span>, -<span class="number">0.2480</span>, -<span class="number">1.0626</span>]],</span><br><span class="line"></span><br><span class="line">        [[-<span class="number">0.5171</span>, -<span class="number">0.6608</span>,  <span class="number">1.3164</span>, -<span class="number">1.2351</span>],</span><br><span class="line">         [ <span class="number">1.9305</span>,  <span class="number">0.1607</span>,  <span class="number">0.8634</span>, -<span class="number">0.6855</span>],</span><br><span class="line">         [-<span class="number">0.3664</span>,  <span class="number">0.3081</span>,  <span class="number">1.1023</span>, -<span class="number">1.6237</span>]]])</span><br><span class="line">tensor([[[ <span class="number">0.5383</span>, -<span class="number">0.4785</span>,  <span class="number">0.6237</span>, -<span class="number">1.0081</span>],</span><br><span class="line">         [ <span class="number">0.7487</span>,  <span class="number">1.5606</span>, -<span class="number">3.9523</span>,  <span class="number">3.3816</span>]],</span><br><span class="line"></span><br><span class="line">        [[-<span class="number">1.4404</span>, -<span class="number">0.0572</span>, -<span class="number">0.8915</span>,  <span class="number">0.7634</span>],</span><br><span class="line">         [-<span class="number">2.1641</span>,  <span class="number">1.5909</span>, -<span class="number">0.1993</span>, -<span class="number">1.3964</span>]]])</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="4-torch-dot-x-y-gt-tensor-scalar"><a href="#4-torch-dot-x-y-gt-tensor-scalar" class="headerlink" title="4 torch.dot(x, y) -&gt; tensor (scalar)"></a>4 torch.dot(x, y) -&gt; tensor (scalar)</h1><ul>
+<li><strong>两个元素个数相同的一维张量</strong>点积运算 <strong>和numpy的dot不同，torch.dot(x, y)仅支持两个一维张量</strong><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x = torch.tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = torch.tensor([<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line">z = torch.dot(x, y) <span class="comment"># 1*4 + 2*5 + 3*6 = 32</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125;\n&#123;&#125;\n&#123;&#125;\n&#x27;</span>.<span class="built_in">format</span>(x, y, z))</span><br><span class="line"></span><br><span class="line"><span class="comment"># error</span></span><br><span class="line"><span class="comment"># y = torch.tensor([[1, 2, 3], [1, 2, 3], [1, 2, 3]])</span></span><br><span class="line"><span class="comment"># z = torch.dot(x, y)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">tensor([<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line"><span class="number">32</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="5-torch-mv-x-y-gt-Tensor"><a href="#5-torch-mv-x-y-gt-Tensor" class="headerlink" title="5 torch.mv(x, y) -&gt; Tensor"></a>5 torch.mv(x, y) -&gt; Tensor</h1><ul>
+<li><strong>matrix-vector and x = (n, m) y = (m, ) -&gt; return = (n, )</strong> 不支持广播<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x = torch.tensor([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line">y = torch.tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">z = torch.mv(x, y) <span class="comment"># [1*1 + 2*2 + 3*3, 4*1 + 5*2 + 6*3]</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125;\n&#123;&#125;\n&#123;&#125;\n&#x27;</span>.<span class="built_in">format</span>(x, y, z))</span><br><span class="line"></span><br><span class="line"><span class="comment"># ERROR</span></span><br><span class="line"><span class="comment"># z = torch.mv(y, x)</span></span><br><span class="line"><span class="comment"># print(&#x27;&#123;&#125;\n&#123;&#125;\n&#123;&#125;\n&#x27;.format(x, y, z))</span></span><br><span class="line"><span class="comment"># y = torch.tensor([1, 2])</span></span><br><span class="line"><span class="comment"># z = torch.mv(y, x)</span></span><br><span class="line"><span class="comment"># print(&#x27;&#123;&#125;\n&#123;&#125;\n&#123;&#125;\n&#x27;.format(x, y, z))</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tensor([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">        [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">tensor([<span class="number">14</span>, <span class="number">32</span>])</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="6-torch-matmul-x-y-gt-tensor"><a href="#6-torch-matmul-x-y-gt-tensor" class="headerlink" title="6 torch.matmul(x, y) -&gt; tensor"></a>6 torch.matmul(x, y) -&gt; tensor</h1><ul>
+<li>比较全能的一种乘法 <strong>支持广播</strong> 支持任何维度可相乘的tensor相乘<br><img src="/2024/03/01/pytorch%E4%B8%AD%E5%85%B3%E4%BA%8E%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%98%E6%B3%95%E6%80%BB%E7%BB%93/1709381483833.png" alt="1709381483833"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x = torch.randn(<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">y = torch.randn(<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>)</span><br><span class="line">z = torch.matmul(x, y) <span class="comment"># [2, 2, 2, 2]</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125;\n&#123;&#125;\n&#123;&#125;\n&#x27;</span>.<span class="built_in">format</span>(x, y, z))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">tensor([[[[-<span class="number">0.9772</span>, -<span class="number">0.0628</span>, -<span class="number">0.5369</span>],</span><br><span class="line">          [-<span class="number">0.3113</span>,  <span class="number">1.7524</span>,  <span class="number">0.7249</span>]],</span><br><span class="line"></span><br><span class="line">         [[-<span class="number">1.1878</span>,  <span class="number">0.0895</span>,  <span class="number">0.7625</span>],</span><br><span class="line">          [ <span class="number">0.2828</span>,  <span class="number">0.1154</span>, -<span class="number">0.8482</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        [[[ <span class="number">0.8277</span>,  <span class="number">0.4449</span>,  <span class="number">0.0741</span>],</span><br><span class="line">          [ <span class="number">0.9390</span>, -<span class="number">0.6762</span>,  <span class="number">0.4093</span>]],</span><br><span class="line"></span><br><span class="line">         [[-<span class="number">0.2564</span>,  <span class="number">0.8857</span>, -<span class="number">0.1946</span>],</span><br><span class="line">          [-<span class="number">0.9418</span>,  <span class="number">0.0510</span>, -<span class="number">0.2456</span>]]]])</span><br><span class="line">tensor([[[[-<span class="number">0.0997</span>,  <span class="number">0.2760</span>],</span><br><span class="line">          [-<span class="number">0.7134</span>, -<span class="number">0.4839</span>],</span><br><span class="line">          [-<span class="number">1.3931</span>,  <span class="number">0.2729</span>]],</span><br><span class="line"></span><br><span class="line">         [[-<span class="number">0.4765</span>,  <span class="number">0.5714</span>],</span><br><span class="line">          [ <span class="number">1.4368</span>,  <span class="number">1.2979</span>],</span><br><span class="line">          [ <span class="number">1.0061</span>,  <span class="number">0.2874</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        [[[-<span class="number">0.0596</span>,  <span class="number">0.5366</span>],</span><br><span class="line">          [ <span class="number">0.2938</span>, -<span class="number">0.6728</span>],</span><br><span class="line">          [-<span class="number">0.0664</span>, -<span class="number">1.8749</span>]],</span><br><span class="line"></span><br><span class="line">         [[ <span class="number">0.1983</span>, -<span class="number">0.2220</span>],</span><br><span class="line">          [-<span class="number">1.4755</span>, -<span class="number">2.2627</span>],</span><br><span class="line">          [-<span class="number">0.4390</span>,  <span class="number">0.4608</span>]]]])</span><br><span class="line">tensor([[[[ <span class="number">0.8902</span>, -<span class="number">0.3858</span>],</span><br><span class="line">          [-<span class="number">2.2289</span>, -<span class="number">0.7362</span>]],</span><br><span class="line"></span><br><span class="line">         [[ <span class="number">1.4617</span>, -<span class="number">0.3435</span>],</span><br><span class="line">          [-<span class="number">0.8224</span>,  <span class="number">0.0675</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        [[[ <span class="number">0.0764</span>,  <span class="number">0.0058</span>],</span><br><span class="line">          [-<span class="number">0.2818</span>,  <span class="number">0.1914</span>]],</span><br><span class="line"></span><br><span class="line">         [[-<span class="number">1.2722</span>, -<span class="number">2.0368</span>],</span><br><span class="line">          [-<span class="number">0.1542</span>, -<span class="number">0.0195</span>]]]])</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="7-torch-einsum-gt-爱因斯坦求和约定"><a href="#7-torch-einsum-gt-爱因斯坦求和约定" class="headerlink" title="7 torch.einsum() -&gt; 爱因斯坦求和约定"></a>7 torch.einsum() -&gt; 爱因斯坦求和约定</h1><ul>
+<li><em>功能十分强大，支持求和运算, 各种乘法运算, transpose运算等等</em><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># trace</span></span><br><span class="line">torch.einsum(<span class="string">&#x27;ii&#x27;</span>, torch.randn(<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># diagonal</span></span><br><span class="line">torch.einsum(<span class="string">&#x27;ii-&gt;i&#x27;</span>, torch.randn(<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># outer product</span></span><br><span class="line">x = torch.randn(<span class="number">5</span>)</span><br><span class="line">y = torch.randn(<span class="number">4</span>)</span><br><span class="line">torch.einsum(<span class="string">&#x27;i,j-&gt;ij&#x27;</span>, x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># batch matrix multiplication</span></span><br><span class="line">As = torch.randn(<span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>)</span><br><span class="line">Bs = torch.randn(<span class="number">3</span>, <span class="number">5</span>, <span class="number">4</span>)</span><br><span class="line">torch.einsum(<span class="string">&#x27;bij,bjk-&gt;bik&#x27;</span>, As, Bs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># with sublist format and ellipsis</span></span><br><span class="line">torch.einsum(As, [..., <span class="number">0</span>, <span class="number">1</span>], Bs, [..., <span class="number">1</span>, <span class="number">2</span>], [..., <span class="number">0</span>, <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># batch permute</span></span><br><span class="line">A = torch.randn(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line">torch.einsum(<span class="string">&#x27;...ij-&gt;...ji&#x27;</span>, A).shape</span><br><span class="line"></span><br><span class="line"><span class="comment"># equivalent to torch.nn.functional.bilinear</span></span><br><span class="line">A = torch.randn(<span class="number">3</span>, <span class="number">5</span>, <span class="number">4</span>)</span><br><span class="line">l = torch.randn(<span class="number">2</span>, <span class="number">5</span>)</span><br><span class="line">r = torch.randn(<span class="number">2</span>, <span class="number">4</span>)</span><br><span class="line">torch.einsum(<span class="string">&#x27;bn,anm,bm-&gt;ba&#x27;</span>, l, A, r)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="8-总结"><a href="#8-总结" class="headerlink" title="8 总结"></a>8 总结</h1><p>一般在神经网络中常用的就是 1. torch.dot(x, y) 求两个向量的点积 2. torch.bmm(x, y) 求一个batch的矩阵数据相乘 (<strong>必须是三维[b, n, m] × [b, m, q]</strong>) 3. torch.matmul(x, y)<strong>求维度超过三维或者需要广播的矩阵乘法</strong></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><script src="//sdk.jinrishici.com/v2/browser/jinrishici.js"></script>
+<script>
+  jinrishici.load((result) => {
+    let jrsc = document.getElementById('jrsc');
+    const data = result.data;
+    let author = data.origin.author;
+    let title = '《' + data.origin.title + '》';
+    let content = data.content.substr(0, data.content.length - 1);
+    let dynasty = data.origin.dynasty.substr(0, data.origin.dynasty.length - 1);
+    jrsc.innerText = content + ' @ ' + dynasty + '·' + author + title;
+  });
+</script>
+<div style="text-align: center"><span id="jrsc" >正在加载今日诗词....</span></div>
+
+          <div class="post-tags">
+              <a href="/tags/pytorch/" rel="tag"># pytorch</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/02/26/RACE/" rel="prev" title="RACE">
+                  <i class="fa fa-angle-left"></i> RACE
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Wei</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">23k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">39 分钟</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
