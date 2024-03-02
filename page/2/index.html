@@ -121,7 +121,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -144,6 +144,100 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米兰的小铁酱">
+      <meta itemprop="description" content="attention is all you need">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 米兰的小铁酱">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/01/22/Actor-Critic-A2C/" class="post-title-link" itemprop="url">Actor-Critic && A2C</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-01-22 14:35:32 / 修改时间：18:27:39" itemprop="dateCreated datePublished" datetime="2024-01-22T14:35:32+08:00">2024-01-22</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>545</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Actor-Critic-amp-amp-Advantage-Actor-Critic-A2C"><a href="#Actor-Critic-amp-amp-Advantage-Actor-Critic-A2C" class="headerlink" title="Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)"></a>Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)</h1><ul>
+<li><p>基本思想：相比于Policy Gradient, Actor Critic就是使用Critic网络代替了R(episode), 使用一个Critic模型来估计episode的长期回报<br><img src="/2024/01/22/Actor-Critic-A2C/1705906493223.png" alt="1705906493223"></p>
+</li>
+<li><p>Advantage Actor Critic<br>Advantage 是指减去baseline作为交叉熵的权重<br><img src="/2024/01/22/Actor-Critic-A2C/1705906817564.png" alt="1705906817564"><br>如果奖励全是正的，那么每个episode对应的奖励就都是大于0的，那么p𝜃(at|st)都是上升的，这样看过去没有太大问题，因为累积奖励越大，对应的概率就提升越大，那么最后归一化还是往累积奖励大的方向去更新参数𝜃的，只不过收敛的慢。<br>但是在实际中，采样意味着有的动作是采样不到的，那可能本来最优动作是a，但是没有采样到a, 只采样到了b,c,那b c对应的概率升高，导致a的概率降低，这样产生恶性循环。</p>
+</li>
+</ul>
+<p>因此定义Advantage function = R - baseline</p>
+<ul>
+<li>基本流程：<br>把Advantage function定义为r(t + 1) + V(s_t+1) - V(s_t)<br>这里使用时序差分来代替累积奖励，牺牲一部分偏差换取模型的方差减小<br>r(t + 1) + V(s_t+1)代表当前策略的期望奖励，V(s_t)表示baseline，代表平均值。<br><img src="/2024/01/22/Actor-Critic-A2C/1705908998891.png" alt="1705908998891"><br><img src="/2024/01/22/Actor-Critic-A2C/1705909008374.png" alt="1705909008374"></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -270,13 +364,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">23k</span>
+    <span title="站点总字数">24k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">39 分钟</span>
+    <span title="站点阅读时长">41 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
