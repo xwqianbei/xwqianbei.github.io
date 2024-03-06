@@ -19,28 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"xwqianbei.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="RACE: Improve Multi-Agent Reinforcement Learning with Representation Asymmetry and Collaborative EvolutionAbstract challenge: MARL 在合作方面 挣扎在低质量的奖励信号和高不稳定性 Evolutionary Algorithm(EA): 更好的收敛、更加健壮鲁棒、对奖励信">
+    <meta name="description" content="ATTENTION-GUIDED CONTRASTIVE ROLE REPRE-SENTATIONS FOR MULTI-AGENT REINFORCEMENT LEARNING ICLR-24 Nanjing UniversityAbstract Challenge: 智能体之间的有效合作 motivation: 受角色和智能体行为模式之间相关性的启发 ACORM: Attention-guid">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RACE">
-<meta property="og:url" content="http://xwqianbei.github.io/2024/02/26/RACE/index.html">
+<meta property="og:title" content="ATTENTION-GUIDED CONTRASTIVE ROLE REPRE-SENTATIONS FOR MULTI-AGENT REINFORCEMENT LEARNING">
+<meta property="og:url" content="http://xwqianbei.github.io/2024/03/04/ATTENTION-GUIDED-CONTRASTIVE-ROLE-REPRE-SENTATIONS-FOR-MULTI-AGENT-REINFORCEMENT-LEARNING/index.html">
 <meta property="og:site_name" content="米兰的小铁酱">
-<meta property="og:description" content="RACE: Improve Multi-Agent Reinforcement Learning with Representation Asymmetry and Collaborative EvolutionAbstract challenge: MARL 在合作方面 挣扎在低质量的奖励信号和高不稳定性 Evolutionary Algorithm(EA): 更好的收敛、更加健壮鲁棒、对奖励信">
+<meta property="og:description" content="ATTENTION-GUIDED CONTRASTIVE ROLE REPRE-SENTATIONS FOR MULTI-AGENT REINFORCEMENT LEARNING ICLR-24 Nanjing UniversityAbstract Challenge: 智能体之间的有效合作 motivation: 受角色和智能体行为模式之间相关性的启发 ACORM: Attention-guid">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-02-26T12:57:10.000Z">
-<meta property="article:modified_time" content="2024-02-29T04:06:50.446Z">
+<meta property="article:published_time" content="2024-03-04T13:27:25.000Z">
+<meta property="article:modified_time" content="2024-03-06T05:32:28.061Z">
 <meta property="article:author" content="Wei">
 <meta property="article:tag" content="论文阅读">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://xwqianbei.github.io/2024/02/26/RACE/">
+<link rel="canonical" href="http://xwqianbei.github.io/2024/03/04/ATTENTION-GUIDED-CONTRASTIVE-ROLE-REPRE-SENTATIONS-FOR-MULTI-AGENT-REINFORCEMENT-LEARNING/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://xwqianbei.github.io/2024/02/26/RACE/","path":"2024/02/26/RACE/","title":"RACE"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://xwqianbei.github.io/2024/03/04/ATTENTION-GUIDED-CONTRASTIVE-ROLE-REPRE-SENTATIONS-FOR-MULTI-AGENT-REINFORCEMENT-LEARNING/","path":"2024/03/04/ATTENTION-GUIDED-CONTRASTIVE-ROLE-REPRE-SENTATIONS-FOR-MULTI-AGENT-REINFORCEMENT-LEARNING/","title":"ATTENTION-GUIDED CONTRASTIVE ROLE REPRE-SENTATIONS FOR MULTI-AGENT REINFORCEMENT LEARNING"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>RACE | 米兰的小铁酱</title>
+<title>ATTENTION-GUIDED CONTRASTIVE ROLE REPRE-SENTATIONS FOR MULTI-AGENT REINFORCEMENT LEARNING | 米兰的小铁酱</title>
   
 
 
@@ -112,7 +112,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RACE-Improve-Multi-Agent-Reinforcement-Learning-with-Representation-Asymmetry-and-Collaborative-Evolution"><span class="nav-number">1.</span> <span class="nav-text">RACE: Improve Multi-Agent Reinforcement Learning with Representation Asymmetry and Collaborative Evolution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">3.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">3.1.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shared-Observation-Representation-Learning"><span class="nav-number">3.1.1.</span> <span class="nav-text">Shared Observation Representation Learning</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ATTENTION-GUIDED-CONTRASTIVE-ROLE-REPRE-SENTATIONS-FOR-MULTI-AGENT-REINFORCEMENT-LEARNING-ICLR-24-Nanjing-University"><span class="nav-number">1.</span> <span class="nav-text">ATTENTION-GUIDED CONTRASTIVE ROLE REPRE-SENTATIONS FOR MULTI-AGENT REINFORCEMENT LEARNING ICLR-24 Nanjing University</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">1.3.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Contrastive-Role-Representations"><span class="nav-number">1.3.1.</span> <span class="nav-text">Contrastive Role Representations</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -158,7 +158,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/02/26/RACE/">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/03/04/ATTENTION-GUIDED-CONTRASTIVE-ROLE-REPRE-SENTATIONS-FOR-MULTI-AGENT-REINFORCEMENT-LEARNING/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -171,12 +171,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="RACE | 米兰的小铁酱">
+      <meta itemprop="name" content="ATTENTION-GUIDED CONTRASTIVE ROLE REPRE-SENTATIONS FOR MULTI-AGENT REINFORCEMENT LEARNING | 米兰的小铁酱">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          RACE
+          ATTENTION-GUIDED CONTRASTIVE ROLE REPRE-SENTATIONS FOR MULTI-AGENT REINFORCEMENT LEARNING
         </h1>
 
         <div class="post-meta-container">
@@ -187,14 +187,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2024-02-26 20:57:10" itemprop="dateCreated datePublished" datetime="2024-02-26T20:57:10+08:00">2024-02-26</time>
+      <time title="创建时间：2024-03-04 21:27:25" itemprop="dateCreated datePublished" datetime="2024-03-04T21:27:25+08:00">2024-03-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-29 12:06:50" itemprop="dateModified" datetime="2024-02-29T12:06:50+08:00">2024-02-29</time>
+      <time title="修改时间：2024-03-06 13:32:28" itemprop="dateModified" datetime="2024-03-06T13:32:28+08:00">2024-03-06</time>
     </span>
 
   
@@ -204,14 +204,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2k</span>
+      <span>2.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 
@@ -221,32 +221,37 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="RACE-Improve-Multi-Agent-Reinforcement-Learning-with-Representation-Asymmetry-and-Collaborative-Evolution"><a href="#RACE-Improve-Multi-Agent-Reinforcement-Learning-with-Representation-Asymmetry-and-Collaborative-Evolution" class="headerlink" title="RACE: Improve Multi-Agent Reinforcement Learning with Representation Asymmetry and Collaborative Evolution"></a>RACE: Improve Multi-Agent Reinforcement Learning with Representation Asymmetry and Collaborative Evolution</h1><h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><ul>
-<li><strong>challenge</strong>: MARL 在合作方面 挣扎在低质量的奖励信号和高不稳定性</li>
-<li><strong>Evolutionary Algorithm(EA)</strong>: 更好的收敛、更加健壮鲁棒、对奖励信号不敏感</li>
-<li><strong>in this paper</strong>: 本文提出一个混合框架： Representation Asymmetry and Collaboration Evolution (RACE) -&gt; 将EA和MARL结合 以达到高效的合作</li>
-<li><strong>method</strong>: RACE 维持一个MARL team和一群EA teams. 为了高效的知识共享和策略探索 -&gt; RACE 把不同team控制相同agent的 policies 分解成 1. shared nonlinear observation representation encoder（共享的非线性观察表示编码器encoder） 2. individual linear policy representations.（独立的线性策略表示） trick1: 为了解决部分观察的问题, 本文引入Value-Aware Mutual Information Maximization （价值感知 互信息最大化）-&gt; 利用有关全局状态的有用信息增强共享表示    trick2: 为了促进协调 -&gt; 使用新颖的 agent-level 交叉和变异算子来进化种群 -&gt; 为MARL提供多样化的经验  trick3: MARL优化它的策略并且将它们注入到种群中进化</li>
-</ul>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><ul>
-<li><strong>motivation</strong>: EA has strong exploration ability, good robustness, and stable convergence. EA offers numerous strengths that can complement the weaknesses of MARL.</li>
-<li><strong>challenge</strong>: 独立维持和优化每个team的policy是非常不高效的 并且这样无法利用其他team获得的有价值的知识 在广阔的非线性策略空间探索合作是非常低效的</li>
-<li><strong>methods</strong>: 提出两级团队策略测结构 1. 共享的非线性观察表示(shared observation represention encoder) 2. 独立的线性策略表示(independent policy representions)</li>
-<li><strong>represention asymmetry</strong>: independent policy构建的不同表示范围</li>
-<li><strong>observation representation encoder</strong>: 负责共享任务相关和合作相关的知识 -&gt; 通过价值函数最大化的集成（涉及所有的EA team 和 MARL team）更新方向进行优化</li>
-<li><strong>Value-Aware Mutual Information Maximization</strong>: 最大化共享观察表示(shared observation representations) 和全局状态的互信息(MI)。 -&gt; 在低价值状态下进行最大化可能导致对共享观察表示(shared observation representation)的负面影响 -&gt; 导致合作不理想 -&gt; Value-Aware MI: 归一化状态价值函数作为权重 已到达 提取全局状态信息加入共享观察表示(shared observation representations)</li>
-<li><strong>independent linear policy</strong>: 在更加紧凑和有利的线性空间 policy的探索更加有效 从而促进合作</li>
-<li><strong>EA</strong>: EA进化种群 生成多样性的经验 -&gt; 被MARL使用 -&gt; 反过来，MARL team通过收集的样本进行优化 并且定期加入种群进化</li>
-<li>agent-level 交叉变异 -&gt; 交换两个team的individual policy representation -&gt; 探索更好的团队合作</li>
-</ul>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><ol>
-<li>Representation Asymmetry of team construction</li>
-<li>How to learn the shared observation representation encoders</li>
-<li>How to improve MARL with Collaborative Evolution</li>
+    <div class="post-body" itemprop="articleBody"><h1 id="ATTENTION-GUIDED-CONTRASTIVE-ROLE-REPRE-SENTATIONS-FOR-MULTI-AGENT-REINFORCEMENT-LEARNING-ICLR-24-Nanjing-University"><a href="#ATTENTION-GUIDED-CONTRASTIVE-ROLE-REPRE-SENTATIONS-FOR-MULTI-AGENT-REINFORCEMENT-LEARNING-ICLR-24-Nanjing-University" class="headerlink" title="ATTENTION-GUIDED CONTRASTIVE ROLE REPRE-SENTATIONS FOR MULTI-AGENT REINFORCEMENT LEARNING ICLR-24 Nanjing University"></a>ATTENTION-GUIDED CONTRASTIVE ROLE REPRE-SENTATIONS FOR MULTI-AGENT REINFORCEMENT LEARNING ICLR-24 Nanjing University</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li><strong>Challenge</strong>: 智能体之间的有效合作</li>
+<li><strong>motivation</strong>: 受角色和智能体行为模式之间相关性的启发</li>
+<li><strong>ACORM</strong>: Attention-guided COntrastive Role representation learning for MARL (ACORM) -&gt; 促进智能体之间 行为异质化、知识传输、技能上的协调</li>
+<li><strong>methods</strong>: <ol>
+<li>使用最大化互信息来形式化角色表征学习(role representation learning) -&gt; 推导出对比学习目标 -&gt; 精简估计负样本的分布 </li>
+<li>利用注意力机制促进在价值分解中global state 关注到 学习到的role representations -&gt; 隐式地指导智能体协调在一个技能性的skillful role space 以生成具有表现力的信用分配</li>
 </ol>
-<ul>
-<li><strong>motivation</strong>: 每个team 独立的策略构建限制了teams之间的知识共享和在策略空间上的探索 -&gt; inspired by ERL-Re -&gt; 本文提出Representation-Asymmetry Team Construction(RATC) 使能够高效的知识共享和策略探索</li>
+</li>
 </ul>
-<h3 id="Shared-Observation-Representation-Learning"><a href="#Shared-Observation-Representation-Learning" class="headerlink" title="Shared Observation Representation Learning"></a>Shared Observation Representation Learning</h3>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li><strong>challenge</strong>: 共享policy参数 加速massive agents场景下的 合作学习 -&gt; 导致同质的行为 阻碍了多样性探索和复杂的合作 </li>
+<li><strong>existing works</strong>: Contrastive Identity-Aware Learning for Multi-Agent Value Decomposition -&gt; 利用对比学习使得agent对应的identify representation 相互区分 -&gt; 忽略了通过隐式任务分配进行team分解的有效性   通过分层控制结构将任务分解为一组技能 或者 子任务</li>
+<li><strong>methods</strong>: <ol>
+<li>形式化学习目标为 role 和 它的representation 之间的互信息 -&gt; 最大限度减少role的不确定性 最小化保留role无关信息 为了简单的近似 negative pairs 的分布 -&gt; 通过编码它的trajectory到隐空间中 提取agent的行为 并根据隐空间定期地将agent分为几个簇 -&gt; 来自不同簇的点被分配为负对</li>
+<li>使用注意力机制 促进 在价值分解时 global state 注意 学习到的role representation -&gt; 隐式的指导 agent 在一个 skillful role space 中协调 -&gt; 随着role的涌现生成更有表现力的 信用分配</li>
+</ol>
+</li>
+</ul>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><ul>
+<li><strong>idea</strong>: 学习一个紧凑的角色表示(compact role representation) 这个compact role representation可以个性化智能体复杂的行为模式 -&gt; 使用这个角色信息可以促进个体 policy 学习 和 引导agent 协作 -&gt; 相似角色的 agents 可以通过更积极的知识传输 享受更高的学习效率 并且 不同角色的区分也可以保证智能体的异质性<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Our idea is to learn a compact role representation that can characterize complex behavior patterns of agents, and use the role information to facilitate individual policy learning and guide agent coordination. Agents with similar roles can enjoy higher learning efficiency via more aggressive knowledge transfer, and agent heterogeneity is also guaranteed with the discrimination of diverse roles.</span><br></pre></td></tr></table></figure></li>
+<li><strong>definition 1:</strong> 在多智能体任务中，每个agent都和一个描述其行为模式的role Mi 相关联 -&gt; 其中Mi 通过 role representation zi 量化表示 -&gt; zi 通过 L个observation-action pairs训练 这些O-A pairs来自agent i的trajectory -&gt; πzi : O × A × Z → [0, 1] is the individual policy for agent i</li>
+<li><strong>ACORM</strong>: （1）通过对比学习 学习 agents 对应的 role representations zi （2）使用注意力机制 促进 global state 关注 学习到的role patterns -&gt; 引导在high-level role space 中 技能上的智能体协调 -&gt; 促进有表现力的信用分配</li>
+</ul>
+<h3 id="Contrastive-Role-Representations"><a href="#Contrastive-Role-Representations" class="headerlink" title="Contrastive Role Representations"></a>Contrastive Role Representations</h3><ul>
+<li><strong>Objective</strong>: 1. agents with similar behavior patterns exhibit closer role representations 2. with notably different strategies are pushed away from each other.</li>
+<li><strong>key issues</strong> 1. how to define a feasible metric to quantify the degree of similaroty between agent’s behaviors 2. how to develop an efficient method to optimize the discrimination of role representations</li>
+<li><strong>1 Agent Embedding</strong>:  $e^{t}_{i}=f_{\phi}(o_{i}^{t-1}, a_{i}^{t-1}, e_{i}^{t-1})$ distance between the obtained agent embeddings -&gt; metric to measure the behavior dissimilarity between agents</li>
+<li><strong>2 Contrastive Learning</strong>: discriminative role representation &lt;- agent’s behaviors patterns</li>
+</ul>
+
     </div>
 
     
@@ -275,14 +280,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/02/26/NA2Q/" rel="prev" title="NA2Q">
-                  <i class="fa fa-angle-left"></i> NA2Q
+                <a href="/2024/03/02/pytorch%E4%B8%ADreshape%E5%92%8Ctranspose/" rel="prev" title="pytorch中reshape和transpose">
+                  <i class="fa fa-angle-left"></i> pytorch中reshape和transpose
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/03/01/pytorch%E4%B8%AD%E5%85%B3%E4%BA%8E%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%98%E6%B3%95%E6%80%BB%E7%BB%93/" rel="next" title="pytorch中关于矩阵的乘法总结">
-                  pytorch中关于矩阵的乘法总结 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
