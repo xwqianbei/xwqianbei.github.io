@@ -121,13 +121,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -144,6 +144,614 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/03/16/transformer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米兰的小铁酱">
+      <meta itemprop="description" content="attention is all you need">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 米兰的小铁酱">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/16/transformer/" class="post-title-link" itemprop="url">transformer</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-16 12:52:36" itemprop="dateCreated datePublished" datetime="2024-03-16T12:52:36+08:00">2024-03-16</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>375</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Attention-Is-All-You-Need"><a href="#Attention-Is-All-You-Need" class="headerlink" title="Attention Is All You Need"></a>Attention Is All You Need</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li><strong>Transformer</strong>: based solely on <strong>attention mechanisms</strong>, dispensing with recurrence and convolutions entirely</li>
+<li><strong>being more parallelizable</strong></li>
+<li><strong>sequence to sequence</strong>(seq2seq)</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>Recurrent models 将 token的位置和时间步对齐</li>
+<li><strong>attention mechanisms</strong>: 允许对token依赖关系进行建模，而无需考虑输入或输出序列中的距离</li>
+</ul>
+<h2 id="Model-Architecture"><a href="#Model-Architecture" class="headerlink" title="Model Architecture"></a>Model Architecture</h2><ul>
+<li><strong>Encoder-Decoder structure</strong>: $x = (x_1, … , x_n)$ ——encoder—— $z = (z_1, …, z_n)$ ——decoder—— $y = (y_1, … , y_m)$</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/03/16/BERT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米兰的小铁酱">
+      <meta itemprop="description" content="attention is all you need">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 米兰的小铁酱">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/16/BERT/" class="post-title-link" itemprop="url">BERT</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-16 12:52:09" itemprop="dateCreated datePublished" datetime="2024-03-16T12:52:09+08:00">2024-03-16</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="BERT-Pre-training-of-Deep-Bidirectional-Transformers-for-Language-Understanding"><a href="#BERT-Pre-training-of-Deep-Bidirectional-Transformers-for-Language-Understanding" class="headerlink" title="BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding"></a>BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li><strong>BERT is designed to pretrain deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers.</strong></li>
+<li>the pre-trained BERT model can be finetuned with just one additional output layer to create state-of-the-art models for a wide range of tasks</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li><strong>existing works</strong>: 将预训练语言表征用于下游任务的两种策略<ol>
+<li>feature-based: ELMo 把pre-trained representation 作为额外的特征加入到任务特定的模型结构中</li>
+<li>fine-tuning: GPT 在下游任务中简单的fine-tuning所有的预训练参数</li>
+</ol>
+</li>
+<li><strong>limitation</strong>: the pre-trained BERT model can be finetuned with just one additional output layer to create state-of-the-art models for a wide range of tasks</li>
+<li><strong>BERT</strong>: <ol>
+<li><strong>MLM(masked language model)</strong>: Cloze task alleviates unidirectionality constraint -&gt; enables the representation to fuse the left and the right context</li>
+<li><strong>next sentence prediction</strong>: pretrains text-pair representations</li>
+</ol>
+</li>
+</ul>
+<h2 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h2><h3 id="Unsupervised-Feature-based-Approaches"><a href="#Unsupervised-Feature-based-Approaches" class="headerlink" title="Unsupervised Feature-based  Approaches"></a>Unsupervised Feature-based  Approaches</h3><ul>
+<li><strong>pretrain word embedding</strong>: left-to-right language model -&gt; 区分左右上下中正确或者不正确的单词</li>
+<li><strong>pretrain sentence representation</strong>: 1. 对候选的下一个句子进行排名 2.  根据给定的前一个句子的表征从左到右地生成下一个句子地单词</li>
+<li><strong>ELMo</strong>: <ol>
+<li>They extract context-sensitive features from a left-to-right and a right-to-left language model. </li>
+<li>The contextual representation of each token is the concatenation of the left-to-right and right-to-left representations<h3 id="Unsupervised-Fine-tuning-Approaches"><a href="#Unsupervised-Fine-tuning-Approaches" class="headerlink" title="Unsupervised Fine-tuning Approaches"></a>Unsupervised Fine-tuning Approaches</h3></li>
+</ol>
+</li>
+<li>pre-trained from unlabeled text and fine-tuned for a supervised downstream task</li>
+<li>OpenAI GPT<h3 id="Transfer-Learning-from-Supervised-Data"><a href="#Transfer-Learning-from-Supervised-Data" class="headerlink" title="Transfer Learning from Supervised Data"></a>Transfer Learning from Supervised Data</h3></li>
+</ul>
+<h2 id="BERT"><a href="#BERT" class="headerlink" title="BERT"></a>BERT</h2><h3 id="pre-training-and-fine-tuning"><a href="#pre-training-and-fine-tuning" class="headerlink" title="pre-training and fine-tuning"></a>pre-training and fine-tuning</h3><ul>
+<li><strong>pre-training</strong>: During pre-training, the model is trained on unlabeled data over different pre-training tasks.</li>
+<li><strong>fine-tuning</strong>: For finetuning, the BERT model is first initialized with the pre-trained parameters, and all of the parameters are fine-tuned using labeled data from the downstream tasks.</li>
+<li>每个不同的下游任务都对用相同的预训练参数<br><img src="/2024/03/16/BERT/BERT/1710050250445.png" alt="1710050250445"><h3 id="Model-Architecture"><a href="#Model-Architecture" class="headerlink" title="Model Architecture"></a>Model Architecture</h3></li>
+<li><strong>multi-layer bidirectional Transformer encoder</strong></li>
+<li><em>L</em>: the number of Layers(Transformer blocks)</li>
+<li><em>H</em>: the hidden size</li>
+<li><em>A</em>: the number of self-attention heads</li>
+<li><strong>$BERT_{BASE}$</strong>: (L = 12, H = 768, A = 12, Total Parameters = 110M)</li>
+<li><strong>$BERT_{LARGE}$</strong>: (L = 24, H = 1024, A = 16, Total Parameters = 340M)</li>
+<li><strong>BERT V.S. GPT</strong>: bidirectional self-attention V.S.  constrained self-attention(every token can only attend to context to its left.)<h3 id="Input-Output-Representations"><a href="#Input-Output-Representations" class="headerlink" title="Input/Output Representations"></a>Input/Output Representations</h3></li>
+<li><strong>input sequence</strong>: input 可以是随意跨度的连续文本 input sequence可以是single sentence 或者 two sentences packed together<ol>
+<li><em>Word Embedding</em>: WordPiece embeddings with a 30000 token vocabulary</li>
+<li><em>First token of input sequnence</em>: <strong>[CLS] special classification token as C (dim = H)</strong></li>
+<li><em>Sentences differentite</em>: <ol>
+<li>[CLS] sentenceA [SEP] sentenceB</li>
+<li>learned token embedding as $E_{A}$ or $E_{B}$, sentenceA or sentenceB<br><img src="/2024/03/16/BERT/BERT/1710053093135.png" alt="1710053093135"></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><strong>output representation</strong>: <ol>
+<li>[CLS] as $C \in R^{H}$</li>
+<li>final vector itoken -&gt; $T_{i} \in R^{H}$<h2 id="Pre-training-BERT"><a href="#Pre-training-BERT" class="headerlink" title="Pre-training BERT"></a>Pre-training BERT</h2><h3 id="Task-1-Masked-LM-MLM"><a href="#Task-1-Masked-LM-MLM" class="headerlink" title="Task #1: Masked LM(MLM)"></a>Task #1: Masked LM(MLM)</h3></li>
+</ol>
+</li>
+<li>it is reasonable to believe that a deep bidirectional model is strictly more powerful than either a left-to-right model or the shallow concatenation of a left-toright and a right-to-left model.</li>
+<li>standard conditional language models can only be trained left-to-right or right-to-left, <strong>since bidirectional conditioning would allow each word to indirectly “see itself”</strong></li>
+<li><strong>MLM(masked LM)</strong>: 随机mask每个sequence 15% 的tokens<ol>
+<li>pretrain时 input sequence 有[MASK] token 但是 fine-tuning时是没有[MASK] token的， 为了缓解这种差异，对这 15% mask tokens进行处理</li>
+<li>最终 80% [MASK] 10 [RND(rondam token)] 10 [SAME(same token)]<br><img src="/2024/03/16/BERT/BERT/1710054577043.png" alt="1710054577043"><h3 id="Task-2-Next-Sentence-Prediction-NSP"><a href="#Task-2-Next-Sentence-Prediction-NSP" class="headerlink" title="Task #2: Next Sentence Prediction(NSP)"></a>Task #2: Next Sentence Prediction(NSP)</h3></li>
+</ol>
+</li>
+<li>QA task and Natural Language Inference (NLI) are based on understanding the <strong>relationship between two sentences</strong>, <strong>which is not directly captured by language modeling.</strong></li>
+<li><strong>binarized(0/1) next sentence prediction task</strong>: 判断sentenceB 是否是 sentenceA 的下一句<ul>
+<li><strong>50%</strong> of the time B is the actual next sentence that follows A (labeled as IsNext),</li>
+<li><strong>50%</strong> of the time it is a random sentence from the corpus (labeled as NotNext)</li>
+<li>[CLS] C 被用作 NSP 二分类任务<h3 id="Pre-training-data"><a href="#Pre-training-data" class="headerlink" title="Pre-training data"></a>Pre-training data</h3></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>BooksCorpus (800M words)</li>
+<li>English Wikipedia (2,500M words).(Only passages)</li>
+<li>It is critical to use a <strong>document-level corpus</strong> rather than a shuffled sentence-level corpus</li>
+</ol>
+<h2 id="Fine-tuning-BERT"><a href="#Fine-tuning-BERT" class="headerlink" title="Fine-tuning BERT"></a>Fine-tuning BERT</h2><ul>
+<li>At the output, the token representations are fed into an output layer for tokenlevel tasks, such as sequence tagging or question answering, and the [CLS] representation is fed into an output layer for classification, such as entailment or sentiment analysis.</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/03/12/RLHF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米兰的小铁酱">
+      <meta itemprop="description" content="attention is all you need">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 米兰的小铁酱">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/12/RLHF/" class="post-title-link" itemprop="url">RLHF</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-12 12:45:44" itemprop="dateCreated datePublished" datetime="2024-03-12T12:45:44+08:00">2024-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-15 11:17:03" itemprop="dateModified" datetime="2024-03-15T11:17:03+08:00">2024-03-15</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Training-language-models-to-follow-instructions-with-human-feedback"><a href="#Training-language-models-to-follow-instructions-with-human-feedback" class="headerlink" title="Training language models to follow instructions with human feedback"></a>Training language models to follow instructions with human feedback</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li><strong>Challenge</strong>: 一味地增大大模型也不能从本质上更好地遵循用户的意图， 大模型生成的输出可能是不真实的，有毒害的 或者是对用户没有帮助的</li>
+<li><strong>In this paper</strong>: 展示了一种通过根据人类反馈进行微调来使大模型与用户对各种任务的意图保持一致的途径</li>
+<li><strong>InstructGPT</strong>: <ol>
+<li>we collect a dataset of labeler demonstrations of the desired model behavior, which we use to fine-tune GPT-3 using supervised learning.</li>
+<li>We then collect a dataset of rankings of model outputs, which we use to further fine-tune this supervised model using reinforcement learning from human feedback.</li>
+</ol>
+</li>
+<li><strong>Result</strong>: In human evaluations on our prompt distribution, outputs from the 1.3B parameter InstructGPT model are preferred to outputs from the 175B GPT-3, despite having 100x fewer parameters.</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li><strong>misaligned</strong>: LM的目标是在互联网的网页上预测下一个token 而不是 有效且安全地遵循人类执行</li>
+<li><strong>RLHF</strong>: uses human preferences as reward signal to fine-tune our models.</li>
+</ul>
+<h2 id="Methods-and-experimental-details"><a href="#Methods-and-experimental-details" class="headerlink" title="Methods and experimental details"></a>Methods and experimental details</h2><h3 id="3-1-High-level-methodology"><a href="#3-1-High-level-methodology" class="headerlink" title="3.1 High-level methodology"></a>3.1 High-level methodology</h3><ul>
+<li>start with:<ol>
+<li>a pretrained language model</li>
+<li>a distribution of prompts(which we want our model to produce aligned outputs)</li>
+<li>a team of trained hunman labrlers</li>
+</ol>
+</li>
+<li>steps:<ol>
+<li><strong>collect demonstration data, and train a supervised policy</strong>: <ul>
+<li>human labelers provide demonstrations of the desired behavior on the input prompt distribution. </li>
+<li>We then fine-tune a pretrained GPT-3 model on this data using supervised learning.</li>
+</ul>
+</li>
+<li><strong>Collect comparison data, and train a reward model.</strong>:<ul>
+<li>We collect a dataset of comparisons between model outputs, where labelers indicate which output they prefer for a given input</li>
+<li>We then train a reward model to predict the human-preferred output.</li>
+</ul>
+</li>
+<li><strong>Optimize a policy against the reward model using PPO.</strong>:<ul>
+<li>We use the output of the RM as a scalar reward.</li>
+<li>We fine-tune the supervised policy to optimize this reward using the PPO algorithm<h3 id="3-2-Dataset"><a href="#3-2-Dataset" class="headerlink" title="3.2 Dataset"></a>3.2 Dataset</h3></li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>prompts dataset</strong>: 1. primarily of text prompts submitted to a commercial language model API 2. a small number of labeler-written prompts.</li>
+<li><strong>prompts are diverse</strong>: include generation, question answering, dialog, summarization, extractions, and other natural language tasks</li>
+<li><strong>prompts clean</strong>: 1. heuristically deduplicate prompts  2. ensure that the validation and test sets contain no data from users whose data is in the training set. 3. We also filter prompts containing personally identifiable information (PII).</li>
+<li><strong>prompts  produce three different datasets used in our fine-tuning procedure</strong>:<ol>
+<li>SFT dataset</li>
+<li>RM dataset</li>
+<li>PPO dataset</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-3-Human-data-collection"><a href="#3-3-Human-data-collection" class="headerlink" title="3.3 Human data collection"></a>3.3 Human data collection</h3><h3 id="3-4-Models"><a href="#3-4-Models" class="headerlink" title="3.4 Models"></a>3.4 Models</h3><ol>
+<li><strong>Supervised fine-tuning(SFT)</strong>: fine-tune GPT-3 on our labeler demonstrations using supervised learning.</li>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/03/11/DPO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米兰的小铁酱">
+      <meta itemprop="description" content="attention is all you need">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 米兰的小铁酱">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/11/DPO/" class="post-title-link" itemprop="url">DPO</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-11 13:16:25 / 修改时间：15:28:32" itemprop="dateCreated datePublished" datetime="2024-03-11T13:16:25+08:00">2024-03-11</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>963</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Direct-Preference-Optimization-Your-Language-Model-is-Secretly-a-Reward-Model"><a href="#Direct-Preference-Optimization-Your-Language-Model-is-Secretly-a-Reward-Model" class="headerlink" title="Direct Preference Optimization: Your Language Model is Secretly a Reward Model"></a>Direct Preference Optimization: Your Language Model is Secretly a Reward Model</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li><strong>RLHF</strong>: 收集人类偏好标签数据，使用强化学习对齐人类偏好</li>
+<li><strong>challenge</strong>: RLHF is a complex and often unstable procedure, first fitting a reward model that reflects the human preferences, and then fine-tuning the large unsupervised LM using reinforcement learning to maximize this estimated reward without drifting too far from the original model</li>
+<li><strong>DPO</strong>: <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2></li>
+<li><strong>RLHF</strong>: <ol>
+<li>fit a reward model to a dataset of human prefereneces</li>
+<li>use RL to optimize a language model policy to produce response assigned high reward without drifting excessively far from the original model</li>
+<li>RLHF pipline is considerably more complex than supervised learning</li>
+</ol>
+</li>
+<li><strong>DPO</strong>: <ol>
+<li>without explict reward modeling or reinforcement learning</li>
+<li>implicity optimizes the same objective as existing RLHF algorithms(reward maximization with a KL-divergence constraint)</li>
+<li>DPO update increases the relative log probability of preferred to dispreferred responses</li>
+<li>but it incorporates a dynamic, per-example importance weight that prevents the model degeneration that we find occurs with a naive probability ratio objective.</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/03/10/%E5%85%B3%E4%BA%8Ehexo-new/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米兰的小铁酱">
+      <meta itemprop="description" content="attention is all you need">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 米兰的小铁酱">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/10/%E5%85%B3%E4%BA%8Ehexo-new/" class="post-title-link" itemprop="url">关于hexo new</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-10 12:40:06" itemprop="dateCreated datePublished" datetime="2024-03-10T12:40:06+08:00">2024-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-16 12:52:58" itemprop="dateModified" datetime="2024-03-16T12:52:58+08:00">2024-03-16</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>546</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="关于hexo-new"><a href="#关于hexo-new" class="headerlink" title="关于hexo new"></a>关于hexo new</h1><p><a target="_blank" rel="noopener" href="https://hexo.io/docs/commands.html#new">官网说明</a><br><img src="/2024/03/10/%E5%85%B3%E4%BA%8Ehexo-new/关于hexo-new/1710045767599.png" alt="1710045767599"></p>
+<ul>
+<li>如果layout没有指明的话，hexo会使用config.yml中的default_layout的默认配置，一般默认是post</li>
+<li>如果title中包含空格的话，则需要使用引号</li>
+</ul>
+<h2 id="hexo-new-post"><a href="#hexo-new-post" class="headerlink" title="hexo new post"></a>hexo new post</h2><ul>
+<li>layout 为 post时，会在./source/_posts下创建一个title.md文档 </li>
+<li>使用markdown编辑title.md 并 执行 <code>hexo g -d</code>则可以在网页中看到相应内容</li>
+</ul>
+<h2 id="hexo-new-draft"><a href="#hexo-new-draft" class="headerlink" title="hexo new draft"></a>hexo new draft</h2><ul>
+<li>执行 <code>hexo new draft &#39;title&#39;</code> 后， hexo会在./source/_drafts下创建一个 title.md文档（如果是第一次执行则会先创建_drafts文件夹）</li>
+<li>该title.md为草稿状态 执行 <code>hexo g -d</code>则在网页中看不到相应内容</li>
+<li><strong>如何发布draft状态的文档？</strong> -&gt; <code>hexo publish draft title</code> 这样_drafts下的title.md会消失，_posts下会出现一个title.md</li>
+<li>可以使用<code>hexo g --draft</code>， <code>hexo s --draft</code>命令来在本地预览我们的草稿效果</li>
+</ul>
+<h2 id="hexo-new-page"><a href="#hexo-new-page" class="headerlink" title="hexo new page"></a>hexo new page</h2><ul>
+<li><code>hexo new page &#39;about&#39;</code> 会在source下生成一个名为about的文件夹， 文件夹下会有一个index.md的文件</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -729,737 +1337,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Wei">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="米兰的小铁酱">
-      <meta itemprop="description" content="attention is all you need">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 米兰的小铁酱">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/" class="post-title-link" itemprop="url">Consensus Learning for Cooperative Multi-Agent Reinforcement Learning</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-02-24 20:25:35" itemprop="dateCreated datePublished" datetime="2024-02-24T20:25:35+08:00">2024-02-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-29 17:17:14" itemprop="dateModified" datetime="2024-02-29T17:17:14+08:00">2024-02-29</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning"><a href="#Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning" class="headerlink" title="Consensus Learning for Cooperative Multi-Agent Reinforcement Learning"></a>Consensus Learning for Cooperative Multi-Agent Reinforcement Learning</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li><strong>shortcoming</strong>: agent 缺乏共享信号 在执行动作时仅考虑了局部的观察</li>
-<li><strong>inspired by</strong>: viewpoint invariance（试图不变性） + contrastive learning</li>
-<li><strong>consensus learning</strong>: <strong>尽管基于局部观察，不同agents在没有交流的分散空间中可以推断出相同的consensus（共识）</strong></li>
-<li><strong>Method</strong>: 将推断出的one-hot consensus 输入到agent network中 -&gt; 培养agent之间的合作精神</li>
-</ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li><strong>motivation</strong>: 尽管每个智能体的局部观察是独特的, 但是不同智能体对应的是相同的全局状体的不同表示 -&gt; 就像一个多视角问题 -&gt; 如果智能体可以意识到这个不变性，智能体就可以在执行时通过推断的共同意识来进行合作</li>
-</ul>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">the observations of all agents at the same moment are different representations of the same global state,</span><br><span class="line"></span><br><span class="line">as shown in Figure 1. It is like a multi-view problem (Xu, Tao, and Xu 2013),</span><br><span class="line"></span><br><span class="line">where the same object can look different from various viewpoints.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">If the agents are aware of the invariance, they can explicitly select</span><br><span class="line"></span><br><span class="line">cooperative actions by inferring the same consensus on the state from their</span><br><span class="line"></span><br><span class="line">different local observations during the decentralized execution.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1708834968206.png" alt="1708834968206"></p>
-<ul>
-<li><p><strong>consensus</strong>: 怎么定义consensus -&gt; 最简单的方法就是把real global state作为consensus， 但是local observation infer global state 很难实现 -&gt; 采用对比学习</p>
-</li>
-<li><p><strong>COLA (COnsensus LeArning)</strong>: 利用对比学习通过不变性的形式将局部观察编码到离散的潜空间中 即使在同一时刻不同智能体之间的local observation非常不相似，在训练consensus representation model时依然会把他们作为相似的对待 -&gt; 这样可以让COLA中的agent收到完全不同的局部观察时，agent在执行时依然可以推断出相同的离散状态潜在变量</p>
-</li>
-</ul>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">COLA utilizes contrastive learning to encode local observations into discrete latent spaces through the form of invariances.</span><br><span class="line"></span><br><span class="line">Even though the local observations between agents at the same moment may be quite dissimilar,</span><br><span class="line"></span><br><span class="line">we still treat them as similar when training the consensus representation model.</span><br><span class="line"></span><br><span class="line">Thus, even if agents in COLA receive entirely different local observations,</span><br><span class="line"></span><br><span class="line">they can still infer the same discrete state latent variables during execution.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>Intuitive interpretation</strong>: COLA 赋能 agent学习到人类社会中的“默契” 智能体之间没有实质的交流 但是依然能达到一个处于相同state的共识</li>
-</ul>
-<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h3 id="Contrastive-Learning"><a href="#Contrastive-Learning" class="headerlink" title="Contrastive Learning"></a>Contrastive Learning</h3><ul>
-<li><p>Constrastive Learning</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A dataset in contrastive learning tasks is typically organized by similar and dissimilar pairs. Then contrastive learning methods are trained by reducing the distance between augmented views of the same sample and increasing it between different ones (Wang and Isola 2020). In this way, contrastive learning enables the representation model to learn the general knowledge contained in the dataset.</span><br></pre></td></tr></table></figure>
-<p><strong>负样本的选择对对比学习的性能影响很大</strong>  -&gt; 因此通常由人工来选择负样本 这样就限制了对比学习的开发 -&gt; <strong>new work： 通过类似聚类的技术 取消显示加入负样本</strong> 但是依然可以得到不错的性能 并且避免了塌陷(collapse)</p>
-</li>
-<li><p>Contrastive Learning in Reinforcement Learning: 通过比较不同时间的状态， <strong>对比学习可以将复杂的状态映射到低维的潜在空间 进而去除和学习无关的信息</strong></p>
-</li>
-</ul>
-<h3 id="Knowledge-Distillation-with-No-Labels"><a href="#Knowledge-Distillation-with-No-Labels" class="headerlink" title="Knowledge Distillation with No Labels"></a>Knowledge Distillation with No Labels</h3><ul>
-<li><strong>self-train and knowledge distillation</strong>:<ol>
-<li>利用已标记的数据训练一个教师模型</li>
-<li>教师模型对未标记的数据生成伪标签（软标签）</li>
-<li>将生成为标签的数据与原始数据相结合 训练学生模型</li>
-</ol>
-</li>
-<li><strong>self-DIstillation with NO labels</strong>:  <ol>
-<li>完全没有带标签的数据 不存在预训练好的教师模型</li>
-<li>教师模型和学生模型的结构完全一样</li>
-<li>教师模型的参数是随机初始化的， 使用EMA的方式从学生模型上更新参数 </li>
-</ol>
-</li>
-<li><strong>Emerging Properties in Self-Supervised Vision Transformers</strong>: 发表在ICCV-2021上提出DINO模型  及  伪代码</li>
-</ul>
-<p><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194106907.png" alt="1709194106907"><br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194151157.png" alt="1709194151157"></p>
-<ul>
-<li><strong>consensus builder 模型结构：</strong><br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/image.png" alt="alt text"></li>
-<li><strong>loss损失函数：</strong> K 是共识类别的数量<br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194310765.png" alt="1709194310765"></li>
-</ul>
-<h3 id="COLA-Architecture"><a href="#COLA-Architecture" class="headerlink" title="COLA Architecture"></a>COLA Architecture</h3><ul>
-<li><strong>We concatenate local observations with the one-hot consensus and feed them into the network.</strong></li>
-<li><strong>loss:</strong> $L_{RL} = (y_{tot} - Q_{tot}(\tau , c, u))$<br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194473121.png" alt="1709194473121"></li>
-</ul>
-<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><h3 id="Performance-Comparison"><a href="#Performance-Comparison" class="headerlink" title="Performance Comparison"></a>Performance Comparison</h3><p><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194546681.png" alt="1709194546681"><br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194567201.png" alt="1709194567201"></p>
-<h3 id="Case-Study-and-Visualization"><a href="#Case-Study-and-Visualization" class="headerlink" title="Case Study and Visualization"></a>Case Study and Visualization</h3><ul>
-<li>模型参数分析：<br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194594721.png" alt="1709194594721"></li>
-<li><p><strong>Result of Consensus Learning</strong>: </p>
-<ol>
-<li>in the 2D t-SNE embedding of states, the states with the same consensus generated by the agent tend to cluster together.</li>
-<li>states with the same consensus often have similar estimated values or true returns.<br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194625724.png" alt="1709194625724"><h3 id="Ablation-Study"><a href="#Ablation-Study" class="headerlink" title="Ablation Study"></a>Ablation Study</h3></li>
-</ol>
-</li>
-<li><p>How does the hyperparameter K affect the performance of COLA?<br><img src="/2024/02/24/Consensus-Learning-for-Cooperative-Multi-Agent-Reinforcement-Learning/1709194655396.png" alt="1709194655396"></p>
-</li>
-<li><strong>conclusion</strong>: we conclude that the choice of K depends on the difficulty of the task. We should pick a higher K value when the reinforcement learning task is complex and vice versa.</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Wei">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="米兰的小铁酱">
-      <meta itemprop="description" content="attention is all you need">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 米兰的小铁酱">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/" class="post-title-link" itemprop="url">Contrastive Identity-Aware Learning for Multi-Agent Value Decomposition</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-02-23 10:34:54" itemprop="dateCreated datePublished" datetime="2024-02-23T10:34:54+08:00">2024-02-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-29 17:02:34" itemprop="dateModified" datetime="2024-02-29T17:02:34+08:00">2024-02-29</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>5.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>9 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition-AAAI-23-Zhejiang-University-MARL-Contrastive-Learning"><a href="#Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition-AAAI-23-Zhejiang-University-MARL-Contrastive-Learning" class="headerlink" title="Contrastive Identity-Aware Learning for Multi-Agent Value Decomposition /AAAI-23/Zhejiang University/MARL + Contrastive Learning"></a>Contrastive Identity-Aware Learning for Multi-Agent Value Decomposition /AAAI-23/Zhejiang University/MARL + Contrastive Learning</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li><strong>Challenges:</strong> 挑战在于促进多智能体之间的多样性行为</li>
-<li><strong>Existing Methodes</strong>: 现有方法直接鼓励通过各种策略学习多样的agent network</li>
-<li><strong>Shortcoming</strong>: 专门设计agent network的方法受到无法区分的indistinguishable VD network限制 -&gt; 导致智能体行为<strong>同质化</strong>，进而降低合作能力<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">One of the main challenges in VD is to promote diverse behaviors among agents, </span><br><span class="line">while existing methods directly encourage the diversity oflearned agent networks with various strategies. </span><br><span class="line">However, we argue that these dedicated designs for agent networks are still limited by the indistinguishable VD network, </span><br><span class="line">leading to homogeneous agent behaviors and thus downgrading the cooperation capability.</span><br></pre></td></tr></table></figure></li>
-<li><strong>In this paper</strong>: Contrastive Identity-Aware learning (CIA) method(对比身份意识学习) -&gt; 提高VD network信用等级区分能力 -&gt; 多智能体行文更加多样性</li>
-<li><strong>CIA</strong>: 利用对比学习最大化不同智能体的<strong>时间信用和身份表征</strong>之间的互信息 -&gt; 信用分配的充分表现和进一步突显个性<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In this paper, we propose a novel Contrastive Identity-Aware learning (CIA) method, </span><br><span class="line">explicitly boosting the credit-level distinguishability of the VD network to break the bottleneck of multi-agent diversity.</span><br><span class="line">Specifically, our approach leverages contrastive learning to maximize the mutual information </span><br><span class="line">between the temporal credits and identity representations of different agents, </span><br><span class="line">encouraging the full expressiveness of credit assignment and further the emergence of individualities.</span><br></pre></td></tr></table></figure></li>
-<li><strong>Experiment</strong>:  CIA 模块的算法实现简单而有效，可以轻松合并到各种 VD 架构中</li>
-<li><strong>Code</strong>: <a target="_blank" rel="noopener" href="https://github.com/liushunyu/CIA">https://github.com/liushunyu/CIA</a></li>
-</ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li><strong>Existing Methods</strong>: 1. <strong>归因agent之间的相似性</strong> 通过参数共享来同质化policy network / 2. 设计<strong>辅助的目标(+ loss)</strong>在policy network上解决<strong>agent-level</strong>的多样性 / 3. 为<strong>每个agent引入特定的networks</strong> 不惜牺牲完全参数共享的优势</li>
-<li><strong>Motivation</strong>: 现有的方法都忽略了agents 的 policy networks 都是通过VD network来评估和改进的这一事实 -&gt; agents 行为的多样性实际上是依赖于信用分配的区分性 -&gt; 本文认为追逐agents policies的多样性依然受限到VD network 提供模糊的信用分配来证明不同agent的贡献<br><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1708666648057.png" alt="1708666648057"></li>
-<li><strong>In this paper</strong>: 本文从信用分配的新颖角度研究multi-agent的多样性 提出contrastive identity-aware learning method, termed as CIA -&gt; 鼓励credit-level 区分性</li>
-<li><strong>Method</strong>:<ol>
-<li><strong>利用基于梯度的归因来表示每个智能体的信用</strong>， 并且采用完整轨迹的时序信用来进一步考虑智能体的长期行为</li>
-<li>最大化互不同智能体的时序信用和可学习身份表征之间的互信息</li>
-<li>本文定制一个对比学习目标来导出互信息的易于处理的下界，因为估计和最大化神经网络的互信息通常很棘手</li>
-</ol>
-</li>
-</ul>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Credit-Indistinguishability-Analysis"><a href="#Credit-Indistinguishability-Analysis" class="headerlink" title="Credit Indistinguishability Analysis"></a>Credit Indistinguishability Analysis</h3><ul>
-<li>信用分配模糊：如果可学习的信用对于agent身份来说是不变的说明信用分配是模糊的</li>
-<li>方法：QMIX(RS)在每个训练epoch，随机打乱输入到min network的values的顺序 / 计算训练后的网络采样的轨迹的<strong>KL散度距离表示信用分布的相似性</strong></li>
-<li>结论：QMIX(RS)和original QMIX的性能一样，且两者的KL散度距离很小， 但是QMIX(CIA)的性能优于QMIX，且两者KL散度较大 -&gt; 说明CIA改善了QMIX的信用分配模糊问题<br><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1708688325540.png" alt="1708688325540"><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Interestingly, even with the ambiguous credit assignment, the random-shuffle variant can </span><br><span class="line">still achieve the performance on par with those obtained by original QMIX. </span><br><span class="line">The KL-divergence distance also shows that the credit distribution of QMIX </span><br><span class="line">is similar as its random-shuffle variant, indicating that QMIX are insensitive to the identity of agents.</span><br><span class="line">Thus, its learned credits may be ambiguous, which limits the diverse behaviors of agents and damages the final performance.</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="Contrastive-Identity-Aware-Learning"><a href="#Contrastive-Identity-Aware-Learning" class="headerlink" title="Contrastive Identity-Aware Learning"></a>Contrastive Identity-Aware Learning</h3><ol>
-<li><p>Temporal Credit Attribution</p>
-<ul>
-<li>key issue: 如何定义一个通用的信用来表示单个智能体的贡献<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Before promoting the distinguishability of credits, one key issue to be considered is: </span><br><span class="line">how to define a universal credit to represent the contributions of individual agents in different VD methods.</span><br></pre></td></tr></table></figure></li>
-<li>method: 使用 gradient-based attribution mechanism（基于梯度的归因机制） 提取信用分配信息<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Towards addressing this problem, we consider a gradient-based attribution mechanism </span><br><span class="line">to extract the credit assignment information in the mixing network.</span><br></pre></td></tr></table></figure></li>
-<li>gradient-based attribution mechanism: 计算output对于input的偏导数 -&gt; 揭示输入对于输出的影响程度 -&gt; 使用joint-action value 和 individual value之间的偏导数表示信用 -&gt; 确定每个agent的贡献 $x_{t}^{k} = \partial Q_{t}^{tot}/ \partial Q_{t}^{k} \in R$<br><em>越大的归因值对应的agent对最终结果影响越大</em></li>
-<li>在贯序决策中，推断一个agent的贡献仅靠单个时间步的行为是不够的 -&gt; 采用时序信用归因 整个轨迹trajectory $x_{\tau}^{k}=[x_{1}^{k},x_{2}^{k},…,x_{N}^{k}] \in R^{N}$<br>$X_{\tau} \in R^(K \times N)$<br><em>N 是所有采样的τ具有的最大长度， 如果某个τ提前终止 则用 0 填充</em></li>
-<li>结论： $X_{\tau \in R^{K \times N}}$ 时序信用归因考虑了agent长期的行为 -&gt; 进而更加稳定的衡量了agent的贡献</li>
-</ul>
-</li>
-<li><p>Contrastive Identity-Aware Distinguishability（对比身份意识可区分性）<br>temporal credit attribution解决了信用的表示，还要进一步区分credit -&gt; 但是很难直接限制不同可学习的credit之间的距离<br>-&gt; 本文提出近似方法： 提出潜在身份表示作为agent的中间变量，并且通过这些表示调控独自的时序信用 -&gt; 实现身份意识的区分性</p>
-<ul>
-<li>identity representation: 每个agent对应一个可学习的随机初始化的身份表示 $ w^{k} \in R^{N} $</li>
-<li>最大化temporal credits 和 identity representation的互信息 -&gt; 最大化identity representation 和 temporal credit的关联程度 $I_{x;w} = E_{x, w}[log(P(x|w)/P(x))]$<br>然而优化 $I_{x,w}$ 十分困难，因为估算互信息是不可解的</li>
-<li>对比学习：$ I(x;w) &gt;= log(K) - L_{CL} $<br><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1708760818204.png" alt="1708760818204"><br>-&gt; $w_{k}$ 会和 $x_{k}$ 靠近，并且和其他 $x_{k-}$ 远离<br>公式中$g(x_{\tau}^{k}, w^{k}) $ 表示 $ x_{\tau}^{k} $ 和 $ w^{k} $ 相似性，本文中使用点积运算表示</li>
-<li><p>结论：<strong>这种身份层面的对比学习loss 1. 限制了学习到的身份表示均分分布在一个特定的超球面 而不会发散 2. 并且对应的时序信用也会分布在对应的身份表示周围</strong><br>-&gt; agent credits的身份意识之间的区分性 提供更加有区分度的信用分配</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">As shown in Figure 3(d), this identitywise contrastive learning </span><br><span class="line">loss constrains the learned identity representations to uniformly</span><br><span class="line">distribute on a specific creditidentity hypersphere without divergence, </span><br><span class="line">where the temporal credits distribute around their corresponding</span><br><span class="line">identity representation (Wang and Isola 2020). With the contrastive learning loss, </span><br><span class="line">CIA directly encourages the identity-awaredistinguishability among agent credits, </span><br><span class="line">providing a more discriminative credit assignment for multi-agent diversity.</span><br></pre></td></tr></table></figure>
-<p><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1708762823185.png" alt="1708762823185"></p>
-</li>
-<li><p>从分类的角度解释： 可以看成一个分类问题，input是temporal credits 那么identity是分类网络的参数 想要最小化这个loss 要么样本空间十分简单，要么模型足够复杂，但是网络结构仅包含一层线性层nn.Linear(N, K)则施加了一个强约束了输入的credits是线性可分的 <strong>需要注意的是这里输入的样本temporal credits也是可以学的，通过反向传播更新MIX Network</strong> $L_{all} = L_{TD} + \alpha L_{CL}$<br>*$\alpha$是一个trade off</p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><h3 id="Didactic-Game"><a href="#Didactic-Game" class="headerlink" title="Didactic Game"></a>Didactic Game</h3><ul>
-<li>为了研究信用分配问题本文设计了一个教学游戏：每个agent回合制轮流吃到各自颜色对应的苹果奖励+10 每回合另一个agent被栅栏限制住每移动一格奖励为-1<br><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1709195829662.png" alt="1709195829662"></li>
-<li><strong>从c图可以看出两个agent有明确的信用分配区分 两个agent的时序信用随着回合的交替而交替变化</strong></li>
-</ul>
-<h3 id="SMAC-Benchmark"><a href="#SMAC-Benchmark" class="headerlink" title="SMAC Benchmark"></a>SMAC Benchmark</h3><p><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1709196026013.png" alt="1709196026013"></p>
-<h3 id="Ablation-Study"><a href="#Ablation-Study" class="headerlink" title="Ablation Study"></a>Ablation Study</h3><ul>
-<li><strong>为了验证身份意识的作用</strong> 本文额外设计了直接通过分类进行时序信用区分的算法</li>
-<li><strong>credit classification loss(CC loss)</strong>: 给定时序信用，直接预测对应的身份标签</li>
-<li>三种方法的性能对比:<br><img src="/2024/02/23/Contrastive-Identity-Aware-Learning-for-Multi-Agent-Value-Decomposition/1709196272260.png" alt="1709196272260"></li>
-<li>从图中可以看出CC loss的方差很大 分析原因是：<br><strong>Identity represents可以限制temporal credits在一个特定的credit-identity的空间中 使temporal credits围绕在identity representation的周围 而不发散，但是CC loss可能导致同一个agent对应的temporal credits分布在远离决策边界的地方</strong></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/02/12/learning-pytorch/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Wei">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="米兰的小铁酱">
-      <meta itemprop="description" content="attention is all you need">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 米兰的小铁酱">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/12/learning-pytorch/" class="post-title-link" itemprop="url">learning pytorch</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-02-12 23:39:33" itemprop="dateCreated datePublished" datetime="2024-02-12T23:39:33+08:00">2024-02-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-29 11:51:51" itemprop="dateModified" datetime="2024-02-29T11:51:51+08:00">2024-02-29</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>4.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>7 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="learning-Pytorch"><a href="#learning-Pytorch" class="headerlink" title="learning Pytorch"></a>learning Pytorch</h1><h2 id="Pytorch-构建模型的三种方式"><a href="#Pytorch-构建模型的三种方式" class="headerlink" title="Pytorch 构建模型的三种方式"></a>Pytorch 构建模型的三种方式</h2><ol>
-<li>继承nn.Sequential按照层的顺序构建模型：这种方式仅仅适用于简单的模型，<br>-&gt; 按层顺序构建模型无需定义forward方法<br>(1) add_module方法</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn </span><br><span class="line">import torch.nn.functional as F</span><br><span class="line"></span><br><span class="line">class Xnet():</span><br><span class="line">    def __init__(self, input_dim, hidden_dim, output_dim):</span><br><span class="line">        net = nn.Sequential()</span><br><span class="line">        net.add_module(&quot;linear1&quot;, nn.Linear(input_dim, hidden_dim))</span><br><span class="line">        net.add_module(&quot;relu1&quot;, nn.ReLU())</span><br><span class="line">        net.add_module(&quot;linear2&quot;, nn.Linear(hidden_dim, output_dim))</span><br><span class="line">        self.net = net</span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    model1 = Xnet(10, 128, 2)</span><br><span class="line">    print(model1.net)</span><br><span class="line"></span><br><span class="line">#Sequential(</span><br><span class="line">#  (linear1): Linear(in_features=10, out_features=128, bias=True)</span><br><span class="line">#  (relu1): ReLU()</span><br><span class="line">#  (linear2): Linear(in_features=128, out_features=2, bias=True)</span><br><span class="line">#)</span><br></pre></td></tr></table></figure>
-<p>(2) 利用变长参数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">net = nn.Sequential(</span><br><span class="line">    nn.Linear(input_dim, hidden_dim),</span><br><span class="line">    nn.Relu(),</span><br><span class="line">    nn.Linear(hidden_dim, output_dim),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>(3) 使用OrderedDict</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">from collections import OrderedDict</span><br><span class="line">import torch </span><br><span class="line">import torch.nn as nn</span><br><span class="line">import torch.nn.functional as F</span><br><span class="line"></span><br><span class="line">class XNet():</span><br><span class="line"></span><br><span class="line">    def __init__(self, input_dim, hidden_dim, output_dim):</span><br><span class="line">        net = nn.Sequential(OrderedDict([</span><br><span class="line">            (&#x27;linear1&#x27;, nn.Linear(input_dim, hidden_dim)),</span><br><span class="line">            (&#x27;Relu&#x27;, nn.ReLU()),</span><br><span class="line">            (&#x27;linear2&#x27;, nn.Linear(hidden_dim, output_dim)),</span><br><span class="line">        ]))</span><br><span class="line">        self.net = net</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    net = XNet(4, 128, 2)</span><br><span class="line">    print(net.net)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>继承nn.Module基类构建自定义模型</li>
-</ol>
-<ul>
-<li>模型的层在<strong>init</strong>函数中定义，然后再forward函数中定义正向传播的逻辑<br>-&gt; 需要forward方法</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn </span><br><span class="line">import torch.nn.functional as F</span><br><span class="line"></span><br><span class="line">class Xnet(nn.Module):</span><br><span class="line">    def __init__(self, input_dim, hidden_dim, output_dim):</span><br><span class="line">        super(Xnet, self).__init__()</span><br><span class="line">        self.fc1 = nn.Linear(input_dim, hidden_dim)</span><br><span class="line">        self.fc2 = nn.Linear(hidden_dim, output_dim)</span><br><span class="line">    def forward(self, x):</span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        return self.fc2(x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    model1 = Xnet(10, 128, 2)</span><br><span class="line">    print(model1)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Xnet(</span><br><span class="line">#   (fc1): Linear(in_features=10, out_features=128, bias=True)</span><br><span class="line">#   (fc2): Linear(in_features=128, out_features=2, bias=True)</span><br><span class="line"># )</span><br></pre></td></tr></table></figure>
-<ol>
-<li>继承nn.Module基类构建模型，并用模型容器进行封装<br>-&gt; 结合前两种方法<br>(1) nn.Sequential作为模型容器</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Net(nn.Module):</span><br><span class="line">    </span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        self.conv = nn.Sequential(</span><br><span class="line">            nn.Conv2d(in_channels=3,out_channels=32,kernel_size = 3),</span><br><span class="line">            nn.MaxPool2d(kernel_size = 2,stride = 2),</span><br><span class="line">            nn.Conv2d(in_channels=32,out_channels=64,kernel_size = 5),</span><br><span class="line">            nn.MaxPool2d(kernel_size = 2,stride = 2),</span><br><span class="line">            nn.Dropout2d(p = 0.1),</span><br><span class="line">            nn.AdaptiveMaxPool2d((1,1))</span><br><span class="line">        )</span><br><span class="line">        self.dense = nn.Sequential(</span><br><span class="line">            nn.Flatten(),</span><br><span class="line">            nn.Linear(64,32),</span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.Linear(32,1),</span><br><span class="line">            nn.Sigmoid()</span><br><span class="line">        )</span><br><span class="line">    def forward(self,x):</span><br><span class="line">        x = self.conv(x)</span><br><span class="line">        y = self.dense(x)</span><br><span class="line">        return y </span><br><span class="line">    </span><br><span class="line">net = Net()</span><br><span class="line">print(net)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>这里Sequential模块内部的layer是在内部就实现了forward的，所以只需要在Sequential模块之间实现forward函数就行了</li>
-</ul>
-<p>(2) 使用nn.ModuleList作为模型容器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Net(nn.Module):</span><br><span class="line">    </span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        self.layers = nn.ModuleList([</span><br><span class="line">            nn.Conv2d(in_channels=3,out_channels=32,kernel_size = 3),</span><br><span class="line">            nn.MaxPool2d(kernel_size = 2,stride = 2),</span><br><span class="line">            nn.Conv2d(in_channels=32,out_channels=64,kernel_size = 5),</span><br><span class="line">            nn.MaxPool2d(kernel_size = 2,stride = 2),</span><br><span class="line">            nn.Dropout2d(p = 0.1),</span><br><span class="line">            nn.AdaptiveMaxPool2d((1,1)),</span><br><span class="line">            nn.Flatten(),</span><br><span class="line">            nn.Linear(64,32),</span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.Linear(32,1),</span><br><span class="line">            nn.Sigmoid()]</span><br><span class="line">        )</span><br><span class="line">    def forward(self,x):</span><br><span class="line">        for layer in self.layers:</span><br><span class="line">            x = layer(x)</span><br><span class="line">        return x</span><br><span class="line">net = Net()</span><br><span class="line">print(net)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>ModuleList有和List相似的方法：append(module), extend(module), insert(index, module)</li>
-<li>ModuleList没有顺序（不用保证List中相邻Layer的维度匹配，所以需要自己定义forward函数</li>
-</ul>
-<p>(3) nn.ModuleDict作为模型容器<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Net(nn.Module):</span><br><span class="line">    </span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        self.layers_dict = nn.ModuleDict(</span><br><span class="line">        	  &#123;&quot;conv1&quot;:nn.Conv2d(in_channels=3,out_channels=32,kernel_size = 3),</span><br><span class="line">               &quot;pool&quot;: nn.MaxPool2d(kernel_size = 2,stride = 2),</span><br><span class="line">               &quot;conv2&quot;:nn.Conv2d(in_channels=32,out_channels=64,kernel_size = 5),</span><br><span class="line">               &quot;dropout&quot;: nn.Dropout2d(p = 0.1),</span><br><span class="line">               &quot;adaptive&quot;:nn.AdaptiveMaxPool2d((1,1)),</span><br><span class="line">               &quot;flatten&quot;: nn.Flatten(),</span><br><span class="line">               &quot;linear1&quot;: nn.Linear(64,32),</span><br><span class="line">               &quot;relu&quot;:nn.ReLU(),</span><br><span class="line">               &quot;linear2&quot;: nn.Linear(32,1),</span><br><span class="line">               &quot;sigmoid&quot;: nn.Sigmoid()</span><br><span class="line">              &#125;)</span><br><span class="line">    def forward(self,x):</span><br><span class="line">        layers = [&quot;conv1&quot;,&quot;pool&quot;,&quot;conv2&quot;,&quot;pool&quot;,&quot;dropout&quot;,&quot;adaptive&quot;,</span><br><span class="line">                  &quot;flatten&quot;,&quot;linear1&quot;,&quot;relu&quot;,&quot;linear2&quot;,&quot;sigmoid&quot;]</span><br><span class="line">        for layer in layers:</span><br><span class="line">            x = self.layers_dict[layer](x)</span><br><span class="line">        return x</span><br><span class="line">net = Net()</span><br><span class="line">print(net)</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>ModuleDict具有普通字典的属性：clear(), items(), keys(), pop(key), update(modules)</li>
-<li>ModuleDict定义的layers也不包含顺序性，需要自己定义forward函数</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/01/27/MARL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Wei">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="米兰的小铁酱">
-      <meta itemprop="description" content="attention is all you need">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 米兰的小铁酱">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/01/27/MARL/" class="post-title-link" itemprop="url">MARL</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-01-27 16:55:17" itemprop="dateCreated datePublished" datetime="2024-01-27T16:55:17+08:00">2024-01-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-11 00:34:56" itemprop="dateModified" datetime="2024-02-11T00:34:56+08:00">2024-02-11</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="MARL综述"><a href="#MARL综述" class="headerlink" title="MARL综述"></a>MARL综述</h1><h2 id="多智能体系统"><a href="#多智能体系统" class="headerlink" title="多智能体系统"></a>多智能体系统</h2><ul>
-<li>多智能体系统：包含m个智能体，智能体共享环境，智能体之间会相互影响 -&gt; 智能体会影响环境，从而影响其他智能体</li>
-<li>和单智能体系统的区别：单智能体的环境是稳态的，状态转移概率和奖励函数是不变的， 而多智能体系统中，智能体在与环境交互的同时也间接或直接的和其他智能体进行交互</li>
-<li><p>多智能体强化学习的难点：</p>
-<ol>
-<li>因为环境是非稳态的，导致智能体在相同状态执行相同动作，得到的状态转移概率和奖励函数的分布不同</li>
-<li>多智能体的训练是多目标的，不同智能体需要最大化自己的回报</li>
-<li>训练评估复杂度提升</li>
-</ol>
-<p><img src="/2024/01/27/MARL/1706346629825.png" alt="1706346629825"></p>
-</li>
-<li><p>按照任务特性可以把多智能体系统划分为</p>
-</li>
-</ul>
-<ol>
-<li>完全协作：智能体拥有一个共同目标</li>
-<li>完全竞争：智能体间的目标冲突，一方收益导致另一方损失</li>
-<li>混合关系：组内合作，组间竞争，例如球类比赛</li>
-</ol>
-<h2 id="博弈论简介"><a href="#博弈论简介" class="headerlink" title="博弈论简介"></a>博弈论简介</h2><ul>
-<li>将智能体之间的协作和竞争建模为博弈问题， 通常将问题建模为正则博弈</li>
-<li><p>正则式博弈 -&gt; (N, A, Q)</p>
-<ul>
-<li>N -&gt; N表示有限智能体的集合：大小为n, 每个智能体用i {1, 2, 3,…,n} 索引表示</li>
-<li>A -&gt; A表示动作组合空间： A = A1 × A2 × … × An（笛卡尔积） 其中Ai 表示智能体i可以做的动作 a = (a1, a2, … , an) 表示一个动作组合</li>
-<li>Q -&gt; Q表示效益：Q = {Q1, Q2, … , Qn} Qi 表示智能体i的收益函数<br>注意：这里Qi可能不仅仅取决于ai, 它往往可能被其他的智能体动作影响，所以Qi取决于动作组合a</li>
-</ul>
-</li>
-</ul>
-<p>情景：仅有两个智能体，且是完全竞争<br>-&gt; 二人零和博弈：此时收益函数满足Q1(a) + Q2(a) = 0</p>
-<h2 id="多智能体强化学习"><a href="#多智能体强化学习" class="headerlink" title="多智能体强化学习"></a>多智能体强化学习</h2><p>单智能体强化学习将多步决策建模为MDP，多智能体强化学习一般被建模为随机博弈</p>
-<ul>
-<li>随机博弈： -&gt; {N, S, A, P, R, γ}</li>
-</ul>
-<ul>
-<li>N -&gt; N表示有限智能体的集合</li>
-<li>S -&gt; S表示环境中所有智能体共享的状态空间</li>
-<li>A -&gt; A表示联合动作空间： Ai表示智能体i的动作空间， A = A1 × A2 × … × An a = (a1, a2, … , an) 表示一个动作组合</li>
-<li>P -&gt; P表示状态转移函数：S × A 映射了在每个时间步，给定一个动作组合a 属于 A, 环境从s 属于 S 转移到 s’ 属于 S 的概率</li>
-<li>R -&gt; R表示每个智能体的奖励函数：S × A × N Ri表示智能体i对应的奖励函数</li>
-<li>γ -&gt; γ表示折扣因子</li>
-</ul>
-<p><strong>过程</strong>：在每一个时间步，智能体i 处于 状态s , 选择动作ai 属于 Ai, 构成联合动作 a = {a1, a2, … , an}并执行，环境转移到下一个状态s’~P(·|s, a)， 智能体i得到奖励Ri(s, a)， 每个智能体通过优化自身的策略函数 πi : S -&gt; Δ(Ai)最大化以其期望累计奖赏，以状态价值函数的形式表达如下：<br><img src="/2024/01/27/MARL/1706412112570.png" alt="1706412112570"></p>
-<ul>
-<li>上述的符号 i 代表除了智能体 i 之外的其他智能体。与单智能体强化学习中智能体仅仅需要考虑自身对环境的影响不同，多智能体系统中智能体之间也会相互影响，他们共同决策并且同时更新策略。</li>
-<li>当系统中的其他智能体的策略固定时，智能体 i 可以最大化自己的收益函数，以寻找到相对于其他智能体的策略的最优策略 π∗</li>
-<li>合理性和收敛性是学习算法最主要的评价指标<ul>
-<li><strong>合理性</strong>：在对手使用一个恒定策略的情况下，当前智能体能够学习并收敛到一个相对 于对手策略的最优策略。</li>
-<li><strong>收敛性</strong>：在其他智能体也使用学习算法时，当前智能体能够学习并收敛到一个稳定的策略。通常情况下，<em>收敛性针对系统中的所有智能体使用相同的学习算法</em>。</li>
-</ul>
-</li>
-</ul>
-<p><img src="/2024/01/27/MARL/1706412808069.png" alt="1706412808069"></p>
-<ul>
-<li><p>部分可观测随机博弈：定义为 M = {N, S, A, P, R, γ, Ω, O}</p>
-<ul>
-<li>Ω -&gt; Ω表示所有智能体的联合观测空间 Ω = Ω1 × Ω2 × … × Ωn, Ωi 表示智能体i的观测空间</li>
-<li>O -&gt; O表示观测函数：S -&gt; Δ(Ω) O(Ω|s),指在给定状态 s 后关于联合观测 Ω 的函数概率</li>
-</ul>
-</li>
-<li><strong>在协作任务场景</strong>, 可以进一步建模为 -&gt; 分布式局部可观测马尔可夫决策过程（Decentralized Partially Observable MDP, Dec-POMDP），-&gt; 每个智能体的奖赏函数相同</li>
-</ul>
-<h2 id="多智能体强化学习训练范式"><a href="#多智能体强化学习训练范式" class="headerlink" title="多智能体强化学习训练范式"></a>多智能体强化学习训练范式</h2><ol>
-<li>智能体更新自身策略是否需要其他智能体信息：<ul>
-<li>集中式训练(Centralized Training)</li>
-<li>分布式训练(Decentralized Training)</li>
-</ul>
-</li>
-<li>智能体执行阶段是否需要外部信息：<ul>
-<li>集中式执行(Centralized Execution)</li>
-<li>分布式执行(Decentralized Execution)</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li><p>三种范式：</p>
-<ul>
-<li>DTDE 分布式训练分布式执行</li>
-<li>CTCE 集中式训练集中式执行</li>
-<li>CTDE 集中式训练分布式执行<br><img src="/2024/01/27/MARL/1706421213707.png" alt="1706421213707"></li>
-</ul>
-</li>
-<li>分布式训练分布式执行 DTDE：每个智能体<strong>仅利用自己的局部信息独立地进行策略更新和策略实现</strong>，不涉及到信息的交换<br>πi: Ωi -&gt; ∆(Ai)<br>IQL: 是基于DTDE的典型算法</li>
-<li>集中式训练集中式执行 CTCE：<strong>智能体学习一个集中式的联合策略</strong><br>π: Ω -&gt; ∆(A).<br><strong>在CTCE框架下，可以使用任意一种单智能体强化学习算法训练多智能体系统</strong><br>-&gt; 算法的复杂度随状态和动作的维度增长呈维度爆炸 -&gt; 可通过策略分解 或者 值分解 来解决<br>-&gt; 无法评估每个智能体间的相互影响 -&gt; 信度分配问题会给学习效率带来较严重的影响 -&gt; 未解决</li>
-<li>集中式训练分布式执行 CTDE：<strong>在训练阶段，智能体通过拿到其他智能体的信息甚至是全局信息以优化自己的局部策略</strong> <strong>在执行过程仅使用自己的局部信息进行决策</strong><br>πi: Ωi -&gt; ∆(A).<br>优势：</li>
-</ul>
-<ol>
-<li>在训练过程中，拿到全局信息，可以缓解非稳态性</li>
-<li>在执行过程中，可以直接基于局部信息按策略执行动作<br>问题：<br>CTDE 在处理异质多智能体（智能体的状态或者动作空间不一致）的时候，往往表现不佳 -&gt; 可以通过技能学习或者通过先分组，再采用局部 CTDE 的方式进行训练</li>
-</ol>
-<h2 id="多智能体强化学习的难点和挑战"><a href="#多智能体强化学习的难点和挑战" class="headerlink" title="多智能体强化学习的难点和挑战"></a>多智能体强化学习的难点和挑战</h2><ol>
-<li><p>非稳态性： 导致智能体在相同状态执行相同动作，得到的状态转移概率和奖励函数的分布不同<br>在基于Q值更新的策略中存在大问题：</p>
-<ul>
-<li>进行TD更新需要进行动作采样，在多智能体中采样联合动作往往难度较大</li>
-<li>随着智能体同时进行更新，经验回放池中的数据会过时<br>-&gt; 对对手或者队友进行建模<br>-&gt; 对回放数据进行重采样</li>
-</ul>
-</li>
-<li>可拓展性：为了解决非稳态，多智能体往往需要考虑环境中的所有智能体的联合动作，联合动作会随着智能体的数量呈指数上升<br>-&gt; 同质智能体共享神经网络、异质智能体间独立训练<br>-&gt; 迁移学习</li>
-<li>部分可观测性：考虑到环境中传感器的限制等因素，智能体往往很难获得全局状态，一般只能拿到部分信息，我 们一般把多智能体强化学习建模为 POSG 部分可观测随机博弈：定义为 M = {N, S, A, P, R, γ, Ω, O}<br>-&gt; 环境不再遵循马尔可夫性<br>-&gt; 多智能体通信：智能体之间通过信息传递，缓解多智能体的局部观测问题 则需定义</li>
-</ol>
-<ul>
-<li>与谁通信</li>
-<li>通信什么内容</li>
-<li>何时通信</li>
-</ul>
-<p><img src="/2024/01/27/MARL/1706431067761.png" alt="1706431067761"></p>
-<p>通信内容：1. 直接把自身局部信息发送给其他智能体 -&gt; 信息冗余、带宽损耗 2. <strong>发送者提取出最有用的信息</strong><br>通信时机：1. 每时每刻通信 2. <strong>关键时刻通信</strong> 更高效</p>
-<h2 id="经典环境下的协作多智能体强化学习"><a href="#经典环境下的协作多智能体强化学习" class="headerlink" title="经典环境下的协作多智能体强化学习"></a>经典环境下的协作多智能体强化学习</h2><h3 id="基于值函数的多智能体协作"><a href="#基于值函数的多智能体协作" class="headerlink" title="基于值函数的多智能体协作"></a>基于值函数的多智能体协作</h3><ol>
-<li><p>IQL<br><img src="/2024/01/27/MARL/IQL.png" alt="IQL"></p>
-</li>
-<li><p>VDN<br><img src="/2024/01/27/MARL/VDN.png" alt="VDN"></p>
-</li>
-<li><p>QMIX<br><img src="/2024/01/27/MARL/QMIX.png" alt="QMIX"></p>
-</li>
-<li><p>QTRAN<br><img src="/2024/01/27/MARL/QTRAN.png" alt="QTRAN"></p>
-</li>
-</ol>
-<ul>
-<li>参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/203164554">https://zhuanlan.zhihu.com/p/203164554</a></li>
-</ul>
-<h3 id="MADDPG"><a href="#MADDPG" class="headerlink" title="MADDPG"></a>MADDPG</h3><p><img src="/2024/01/27/MARL/MADDPG.png" alt="MADDPG"></p>
-<h3 id="COMA"><a href="#COMA" class="headerlink" title="COMA"></a>COMA</h3><p><img src="/2024/01/27/MARL/COMA.png" alt="COMA"></p>
-<ul>
-<li>参考：<a target="_blank" rel="noopener" href="https://hub.baai.ac.cn/view/13622">https://hub.baai.ac.cn/view/13622</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/01/22/PPO/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Wei">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="米兰的小铁酱">
-      <meta itemprop="description" content="attention is all you need">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 米兰的小铁酱">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/01/22/PPO/" class="post-title-link" itemprop="url">PPO</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-01-22 16:11:29 / 修改时间：18:26:20" itemprop="dateCreated datePublished" datetime="2024-01-22T16:11:29+08:00">2024-01-22</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="PPO"><a href="#PPO" class="headerlink" title="PPO"></a>PPO</h1><p><img src="/2024/01/22/PPO/1705917072236.png" alt="1705917072236"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1483,13 +1360,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">29k</span>
+    <span title="站点总字数">37k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">49 分钟</span>
+    <span title="站点阅读时长">1:02</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
