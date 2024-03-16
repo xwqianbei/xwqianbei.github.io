@@ -276,8 +276,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2024-03-16 12:52:09" itemprop="dateCreated datePublished" datetime="2024-03-16T12:52:09+08:00">2024-03-16</time>
+      <time title="创建时间：2024-03-16 12:52:09 / 修改时间：12:56:28" itemprop="dateCreated datePublished" datetime="2024-03-16T12:52:09+08:00">2024-03-16</time>
     </span>
 
   
@@ -336,7 +337,7 @@
 <h2 id="BERT"><a href="#BERT" class="headerlink" title="BERT"></a>BERT</h2><h3 id="pre-training-and-fine-tuning"><a href="#pre-training-and-fine-tuning" class="headerlink" title="pre-training and fine-tuning"></a>pre-training and fine-tuning</h3><ul>
 <li><strong>pre-training</strong>: During pre-training, the model is trained on unlabeled data over different pre-training tasks.</li>
 <li><strong>fine-tuning</strong>: For finetuning, the BERT model is first initialized with the pre-trained parameters, and all of the parameters are fine-tuned using labeled data from the downstream tasks.</li>
-<li>每个不同的下游任务都对用相同的预训练参数<br><img src="/2024/03/16/BERT/BERT/1710050250445.png" alt="1710050250445"><h3 id="Model-Architecture"><a href="#Model-Architecture" class="headerlink" title="Model Architecture"></a>Model Architecture</h3></li>
+<li>每个不同的下游任务都对用相同的预训练参数<br><img src="/2024/03/16/BERT/1710050250445.png" alt="1710050250445"><h3 id="Model-Architecture"><a href="#Model-Architecture" class="headerlink" title="Model Architecture"></a>Model Architecture</h3></li>
 <li><strong>multi-layer bidirectional Transformer encoder</strong></li>
 <li><em>L</em>: the number of Layers(Transformer blocks)</li>
 <li><em>H</em>: the hidden size</li>
@@ -349,7 +350,7 @@
 <li><em>First token of input sequnence</em>: <strong>[CLS] special classification token as C (dim = H)</strong></li>
 <li><em>Sentences differentite</em>: <ol>
 <li>[CLS] sentenceA [SEP] sentenceB</li>
-<li>learned token embedding as $E_{A}$ or $E_{B}$, sentenceA or sentenceB<br><img src="/2024/03/16/BERT/BERT/1710053093135.png" alt="1710053093135"></li>
+<li>learned token embedding as $E_{A}$ or $E_{B}$, sentenceA or sentenceB<br><img src="/2024/03/16/BERT/1710053093135.png" alt="1710053093135"></li>
 </ol>
 </li>
 </ol>
@@ -363,7 +364,7 @@
 <li>standard conditional language models can only be trained left-to-right or right-to-left, <strong>since bidirectional conditioning would allow each word to indirectly “see itself”</strong></li>
 <li><strong>MLM(masked LM)</strong>: 随机mask每个sequence 15% 的tokens<ol>
 <li>pretrain时 input sequence 有[MASK] token 但是 fine-tuning时是没有[MASK] token的， 为了缓解这种差异，对这 15% mask tokens进行处理</li>
-<li>最终 80% [MASK] 10 [RND(rondam token)] 10 [SAME(same token)]<br><img src="/2024/03/16/BERT/BERT/1710054577043.png" alt="1710054577043"><h3 id="Task-2-Next-Sentence-Prediction-NSP"><a href="#Task-2-Next-Sentence-Prediction-NSP" class="headerlink" title="Task #2: Next Sentence Prediction(NSP)"></a>Task #2: Next Sentence Prediction(NSP)</h3></li>
+<li>最终 80% [MASK] 10 [RND(rondam token)] 10 [SAME(same token)]<br><img src="/2024/03/16/BERT/1710054577043.png" alt="1710054577043"><h3 id="Task-2-Next-Sentence-Prediction-NSP"><a href="#Task-2-Next-Sentence-Prediction-NSP" class="headerlink" title="Task #2: Next Sentence Prediction(NSP)"></a>Task #2: Next Sentence Prediction(NSP)</h3></li>
 </ol>
 </li>
 <li>QA task and Natural Language Inference (NLI) are based on understanding the <strong>relationship between two sentences</strong>, <strong>which is not directly captured by language modeling.</strong></li>
@@ -689,7 +690,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-16 12:52:58" itemprop="dateModified" datetime="2024-03-16T12:52:58+08:00">2024-03-16</time>
+      <time title="修改时间：2024-03-16 12:56:54" itemprop="dateModified" datetime="2024-03-16T12:56:54+08:00">2024-03-16</time>
     </span>
 
   
@@ -717,7 +718,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="关于hexo-new"><a href="#关于hexo-new" class="headerlink" title="关于hexo new"></a>关于hexo new</h1><p><a target="_blank" rel="noopener" href="https://hexo.io/docs/commands.html#new">官网说明</a><br><img src="/2024/03/10/%E5%85%B3%E4%BA%8Ehexo-new/关于hexo-new/1710045767599.png" alt="1710045767599"></p>
+          <h1 id="关于hexo-new"><a href="#关于hexo-new" class="headerlink" title="关于hexo new"></a>关于hexo new</h1><p><a target="_blank" rel="noopener" href="https://hexo.io/docs/commands.html#new">官网说明</a><br><img src="/2024/03/10/%E5%85%B3%E4%BA%8Ehexo-new/1710045767599.png" alt="1710045767599"></p>
 <ul>
 <li>如果layout没有指明的话，hexo会使用config.yml中的default_layout的默认配置，一般默认是post</li>
 <li>如果title中包含空格的话，则需要使用引号</li>
