@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xwqianbei.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Automatic Grouping for Efficient Cooperative Multi-Agent Reinforcement LearningAbstract GoMARL: Group-oriented Multi-Agent Reinforcement Learning learn automatic grouping without domain knowledge for">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GoMARL">
+<meta property="og:url" content="http://xwqianbei.github.io/2024/03/15/GoMARL/index.html">
+<meta property="og:site_name" content="米兰的小铁酱">
+<meta property="og:description" content="Automatic Grouping for Efficient Cooperative Multi-Agent Reinforcement LearningAbstract GoMARL: Group-oriented Multi-Agent Reinforcement Learning learn automatic grouping without domain knowledge for">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/03/15/GoMARL/1710561769884.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/03/15/GoMARL/1710852685014.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/03/15/GoMARL/1710852756019.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/03/15/GoMARL/1710853359419.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/03/15/GoMARL/1710854191337.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/03/15/GoMARL/1710855631168.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/03/15/GoMARL/1710860129623.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/03/15/GoMARL/1710930045436.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/03/15/GoMARL/1710930152325.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/03/15/GoMARL/1710930947555.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/03/15/GoMARL/1710931015065.png">
+<meta property="og:image" content="http://xwqianbei.github.io/2024/03/15/GoMARL/1710931307596.png">
+<meta property="article:published_time" content="2024-03-15T03:17:36.000Z">
+<meta property="article:modified_time" content="2024-03-20T10:44:46.185Z">
+<meta property="article:author" content="Wei">
+<meta property="article:tag" content="论文阅读">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xwqianbei.github.io/2024/03/15/GoMARL/1710561769884.png">
+
+
+<link rel="canonical" href="http://xwqianbei.github.io/2024/03/15/GoMARL/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://xwqianbei.github.io/2024/03/15/GoMARL/","path":"2024/03/15/GoMARL/","title":"GoMARL"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>GoMARL | 米兰的小铁酱</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">米兰的小铁酱</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Automatic-Grouping-for-Efficient-Cooperative-Multi-Agent-Reinforcement-Learning"><span class="nav-number">1.</span> <span class="nav-text">Automatic Grouping for Efficient Cooperative Multi-Agent Reinforcement Learning</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">3.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-number">4.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Group-oriented-Multi-Agent-Reinforcement-Learning"><span class="nav-number">4.1.</span> <span class="nav-text">Group-oriented Multi-Agent Reinforcement Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Automatic-Grouping-Mechanism"><span class="nav-number">4.2.</span> <span class="nav-text">4.1 Automatic Grouping Mechanism</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Specialized-Agent-Network-for-Decentralized-Execution"><span class="nav-number">4.3.</span> <span class="nav-text">4.2 Specialized Agent Network for Decentralized Execution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-Overall-Learning-Framework"><span class="nav-number">4.4.</span> <span class="nav-text">4.3 Overall Learning Framework</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-number">5.</span> <span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-Performance-on-SMAC"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 Performance on SMAC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-Performance-on-Google-Research-Football"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 Performance on Google Research Football</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wei</p>
+  <div class="site-description" itemprop="description">attention is all you need</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/03/15/GoMARL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米兰的小铁酱">
+      <meta itemprop="description" content="attention is all you need">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="GoMARL | 米兰的小铁酱">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GoMARL
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-15 11:17:36" itemprop="dateCreated datePublished" datetime="2024-03-15T11:17:36+08:00">2024-03-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-20 18:44:46" itemprop="dateModified" datetime="2024-03-20T18:44:46+08:00">2024-03-20</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Automatic-Grouping-for-Efficient-Cooperative-Multi-Agent-Reinforcement-Learning"><a href="#Automatic-Grouping-for-Efficient-Cooperative-Multi-Agent-Reinforcement-Learning" class="headerlink" title="Automatic Grouping for Efficient Cooperative Multi-Agent Reinforcement Learning"></a>Automatic Grouping for Efficient Cooperative Multi-Agent Reinforcement Learning</h1><h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><ul>
+<li><strong>GoMARL</strong>: Group-oriented Multi-Agent Reinforcement Learning learn automatic grouping without domain knowledge for efficient cooperation.</li>
+</ul>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><ul>
+<li>GoMARL:<ol>
+<li>GoMARL holds a dualhierarchical value factorization</li>
+<li>learns dynamic groups with a “select-and-kick-out” scheme.</li>
+</ol>
+</li>
+<li>GoMARL continuously selects agents unsuitable for their current groups based on the learning weights of the decomposition from the group-wise value to local utilities and kicks them out to reorganize the group division.</li>
+<li>GoMARL transforms various informative training signals, including individual group-related information, group state, and global state, into network weights, which extracts effective guidance for policy improvement and enables flexible adaptation to the dynamic changes in the number of subgroups and the number of agents per group.</li>
+</ul>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><h2 id="Group-oriented-Multi-Agent-Reinforcement-Learning"><a href="#Group-oriented-Multi-Agent-Reinforcement-Learning" class="headerlink" title="Group-oriented Multi-Agent Reinforcement Learning"></a>Group-oriented Multi-Agent Reinforcement Learning</h2><ul>
+<li><strong>Atuomatic grouping module</strong>: GoMARL decomposes the global action-value Qtot into groupwise values Qg and trains agents by groups in a fine-grained manner.<br><img src="/2024/03/15/GoMARL/1710561769884.png" alt="1710561769884"><h2 id="4-1-Automatic-Grouping-Mechanism"><a href="#4-1-Automatic-Grouping-Mechanism" class="headerlink" title="4.1 Automatic Grouping Mechanism"></a>4.1 Automatic Grouping Mechanism</h2></li>
+<li>learn a mapping relationship $f_{g}$ : A -&gt; G. -&gt; divide the team into dynamic groups in an end-to-end fashion by maximizing the expected global return $Q_{g}^{tot}$.</li>
+<li><strong>Individual    w! Generator</strong>: GoMARL “selects and kicks out” agents whose individual utilities hold small mixing weights and contribute a little to their group-wise Q values</li>
+<li><p>We empirically utilize seventy percent of each group’s average weight to assess whether an agent fits its current group.<br><img src="/2024/03/15/GoMARL/1710852685014.png" alt="1710852685014"></p>
+</li>
+<li><p><strong>Group Adjustment Operator</strong>: $O_{g}:\{w_{1}^{1},…,W_{1}^{n}\}-&gt;\{w_{1}^{g1},…,w_{1}^{gm}\}$ concatenates the wi1 of agents in the same group to form a set of group-wise wg 1 to generate group action-value.<br><img src="/2024/03/15/GoMARL/1710852756019.png" alt="1710852756019"></p>
+</li>
+</ul>
+<h2 id="4-2-Specialized-Agent-Network-for-Decentralized-Execution"><a href="#4-2-Specialized-Agent-Network-for-Decentralized-Execution" class="headerlink" title="4.2 Specialized Agent Network for Decentralized Execution"></a>4.2 Specialized Agent Network for Decentralized Execution</h2><ul>
+<li><strong>group-wise information e</strong>: Integrating group-wise information e into the decision-making process enables consideration of cooperative behaviors.<br><img src="/2024/03/15/GoMARL/1710853359419.png" alt="1710853359419"></li>
+<li><p><strong>group-related info encoder $f_{e}(·; \theta_{e})$</strong>: train the encoder network as an extractor, where the extracted agent info $e$ of agents from the same group should be similar. To avoid all agents’ $e^{i}$ collapsing to be alikem the regularizer also encourages diversity between agents from different groups.<br><img src="/2024/03/15/GoMARL/1710854191337.png" alt="1710854191337"></p>
+</li>
+<li><p><strong>Group-related Info Decoder</strong>: $e^{i}$ fed into a decoder $f_{d}(·;\theta_{d})$ to generate the parameters of the agent network’s upper MLP</p>
+<ol>
+<li>Our method hybridizes the efficiency of parameter-sharing and the policy diversity needed for complex collaboration.</li>
+<li>providing informative group-related information to enrich local utilities and promote intra-group cooperation.</li>
+</ol>
+</li>
+</ul>
+<h2 id="4-3-Overall-Learning-Framework"><a href="#4-3-Overall-Learning-Framework" class="headerlink" title="4.3 Overall Learning Framework"></a>4.3 Overall Learning Framework</h2><p><img src="/2024/03/15/GoMARL/1710855631168.png" alt="1710855631168"></p>
+<ul>
+<li>two mixing networks:<ol>
+<li>group-wise $Q^{g}$</li>
+<li>global $Q^{tot}$</li>
+</ol>
+</li>
+<li>group-wise $Q^{g}$: <ol>
+<li>$w_{1}^{g}$ -&gt; “selects and kicks out” decides the group division</li>
+<li>$w_{2}^{g}$ -&gt; generate $Q^{g}$\ carries group status information</li>
+</ol>
+</li>
+<li>$w_{2}^{g}$: Group-related Info $e = \{e_{t}^{1},e_{t}^{2},…,e_{t}^{n}\}$  (from group-related info encoder) -&gt; pooling Operation -&gt; Group State$s = \{s_{t}^{g1},s_{t}^{g2},…,s_{t}^{gm}\}$ -&gt; Group-wise 𝐰𝟐 Generator$f_{w2}(s_{g})$ -&gt; $\{w_{2}^{g1}, … ,w_{2}^{gm}\}$</li>
+<li>$Q^{tot}$: <ol>
+<li>$w_{1}^{Q^{tot}}$: $s = \{s_{t}^{g1},s_{t}^{g2},…,s_{t}^{gm}\}$ -&gt; $f_{w1}^{i}(·;\theta_{w1}^[i])$ -&gt; $\{w_{1}^{g1},…,w_{1}^{gm}\}$ -&gt; k dim hidden state</li>
+<li>global state $s$ -&gt; $f_{w2}(·|s)$ -&gt; $w_{2}$ -&gt; $Q^{tot}$<br><img src="/2024/03/15/GoMARL/1710860129623.png" alt="1710860129623"></li>
+</ol>
+</li>
+</ul>
+<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><h2 id="5-1-Performance-on-SMAC"><a href="#5-1-Performance-on-SMAC" class="headerlink" title="5.1 Performance on SMAC"></a>5.1 Performance on SMAC</h2><ul>
+<li><strong>Overall performance</strong>:<br><img src="/2024/03/15/GoMARL/1710930045436.png" alt="1710930045436"></li>
+<li><strong>Parameter size for value mixing.</strong>: GoMARL outperforms other methods despite using fewer mixing parameters, highlighting its inherent superiority over methods relying on stronger mixing networks.<br><img src="/2024/03/15/GoMARL/1710930152325.png" alt="1710930152325"></li>
+<li><strong>Component analysis and ablation study</strong>:<ol>
+<li>Learned grouping analysis<br><img src="/2024/03/15/GoMARL/1710930947555.png" alt="1710930947555"></li>
+<li>Component study of the specialized agents: We transplant our specialized agent network (SAN) into other baselines to verify module effectiveness.<br><img src="/2024/03/15/GoMARL/1710931015065.png" alt="1710931015065"></li>
+<li>Ablation study of the informative group-related signals: <h2 id="5-2-Performance-on-Google-Research-Football"><a href="#5-2-Performance-on-Google-Research-Football" class="headerlink" title="5.2 Performance on Google Research Football"></a>5.2 Performance on Google Research Football</h2></li>
+</ol>
+</li>
+<li>in which the first group brought the ball into the penalty area through smooth coordination, while the second group created two shoots and the final goal through skillful cooperation<br><img src="/2024/03/15/GoMARL/1710931307596.png" alt="1710931307596"></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><script src="//sdk.jinrishici.com/v2/browser/jinrishici.js"></script>
+<script>
+  jinrishici.load((result) => {
+    let jrsc = document.getElementById('jrsc');
+    const data = result.data;
+    let author = data.origin.author;
+    let title = '《' + data.origin.title + '》';
+    let content = data.content.substr(0, data.content.length - 1);
+    let dynasty = data.origin.dynasty.substr(0, data.origin.dynasty.length - 1);
+    jrsc.innerText = content + ' @ ' + dynasty + '·' + author + title;
+  });
+</script>
+<div style="text-align: center"><span id="jrsc" >正在加载今日诗词....</span></div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" rel="tag"># 论文阅读</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/12/RLHF/" rel="prev" title="RLHF">
+                  <i class="fa fa-angle-left"></i> RLHF
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/03/16/BERT/" rel="next" title="BERT">
+                  BERT <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Wei</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">41k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:08</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
