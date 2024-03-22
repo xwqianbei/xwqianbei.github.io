@@ -121,7 +121,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -144,6 +144,121 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/02/26/RACE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米兰的小铁酱">
+      <meta itemprop="description" content="attention is all you need">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 米兰的小铁酱">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/02/26/RACE/" class="post-title-link" itemprop="url">RACE</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-02-26 20:57:10" itemprop="dateCreated datePublished" datetime="2024-02-26T20:57:10+08:00">2024-02-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-29 12:06:50" itemprop="dateModified" datetime="2024-02-29T12:06:50+08:00">2024-02-29</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="RACE-Improve-Multi-Agent-Reinforcement-Learning-with-Representation-Asymmetry-and-Collaborative-Evolution"><a href="#RACE-Improve-Multi-Agent-Reinforcement-Learning-with-Representation-Asymmetry-and-Collaborative-Evolution" class="headerlink" title="RACE: Improve Multi-Agent Reinforcement Learning with Representation Asymmetry and Collaborative Evolution"></a>RACE: Improve Multi-Agent Reinforcement Learning with Representation Asymmetry and Collaborative Evolution</h1><h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><ul>
+<li><strong>challenge</strong>: MARL 在合作方面 挣扎在低质量的奖励信号和高不稳定性</li>
+<li><strong>Evolutionary Algorithm(EA)</strong>: 更好的收敛、更加健壮鲁棒、对奖励信号不敏感</li>
+<li><strong>in this paper</strong>: 本文提出一个混合框架： Representation Asymmetry and Collaboration Evolution (RACE) -&gt; 将EA和MARL结合 以达到高效的合作</li>
+<li><strong>method</strong>: RACE 维持一个MARL team和一群EA teams. 为了高效的知识共享和策略探索 -&gt; RACE 把不同team控制相同agent的 policies 分解成 1. shared nonlinear observation representation encoder（共享的非线性观察表示编码器encoder） 2. individual linear policy representations.（独立的线性策略表示） trick1: 为了解决部分观察的问题, 本文引入Value-Aware Mutual Information Maximization （价值感知 互信息最大化）-&gt; 利用有关全局状态的有用信息增强共享表示    trick2: 为了促进协调 -&gt; 使用新颖的 agent-level 交叉和变异算子来进化种群 -&gt; 为MARL提供多样化的经验  trick3: MARL优化它的策略并且将它们注入到种群中进化</li>
+</ul>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><ul>
+<li><strong>motivation</strong>: EA has strong exploration ability, good robustness, and stable convergence. EA offers numerous strengths that can complement the weaknesses of MARL.</li>
+<li><strong>challenge</strong>: 独立维持和优化每个team的policy是非常不高效的 并且这样无法利用其他team获得的有价值的知识 在广阔的非线性策略空间探索合作是非常低效的</li>
+<li><strong>methods</strong>: 提出两级团队策略测结构 1. 共享的非线性观察表示(shared observation represention encoder) 2. 独立的线性策略表示(independent policy representions)</li>
+<li><strong>represention asymmetry</strong>: independent policy构建的不同表示范围</li>
+<li><strong>observation representation encoder</strong>: 负责共享任务相关和合作相关的知识 -&gt; 通过价值函数最大化的集成（涉及所有的EA team 和 MARL team）更新方向进行优化</li>
+<li><strong>Value-Aware Mutual Information Maximization</strong>: 最大化共享观察表示(shared observation representations) 和全局状态的互信息(MI)。 -&gt; 在低价值状态下进行最大化可能导致对共享观察表示(shared observation representation)的负面影响 -&gt; 导致合作不理想 -&gt; Value-Aware MI: 归一化状态价值函数作为权重 已到达 提取全局状态信息加入共享观察表示(shared observation representations)</li>
+<li><strong>independent linear policy</strong>: 在更加紧凑和有利的线性空间 policy的探索更加有效 从而促进合作</li>
+<li><strong>EA</strong>: EA进化种群 生成多样性的经验 -&gt; 被MARL使用 -&gt; 反过来，MARL team通过收集的样本进行优化 并且定期加入种群进化</li>
+<li>agent-level 交叉变异 -&gt; 交换两个team的individual policy representation -&gt; 探索更好的团队合作</li>
+</ul>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><ol>
+<li>Representation Asymmetry of team construction</li>
+<li>How to learn the shared observation representation encoders</li>
+<li>How to improve MARL with Collaborative Evolution</li>
+</ol>
+<ul>
+<li><strong>motivation</strong>: 每个team 独立的策略构建限制了teams之间的知识共享和在策略空间上的探索 -&gt; inspired by ERL-Re -&gt; 本文提出Representation-Asymmetry Team Construction(RATC) 使能够高效的知识共享和策略探索</li>
+</ul>
+<h3 id="Shared-Observation-Representation-Learning"><a href="#Shared-Observation-Representation-Learning" class="headerlink" title="Shared Observation Representation Learning"></a>Shared Observation Representation Learning</h3>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1281,13 +1396,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">41k</span>
+    <span title="站点总字数">44k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:08</span>
+    <span title="站点阅读时长">1:13</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

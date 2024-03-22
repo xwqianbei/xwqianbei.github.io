@@ -121,7 +121,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -144,6 +144,103 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/03/22/self-attention-pytorch%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米兰的小铁酱">
+      <meta itemprop="description" content="attention is all you need">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 米兰的小铁酱">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/22/self-attention-pytorch%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">self_attention pytorch实现</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-22 09:59:21 / 修改时间：10:13:30" itemprop="dateCreated datePublished" datetime="2024-03-22T09:59:21+08:00">2024-03-22</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="self-attention-和-MultiHead-attention-pytorch代码实现"><a href="#self-attention-和-MultiHead-attention-pytorch代码实现" class="headerlink" title="self attention 和 MultiHead attention pytorch代码实现"></a>self attention 和 MultiHead attention pytorch代码实现</h1><ol>
+<li><p>self attention pytorch代码实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SelfAttention</span>(nn.modules):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, word_dim, k_dim, q_dim, v_dim</span>):</span><br><span class="line">        <span class="built_in">super</span>(SelfAttention, self).__init__()</span><br><span class="line">        <span class="keyword">assert</span> q_dim == v_dim</span><br><span class="line"></span><br><span class="line">        self.word_dim = word_dim</span><br><span class="line">        self.q_dim = q_dim</span><br><span class="line">        self.k_dim = k_dim </span><br><span class="line">        self.v_dim = v_dim</span><br><span class="line">        self.sqrt_dimk = math.sqrt(self.k_dim)</span><br><span class="line"></span><br><span class="line">        self.w_q = nn.Linear(word_dim, q_dim, require_grad = <span class="literal">True</span>)</span><br><span class="line">        self.w_k = nn.Linear(word_dim, k_dim, require_grad = <span class="literal">True</span>)</span><br><span class="line">        self.w_v = nn.Linear(word_dim, v_dim, require_grad = <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="comment"># x: [batch_size, max_length, word_dim]</span></span><br><span class="line">        batch_size, n, word_dim = x.shape</span><br><span class="line">        <span class="keyword">assert</span> word_dim == self.word_dim</span><br><span class="line"></span><br><span class="line">        Q = self.w_q(x) <span class="comment"># [batch_size, max_length, q_dim]</span></span><br><span class="line">        K = self.w_k(x) <span class="comment"># [batch_size, max_length, k_dim]</span></span><br><span class="line">        V = self.w_v(x) <span class="comment"># [batch_size, max_length, v_dim]</span></span><br><span class="line"></span><br><span class="line">        attention_score = torch.bmm(Q, K.transpose(<span class="number">1</span>, <span class="number">2</span>)) * self.sqrt_dimk <span class="comment"># [batch_size, max_length, max_length]</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> torch.bmm(F.softmax(attention_score, dim = -<span class="number">1</span>), V) <span class="comment"># [batch_size, max_length, v_dim]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>MultiHead attention pytorch代码实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MutilHeadAttention</span>(nn.Moudle):</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, word_dim, q_dim, k_dim, v_dim, num_heads = <span class="number">8</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(MutilHeadAttention, self).__init__()</span><br><span class="line">        <span class="keyword">assert</span> q_dim == v_dim <span class="keyword">and</span> q_dim % num_heads == <span class="number">0</span> <span class="keyword">and</span> v_dim % num_heads == <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        self.word_dim = word_dim</span><br><span class="line">        self.q_dim = q_dim</span><br><span class="line">        self.k_dim = k_dim </span><br><span class="line">        self.v_dim = v_dim</span><br><span class="line">        self.num_heads = num_heads</span><br><span class="line">        self.sqrt_kdim = <span class="number">1</span> / math.sqrt(v_dim / num_heads)</span><br><span class="line"></span><br><span class="line">        self.w_q = nn.Linear(word_dim, q_dim)</span><br><span class="line">        self.w_k = nn.Linear(word_dim, k_dim)</span><br><span class="line">        self.w_v = nn.Linear(word_dim, v_dim)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        batch_size, max_length, word_dim = x.shape</span><br><span class="line">        <span class="keyword">assert</span> word_dim == self.word_dim</span><br><span class="line"></span><br><span class="line">        Q = self.w_q(x) <span class="comment"># [batch_size, max_length, q_dim]</span></span><br><span class="line">        K = self.w_k(x) <span class="comment"># [batch_size, max_length, k_dim]</span></span><br><span class="line">        V = self.w_v(x) <span class="comment"># [batch_size, max_length, v_dim]</span></span><br><span class="line"></span><br><span class="line">        per_dim_q = self.q_dim / self.num_heads</span><br><span class="line">        per_dim_k = self.k_dim / self.num_heads</span><br><span class="line">        per_dim_v = self.v_dim / self.num_heads</span><br><span class="line"></span><br><span class="line">        Q_split = Q.reshape(batch_size, max_length, self.num_heads, per_dim_q).transpose(<span class="number">1</span>, <span class="number">2</span>) <span class="comment"># [batch_size, num_heads, max_length, per_dim_q]</span></span><br><span class="line">        K_split = K.reshape(batch_size, max_length, self.num_heads, per_dim_k).transpose(<span class="number">1</span>, <span class="number">2</span>) <span class="comment"># [batch_size, num_heads, max_length, per_dim_k]</span></span><br><span class="line">        V_split = V.reshape(batch_size, max_length, self.num_heads, per_dim_v).transpose(<span class="number">1</span>, <span class="number">2</span>) <span class="comment"># [batch_size, num_heads, max_length, per_dim_v]</span></span><br><span class="line"></span><br><span class="line">        attention_score = torch.matmul(Q_split, K_split.transpose(<span class="number">2</span>, <span class="number">3</span>)) * self.kdim <span class="comment"># [batch_size, num_heads, max_length, max_length]</span></span><br><span class="line"></span><br><span class="line">        V_atten = torch.matmul(F.softmax(attention_score, dim=-<span class="number">1</span>), V_split) <span class="comment">#[batch_size, num_heads, max_length, per_dim_v]</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> V_atten.transpose(<span class="number">1</span>, <span class="number">2</span>).reshape(batch_size, max_length, self.v_dim) <span class="comment"># [batch_size, max_length, v_dim]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>需要对注意力机制完全理解</li>
+<li>在代码实现的过程中要时刻理清张量的维度，然后根据结果的维度判断哪一步乘法需要转置</li>
+<li>多头注意力实现时是对多个头的Q, K, V进行拼接，然后后续再进行分割，分割时要reshape 再 transpose成正确的维度</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1282,121 +1379,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/02/26/RACE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Wei">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="米兰的小铁酱">
-      <meta itemprop="description" content="attention is all you need">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 米兰的小铁酱">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/26/RACE/" class="post-title-link" itemprop="url">RACE</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-02-26 20:57:10" itemprop="dateCreated datePublished" datetime="2024-02-26T20:57:10+08:00">2024-02-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-29 12:06:50" itemprop="dateModified" datetime="2024-02-29T12:06:50+08:00">2024-02-29</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="RACE-Improve-Multi-Agent-Reinforcement-Learning-with-Representation-Asymmetry-and-Collaborative-Evolution"><a href="#RACE-Improve-Multi-Agent-Reinforcement-Learning-with-Representation-Asymmetry-and-Collaborative-Evolution" class="headerlink" title="RACE: Improve Multi-Agent Reinforcement Learning with Representation Asymmetry and Collaborative Evolution"></a>RACE: Improve Multi-Agent Reinforcement Learning with Representation Asymmetry and Collaborative Evolution</h1><h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><ul>
-<li><strong>challenge</strong>: MARL 在合作方面 挣扎在低质量的奖励信号和高不稳定性</li>
-<li><strong>Evolutionary Algorithm(EA)</strong>: 更好的收敛、更加健壮鲁棒、对奖励信号不敏感</li>
-<li><strong>in this paper</strong>: 本文提出一个混合框架： Representation Asymmetry and Collaboration Evolution (RACE) -&gt; 将EA和MARL结合 以达到高效的合作</li>
-<li><strong>method</strong>: RACE 维持一个MARL team和一群EA teams. 为了高效的知识共享和策略探索 -&gt; RACE 把不同team控制相同agent的 policies 分解成 1. shared nonlinear observation representation encoder（共享的非线性观察表示编码器encoder） 2. individual linear policy representations.（独立的线性策略表示） trick1: 为了解决部分观察的问题, 本文引入Value-Aware Mutual Information Maximization （价值感知 互信息最大化）-&gt; 利用有关全局状态的有用信息增强共享表示    trick2: 为了促进协调 -&gt; 使用新颖的 agent-level 交叉和变异算子来进化种群 -&gt; 为MARL提供多样化的经验  trick3: MARL优化它的策略并且将它们注入到种群中进化</li>
-</ul>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><ul>
-<li><strong>motivation</strong>: EA has strong exploration ability, good robustness, and stable convergence. EA offers numerous strengths that can complement the weaknesses of MARL.</li>
-<li><strong>challenge</strong>: 独立维持和优化每个team的policy是非常不高效的 并且这样无法利用其他team获得的有价值的知识 在广阔的非线性策略空间探索合作是非常低效的</li>
-<li><strong>methods</strong>: 提出两级团队策略测结构 1. 共享的非线性观察表示(shared observation represention encoder) 2. 独立的线性策略表示(independent policy representions)</li>
-<li><strong>represention asymmetry</strong>: independent policy构建的不同表示范围</li>
-<li><strong>observation representation encoder</strong>: 负责共享任务相关和合作相关的知识 -&gt; 通过价值函数最大化的集成（涉及所有的EA team 和 MARL team）更新方向进行优化</li>
-<li><strong>Value-Aware Mutual Information Maximization</strong>: 最大化共享观察表示(shared observation representations) 和全局状态的互信息(MI)。 -&gt; 在低价值状态下进行最大化可能导致对共享观察表示(shared observation representation)的负面影响 -&gt; 导致合作不理想 -&gt; Value-Aware MI: 归一化状态价值函数作为权重 已到达 提取全局状态信息加入共享观察表示(shared observation representations)</li>
-<li><strong>independent linear policy</strong>: 在更加紧凑和有利的线性空间 policy的探索更加有效 从而促进合作</li>
-<li><strong>EA</strong>: EA进化种群 生成多样性的经验 -&gt; 被MARL使用 -&gt; 反过来，MARL team通过收集的样本进行优化 并且定期加入种群进化</li>
-<li>agent-level 交叉变异 -&gt; 交换两个team的individual policy representation -&gt; 探索更好的团队合作</li>
-</ul>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><ol>
-<li>Representation Asymmetry of team construction</li>
-<li>How to learn the shared observation representation encoders</li>
-<li>How to improve MARL with Collaborative Evolution</li>
-</ol>
-<ul>
-<li><strong>motivation</strong>: 每个team 独立的策略构建限制了teams之间的知识共享和在策略空间上的探索 -&gt; inspired by ERL-Re -&gt; 本文提出Representation-Asymmetry Team Construction(RATC) 使能够高效的知识共享和策略探索</li>
-</ul>
-<h3 id="Shared-Observation-Representation-Learning"><a href="#Shared-Observation-Representation-Learning" class="headerlink" title="Shared Observation Representation Learning"></a>Shared Observation Representation Learning</h3>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1420,13 +1402,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">41k</span>
+    <span title="站点总字数">44k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:08</span>
+    <span title="站点阅读时长">1:13</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
