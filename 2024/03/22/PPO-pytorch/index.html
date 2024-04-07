@@ -19,33 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"xwqianbei.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Actor-Critic &amp;&amp; Advantage Actor Critic (A2C) 基本思想：相比于Policy Gradient, Actor Critic就是使用Critic网络代替了R(episode), 使用一个Critic模型来估计episode的长期回报  Advantage Actor CriticAdvantage 是指减去baseline作为交叉熵的权重如果">
+    <meta name="description" content="PPO pytorch代码实现框架">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Actor-Critic &amp;&amp; A2C">
-<meta property="og:url" content="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/index.html">
+<meta property="og:title" content="PPO pytorch">
+<meta property="og:url" content="http://xwqianbei.github.io/2024/03/22/PPO-pytorch/index.html">
 <meta property="og:site_name" content="米兰的小铁酱">
-<meta property="og:description" content="Actor-Critic &amp;&amp; Advantage Actor Critic (A2C) 基本思想：相比于Policy Gradient, Actor Critic就是使用Critic网络代替了R(episode), 使用一个Critic模型来估计episode的长期回报  Advantage Actor CriticAdvantage 是指减去baseline作为交叉熵的权重如果">
+<meta property="og:description" content="PPO pytorch代码实现框架">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/1705906493223.png">
-<meta property="og:image" content="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/1705906817564.png">
-<meta property="og:image" content="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/1705908998891.png">
-<meta property="og:image" content="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/1705909008374.png">
-<meta property="article:published_time" content="2024-01-22T06:35:32.000Z">
-<meta property="article:modified_time" content="2024-01-22T10:27:39.276Z">
+<meta property="article:published_time" content="2024-03-22T08:00:30.000Z">
+<meta property="article:modified_time" content="2024-03-22T08:01:22.540Z">
 <meta property="article:author" content="Wei">
-<meta property="article:tag" content="RL">
+<meta property="article:tag" content="技能树">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/1705906493223.png">
 
 
-<link rel="canonical" href="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/">
+<link rel="canonical" href="http://xwqianbei.github.io/2024/03/22/PPO-pytorch/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/","path":"2024/01/22/Actor-Critic-A2C/","title":"Actor-Critic && A2C"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://xwqianbei.github.io/2024/03/22/PPO-pytorch/","path":"2024/03/22/PPO-pytorch/","title":"PPO pytorch"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Actor-Critic && A2C | 米兰的小铁酱</title>
+<title>PPO pytorch | 米兰的小铁酱</title>
   
 
 
@@ -117,7 +112,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Actor-Critic-amp-amp-Advantage-Actor-Critic-A2C"><span class="nav-number">1.</span> <span class="nav-text">Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PPO-pytorch%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">PPO pytorch代码实现框架</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -163,7 +158,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/03/22/PPO-pytorch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -176,12 +171,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Actor-Critic && A2C | 米兰的小铁酱">
+      <meta itemprop="name" content="PPO pytorch | 米兰的小铁酱">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Actor-Critic && A2C
+          PPO pytorch
         </h1>
 
         <div class="post-meta-container">
@@ -193,7 +188,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-01-22 14:35:32 / 修改时间：18:27:39" itemprop="dateCreated datePublished" datetime="2024-01-22T14:35:32+08:00">2024-01-22</time>
+      <time title="创建时间：2024-03-22 16:00:30 / 修改时间：16:01:22" itemprop="dateCreated datePublished" datetime="2024-03-22T16:00:30+08:00">2024-03-22</time>
     </span>
 
   
@@ -203,7 +198,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>545</span>
+      <span>16</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -220,17 +215,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="Actor-Critic-amp-amp-Advantage-Actor-Critic-A2C"><a href="#Actor-Critic-amp-amp-Advantage-Actor-Critic-A2C" class="headerlink" title="Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)"></a>Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)</h1><ul>
-<li><p>基本思想：相比于Policy Gradient, Actor Critic就是使用Critic网络代替了R(episode), 使用一个Critic模型来估计episode的长期回报<br><img src="/2024/01/22/Actor-Critic-A2C/1705906493223.png" alt="1705906493223"></p>
-</li>
-<li><p>Advantage Actor Critic<br>Advantage 是指减去baseline作为交叉熵的权重<br><img src="/2024/01/22/Actor-Critic-A2C/1705906817564.png" alt="1705906817564"><br>如果奖励全是正的，那么每个episode对应的奖励就都是大于0的，那么p𝜃(at|st)都是上升的，这样看过去没有太大问题，因为累积奖励越大，对应的概率就提升越大，那么最后归一化还是往累积奖励大的方向去更新参数𝜃的，只不过收敛的慢。<br>但是在实际中，采样意味着有的动作是采样不到的，那可能本来最优动作是a，但是没有采样到a, 只采样到了b,c,那b c对应的概率升高，导致a的概率降低，这样产生恶性循环。</p>
-</li>
-</ul>
-<p>因此定义Advantage function = R - baseline</p>
-<ul>
-<li>基本流程：<br>把Advantage function定义为r(t + 1) + V(s_t+1) - V(s_t)<br>这里使用时序差分来代替累积奖励，牺牲一部分偏差换取模型的方差减小<br>r(t + 1) + V(s_t+1)代表当前策略的期望奖励，V(s_t)表示baseline，代表平均值。<br><img src="/2024/01/22/Actor-Critic-A2C/1705908998891.png" alt="1705908998891"><br><img src="/2024/01/22/Actor-Critic-A2C/1705909008374.png" alt="1705909008374"></li>
-</ul>
-
+    <div class="post-body" itemprop="articleBody"><h1 id="PPO-pytorch代码实现框架"><a href="#PPO-pytorch代码实现框架" class="headerlink" title="PPO pytorch代码实现框架"></a>PPO pytorch代码实现框架</h1>
     </div>
 
     
@@ -252,21 +237,18 @@
 <div style="text-align: center"><span id="jrsc" >正在加载今日诗词....</span></div>
 
           <div class="post-tags">
-              <a href="/tags/RL/" rel="tag"># RL</a>
+              <a href="/tags/%E6%8A%80%E8%83%BD%E6%A0%91/" rel="tag"># 技能树</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/01/22/Policy-Gradient/" rel="prev" title="Policy Gradient">
-                  <i class="fa fa-angle-left"></i> Policy Gradient
+                <a href="/2024/03/22/self-attention-pytorch%E5%AE%9E%E7%8E%B0/" rel="prev" title="self_attention pytorch实现">
+                  <i class="fa fa-angle-left"></i> self_attention pytorch实现
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/01/22/A3C/" rel="next" title="A3C">
-                  A3C <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>

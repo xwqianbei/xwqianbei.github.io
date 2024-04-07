@@ -19,33 +19,25 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"xwqianbei.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Actor-Critic &amp;&amp; Advantage Actor Critic (A2C) 基本思想：相比于Policy Gradient, Actor Critic就是使用Critic网络代替了R(episode), 使用一个Critic模型来估计episode的长期回报  Advantage Actor CriticAdvantage 是指减去baseline作为交叉熵的权重如果">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Actor-Critic &amp;&amp; A2C">
-<meta property="og:url" content="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/index.html">
+    <meta name="description" content="attention is all you need">
+<meta property="og:type" content="website">
+<meta property="og:title" content="米兰的小铁酱">
+<meta property="og:url" content="http://xwqianbei.github.io/page/3/index.html">
 <meta property="og:site_name" content="米兰的小铁酱">
-<meta property="og:description" content="Actor-Critic &amp;&amp; Advantage Actor Critic (A2C) 基本思想：相比于Policy Gradient, Actor Critic就是使用Critic网络代替了R(episode), 使用一个Critic模型来估计episode的长期回报  Advantage Actor CriticAdvantage 是指减去baseline作为交叉熵的权重如果">
+<meta property="og:description" content="attention is all you need">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/1705906493223.png">
-<meta property="og:image" content="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/1705906817564.png">
-<meta property="og:image" content="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/1705908998891.png">
-<meta property="og:image" content="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/1705909008374.png">
-<meta property="article:published_time" content="2024-01-22T06:35:32.000Z">
-<meta property="article:modified_time" content="2024-01-22T10:27:39.276Z">
 <meta property="article:author" content="Wei">
-<meta property="article:tag" content="RL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/1705906493223.png">
 
 
-<link rel="canonical" href="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/">
+<link rel="canonical" href="http://xwqianbei.github.io/page/3/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/","path":"2024/01/22/Actor-Critic-A2C/","title":"Actor-Critic && A2C"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"page/3/index.html","title":""}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Actor-Critic && A2C | 米兰的小铁酱</title>
+<title>米兰的小铁酱</title>
   
 
 
@@ -78,7 +70,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">米兰的小铁酱</p>
+      <h1 class="site-title">米兰的小铁酱</h1>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -104,7 +96,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -117,7 +109,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Actor-Critic-amp-amp-Advantage-Actor-Critic-A2C"><span class="nav-number">1.</span> <span class="nav-text">Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -152,18 +143,17 @@
 
     </div>
 
-    <div class="main-inner post posts-expand">
+    <div class="main-inner index posts-expand">
 
-
-  
+    
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/01/22/Actor-Critic-A2C/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://xwqianbei.github.io/2024/01/22/Policy-Gradient/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -176,13 +166,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Actor-Critic && A2C | 米兰的小铁酱">
+      <meta itemprop="name" content="undefined | 米兰的小铁酱">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Actor-Critic && A2C
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/01/22/Policy-Gradient/" class="post-title-link" itemprop="url">Policy Gradient</a>
+        </h2>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -193,7 +183,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-01-22 14:35:32 / 修改时间：18:27:39" itemprop="dateCreated datePublished" datetime="2024-01-22T14:35:32+08:00">2024-01-22</time>
+      <time title="创建时间：2024-01-22 13:29:38 / 修改时间：18:27:00" itemprop="dateCreated datePublished" datetime="2024-01-22T13:29:38+08:00">2024-01-22</time>
     </span>
 
   
@@ -203,7 +193,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>545</span>
+      <span>354</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -220,55 +210,36 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="Actor-Critic-amp-amp-Advantage-Actor-Critic-A2C"><a href="#Actor-Critic-amp-amp-Advantage-Actor-Critic-A2C" class="headerlink" title="Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)"></a>Actor-Critic &amp;&amp; Advantage Actor Critic (A2C)</h1><ul>
-<li><p>基本思想：相比于Policy Gradient, Actor Critic就是使用Critic网络代替了R(episode), 使用一个Critic模型来估计episode的长期回报<br><img src="/2024/01/22/Actor-Critic-A2C/1705906493223.png" alt="1705906493223"></p>
-</li>
-<li><p>Advantage Actor Critic<br>Advantage 是指减去baseline作为交叉熵的权重<br><img src="/2024/01/22/Actor-Critic-A2C/1705906817564.png" alt="1705906817564"><br>如果奖励全是正的，那么每个episode对应的奖励就都是大于0的，那么p𝜃(at|st)都是上升的，这样看过去没有太大问题，因为累积奖励越大，对应的概率就提升越大，那么最后归一化还是往累积奖励大的方向去更新参数𝜃的，只不过收敛的慢。<br>但是在实际中，采样意味着有的动作是采样不到的，那可能本来最优动作是a，但是没有采样到a, 只采样到了b,c,那b c对应的概率升高，导致a的概率降低，这样产生恶性循环。</p>
-</li>
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Policy-Gradient"><a href="#Policy-Gradient" class="headerlink" title="Policy Gradient"></a>Policy Gradient</h1><ul>
+<li>基本思路：使用神经网络对策略函数进行建模</li>
 </ul>
-<p>因此定义Advantage function = R - baseline</p>
+<ol>
+<li>input：某个状态</li>
+<li>output：动作的概率分布</li>
+<li>目标：调整Actor的策略π(即更新参数𝜃)，使得期望奖励最大化<br><img src="/2024/01/22/Policy-Gradient/1705902014807.png" alt="1705902014807"></li>
+</ol>
 <ul>
-<li>基本流程：<br>把Advantage function定义为r(t + 1) + V(s_t+1) - V(s_t)<br>这里使用时序差分来代替累积奖励，牺牲一部分偏差换取模型的方差减小<br>r(t + 1) + V(s_t+1)代表当前策略的期望奖励，V(s_t)表示baseline，代表平均值。<br><img src="/2024/01/22/Actor-Critic-A2C/1705908998891.png" alt="1705908998891"><br><img src="/2024/01/22/Actor-Critic-A2C/1705909008374.png" alt="1705909008374"></li>
+<li>基本流程：使用当前的策略π(𝜃), 与环境进行交互，直到状态到达终止状态为一个episode，如下图：<br><img src="/2024/01/22/Policy-Gradient/1705902335731.png" alt="1705902335731"><br>因为策略π(𝜃)是随机策略，所以需要采样N个episode算期望<br><img src="/2024/01/22/Policy-Gradient/1705902838575.png" alt="1705902838575"></li>
+</ul>
+<p><img src="/2024/01/22/Policy-Gradient/1705903738661.png" alt="1705903738661"></p>
+<ul>
+<li><p>数学推导：<br><img src="/2024/01/22/Policy-Gradient/1705902985289.png" alt="1705902985289"></p>
+</li>
+<li><p>直觉上理解：<br><img src="/2024/01/22/Policy-Gradient/1705903047698.png" alt="1705903047698"><br>和监督学习里面的多分类所不同的是，这里我们并不知道ground-truth，即我们并不知道当然所选取的action是不是最优的action。因为我们需要对其再增加一个置信度的系数，也就是之前我们所计算出来的return值。直观理解就是，如果当前action可以为我们带来更多收益，我们的网络就更应该朝着选择当前action的方向去更新。</p>
+</li>
 </ul>
 
+      
     </div>
 
     
     
     
 
-    <footer class="post-footer"><script src="//sdk.jinrishici.com/v2/browser/jinrishici.js"></script>
-<script>
-  jinrishici.load((result) => {
-    let jrsc = document.getElementById('jrsc');
-    const data = result.data;
-    let author = data.origin.author;
-    let title = '《' + data.origin.title + '》';
-    let content = data.content.substr(0, data.content.length - 1);
-    let dynasty = data.origin.dynasty.substr(0, data.origin.dynasty.length - 1);
-    jrsc.innerText = content + ' @ ' + dynasty + '·' + author + title;
-  });
-</script>
-<div style="text-align: center"><span id="jrsc" >正在加载今日诗词....</span></div>
-
-          <div class="post-tags">
-              <a href="/tags/RL/" rel="tag"># RL</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2024/01/22/Policy-Gradient/" rel="prev" title="Policy Gradient">
-                  <i class="fa fa-angle-left"></i> Policy Gradient
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2024/01/22/A3C/" rel="next" title="A3C">
-                  A3C <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
     </footer>
   </article>
 </div>
@@ -276,7 +247,9 @@
 
 
 
-
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 </div>
   </main>
