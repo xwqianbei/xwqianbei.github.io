@@ -4,31 +4,31 @@
 
 /* === Design Tokens === */
 :root {
-    /* Morandi Color Palette */
-    --bg-primary: #f4f1ec;
-    --bg-secondary: #ebe7e0;
+    /* Monochrome & Pastel Palette */
+    --bg-primary: #ffffff;
+    --bg-secondary: #fafafa;
     --bg-card: #ffffff;
-    --bg-card-hover: #f9f7f4;
+    --bg-card-hover: #fafafa;
 
-    --text-primary: #3d3d3d;
-    --text-secondary: #7a7a7a;
-    --text-muted: #a3a3a3;
+    --text-primary: #1a1a1a;
+    --text-secondary: #525252;
+    --text-muted: #9ca3af;
 
-    --accent-sage: #8fa89b;
-    --accent-sage-light: #b5cebe;
-    --accent-rose: #c4a0a0;
-    --accent-rose-light: #dfc4c4;
-    --accent-clay: #c4a882;
-    --accent-blue: #9bb0c4;
-    --accent-lavender: #a89bb0;
+    --accent-sage: #0369a1;
+    --accent-sage-light: #e0f2fe;
+    --accent-rose: #be185d;
+    --accent-rose-light: #fce7f3;
+    --accent-clay: #166534;
+    --accent-blue: #7e22ce;
+    --accent-lavender: #f3e8ff;
 
-    --border-color: #ddd8d0;
-    --border-light: #e8e4de;
+    --border-color: #e5e7eb;
+    --border-light: #f3f4f6;
 
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.08);
-    --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.1);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
     --radius-sm: 8px;
     --radius-md: 12px;
@@ -331,15 +331,16 @@ img {
 }
 
 .btn-primary {
-    background: var(--accent-sage);
-    color: #fff;
-    box-shadow: 0 4px 15px rgba(143, 168, 155, 0.3);
+    background: var(--accent-sage-light);
+    color: var(--accent-sage);
+    box-shadow: none;
 }
 
 .btn-primary:hover {
-    background: #7a9688;
+    background: var(--accent-sage);
+    color: #fff;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(143, 168, 155, 0.4);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-secondary {
@@ -350,8 +351,9 @@ img {
 
 .btn-secondary:hover {
     background: var(--bg-secondary);
-    border-color: var(--accent-sage);
+    border-color: var(--text-primary);
     transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 /* === Section === */
@@ -442,7 +444,7 @@ img {
     font-size: 0.75rem;
     font-weight: 500;
     color: var(--accent-sage);
-    background: rgba(143, 168, 155, 0.1);
+    background: var(--accent-sage-light);
     padding: 0.15rem 0.6rem;
     border-radius: var(--radius-pill);
 }
@@ -725,7 +727,7 @@ img {
 .tag-link {
     font-size: 0.82rem;
     color: var(--accent-sage);
-    background: rgba(143, 168, 155, 0.08);
+    background: var(--accent-sage-light);
     padding: 0.2rem 0.8rem;
     border-radius: var(--radius-pill);
     text-decoration: none;
@@ -737,8 +739,8 @@ img {
 }
 
 .tag-link:hover {
-    background: rgba(143, 168, 155, 0.18);
-    color: #6a8c7a;
+    background: var(--accent-sage);
+    color: #fff;
 }
 
 .tag-link i {
