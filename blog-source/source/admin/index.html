@@ -1,0 +1,138 @@
+---
+layout: false
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>撰写文章 - Hexo Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons for elegant UI icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+    <!-- 登录鉴权层 -->
+    <div id="auth-overlay" class="active">
+        <div class="auth-box">
+            <h2>安全访问</h2>
+            <p>请输入您的 GitHub Personal Access Token 以进入专属写作台</p>
+            <input type="password" id="gh-token-input" placeholder="ghp_xxxxxxxxxxxxxxxxx" />
+            <button id="login-btn">进入写作</button>
+            <div id="auth-error" class="error-msg"></div>
+        </div>
+    </div>
+
+    <!-- 主界面布局 -->
+    <div id="app" class="hidden">
+        
+        <!-- 左侧边栏：章节与大纲 -->
+        <aside class="sidebar-left">
+            <div class="sidebar-tabs">
+                <button class="active">文章列表</button>
+                <button>分类</button>
+                <button>标签</button>
+            </div>
+            <div class="sidebar-actions">
+                <button class="btn-secondary" id="new-post-btn"><i class="ph ph-plus"></i> 新建文章</button>
+            </div>
+            <ul class="post-list" id="post-list">
+                <li class="active">
+                    <i class="ph ph-file-text"></i> <span class="post-title-text">未命名草稿</span>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- 中间编辑区：沉浸式写作 -->
+        <main class="editor-main">
+            <header class="editor-header">
+                <div class="tabs">
+                    <div class="tab active"><i class="ph ph-file-text"></i> 写作台</div>
+                </div>
+                <div class="editor-tools">
+                    <button class="icon-btn" title="撤销"><i class="ph ph-arrow-u-up-left"></i></button>
+                    <button class="icon-btn" title="重做"><i class="ph ph-arrow-u-up-right"></i></button>
+                </div>
+            </header>
+
+            <div class="editor-content-area">
+                <input type="text" id="post-title" class="title-input" placeholder="输入文章标题..." value="未命名文章" />
+                <textarea id="post-content" class="content-textarea" placeholder="在此开始撰写您的精彩内容... 支持 Markdown 格式"></textarea>
+            </div>
+
+            <footer class="editor-footer">
+                <div class="footer-stats">
+                    <span>当前状态: 撰写中</span>
+                    <span id="footer-word-count">本文: 0字</span>
+                </div>
+                <div class="footer-tools">
+                    <button class="icon-btn" title="排版"><i class="ph ph-text-aa"></i></button>
+                    <button class="icon-btn" title="夜间模式" id="dark-mode-toggle"><i class="ph ph-moon"></i></button>
+                    <span class="clock" id="clock">2026.05.02 12:00:00</span>
+                </div>
+            </footer>
+        </main>
+
+        <!-- 右侧边栏：元数据与发布工具 -->
+        <aside class="sidebar-right">
+            <div class="sidebar-header">
+                <span class="title">文章设置</span>
+                <i class="ph ph-dots-three"></i>
+            </div>
+            
+            <div class="tool-section">
+                <h3>常用操作</h3>
+                <div class="icon-grid">
+                    <button class="icon-btn-large" id="publish-btn" title="提交到网站"><i class="ph ph-upload-simple"></i></button>
+                    <button class="icon-btn-large" title="保存草稿 (本地)"><i class="ph ph-floppy-disk"></i></button>
+                    <button class="icon-btn-large" title="文章信息"><i class="ph ph-info"></i></button>
+                    <button class="icon-btn-large" title="设置"><i class="ph ph-gear"></i></button>
+                </div>
+            </div>
+
+            <div class="tool-section meta-section">
+                <h3>元数据 (Front-matter)</h3>
+                <div class="input-group">
+                    <label>文件名 (URL路径)</label>
+                    <input type="text" id="post-filename" placeholder="例如: my-new-post" />
+                </div>
+                <div class="input-group">
+                    <label>分类 (Categories)</label>
+                    <input type="text" id="post-categories" placeholder="以逗号分隔" />
+                </div>
+                <div class="input-group">
+                    <label>标签 (Tags)</label>
+                    <input type="text" id="post-tags" placeholder="以逗号分隔" />
+                </div>
+            </div>
+
+            <div class="tool-section stats-section">
+                <h3>数据统计 <i class="ph ph-faders"></i></h3>
+                <div class="stat-item">
+                    <span class="label">本次码字</span>
+                    <span class="value" id="session-word-count">0字</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">当前速度</span>
+                    <span class="value" id="typing-speed">0 字/分</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">码字时长</span>
+                    <span class="value" id="writing-time">00:00</span>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- 弹窗提示 -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
