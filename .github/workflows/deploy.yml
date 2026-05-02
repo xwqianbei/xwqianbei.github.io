@@ -1,0 +1,56 @@
+name: Auto Deploy Hexo Blog
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'blog-source/source/**'
+      - 'blog-source/_config.yml'
+      - 'blog-source/themes/**'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        working-directory: ./blog-source
+        run: npm install
+
+      - name: Build Hexo
+        working-directory: ./blog-source
+        run: npx hexo generate
+
+      - name: Commit and Push static files to root
+        run: |
+          # 1. 复制新生成的网页文件到仓库根目录
+          cp -r blog-source/public/* ./
+          
+          # 2. 配置 GitHub Actions 机器人账号
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          # 3. 将所有改动加入 git
+          git add .
+          
+          # 4. 如果有改动则提交并推送，使用 [skip ci] 防止无限循环触发 action
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto-deploy: Update Hexo static files [skip ci]"
+            git push
+          else
+            echo "No changes to deploy."
+          fi
