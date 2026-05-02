@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wei&#39;s Space</title>
+    <meta name="description" content="Exploring the depths of Deep Learning, Reinforcement Learning, and the art of code.">
+    <meta name="author" content="Wei">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-inner">
+            <a href="/" class="logo">
+                WEI<span class="logo-dot">.</span>
+            </a>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                
+                <li>
+                    <a href="/" class="nav-link">
+                        Home
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" class="nav-link">
+                        Blog
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/projects" class="nav-link">
+                        Project
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" class="nav-link">
+                        About
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+<header class="hero">
+    <div class="hero-inner">
+        <p class="hero-greeting">Hello, I'm</p>
+        <h1 class="hero-title">
+            <span class="hero-name">Wei</span>
+        </h1>
+        <p class="hero-subtitle">Attention Is All You Need</p>
+        <p class="hero-desc">Exploring the depths of Deep Learning, Reinforcement Learning, and the art of code.</p>
+        <div class="hero-actions">
+            <a href="/archives" class="btn btn-primary">
+                <i class="fas fa-pen-nib"></i> Read Blog
+            </a>
+            <a href="/projects" class="btn btn-secondary">
+                <i class="fas fa-shapes"></i> Projects
+            </a>
+        </div>
+    </div>
+    <div class="hero-decoration">
+        <div class="deco-circle circle-1"></div>
+        <div class="deco-circle circle-2"></div>
+        <div class="deco-circle circle-3"></div>
+    </div>
+</header>
+
+<!-- Recent Posts Section -->
+
+<section class="section recent-posts">
+    <div class="section-header">
+        <h2 class="section-title">Recent Posts</h2>
+        
+    </div>
+    
+    <div class="empty-state">
+        <i class="fas fa-feather-pointed"></i>
+        <p>No posts yet. Stay tuned!</p>
+    </div>
+    
+</section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">WEI<span class="logo-dot">.</span></a>
+                <p class="footer-tagline">Exploring the depths of Deep Learning, Reinforcement Learning, and the art of code.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Blog</a>
+                    
+                    <a href="/projects">Project</a>
+                    
+                    <a href="/about">About</a>
+                    
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    
+                    <a href="https://github.com/xwqianbei" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                    
+                    
+                    <a href="mailto:2816739071@qq.com"><i class="fas fa-envelope"></i> Email</a>
+                    
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Wei. Crafted with <i class="fas fa-heart"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const toggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+        toggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+            toggle.classList.toggle('active');
+        });
+
+        // Nav scroll effect
+        let lastScroll = 0;
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 60) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+
+</html>
