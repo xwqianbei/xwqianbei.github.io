@@ -1,0 +1,51 @@
+<div class="page-header">
+    <h1 class="page-title">Blog</h1>
+    <p class="page-desc">Thoughts, learnings, and explorations.</p>
+</div>
+
+<% if (page.posts && page.posts.length > 0) { %>
+<div class="archive-stats">
+    <span><i class="fas fa-pen-nib"></i> <%= page.posts.length %> posts</span>
+    <a href="<%- url_for('/tags') %>" class="archive-tags-link"><i class="fas fa-tags"></i> Browse by Tags</a>
+</div>
+
+<%
+    var currentYear = '';
+    page.posts.each(function(post){
+        var postYear = date(post.date, 'YYYY');
+%>
+        <% if (postYear !== currentYear) { %>
+            <% if (currentYear !== '') { %></div><% } %>
+            <% currentYear = postYear; %>
+            <div class="archive-year-group">
+                <h2 class="archive-year"><%= currentYear %></h2>
+        <% } %>
+
+        <a href="<%- url_for(post.path) %>" class="archive-item">
+            <span class="archive-date"><%= date(post.date, 'MM-DD') %></span>
+            <span class="archive-item-title"><%= post.title || "Untitled" %></span>
+            <% if (post.tags && post.tags.length) { %>
+            <span class="archive-item-tags">
+                <% post.tags.each(function(tag){ %>
+                <span class="mini-tag"><%= tag.name %></span>
+                <% }) %>
+            </span>
+            <% } %>
+        </a>
+<%
+    });
+%>
+</div>
+
+<% if (page.total > 1){ %>
+<nav class="page-nav">
+    <%- paginator({ prev_text: '&laquo; Prev', next_text: 'Next &raquo;' }) %>
+</nav>
+<% } %>
+
+<% } else { %>
+<div class="empty-state">
+    <i class="fas fa-feather-pointed"></i>
+    <p>No posts yet. Stay tuned!</p>
+</div>
+<% } %>

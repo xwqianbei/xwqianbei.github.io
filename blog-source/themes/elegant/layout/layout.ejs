@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= page.title ? page.title + ' — ' + config.title : config.title %></title>
+    <meta name="description" content="<%= config.description %>">
+    <meta name="author" content="<%= config.author %>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <%- css('css/style') %>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-inner">
+            <a href="<%- url_for('/') %>" class="logo">
+                WEI<span class="logo-dot">.</span>
+            </a>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <% for (var i in theme.menu){ %>
+                <li>
+                    <a href="<%- url_for(theme.menu[i]) %>" class="nav-link">
+                        <%= i %>
+                    </a>
+                </li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <%- body %>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="<%- url_for('/') %>" class="footer-logo">WEI<span class="logo-dot">.</span></a>
+                <p class="footer-tagline"><%= config.description %></p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <% for (var i in theme.menu){ %>
+                    <a href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
+                    <% } %>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <% if (theme.social && theme.social.github) { %>
+                    <a href="<%= theme.social.github %>" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                    <% } %>
+                    <% if (theme.social && theme.social.email) { %>
+                    <a href="mailto:<%= theme.social.email %>"><i class="fas fa-envelope"></i> Email</a>
+                    <% } %>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <%= date(new Date(), 'YYYY') %> <%= config.author %>. Crafted with <i class="fas fa-heart"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const toggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+        toggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+            toggle.classList.toggle('active');
+        });
+
+        // Nav scroll effect
+        let lastScroll = 0;
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 60) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+
+</html>

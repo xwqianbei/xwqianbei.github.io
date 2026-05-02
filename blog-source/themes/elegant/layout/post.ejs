@@ -1,0 +1,45 @@
+<article class="post-detail">
+    <header class="post-header">
+        <a href="<%- url_for('/archives') %>" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Blog
+        </a>
+        <h1 class="post-title"><%= page.title %></h1>
+        <div class="post-meta">
+            <span class="post-date">
+                <i class="far fa-calendar"></i> <%= date(page.date, 'MMMM DD, YYYY') %>
+            </span>
+            <% if (page.tags && page.tags.length) { %>
+            <div class="post-tags">
+                <% page.tags.each(function(tag){ %>
+                <a href="<%- url_for(tag.path) %>" class="tag-link">
+                    <i class="fas fa-tag"></i> <%= tag.name %>
+                </a>
+                <% }) %>
+            </div>
+            <% } %>
+        </div>
+    </header>
+
+    <div class="post-content">
+        <%- page.content %>
+    </div>
+
+    <footer class="post-footer">
+        <% if (page.prev || page.next) { %>
+        <nav class="post-nav">
+            <% if (page.prev) { %>
+            <a href="<%- url_for(page.prev.path) %>" class="post-nav-item post-nav-prev">
+                <span class="post-nav-label"><i class="fas fa-arrow-left"></i> Previous</span>
+                <span class="post-nav-title"><%= page.prev.title %></span>
+            </a>
+            <% } %>
+            <% if (page.next) { %>
+            <a href="<%- url_for(page.next.path) %>" class="post-nav-item post-nav-next">
+                <span class="post-nav-label">Next <i class="fas fa-arrow-right"></i></span>
+                <span class="post-nav-title"><%= page.next.title %></span>
+            </a>
+            <% } %>
+        </nav>
+        <% } %>
+    </footer>
+</article>

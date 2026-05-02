@@ -1,0 +1,48 @@
+<% if (page.tag) { %>
+<!-- Single tag page: show all posts for this tag -->
+<div class="page-header">
+    <h1 class="page-title">
+        <i class="fas fa-tag"></i> <%= page.tag %>
+    </h1>
+    <p class="page-desc"><%= page.posts.length %> post<%= page.posts.length > 1 ? 's' : '' %> tagged with "<%= page.tag %>"</p>
+</div>
+
+<div class="tag-posts-list">
+    <% page.posts.each(function(post){ %>
+    <a href="<%- url_for(post.path) %>" class="archive-item">
+        <span class="archive-date"><%= date(post.date, 'YYYY-MM-DD') %></span>
+        <span class="archive-item-title"><%= post.title || "Untitled" %></span>
+    </a>
+    <% }) %>
+</div>
+
+<% if (page.total > 1){ %>
+<nav class="page-nav">
+    <%- paginator({ prev_text: '&laquo; Prev', next_text: 'Next &raquo;' }) %>
+</nav>
+<% } %>
+
+<% } else { %>
+<!-- Tags index page: show all tags -->
+<div class="page-header">
+    <h1 class="page-title">Tags</h1>
+    <p class="page-desc">Browse all topics.</p>
+</div>
+
+<% if (site.tags.length) { %>
+<div class="tag-cloud">
+    <% site.tags.sort('name').each(function(tag){ %>
+    <a href="<%- url_for(tag.path) %>" class="tag-item">
+        <span class="tag-name"><%= tag.name %></span>
+        <span class="tag-count"><%= tag.posts.length %></span>
+    </a>
+    <% }) %>
+</div>
+<% } else { %>
+<div class="empty-state">
+    <i class="fas fa-tags"></i>
+    <p>No tags yet.</p>
+</div>
+<% } %>
+
+<% } %>

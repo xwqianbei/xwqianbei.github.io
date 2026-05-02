@@ -1,0 +1,71 @@
+<!-- Hero Section -->
+<header class="hero">
+    <div class="hero-inner">
+        <p class="hero-greeting">Hello, I'm</p>
+        <h1 class="hero-title">
+            <span class="hero-name"><%= config.author %></span>
+        </h1>
+        <p class="hero-subtitle"><%= config.subtitle %></p>
+        <p class="hero-desc"><%= config.description %></p>
+        <div class="hero-actions">
+            <a href="<%- url_for('/archives') %>" class="btn btn-primary">
+                <i class="fas fa-pen-nib"></i> Read Blog
+            </a>
+            <a href="<%- url_for('/projects') %>" class="btn btn-secondary">
+                <i class="fas fa-shapes"></i> Projects
+            </a>
+        </div>
+    </div>
+    <div class="hero-decoration">
+        <div class="deco-circle circle-1"></div>
+        <div class="deco-circle circle-2"></div>
+        <div class="deco-circle circle-3"></div>
+    </div>
+</header>
+
+<!-- Recent Posts Section -->
+<%
+    var recentPosts = page.posts || site.posts.sort('-date').limit(6);
+    var hasPosts = recentPosts && recentPosts.length > 0;
+%>
+<section class="section recent-posts">
+    <div class="section-header">
+        <h2 class="section-title">Recent Posts</h2>
+        <% if (hasPosts) { %>
+        <a href="<%- url_for('/archives') %>" class="section-link">View all <i class="fas fa-arrow-right"></i></a>
+        <% } %>
+    </div>
+    <% if (hasPosts) { %>
+    <div class="posts-grid">
+        <% var count = 0; recentPosts.each(function(post){ %>
+        <% if (count < 6) { %>
+        <a href="<%- url_for(post.path) %>" class="post-card" style="animation-delay: <%= count * 0.1 %>s">
+            <div class="card-body">
+                <div class="card-meta">
+                    <span class="card-date"><i class="far fa-calendar"></i> <%= date(post.date, 'MMM DD, YYYY') %></span>
+                    <% if (post.tags && post.tags.length) { %>
+                    <span class="card-tag"><%= post.tags.data[0].name %></span>
+                    <% } %>
+                </div>
+                <h3 class="card-title"><%= post.title || "Untitled" %></h3>
+                <p class="card-excerpt">
+                    <%- truncate(strip_html(post.content), {length: 120}) %>
+                </p>
+                <span class="card-link">Read more <i class="fas fa-arrow-right"></i></span>
+            </div>
+        </a>
+        <% } count++; }) %>
+    </div>
+    <% } else { %>
+    <div class="empty-state">
+        <i class="fas fa-feather-pointed"></i>
+        <p>No posts yet. Stay tuned!</p>
+    </div>
+    <% } %>
+</section>
+
+<% if (page.total > 1){ %>
+<nav class="page-nav">
+    <%- paginator({ prev_text: '&laquo; Prev', next_text: 'Next &raquo;' }) %>
+</nav>
+<% } %>

@@ -1,0 +1,13 @@
+menu:
+  Home: /
+  Blog: /archives
+  Project: /projects
+  About: /about
+
+# Social Links
+social:
+  github: https://github.com/xwqianbei
+  email: 2816739071@qq.com
+
+# Content
+excerpt_length: 150
