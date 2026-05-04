@@ -3,35 +3,24 @@
    ============================================ */
 
 :root {
-    /* Monochrome & Pastel Palette */
-    --bg-primary: #ffffff;
-    --bg-secondary: #fafafa;
+    --bg-primary: #f7f5f0;
+    --bg-secondary: #efece6;
     --bg-card: #ffffff;
-    --bg-card-hover: #fafafa;
-
-    --text-primary: #1a1a1a;
-    --text-secondary: #525252;
-    --text-muted: #9ca3af;
-
-    --accent-sage: #0369a1;
-    --accent-sage-light: #e0f2fe;
-    --accent-rose: #be185d;
-    --accent-rose-light: #fce7f3;
-    --accent-clay: #166534;
-    --accent-blue: #7e22ce;
-    --accent-lavender: #f3e8ff;
-
-    --border-color: #e5e7eb;
-    --border-light: #f3f4f6;
-
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 20px;
+    --bg-card-hover: #fcfbf9;
+    --text-primary: #2c2c2c;
+    --text-secondary: #6b6b6b;
+    --text-muted: #a0a0a0;
+    --accent: #7d8c7e;
+    --accent-light: #d4ddd5;
+    --accent-rose: #b8a0a0;
+    --accent-blue: #8a9bb0;
+    --border-color: #ddd8d0;
+    --border-light: #ebe8e2;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.08);
+    --radius-sm: 6px;
+    --radius-md: 10px;
     --radius-pill: 100px;
     --font-heading: 'Playfair Display', Georgia, serif;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -147,50 +136,10 @@ img { max-width:100%; height:auto; }
 
 /* === Buttons === */
 .btn {
-<<<<<<< HEAD
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.8rem;
-    border-radius: var(--radius-pill);
-    font-size: 0.95rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all var(--transition-base);
-    border: none;
-    text-decoration: none;
-}
-
-.btn-primary {
-    background: var(--accent-sage-light);
-    color: var(--accent-sage);
-    box-shadow: none;
-}
-
-.btn-primary:hover {
-    background: var(--accent-sage);
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-.btn-secondary {
-    background: var(--bg-card);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
-}
-
-.btn-secondary:hover {
-    background: var(--bg-secondary);
-    border-color: var(--text-primary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-=======
     display:inline-flex; align-items:center; gap:0.4rem;
     padding:0.6rem 1.5rem; border-radius:var(--radius-pill);
     font-size:0.88rem; font-weight:500; cursor:pointer;
     transition:all var(--transition); border:none; text-decoration:none;
->>>>>>> 262a813 (feat: add custom about page layout and update site styling)
 }
 .btn-primary { background:var(--accent); color:#fff; }
 .btn-primary:hover { background:#6b7a6c; transform:translateY(-1px); box-shadow:var(--shadow-md); }
@@ -221,55 +170,8 @@ img { max-width:100%; height:auto; }
 .card-meta { display:flex; align-items:center; gap:0.6rem; margin-bottom:0.5rem; }
 .card-date { font-size:0.78rem; color:var(--text-muted); display:flex; align-items:center; gap:0.25rem; }
 .card-tag {
-<<<<<<< HEAD
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--accent-sage);
-    background: var(--accent-sage-light);
-    padding: 0.15rem 0.6rem;
-    border-radius: var(--radius-pill);
-}
-
-.card-title {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 0.6rem;
-    line-height: 1.4;
-}
-
-.card-excerpt {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin-bottom: 1rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.card-link {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--accent-sage);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-}
-
-.post-card:hover .card-link i {
-    transform: translateX(3px);
-}
-
-.card-link i {
-    transition: transform var(--transition-fast);
-    font-size: 0.75rem;
-=======
     font-size:0.7rem; font-weight:500; color:var(--accent);
     background:var(--accent-light); padding:0.1rem 0.5rem; border-radius:var(--radius-pill);
->>>>>>> 262a813 (feat: add custom about page layout and update site styling)
 }
 .card-title { font-family:var(--font-heading); font-size:1.1rem; font-weight:600; margin-bottom:0.4rem; line-height:1.35; }
 .card-excerpt { font-size:0.85rem; color:var(--text-secondary); line-height:1.6; margin-bottom:0.8rem; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
@@ -341,24 +243,6 @@ img { max-width:100%; height:auto; }
 .post-date { font-size:0.85rem; color:var(--text-muted); display:flex; align-items:center; gap:0.3rem; }
 .post-tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
 .tag-link {
-<<<<<<< HEAD
-    font-size: 0.82rem;
-    color: var(--accent-sage);
-    background: var(--accent-sage-light);
-    padding: 0.2rem 0.8rem;
-    border-radius: var(--radius-pill);
-    text-decoration: none;
-    font-weight: 500;
-    transition: all var(--transition-fast);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-}
-
-.tag-link:hover {
-    background: var(--accent-sage);
-    color: #fff;
-=======
     font-size:0.78rem; color:var(--accent); background:var(--accent-light);
     padding:0.15rem 0.6rem; border-radius:var(--radius-pill); font-weight:500;
     display:inline-flex; align-items:center; gap:0.2rem; transition:all var(--transition);
@@ -435,7 +319,6 @@ img { max-width:100%; height:auto; }
     font-size:0.82rem; font-weight:500; color:var(--accent);
     background:var(--accent-light); padding:0.35rem 0.9rem;
     border-radius:var(--radius-pill);
->>>>>>> 262a813 (feat: add custom about page layout and update site styling)
 }
 
 /* Timeline */
