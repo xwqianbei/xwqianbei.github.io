@@ -70,7 +70,28 @@ img { max-width:100%; height:auto; }
     color:var(--text-primary); text-decoration:none; letter-spacing:-0.3px;
 }
 .logo-dot { color:var(--accent); }
-.nav-links { display:flex; list-style:none; gap:0.25rem; }
+
+/* Nav Avatar (replaces text logo on non-home pages) */
+.nav-avatar {
+    display:flex; align-items:center; text-decoration:none; flex-shrink:0;
+}
+.nav-avatar img {
+    width:38px; height:38px; border-radius:10px; object-fit:cover;
+    border:2px solid var(--border-light); transition:all var(--transition);
+    box-shadow:var(--shadow-sm);
+}
+.nav-avatar img:hover {
+    border-color:var(--accent); transform:scale(1.05);
+}
+
+/* Nav Separator */
+.nav-separator {
+    color:var(--text-muted); font-size:0.85rem; font-weight:300;
+    padding:0 0.3rem; user-select:none; list-style:none;
+    display:flex; align-items:center;
+}
+
+.nav-links { display:flex; list-style:none; gap:0.25rem; align-items:center; }
 .nav-link {
     display:block; padding:0.4rem 1rem; font-size:0.88rem; font-weight:500;
     color:var(--text-secondary); border-radius:var(--radius-pill);
