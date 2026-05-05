@@ -21,53 +21,47 @@
     
 <meta name="generator" content="Hexo 7.3.0"></head>
 
-<body class="homepage">
-    <!-- Navigation -->
-    <nav class="main-nav" id="mainNav">
-        <div class="nav-inner">
-            <a href="/" class="nav-avatar" aria-label="Home">
-                <img src="/images/icons/main.jpg" alt="米兰的小铁酱">
+<body class="hero-page">
+    
+    <!-- Hero Full-Screen Section -->
+<section class="hero-fullscreen" id="heroSection">
+    <!-- Background Image with Overlay -->
+    <div class="hero-bg">
+        <div class="hero-bg-image"></div>
+        <div class="hero-bg-overlay"></div>
+        <div class="hero-bg-gradient"></div>
+    </div>
+
+    <!-- Watermark Text -->
+    <div class="hero-watermark" aria-hidden="true">
+        <span>W</span><span>E</span><span>I</span><span>·</span><span>S</span><span>P</span><span>A</span><span>C</span><span>E</span>
+    </div>
+
+    <!-- Navigation (embedded in hero) -->
+    <nav class="hero-nav" id="heroNav">
+        <div class="hero-nav-inner">
+            <a href="/" class="hero-avatar-link">
+                <img src="/images/icons/main.jpg" alt="米兰的小铁酱" class="hero-avatar" />
             </a>
-            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-links" id="navLinks">
+            <ul class="hero-nav-links" id="heroNavLinks">
                 
                 
-                <li>
-                    <a href="/" class="nav-link">
-                        Home
-                    </a>
-                </li>
+                <li><a href="/" class="hero-nav-link active">Home</a></li>
                 
-                <li class="nav-separator" aria-hidden="true">/</li>
+                <li class="nav-separator">/</li>
                 
                 
-                <li>
-                    <a href="/archives" class="nav-link">
-                        Words
-                    </a>
-                </li>
+                <li><a href="/archives" class="hero-nav-link">Words</a></li>
                 
-                <li class="nav-separator" aria-hidden="true">/</li>
+                <li class="nav-separator">/</li>
                 
                 
-                <li>
-                    <a href="/projects" class="nav-link">
-                        Work
-                    </a>
-                </li>
+                <li><a href="/projects" class="hero-nav-link">Work</a></li>
                 
-                <li class="nav-separator" aria-hidden="true">/</li>
+                <li class="nav-separator">/</li>
                 
                 
-                <li>
-                    <a href="/about" class="nav-link">
-                        About
-                    </a>
-                </li>
+                <li><a href="/about" class="hero-nav-link">About</a></li>
                 
                 
             </ul>
@@ -79,54 +73,126 @@
         </div>
     </nav>
 
-    
-    <!-- Homepage: full-width content -->
-    <main class="main-content-full">
-        <!-- Full-Screen Hero -->
-<section class="hero-home" id="heroHome">
-    <!-- Background Photo -->
-    <div class="hero-bg"></div>
-    <!-- Gradient Overlay -->
-    <div class="hero-overlay"></div>
-    <!-- Atmospheric Glow -->
-    <div class="hero-glow"></div>
-    <div class="hero-glow-secondary"></div>
-
-    <!-- Floating Particles -->
-    <div class="hero-particles">
-        <div class="particle" style="left:10%;top:20%;animation-delay:0s;animation-duration:7s;"></div>
-        <div class="particle" style="left:25%;top:60%;animation-delay:1.5s;animation-duration:9s;"></div>
-        <div class="particle" style="left:45%;top:15%;animation-delay:3s;animation-duration:6s;"></div>
-        <div class="particle" style="left:65%;top:70%;animation-delay:0.5s;animation-duration:8s;"></div>
-        <div class="particle" style="left:80%;top:30%;animation-delay:2s;animation-duration:10s;"></div>
-        <div class="particle" style="left:90%;top:55%;animation-delay:4s;animation-duration:7s;"></div>
-        <div class="particle" style="left:15%;top:80%;animation-delay:2.5s;animation-duration:11s;"></div>
-        <div class="particle" style="left:55%;top:45%;animation-delay:1s;animation-duration:8s;"></div>
-    </div>
-
     <!-- Hero Content -->
     <div class="hero-content">
         <div class="hero-text">
-            <h1 class="hero-home-greeting">
-                你好<span class="wave">👋</span>，
-                <br>
-                我是<span class="hero-home-name">米兰的小铁酱</span>
+            <h1 class="hero-title">
+                <span class="hero-greeting-line">你好<span class="hero-wave">👋</span>，</span>
+                <span class="hero-name-line">我是<span class="hero-highlight">米兰的小铁酱</span></span>
             </h1>
-            <p class="hero-home-subtitle">亲爱的，外面没有别人</p>
-            <p class="hero-home-desc">一个即将进入互联网的预备牛马</p>
+            <p class="hero-subtitle">亲爱的，外面没有别人</p>
+            <div class="hero-desc-lines">
+                <p>一个即将进入互联网的预备牛马</p>
+            </div>
+            <div class="hero-actions">
+                <a href="/archives" class="hero-btn hero-btn-primary">
+                    <i class="fas fa-pen-nib"></i> Read Blog
+                </a>
+                <a href="/projects" class="hero-btn hero-btn-ghost">
+                    <i class="fas fa-shapes"></i> Projects
+                </a>
+            </div>
         </div>
     </div>
 
     <!-- Scroll Indicator -->
-    <div class="scroll-indicator" aria-hidden="true">
+    <div class="hero-scroll-indicator">
         <div class="scroll-mouse">
-            <div class="scroll-dot"></div>
+            <div class="scroll-wheel"></div>
         </div>
-        <span class="scroll-text">SCROLL</span>
+        <span>Scroll</span>
     </div>
+
+    <!-- Decorative Elements -->
+    <div class="hero-deco-circle hero-deco-1"></div>
+    <div class="hero-deco-circle hero-deco-2"></div>
+    <div class="hero-particles" id="heroParticles"></div>
 </section>
-    </main>
-    
+
+<!-- Main Content Below Hero -->
+<main class="main-content">
+    <!-- Recent Posts Section -->
+    <section class="section recent-posts">
+        <div class="section-header">
+            <h2 class="section-title">Recent Posts</h2>
+            
+            <a href="/archives" class="section-link">View all <i class="fas fa-arrow-right"></i></a>
+            
+        </div>
+        
+        <div class="posts-grid">
+            
+            
+            <a href="/2026/05/02/2026-05-02-%E6%B5%8B%E8%AF%95%E6%92%B0%E5%86%99%E6%96%87%E7%AB%A0/" class="post-card" style="animation-delay: 0s">
+                <div class="card-body">
+                    <div class="card-meta">
+                        <span class="card-date"><i class="far fa-calendar"></i> 5月 02, 2026</span>
+                        
+                    </div>
+                    <h3 class="card-title">测试撰写文章</h3>
+                    <p class="card-excerpt">
+                        Title 1正式正文内容
+
+                    </p>
+                    <span class="card-link">Read more <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            
+            <a href="/2026/05/02/2026-05-02-%E6%B5%8B%E8%AF%95/" class="post-card" style="animation-delay: 0.1s">
+                <div class="card-body">
+                    <div class="card-meta">
+                        <span class="card-date"><i class="far fa-calendar"></i> 5月 02, 2026</span>
+                        
+                    </div>
+                    <h3 class="card-title">测试</h3>
+                    <p class="card-excerpt">
+                        Title 1这是正文内容
+
+                    </p>
+                    <span class="card-link">Read more <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            
+        </div>
+        
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="/" class="footer-logo">米兰的小铁酱</a>
+            <p class="footer-tagline">一个即将进入互联网的预备牛马</p>
+        </div>
+        <div class="footer-links">
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Words</a>
+                
+                <a href="/projects">Work</a>
+                
+                <a href="/about">About</a>
+                
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                
+                <a href="https://github.com/xwqianbei" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                
+                
+                <a href="mailto:2816739071@qq.com"><i class="fas fa-envelope"></i> Email</a>
+                
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 米兰的小铁酱. Crafted with <i class="fas fa-heart"></i></p>
+        </div>
+    </div>
+</footer>
 
 <script>
     // Mobile menu toggle
