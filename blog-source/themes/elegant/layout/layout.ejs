@@ -24,8 +24,8 @@
     <!-- Navigation -->
     <nav class="main-nav" id="mainNav">
         <div class="nav-inner">
-            <a href="<%- url_for('/') %>" class="nav-avatar" aria-label="Home">
-                <img src="<%= theme.avatar || '/images/icons/main.jpg' %>" alt="<%= config.author %>">
+            <a href="<%- url_for('/') %>" class="logo">
+                <%= config.author %><span class="logo-dot">.</span>
             </a>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
                 <span></span>
