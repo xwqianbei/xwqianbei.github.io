@@ -1,40 +1,33 @@
-<div class="page-header">
-    <h1 class="page-title">Blog</h1>
-    <p class="page-desc">Thoughts, learnings, and explorations.</p>
+<div class="portfolio-header">
+    <h1 class="page-title">系统性的博客</h1>
+    <p class="page-desc">做过的事情，要记下来，时时去看，复盘短板，发扬优点，温故而知新，且不枉人间一趟</p>
 </div>
 
 <% if (page.posts && page.posts.length > 0) { %>
-<div class="archive-stats">
-    <span><i class="fas fa-pen-nib"></i> <%= page.posts.length %> posts</span>
-    <a href="<%- url_for('/tags') %>" class="archive-tags-link"><i class="fas fa-tags"></i> Browse by Tags</a>
-</div>
 
-<%
-    var currentYear = '';
-    page.posts.each(function(post){
-        var postYear = date(post.date, 'YYYY');
-%>
-        <% if (postYear !== currentYear) { %>
-            <% if (currentYear !== '') { %></div><% } %>
-            <% currentYear = postYear; %>
-            <div class="archive-year-group">
-                <h2 class="archive-year"><%= currentYear %></h2>
-        <% } %>
-
-        <a href="<%- url_for(post.path) %>" class="archive-item">
-            <span class="archive-date"><%= date(post.date, 'MM-DD') %></span>
-            <span class="archive-item-title"><%= post.title || "Untitled" %></span>
-            <% if (post.tags && post.tags.length) { %>
-            <span class="archive-item-tags">
-                <% post.tags.each(function(tag){ %>
-                <span class="mini-tag"><%= tag.name %></span>
-                <% }) %>
-            </span>
-            <% } %>
-        </a>
-<%
-    });
-%>
+<div class="portfolio-list">
+<% page.posts.each(function(post){ %>
+    <a href="<%- url_for(post.path) %>" class="portfolio-card">
+        <% var coverImg = post.cover || post.image || '/images/self/life_photo.jpg'; %>
+        <img src="<%- url_for(coverImg) %>" alt="<%= post.title %>" class="portfolio-card-img" />
+        <div class="portfolio-card-content">
+            <div class="portfolio-card-tag">
+                <% if (post.tags && post.tags.length) { %>
+                    <%= post.tags.toArray()[0].name %>
+                <% } else if (post.categories && post.categories.length) { %>
+                    <%= post.categories.toArray()[0].name %>
+                <% } else { %>
+                    Article
+                <% } %>
+            </div>
+            <h2 class="portfolio-card-title"><%= post.title || "Untitled" %></h2>
+            <div class="portfolio-card-desc">
+                <%= strip_html(post.excerpt || post.content).substring(0, 150) %>
+            </div>
+            <span class="portfolio-card-btn">文章详情</span>
+        </div>
+    </a>
+<% }); %>
 </div>
 
 <% if (page.total > 1){ %>
