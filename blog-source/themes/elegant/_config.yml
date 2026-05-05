@@ -1,8 +1,11 @@
 menu:
   Home: /
-  Blog: /archives
-  Project: /projects
+  Words: /archives
+  Work: /projects
   About: /about
+
+# Avatar
+avatar: /images/icons/main.jpg
 
 # Social Links
 social:

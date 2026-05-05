@@ -9,17 +9,17 @@
     <meta name="author" content="<%= config.author %>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <%- css('css/style') %>
 </head>
 
-<body>
+<body<% if (is_home()) { %> class="homepage"<% } %>>
     <!-- Navigation -->
     <nav class="main-nav" id="mainNav">
         <div class="nav-inner">
-            <a href="<%- url_for('/') %>" class="logo">
-                WEI<span class="logo-dot">.</span>
+            <a href="<%- url_for('/') %>" class="nav-avatar" aria-label="Home">
+                <img src="<%= theme.avatar || '/images/icons/main.jpg' %>" alt="<%= config.author %>">
             </a>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
                 <span></span>
@@ -27,18 +27,28 @@
                 <span></span>
             </button>
             <ul class="nav-links" id="navLinks">
-                <% for (var i in theme.menu){ %>
+                <% var menuKeys = Object.keys(theme.menu); %>
+                <% menuKeys.forEach(function(key, index) { %>
                 <li>
-                    <a href="<%- url_for(theme.menu[i]) %>" class="nav-link">
-                        <%= i %>
+                    <a href="<%- url_for(theme.menu[key]) %>" class="nav-link">
+                        <%= key %>
                     </a>
                 </li>
+                <% if (index < menuKeys.length - 1) { %>
+                <li class="nav-separator" aria-hidden="true">/</li>
                 <% } %>
+                <% }); %>
             </ul>
         </div>
     </nav>
 
-    <!-- Main Content -->
+    <% if (is_home()) { %>
+    <!-- Homepage: full-width content -->
+    <main class="main-content-full">
+        <%- body %>
+    </main>
+    <% } else { %>
+    <!-- Other pages: constrained content -->
     <main class="main-content">
         <%- body %>
     </main>
@@ -47,7 +57,7 @@
     <footer class="site-footer">
         <div class="footer-inner">
             <div class="footer-brand">
-                <a href="<%- url_for('/') %>" class="footer-logo">WEI<span class="logo-dot">.</span></a>
+                <a href="<%- url_for('/') %>" class="footer-logo"><%= config.author %></a>
                 <p class="footer-tagline"><%= config.description %></p>
             </div>
             <div class="footer-links">
@@ -72,6 +82,7 @@
             </div>
         </div>
     </footer>
+    <% } %>
 
     <script>
         // Mobile menu toggle
