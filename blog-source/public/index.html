@@ -23,7 +23,9 @@
 
 <body class="hero-page">
     
-    <section class="hero-fullscreen" id="heroSection" aria-label="个人主页">
+    
+
+<section class="hero-fullscreen" id="heroSection" aria-label="个人主页">
     <div class="hero-bg">
         <div class="hero-bg-image"></div>
         <div class="hero-bg-overlay"></div>
@@ -66,32 +68,66 @@
     </nav>
 
     <div class="hero-content">
-        <div class="hero-text">
-            <p class="hero-kicker">Xiong Wei · LLM Algorithm Engineer</p>
-            <h1 class="hero-title">米兰的小铁酱</h1>
-            <p class="hero-subtitle">亲爱的，外面没有别人</p>
-            <p class="hero-lead">关注大语言模型后训练、AI Search 与多智能体协作，把研究里的方法论沉淀为清晰、可复用、能落地的产品能力。</p>
-            <div class="hero-signals" aria-label="专业方向">
-                <span><strong>LLM</strong> Post-Training</span>
-                <span><strong>AI</strong> Search Agents</span>
-                <span><strong>MARL</strong> Coordination</span>
+        <div class="hero-grid">
+            <div class="hero-copy">
+                <p class="hero-kicker">Xiong Wei · LLM Algorithm Engineer</p>
+                <h1 class="hero-title">米兰的小铁酱</h1>
+                <p class="hero-subtitle">亲爱的，外面没有别人</p>
+                <p class="hero-lead">关注大语言模型后训练、AI Search 与多智能体协作，把研究里的方法论沉淀为清晰、可复用、能落地的产品能力。</p>
+                <div class="hero-signals" aria-label="专业方向">
+                    <span><strong>LLM</strong> Post-Training</span>
+                    <span><strong>AI</strong> Search Agents</span>
+                    <span><strong>MARL</strong> Coordination</span>
+                </div>
+                <div class="hero-actions">
+                    <a href="/archives" class="hero-btn hero-btn-primary">
+                        <i class="fas fa-pen-nib" aria-hidden="true"></i> 阅读文章
+                    </a>
+                    <a href="/projects" class="hero-btn hero-btn-ghost">
+                        <i class="fas fa-layer-group" aria-hidden="true"></i> 查看作品
+                    </a>
+                </div>
+                <div class="hero-socials" aria-label="联系方式">
+                    
+                    <a href="https://github.com/xwqianbei" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+                    
+                    
+                    <a href="mailto:2816739071@qq.com"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+                    
+                </div>
             </div>
-            <div class="hero-actions">
-                <a href="/archives" class="hero-btn hero-btn-primary">
-                    <i class="fas fa-pen-nib" aria-hidden="true"></i> 阅读文章
-                </a>
-                <a href="/projects" class="hero-btn hero-btn-ghost">
-                    <i class="fas fa-layer-group" aria-hidden="true"></i> 查看作品
-                </a>
-            </div>
-            <div class="hero-socials" aria-label="联系方式">
-                
-                <a href="https://github.com/xwqianbei" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
-                
-                
-                <a href="mailto:2816739071@qq.com"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
-                
-            </div>
+            <aside class="hero-aside" aria-label="个人概览">
+                <section class="profile-card">
+                    <div class="profile-card-top">
+                        <img src="/images/icons/main.jpg" alt="米兰的小铁酱" class="profile-avatar" />
+                        <div>
+                            <p class="profile-card-kicker">Current mode</p>
+                            <p class="profile-card-status">Research, build, write</p>
+                        </div>
+                    </div>
+                    <h2 class="profile-card-title">LLM post-training, AI search, multi-agent coordination</h2>
+                    <p class="profile-card-text">把研究里的方法论沉淀成可落地的工程表达，让页面、模型和交互都保持清晰、克制、稳定。</p>
+                    <div class="profile-card-tags" aria-label="主页标签">
+                        <span>Research</span>
+                        <span>Engineering</span>
+                        <span>Writing</span>
+                    </div>
+                </section>
+                <div class="hero-metrics">
+                    <div class="metric-card">
+                        <span class="metric-label">Focus</span>
+                        <strong>LLM / Search / MARL</strong>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">Mode</span>
+                        <strong>Research and product thinking</strong>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">Output</span>
+                        <strong>Posts, experiments, and systems</strong>
+                    </div>
+                </div>
+            </aside>
         </div>
     </div>
 
@@ -103,9 +139,9 @@
 
 <main class="main-content home-main">
     <section class="section recent-posts" id="recentPosts">
-        <div class="section-header">
+        <div class="section-header section-header-home">
             <div>
-                <p class="section-eyebrow">Writing</p>
+                <p class="section-eyebrow">Selected writing</p>
                 <h2 class="section-title">最近文章</h2>
             </div>
             
@@ -113,38 +149,49 @@
             
         </div>
         
-        <div class="posts-grid">
+        
+        <div class="home-post-layout">
             
-            
-            <a href="/2026/05/02/2026-05-02-%E6%B5%8B%E8%AF%95%E6%92%B0%E5%86%99%E6%96%87%E7%AB%A0/" class="post-card">
-                <div class="card-body">
-                    <div class="card-meta">
-                        <span class="card-date"><i class="far fa-calendar" aria-hidden="true"></i> 5月 02, 2026</span>
-                        
+            <a href="/2026/05/02/2026-05-02-%E6%B5%8B%E8%AF%95%E6%92%B0%E5%86%99%E6%96%87%E7%AB%A0/" class="featured-post">
+                <div class="featured-post-media">
+                    <img src="/images/self/life_photo.jpg" alt="测试撰写文章" />
+                    <span class="featured-post-badge">Featured</span>
+                </div>
+                <div class="featured-post-body">
+                    <div class="featured-post-meta">
+                        <span class="featured-post-date"><i class="far fa-calendar" aria-hidden="true"></i> 5月 02, 2026</span>
+                        <span class="featured-post-tag">Article</span>
                     </div>
-                    <h3 class="card-title">测试撰写文章</h3>
-                    <p class="card-excerpt">
+                    <h3 class="featured-post-title">测试撰写文章</h3>
+                    <p class="featured-post-excerpt">
                         Title 1正式正文内容
 
                     </p>
-                    <span class="card-link">阅读全文 <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    <span class="featured-post-link">阅读全文 <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                 </div>
             </a>
             
-            <a href="/2026/05/02/2026-05-02-%E6%B5%8B%E8%AF%95/" class="post-card">
-                <div class="card-body">
-                    <div class="card-meta">
-                        <span class="card-date"><i class="far fa-calendar" aria-hidden="true"></i> 5月 02, 2026</span>
-                        
-                    </div>
-                    <h3 class="card-title">测试</h3>
-                    <p class="card-excerpt">
-                        Title 1这是正文内容
 
-                    </p>
-                    <span class="card-link">阅读全文 <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
-                </div>
-            </a>
+            
+            <div class="home-post-stack">
+                
+                <a href="/2026/05/02/2026-05-02-%E6%B5%8B%E8%AF%95/" class="compact-post">
+                    <span class="compact-post-index">02</span>
+                    <div class="compact-post-body">
+                        <div class="compact-post-top">
+                            <span class="compact-post-date"><i class="far fa-calendar" aria-hidden="true"></i> 5月 02, 2026</span>
+                            <span class="compact-post-tag">Article</span>
+                        </div>
+                        <h3 class="compact-post-title">测试</h3>
+                        <p class="compact-post-excerpt">
+                            Title 1这是正文内容
+
+                        </p>
+                        <span class="compact-post-link">继续阅读 <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </div>
+                </a>
+                
+            </div>
             
         </div>
         
