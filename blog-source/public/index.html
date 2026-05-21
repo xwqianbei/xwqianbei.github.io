@@ -23,25 +23,17 @@
 
 <body class="hero-page">
     
-    <!-- Hero Full-Screen Section -->
-<section class="hero-fullscreen" id="heroSection">
-    <!-- Background Image with Overlay -->
+    <section class="hero-fullscreen" id="heroSection" aria-label="个人主页">
     <div class="hero-bg">
         <div class="hero-bg-image"></div>
         <div class="hero-bg-overlay"></div>
-        <div class="hero-bg-gradient"></div>
     </div>
 
-    <!-- Watermark Text -->
-    <div class="hero-watermark" aria-hidden="true">
-        <span>W</span><span>E</span><span>I</span><span>·</span><span>S</span><span>P</span><span>A</span><span>C</span><span>E</span>
-    </div>
-
-    <!-- Navigation (embedded in hero) -->
     <nav class="hero-nav" id="heroNav">
         <div class="hero-nav-inner">
-            <a href="/" class="hero-avatar-link">
+            <a href="/" class="hero-brand">
                 <img src="/images/icons/main.jpg" alt="米兰的小铁酱" class="hero-avatar" />
+                <span>米兰的小铁酱</span>
             </a>
             <ul class="hero-nav-links" id="heroNavLinks">
                 
@@ -65,7 +57,7 @@
                 
                 
             </ul>
-            <button class="hero-mobile-toggle" id="heroMobileToggle" aria-label="Toggle menu">
+            <button class="hero-mobile-toggle" id="heroMobileToggle" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -73,60 +65,61 @@
         </div>
     </nav>
 
-    <!-- Hero Content -->
     <div class="hero-content">
         <div class="hero-text">
-            <h1 class="hero-title">
-                <span class="hero-greeting-line">你好<span class="hero-wave">👋</span>，</span>
-                <span class="hero-name-line">我是<span class="hero-highlight">米兰的小铁酱</span></span>
-            </h1>
+            <p class="hero-kicker">Xiong Wei · LLM Algorithm Engineer</p>
+            <h1 class="hero-title">米兰的小铁酱</h1>
             <p class="hero-subtitle">亲爱的，外面没有别人</p>
-            <div class="hero-desc-lines">
-                <p>一个即将进入互联网的预备牛马</p>
+            <p class="hero-lead">关注大语言模型后训练、AI Search 与多智能体协作，把研究里的方法论沉淀为清晰、可复用、能落地的产品能力。</p>
+            <div class="hero-signals" aria-label="专业方向">
+                <span><strong>LLM</strong> Post-Training</span>
+                <span><strong>AI</strong> Search Agents</span>
+                <span><strong>MARL</strong> Coordination</span>
             </div>
             <div class="hero-actions">
                 <a href="/archives" class="hero-btn hero-btn-primary">
-                    <i class="fas fa-pen-nib"></i> Read Blog
+                    <i class="fas fa-pen-nib" aria-hidden="true"></i> 阅读文章
                 </a>
                 <a href="/projects" class="hero-btn hero-btn-ghost">
-                    <i class="fas fa-shapes"></i> Projects
+                    <i class="fas fa-layer-group" aria-hidden="true"></i> 查看作品
                 </a>
+            </div>
+            <div class="hero-socials" aria-label="联系方式">
+                
+                <a href="https://github.com/xwqianbei" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+                
+                
+                <a href="mailto:2816739071@qq.com"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+                
             </div>
         </div>
     </div>
 
-    <!-- Scroll Indicator -->
-    <div class="hero-scroll-indicator">
-        <div class="scroll-mouse">
-            <div class="scroll-wheel"></div>
-        </div>
-        <span>Scroll</span>
-    </div>
-
-    <!-- Decorative Elements -->
-    <div class="hero-deco-circle hero-deco-1"></div>
-    <div class="hero-deco-circle hero-deco-2"></div>
-    <div class="hero-particles" id="heroParticles"></div>
+    <a href="#recentPosts" class="hero-scroll-indicator" aria-label="查看最近文章">
+        <span class="scroll-line"></span>
+        <span>Latest</span>
+    </a>
 </section>
 
-<!-- Main Content Below Hero -->
-<main class="main-content">
-    <!-- Recent Posts Section -->
-    <section class="section recent-posts">
+<main class="main-content home-main">
+    <section class="section recent-posts" id="recentPosts">
         <div class="section-header">
-            <h2 class="section-title">Recent Posts</h2>
+            <div>
+                <p class="section-eyebrow">Writing</p>
+                <h2 class="section-title">最近文章</h2>
+            </div>
             
-            <a href="/archives" class="section-link">View all <i class="fas fa-arrow-right"></i></a>
+            <a href="/archives" class="section-link">全部文章 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             
         </div>
         
         <div class="posts-grid">
             
             
-            <a href="/2026/05/02/2026-05-02-%E6%B5%8B%E8%AF%95%E6%92%B0%E5%86%99%E6%96%87%E7%AB%A0/" class="post-card" style="animation-delay: 0s">
+            <a href="/2026/05/02/2026-05-02-%E6%B5%8B%E8%AF%95%E6%92%B0%E5%86%99%E6%96%87%E7%AB%A0/" class="post-card">
                 <div class="card-body">
                     <div class="card-meta">
-                        <span class="card-date"><i class="far fa-calendar"></i> 5月 02, 2026</span>
+                        <span class="card-date"><i class="far fa-calendar" aria-hidden="true"></i> 5月 02, 2026</span>
                         
                     </div>
                     <h3 class="card-title">测试撰写文章</h3>
@@ -134,14 +127,14 @@
                         Title 1正式正文内容
 
                     </p>
-                    <span class="card-link">Read more <i class="fas fa-arrow-right"></i></span>
+                    <span class="card-link">阅读全文 <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                 </div>
             </a>
             
-            <a href="/2026/05/02/2026-05-02-%E6%B5%8B%E8%AF%95/" class="post-card" style="animation-delay: 0.1s">
+            <a href="/2026/05/02/2026-05-02-%E6%B5%8B%E8%AF%95/" class="post-card">
                 <div class="card-body">
                     <div class="card-meta">
-                        <span class="card-date"><i class="far fa-calendar"></i> 5月 02, 2026</span>
+                        <span class="card-date"><i class="far fa-calendar" aria-hidden="true"></i> 5月 02, 2026</span>
                         
                     </div>
                     <h3 class="card-title">测试</h3>
@@ -149,7 +142,7 @@
                         Title 1这是正文内容
 
                     </p>
-                    <span class="card-link">Read more <i class="fas fa-arrow-right"></i></span>
+                    <span class="card-link">阅读全文 <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                 </div>
             </a>
             
@@ -158,7 +151,6 @@
     </section>
 </main>
 
-<!-- Footer -->
 <footer class="site-footer">
     <div class="footer-inner">
         <div class="footer-brand">
@@ -181,71 +173,56 @@
             <div class="footer-col">
                 <h4>Connect</h4>
                 
-                <a href="https://github.com/xwqianbei" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://github.com/xwqianbei" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
                 
                 
-                <a href="mailto:2816739071@qq.com"><i class="fas fa-envelope"></i> Email</a>
+                <a href="mailto:2816739071@qq.com"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
                 
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 米兰的小铁酱. Crafted with <i class="fas fa-heart"></i></p>
+            <p>&copy; 2026 米兰的小铁酱. Crafted with <i class="fas fa-heart" aria-hidden="true"></i></p>
         </div>
     </div>
 </footer>
 
+
 <script>
-    // Mobile menu toggle
-    const toggle = document.getElementById('heroMobileToggle');
-    const navLinks = document.getElementById('heroNavLinks');
-    if (toggle && navLinks) {
-        toggle.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
-            toggle.classList.toggle('active');
-        });
-    }
-
-    // Nav scroll effect — transparent on hero, solid after
-    const nav = document.getElementById('heroNav');
-    function handleHeroScroll() {
-        if (!nav) return;
-        if (window.pageYOffset > 80) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-    }
-    window.addEventListener('scroll', handleHeroScroll);
-    handleHeroScroll();
-
-    // Particles animation
     (function() {
-        const container = document.getElementById('heroParticles');
-        if (!container) return;
-        for (let i = 0; i < 30; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.style.left = Math.random() * 100 + '%';
-            p.style.top = Math.random() * 100 + '%';
-            p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
-            p.style.animationDelay = (Math.random() * 6) + 's';
-            p.style.animationDuration = (Math.random() * 4 + 4) + 's';
-            container.appendChild(p);
+        const toggle = document.getElementById('heroMobileToggle');
+        const navLinks = document.getElementById('heroNavLinks');
+        const nav = document.getElementById('heroNav');
+        const indicator = document.querySelector('.hero-scroll-indicator');
+
+        function setMenu(open) {
+            if (!toggle || !navLinks) return;
+            navLinks.classList.toggle('open', open);
+            toggle.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         }
+
+        if (toggle && navLinks) {
+            toggle.addEventListener('click', function() {
+                setMenu(!navLinks.classList.contains('open'));
+            });
+            navLinks.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    setMenu(false);
+                });
+            });
+        }
+
+        function syncHeroState() {
+            const scrolled = window.pageYOffset > 72;
+            if (nav) nav.classList.toggle('scrolled', scrolled);
+            if (indicator) indicator.classList.toggle('is-hidden', window.pageYOffset > 96);
+        }
+
+        window.addEventListener('scroll', syncHeroState, { passive: true });
+        syncHeroState();
     })();
-
-    // Parallax
-    window.addEventListener('scroll', () => {
-        const heroImg = document.querySelector('.hero-bg-image');
-        if (heroImg) heroImg.style.transform = 'scale(1.08) translateY(' + (window.pageYOffset * 0.15) + 'px)';
-    });
-
-    // Scroll indicator fade
-    window.addEventListener('scroll', () => {
-        const ind = document.querySelector('.hero-scroll-indicator');
-        if (ind) ind.style.opacity = window.pageYOffset > 100 ? '0' : '1';
-    });
 </script>
+
     
 
     

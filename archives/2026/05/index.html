@@ -19,13 +19,12 @@
 
 <body>
     
-    <!-- Navigation -->
     <nav class="main-nav" id="mainNav">
         <div class="nav-inner">
             <a href="/" class="logo">
                 米兰的小铁酱<span class="logo-dot">.</span>
             </a>
-            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -71,11 +70,10 @@
         </div>
     </nav>
 
-    <!-- Other pages: constrained content -->
     <main class="main-content">
         <div class="portfolio-header">
     <h1 class="page-title">系统性的博客</h1>
-    <p class="page-desc">做过的事情，要记下来，时时去看，复盘短板，发扬优点，温故而知新，且不枉人间一趟</p>
+    <p class="page-desc">记录技术、研究和生活里的关键问题，尽量写清楚判断依据和复盘结论。</p>
 </div>
 
 
@@ -123,67 +121,78 @@
 
 
 
+
     </main>
 
-    <!-- Footer -->
     <footer class="site-footer">
-        <div class="footer-inner">
-            <div class="footer-brand">
-                <a href="/" class="footer-logo">米兰的小铁酱</a>
-                <p class="footer-tagline">一个即将进入互联网的预备牛马</p>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="/" class="footer-logo">米兰的小铁酱</a>
+            <p class="footer-tagline">一个即将进入互联网的预备牛马</p>
+        </div>
+        <div class="footer-links">
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Words</a>
+                
+                <a href="/projects">Work</a>
+                
+                <a href="/about">About</a>
+                
             </div>
-            <div class="footer-links">
-                <div class="footer-col">
-                    <h4>Navigation</h4>
-                    
-                    <a href="/">Home</a>
-                    
-                    <a href="/archives">Words</a>
-                    
-                    <a href="/projects">Work</a>
-                    
-                    <a href="/about">About</a>
-                    
-                </div>
-                <div class="footer-col">
-                    <h4>Connect</h4>
-                    
-                    <a href="https://github.com/xwqianbei" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
-                    
-                    
-                    <a href="mailto:2816739071@qq.com"><i class="fas fa-envelope"></i> Email</a>
-                    
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 米兰的小铁酱. Crafted with <i class="fas fa-heart"></i></p>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                
+                <a href="https://github.com/xwqianbei" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+                
+                
+                <a href="mailto:2816739071@qq.com"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+                
             </div>
         </div>
-    </footer>
+        <div class="footer-bottom">
+            <p>&copy; 2026 米兰的小铁酱. Crafted with <i class="fas fa-heart" aria-hidden="true"></i></p>
+        </div>
+    </div>
+</footer>
+
     
 
     
     <script>
-        // Mobile menu toggle
         const toggle = document.getElementById('mobileToggle');
         const navLinks = document.getElementById('navLinks');
+        const nav = document.getElementById('mainNav');
+
+        function setMenu(open) {
+            navLinks.classList.toggle('open', open);
+            toggle.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+
         toggle.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
-            toggle.classList.toggle('active');
+            setMenu(!navLinks.classList.contains('open'));
         });
 
-        // Nav scroll effect
-        let lastScroll = 0;
-        const nav = document.getElementById('mainNav');
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            if (currentScroll > 60) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-            lastScroll = currentScroll;
+        navLinks.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                setMenu(false);
+            });
         });
+
+        function syncNavState() {
+            if (window.pageYOffset > 60) {
+                nav.classList.add('scrolled');
+                return;
+            }
+            nav.classList.remove('scrolled');
+        }
+
+        window.addEventListener('scroll', syncNavState, { passive: true });
+        syncNavState();
     </script>
     
 </body>

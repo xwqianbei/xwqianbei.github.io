@@ -21,13 +21,12 @@
     <% if (is_home()) { %>
     <%- body %>
     <% } else { %>
-    <!-- Navigation -->
     <nav class="main-nav" id="mainNav">
         <div class="nav-inner">
             <a href="<%- url_for('/') %>" class="logo">
                 <%= config.author %><span class="logo-dot">.</span>
             </a>
-            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -48,64 +47,45 @@
         </div>
     </nav>
 
-    <!-- Other pages: constrained content -->
     <main class="main-content">
         <%- body %>
     </main>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <div class="footer-brand">
-                <a href="<%- url_for('/') %>" class="footer-logo"><%= config.author %></a>
-                <p class="footer-tagline"><%= config.description %></p>
-            </div>
-            <div class="footer-links">
-                <div class="footer-col">
-                    <h4>Navigation</h4>
-                    <% for (var i in theme.menu){ %>
-                    <a href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
-                    <% } %>
-                </div>
-                <div class="footer-col">
-                    <h4>Connect</h4>
-                    <% if (theme.social && theme.social.github) { %>
-                    <a href="<%= theme.social.github %>" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
-                    <% } %>
-                    <% if (theme.social && theme.social.email) { %>
-                    <a href="mailto:<%= theme.social.email %>"><i class="fas fa-envelope"></i> Email</a>
-                    <% } %>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; <%= date(new Date(), 'YYYY') %> <%= config.author %>. Crafted with <i class="fas fa-heart"></i></p>
-            </div>
-        </div>
-    </footer>
+    <%- partial('_partial/footer') %>
     <% } %>
 
     <% if (!is_home()) { %>
     <script>
-        // Mobile menu toggle
         const toggle = document.getElementById('mobileToggle');
         const navLinks = document.getElementById('navLinks');
+        const nav = document.getElementById('mainNav');
+
+        function setMenu(open) {
+            navLinks.classList.toggle('open', open);
+            toggle.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+
         toggle.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
-            toggle.classList.toggle('active');
+            setMenu(!navLinks.classList.contains('open'));
         });
 
-        // Nav scroll effect
-        let lastScroll = 0;
-        const nav = document.getElementById('mainNav');
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            if (currentScroll > 60) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-            lastScroll = currentScroll;
+        navLinks.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                setMenu(false);
+            });
         });
+
+        function syncNavState() {
+            if (window.pageYOffset > 60) {
+                nav.classList.add('scrolled');
+                return;
+            }
+            nav.classList.remove('scrolled');
+        }
+
+        window.addEventListener('scroll', syncNavState, { passive: true });
+        syncNavState();
     </script>
     <% } %>
 </body>

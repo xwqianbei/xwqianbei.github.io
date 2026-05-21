@@ -1,22 +1,14 @@
-<!-- Hero Full-Screen Section -->
-<section class="hero-fullscreen" id="heroSection">
-    <!-- Background Image with Overlay -->
+<section class="hero-fullscreen" id="heroSection" aria-label="个人主页">
     <div class="hero-bg">
         <div class="hero-bg-image"></div>
         <div class="hero-bg-overlay"></div>
-        <div class="hero-bg-gradient"></div>
     </div>
 
-    <!-- Watermark Text -->
-    <div class="hero-watermark" aria-hidden="true">
-        <span>W</span><span>E</span><span>I</span><span>·</span><span>S</span><span>P</span><span>A</span><span>C</span><span>E</span>
-    </div>
-
-    <!-- Navigation (embedded in hero) -->
     <nav class="hero-nav" id="heroNav">
         <div class="hero-nav-inner">
-            <a href="<%- url_for('/') %>" class="hero-avatar-link">
+            <a href="<%- url_for('/') %>" class="hero-brand">
                 <img src="<%= theme.avatar || '/images/icons/main.jpg' %>" alt="<%= config.author %>" class="hero-avatar" />
+                <span><%= config.author %></span>
             </a>
             <ul class="hero-nav-links" id="heroNavLinks">
                 <% var menuKeys = Object.keys(theme.menu); %>
@@ -27,7 +19,7 @@
                 <% } %>
                 <% }); %>
             </ul>
-            <button class="hero-mobile-toggle" id="heroMobileToggle" aria-label="Toggle menu">
+            <button class="hero-mobile-toggle" id="heroMobileToggle" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -35,60 +27,61 @@
         </div>
     </nav>
 
-    <!-- Hero Content -->
     <div class="hero-content">
         <div class="hero-text">
-            <h1 class="hero-title">
-                <span class="hero-greeting-line">你好<span class="hero-wave">👋</span>，</span>
-                <span class="hero-name-line">我是<span class="hero-highlight"><%= config.author %></span></span>
-            </h1>
+            <p class="hero-kicker">Xiong Wei · LLM Algorithm Engineer</p>
+            <h1 class="hero-title"><%= config.author %></h1>
             <p class="hero-subtitle"><%= config.subtitle %></p>
-            <div class="hero-desc-lines">
-                <p><%= config.description %></p>
+            <p class="hero-lead">关注大语言模型后训练、AI Search 与多智能体协作，把研究里的方法论沉淀为清晰、可复用、能落地的产品能力。</p>
+            <div class="hero-signals" aria-label="专业方向">
+                <span><strong>LLM</strong> Post-Training</span>
+                <span><strong>AI</strong> Search Agents</span>
+                <span><strong>MARL</strong> Coordination</span>
             </div>
             <div class="hero-actions">
                 <a href="<%- url_for('/archives') %>" class="hero-btn hero-btn-primary">
-                    <i class="fas fa-pen-nib"></i> Read Blog
+                    <i class="fas fa-pen-nib" aria-hidden="true"></i> 阅读文章
                 </a>
                 <a href="<%- url_for('/projects') %>" class="hero-btn hero-btn-ghost">
-                    <i class="fas fa-shapes"></i> Projects
+                    <i class="fas fa-layer-group" aria-hidden="true"></i> 查看作品
                 </a>
+            </div>
+            <div class="hero-socials" aria-label="联系方式">
+                <% if (theme.social && theme.social.github) { %>
+                <a href="<%= theme.social.github %>" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+                <% } %>
+                <% if (theme.social && theme.social.email) { %>
+                <a href="mailto:<%= theme.social.email %>"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+                <% } %>
             </div>
         </div>
     </div>
 
-    <!-- Scroll Indicator -->
-    <div class="hero-scroll-indicator">
-        <div class="scroll-mouse">
-            <div class="scroll-wheel"></div>
-        </div>
-        <span>Scroll</span>
-    </div>
-
-    <!-- Decorative Elements -->
-    <div class="hero-deco-circle hero-deco-1"></div>
-    <div class="hero-deco-circle hero-deco-2"></div>
-    <div class="hero-particles" id="heroParticles"></div>
+    <a href="#recentPosts" class="hero-scroll-indicator" aria-label="查看最近文章">
+        <span class="scroll-line"></span>
+        <span>Latest</span>
+    </a>
 </section>
 
-<!-- Main Content Below Hero -->
-<main class="main-content">
-    <!-- Recent Posts Section -->
-    <section class="section recent-posts">
+<main class="main-content home-main">
+    <section class="section recent-posts" id="recentPosts">
         <div class="section-header">
-            <h2 class="section-title">Recent Posts</h2>
+            <div>
+                <p class="section-eyebrow">Writing</p>
+                <h2 class="section-title">最近文章</h2>
+            </div>
             <% if (site.posts.length) { %>
-            <a href="<%- url_for('/archives') %>" class="section-link">View all <i class="fas fa-arrow-right"></i></a>
+            <a href="<%- url_for('/archives') %>" class="section-link">全部文章 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             <% } %>
         </div>
         <% if (site.posts.length) { %>
         <div class="posts-grid">
             <% var posts = site.posts.sort('-date').limit(6); %>
             <% posts.each(function(post, index){ %>
-            <a href="<%- url_for(post.path) %>" class="post-card" style="animation-delay: <%= index * 0.1 %>s">
+            <a href="<%- url_for(post.path) %>" class="post-card">
                 <div class="card-body">
                     <div class="card-meta">
-                        <span class="card-date"><i class="far fa-calendar"></i> <%= date(post.date, 'MMM DD, YYYY') %></span>
+                        <span class="card-date"><i class="far fa-calendar" aria-hidden="true"></i> <%= date(post.date, 'MMM DD, YYYY') %></span>
                         <% if (post.tags && post.tags.length) { %>
                         <span class="card-tag"><%= post.tags.toArray()[0].name %></span>
                         <% } %>
@@ -97,99 +90,54 @@
                     <p class="card-excerpt">
                         <%= strip_html(post.content).substring(0, theme.excerpt_length || 150) %>
                     </p>
-                    <span class="card-link">Read more <i class="fas fa-arrow-right"></i></span>
+                    <span class="card-link">阅读全文 <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                 </div>
             </a>
             <% }); %>
         </div>
         <% } else { %>
         <div class="empty-state">
-            <i class="fas fa-feather-pointed"></i>
-            <p>Stories are brewing...</p>
+            <i class="fas fa-feather-pointed" aria-hidden="true"></i>
+            <p>新的内容正在整理中。</p>
         </div>
         <% } %>
     </section>
 </main>
 
-<!-- Footer -->
-<footer class="site-footer">
-    <div class="footer-inner">
-        <div class="footer-brand">
-            <a href="<%- url_for('/') %>" class="footer-logo"><%= config.author %></a>
-            <p class="footer-tagline"><%= config.description %></p>
-        </div>
-        <div class="footer-links">
-            <div class="footer-col">
-                <h4>Navigation</h4>
-                <% for (var i in theme.menu){ %>
-                <a href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
-                <% } %>
-            </div>
-            <div class="footer-col">
-                <h4>Connect</h4>
-                <% if (theme.social && theme.social.github) { %>
-                <a href="<%= theme.social.github %>" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
-                <% } %>
-                <% if (theme.social && theme.social.email) { %>
-                <a href="mailto:<%= theme.social.email %>"><i class="fas fa-envelope"></i> Email</a>
-                <% } %>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; <%= date(new Date(), 'YYYY') %> <%= config.author %>. Crafted with <i class="fas fa-heart"></i></p>
-        </div>
-    </div>
-</footer>
+<%- partial('_partial/footer') %>
 
 <script>
-    // Mobile menu toggle
-    const toggle = document.getElementById('heroMobileToggle');
-    const navLinks = document.getElementById('heroNavLinks');
-    if (toggle && navLinks) {
-        toggle.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
-            toggle.classList.toggle('active');
-        });
-    }
-
-    // Nav scroll effect — transparent on hero, solid after
-    const nav = document.getElementById('heroNav');
-    function handleHeroScroll() {
-        if (!nav) return;
-        if (window.pageYOffset > 80) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-    }
-    window.addEventListener('scroll', handleHeroScroll);
-    handleHeroScroll();
-
-    // Particles animation
     (function() {
-        const container = document.getElementById('heroParticles');
-        if (!container) return;
-        for (let i = 0; i < 30; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.style.left = Math.random() * 100 + '%';
-            p.style.top = Math.random() * 100 + '%';
-            p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
-            p.style.animationDelay = (Math.random() * 6) + 's';
-            p.style.animationDuration = (Math.random() * 4 + 4) + 's';
-            container.appendChild(p);
+        const toggle = document.getElementById('heroMobileToggle');
+        const navLinks = document.getElementById('heroNavLinks');
+        const nav = document.getElementById('heroNav');
+        const indicator = document.querySelector('.hero-scroll-indicator');
+
+        function setMenu(open) {
+            if (!toggle || !navLinks) return;
+            navLinks.classList.toggle('open', open);
+            toggle.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         }
+
+        if (toggle && navLinks) {
+            toggle.addEventListener('click', function() {
+                setMenu(!navLinks.classList.contains('open'));
+            });
+            navLinks.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    setMenu(false);
+                });
+            });
+        }
+
+        function syncHeroState() {
+            const scrolled = window.pageYOffset > 72;
+            if (nav) nav.classList.toggle('scrolled', scrolled);
+            if (indicator) indicator.classList.toggle('is-hidden', window.pageYOffset > 96);
+        }
+
+        window.addEventListener('scroll', syncHeroState, { passive: true });
+        syncHeroState();
     })();
-
-    // Parallax
-    window.addEventListener('scroll', () => {
-        const heroImg = document.querySelector('.hero-bg-image');
-        if (heroImg) heroImg.style.transform = 'scale(1.08) translateY(' + (window.pageYOffset * 0.15) + 'px)';
-    });
-
-    // Scroll indicator fade
-    window.addEventListener('scroll', () => {
-        const ind = document.querySelector('.hero-scroll-indicator');
-        if (ind) ind.style.opacity = window.pageYOffset > 100 ? '0' : '1';
-    });
 </script>
