@@ -1,9 +1,9 @@
 menu:
-  首页: /
-  文字: /archives
-  作品: /projects
-  生活: /life
-  关于: /about
+  Home: /
+  Writing: /archives
+  Works: /projects
+  Life: /life
+  About: /about
 
 # Avatar
 avatar: /images/icons/main.jpg

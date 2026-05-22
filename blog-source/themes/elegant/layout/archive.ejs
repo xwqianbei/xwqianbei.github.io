@@ -1,44 +1,67 @@
-<div class="portfolio-header">
-    <h1 class="page-title">系统性的博客</h1>
-    <p class="page-desc">记录技术、研究和生活里的关键问题，尽量写清楚判断依据和复盘结论。</p>
-</div>
+<%
+function getPostTag(post) {
+    if (post.tags && post.tags.length) return post.tags.toArray()[0].name;
+    if (post.categories && post.categories.length) return post.categories.toArray()[0].name;
+    return 'Article';
+}
 
-<% if (page.posts && page.posts.length > 0) { %>
+var totalPosts = site.posts ? site.posts.length : 0;
+var visiblePosts = page.posts ? page.posts.length : 0;
+%>
 
-<div class="portfolio-list">
-<% page.posts.each(function(post){ %>
-    <a href="<%- url_for(post.path) %>" class="portfolio-card">
-        <% var coverImg = post.cover || post.image || '/images/self/life_photo.jpg'; %>
-        <img src="<%- url_for(coverImg) %>" alt="<%= post.title %>" class="portfolio-card-img" />
-        <div class="portfolio-card-content">
-            <div class="portfolio-card-tag">
-                <% if (post.tags && post.tags.length) { %>
-                    <%= post.tags.toArray()[0].name %>
-                <% } else if (post.categories && post.categories.length) { %>
-                    <%= post.categories.toArray()[0].name %>
-                <% } else { %>
-                    Article
-                <% } %>
-            </div>
-            <h2 class="portfolio-card-title"><%= post.title || "Untitled" %></h2>
-            <div class="portfolio-card-desc">
-                <%= strip_html(post.excerpt || post.content).substring(0, 150) %>
-            </div>
-            <span class="portfolio-card-btn">文章详情</span>
+<article class="writing-page">
+    <header class="page-hero page-hero-split">
+        <div>
+            <p class="page-eyebrow">Writing</p>
+            <h1 class="page-title">Field Notes</h1>
+            <p class="page-desc">Technical notes, research reflections, product thinking, and life observations kept in a clean reading flow.</p>
         </div>
-    </a>
-<% }); %>
-</div>
+        <div class="page-hero-stats" aria-label="Writing overview">
+            <div>
+                <span>Total</span>
+                <strong><%= totalPosts %></strong>
+            </div>
+            <div>
+                <span>Shown</span>
+                <strong><%= visiblePosts %></strong>
+            </div>
+        </div>
+    </header>
 
-<% if (page.total > 1){ %>
-<nav class="page-nav">
-    <%- paginator({ prev_text: '&laquo; Prev', next_text: 'Next &raquo;' }) %>
-</nav>
-<% } %>
+    <% if (page.posts && page.posts.length > 0) { %>
+    <section class="writing-list" aria-label="Writing list">
+        <% page.posts.each(function(post, index){ 
+            var coverImg = post.cover || post.image || '/images/self/life_photo.jpg';
+            var primaryTag = getPostTag(post);
+        %>
+        <a href="<%- url_for(post.path) %>" class="writing-card">
+            <div class="writing-card-media">
+                <img src="<%- url_for(coverImg) %>" alt="<%= post.title || 'Article cover' %>" />
+                <span><%= ('0' + (index + 1)).slice(-2) %></span>
+            </div>
+            <div class="writing-card-body">
+                <div class="writing-card-meta">
+                    <span><i class="far fa-calendar" aria-hidden="true"></i> <%= date(post.date, 'MMM DD, YYYY') %></span>
+                    <span><%= primaryTag %></span>
+                </div>
+                <h2><%= post.title || 'Untitled' %></h2>
+                <p><%= strip_html(post.excerpt || post.content).substring(0, 170) %></p>
+                <span class="text-link">Read note <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+            </div>
+        </a>
+        <% }); %>
+    </section>
 
-<% } else { %>
-<div class="empty-state">
-    <i class="fas fa-feather-pointed"></i>
-    <p>No posts yet. Stay tuned!</p>
-</div>
-<% } %>
+    <% if (page.total > 1){ %>
+    <nav class="page-nav">
+        <%- paginator({ prev_text: '&laquo; Prev', next_text: 'Next &raquo;' }) %>
+    </nav>
+    <% } %>
+
+    <% } else { %>
+    <div class="empty-state">
+        <i class="fas fa-feather-pointed" aria-hidden="true"></i>
+        <p>No posts yet. Stay tuned.</p>
+    </div>
+    <% } %>
+</article>

@@ -16,15 +16,15 @@ function isNavActive(target) {
 }
 
 var navMeta = {
-    '首页': { icon: 'fa-house-chimney', tone: 'Home' },
-    '文字': { icon: 'fa-pen-nib', tone: 'Writing' },
-    '作品': { icon: 'fa-layer-group', tone: 'Works' },
-    '生活': { icon: 'fa-compass', tone: 'Life' },
-    '关于': { icon: 'fa-user', tone: 'About' }
+    'Home': { icon: 'fa-house-chimney' },
+    'Writing': { icon: 'fa-pen-nib' },
+    'Works': { icon: 'fa-layer-group' },
+    'Life': { icon: 'fa-compass' },
+    'About': { icon: 'fa-user' }
 };
 
 function getNavMeta(key) {
-    return navMeta[key] || { icon: 'fa-circle', tone: key };
+    return navMeta[key] || { icon: 'fa-circle' };
 }
 %>
 <!DOCTYPE html>
@@ -58,7 +58,7 @@ function getNavMeta(key) {
                 </span>
                 <span class="logo-copy">
                     <strong><%= config.author %></strong>
-                    <small>Personal archive</small>
+                    <small>Research & Life</small>
                 </span>
             </a>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
@@ -76,7 +76,6 @@ function getNavMeta(key) {
                     <a href="<%- url_for(theme.menu[key]) %>" class="nav-link<% if (active) { %> active<% } %>"<% if (active) { %> aria-current="page"<% } %>>
                         <i class="fas <%= meta.icon %>" aria-hidden="true"></i>
                         <span class="nav-link-label"><%= key %></span>
-                        <span class="nav-link-tone"><%= meta.tone %></span>
                     </a>
                 </li>
                 <% }); %>

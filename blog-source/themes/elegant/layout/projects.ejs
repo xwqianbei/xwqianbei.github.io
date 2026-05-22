@@ -1,47 +1,65 @@
-<article class="portfolio-page">
-<div class="portfolio-header">
-    <h1 class="page-title">系统性的作品集</h1>
-    <p class="page-desc">记录研究、工程与产品实践，方便持续复盘方法、边界和结果。</p>
-</div>
+<%
+var projects = [
+    {
+        tag: 'LLM · Post-Training',
+        title: 'Life-Service LLM Post-Training',
+        desc: 'Domain foundation model work across continual pre-training, instruction data recipes, evaluation design, and scaling experiments for life-service scenarios.',
+        image: '/images/self/life_photo.jpg',
+        href: 'https://github.com/xwqianbei',
+        stats: ['LongCat-8B', '18B scaling', 'Domain eval']
+    },
+    {
+        tag: 'Agent · Search',
+        title: 'AI Search Agent',
+        desc: 'A planning-execution search agent focused on function calling, retrieval decisions, bad-case loops, and end-to-end model training.',
+        image: '/images/self/life_photo.jpg',
+        href: 'https://github.com/xwqianbei',
+        stats: ['Planning', 'Function call', 'Retrieval']
+    },
+    {
+        tag: 'Research · MARL',
+        title: 'Multi-Agent Role Assignment',
+        desc: 'LLM-guided role assignment and coordination strategies for improving heterogeneous-team stability in multi-agent reinforcement learning.',
+        image: '/images/self/life_photo.jpg',
+        href: 'https://github.com/xwqianbei',
+        stats: ['MARL', 'Coordination', 'PAKDD']
+    }
+];
+%>
 
-<div class="portfolio-list">
-
-    <a href="https://github.com/xwqianbei" class="portfolio-card" target="_blank" rel="noopener">
-        <img src="<%- url_for('/images/self/life_photo.jpg') %>" alt="Life-Service LLM Post-Training" class="portfolio-card-img" />
-        <div class="portfolio-card-content">
-            <div class="portfolio-card-tag">LLM · Post-Training</div>
-            <h2 class="portfolio-card-title">Life-Service LLM Post-Training</h2>
-            <div class="portfolio-card-desc">
-                面向生活服务场景构建领域基础模型，覆盖继续预训练、指令数据配方、评测集建设和规模化训练实验。
-            </div>
-            <span class="portfolio-card-btn">作品详情</span>
+<article class="projects-page">
+    <header class="page-hero page-hero-split">
+        <div>
+            <p class="page-eyebrow">Works</p>
+            <h1 class="page-title">Selected Systems</h1>
+            <p class="page-desc">A concise portfolio of research, engineering, and product-minded work, organized for quick scanning and deeper follow-up.</p>
         </div>
-    </a>
+        <a href="https://github.com/xwqianbei" class="hero-inline-link" target="_blank" rel="noopener">
+            <i class="fab fa-github" aria-hidden="true"></i>
+            GitHub
+        </a>
+    </header>
 
-    <a href="https://github.com/xwqianbei" class="portfolio-card" target="_blank" rel="noopener">
-        <img src="<%- url_for('/images/self/life_photo.jpg') %>" alt="AI Search Agent" class="portfolio-card-img" />
-        <div class="portfolio-card-content">
-            <div class="portfolio-card-tag">Agent · Search</div>
-            <h2 class="portfolio-card-title">AI Search Agent</h2>
-            <div class="portfolio-card-desc">
-                设计规划-执行式搜索智能体，围绕函数调用、检索决策、坏例闭环和端到端训练提升复杂问题求解质量。
+    <section class="project-grid" aria-label="Project list">
+        <% projects.forEach(function(project) { %>
+        <a href="<%= project.href %>" class="project-card" target="_blank" rel="noopener">
+            <div class="project-card-media">
+                <img src="<%- url_for(project.image) %>" alt="<%= project.title %>" />
+                <span><%= project.tag %></span>
             </div>
-            <span class="portfolio-card-btn">作品详情</span>
-        </div>
-    </a>
-
-    <a href="https://github.com/xwqianbei" class="portfolio-card" target="_blank" rel="noopener">
-        <img src="<%- url_for('/images/self/life_photo.jpg') %>" alt="Multi-Agent Reinforcement Learning" class="portfolio-card-img" />
-        <div class="portfolio-card-content">
-            <div class="portfolio-card-tag">Research · MARL</div>
-            <h2 class="portfolio-card-title">Multi-Agent Role Assignment</h2>
-            <div class="portfolio-card-desc">
-                探索 LLM 指导的角色分配与协作策略，在多智能体强化学习中提升异构团队的协同效率和任务稳定性。
+            <div class="project-card-body">
+                <h2><%= project.title %></h2>
+                <p><%= project.desc %></p>
+                <div class="project-card-tags" aria-label="Project keywords">
+                    <% project.stats.forEach(function(stat) { %>
+                    <span><%= stat %></span>
+                    <% }); %>
+                </div>
+                <span class="text-link">View work <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
             </div>
-            <span class="portfolio-card-btn">作品详情</span>
-        </div>
-    </a>
+        </a>
+        <% }); %>
+    </section>
 
-</div>
     <%- page.content %>
 </article>

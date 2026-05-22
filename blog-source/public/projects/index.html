@@ -28,7 +28,7 @@
                 </span>
                 <span class="logo-copy">
                     <strong>米兰的小铁酱</strong>
-                    <small>Personal archive</small>
+                    <small>Research & Life</small>
                 </span>
             </a>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
@@ -42,40 +42,35 @@
                 <li>
                     <a href="/" class="nav-link">
                         <i class="fas fa-house-chimney" aria-hidden="true"></i>
-                        <span class="nav-link-label">首页</span>
-                        <span class="nav-link-tone">Home</span>
+                        <span class="nav-link-label">Home</span>
                     </a>
                 </li>
                 
                 <li>
                     <a href="/archives" class="nav-link">
                         <i class="fas fa-pen-nib" aria-hidden="true"></i>
-                        <span class="nav-link-label">文字</span>
-                        <span class="nav-link-tone">Writing</span>
+                        <span class="nav-link-label">Writing</span>
                     </a>
                 </li>
                 
                 <li>
                     <a href="/projects" class="nav-link active" aria-current="page">
                         <i class="fas fa-layer-group" aria-hidden="true"></i>
-                        <span class="nav-link-label">作品</span>
-                        <span class="nav-link-tone">Works</span>
+                        <span class="nav-link-label">Works</span>
                     </a>
                 </li>
                 
                 <li>
                     <a href="/life" class="nav-link">
                         <i class="fas fa-compass" aria-hidden="true"></i>
-                        <span class="nav-link-label">生活</span>
-                        <span class="nav-link-tone">Life</span>
+                        <span class="nav-link-label">Life</span>
                     </a>
                 </li>
                 
                 <li>
                     <a href="/about" class="nav-link">
                         <i class="fas fa-user" aria-hidden="true"></i>
-                        <span class="nav-link-label">关于</span>
-                        <span class="nav-link-tone">About</span>
+                        <span class="nav-link-label">About</span>
                     </a>
                 </li>
                 
@@ -84,51 +79,88 @@
     </nav>
 
     <main class="main-content">
-        <article class="portfolio-page">
-<div class="portfolio-header">
-    <h1 class="page-title">系统性的作品集</h1>
-    <p class="page-desc">记录研究、工程与产品实践，方便持续复盘方法、边界和结果。</p>
-</div>
+        
 
-<div class="portfolio-list">
-
-    <a href="https://github.com/xwqianbei" class="portfolio-card" target="_blank" rel="noopener">
-        <img src="/images/self/life_photo.jpg" alt="Life-Service LLM Post-Training" class="portfolio-card-img" />
-        <div class="portfolio-card-content">
-            <div class="portfolio-card-tag">LLM · Post-Training</div>
-            <h2 class="portfolio-card-title">Life-Service LLM Post-Training</h2>
-            <div class="portfolio-card-desc">
-                面向生活服务场景构建领域基础模型，覆盖继续预训练、指令数据配方、评测集建设和规模化训练实验。
-            </div>
-            <span class="portfolio-card-btn">作品详情</span>
+<article class="projects-page">
+    <header class="page-hero page-hero-split">
+        <div>
+            <p class="page-eyebrow">Works</p>
+            <h1 class="page-title">Selected Systems</h1>
+            <p class="page-desc">A concise portfolio of research, engineering, and product-minded work, organized for quick scanning and deeper follow-up.</p>
         </div>
-    </a>
+        <a href="https://github.com/xwqianbei" class="hero-inline-link" target="_blank" rel="noopener">
+            <i class="fab fa-github" aria-hidden="true"></i>
+            GitHub
+        </a>
+    </header>
 
-    <a href="https://github.com/xwqianbei" class="portfolio-card" target="_blank" rel="noopener">
-        <img src="/images/self/life_photo.jpg" alt="AI Search Agent" class="portfolio-card-img" />
-        <div class="portfolio-card-content">
-            <div class="portfolio-card-tag">Agent · Search</div>
-            <h2 class="portfolio-card-title">AI Search Agent</h2>
-            <div class="portfolio-card-desc">
-                设计规划-执行式搜索智能体，围绕函数调用、检索决策、坏例闭环和端到端训练提升复杂问题求解质量。
+    <section class="project-grid" aria-label="Project list">
+        
+        <a href="https://github.com/xwqianbei" class="project-card" target="_blank" rel="noopener">
+            <div class="project-card-media">
+                <img src="/images/self/life_photo.jpg" alt="Life-Service LLM Post-Training" />
+                <span>LLM · Post-Training</span>
             </div>
-            <span class="portfolio-card-btn">作品详情</span>
-        </div>
-    </a>
-
-    <a href="https://github.com/xwqianbei" class="portfolio-card" target="_blank" rel="noopener">
-        <img src="/images/self/life_photo.jpg" alt="Multi-Agent Reinforcement Learning" class="portfolio-card-img" />
-        <div class="portfolio-card-content">
-            <div class="portfolio-card-tag">Research · MARL</div>
-            <h2 class="portfolio-card-title">Multi-Agent Role Assignment</h2>
-            <div class="portfolio-card-desc">
-                探索 LLM 指导的角色分配与协作策略，在多智能体强化学习中提升异构团队的协同效率和任务稳定性。
+            <div class="project-card-body">
+                <h2>Life-Service LLM Post-Training</h2>
+                <p>Domain foundation model work across continual pre-training, instruction data recipes, evaluation design, and scaling experiments for life-service scenarios.</p>
+                <div class="project-card-tags" aria-label="Project keywords">
+                    
+                    <span>LongCat-8B</span>
+                    
+                    <span>18B scaling</span>
+                    
+                    <span>Domain eval</span>
+                    
+                </div>
+                <span class="text-link">View work <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
             </div>
-            <span class="portfolio-card-btn">作品详情</span>
-        </div>
-    </a>
+        </a>
+        
+        <a href="https://github.com/xwqianbei" class="project-card" target="_blank" rel="noopener">
+            <div class="project-card-media">
+                <img src="/images/self/life_photo.jpg" alt="AI Search Agent" />
+                <span>Agent · Search</span>
+            </div>
+            <div class="project-card-body">
+                <h2>AI Search Agent</h2>
+                <p>A planning-execution search agent focused on function calling, retrieval decisions, bad-case loops, and end-to-end model training.</p>
+                <div class="project-card-tags" aria-label="Project keywords">
+                    
+                    <span>Planning</span>
+                    
+                    <span>Function call</span>
+                    
+                    <span>Retrieval</span>
+                    
+                </div>
+                <span class="text-link">View work <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+            </div>
+        </a>
+        
+        <a href="https://github.com/xwqianbei" class="project-card" target="_blank" rel="noopener">
+            <div class="project-card-media">
+                <img src="/images/self/life_photo.jpg" alt="Multi-Agent Role Assignment" />
+                <span>Research · MARL</span>
+            </div>
+            <div class="project-card-body">
+                <h2>Multi-Agent Role Assignment</h2>
+                <p>LLM-guided role assignment and coordination strategies for improving heterogeneous-team stability in multi-agent reinforcement learning.</p>
+                <div class="project-card-tags" aria-label="Project keywords">
+                    
+                    <span>MARL</span>
+                    
+                    <span>Coordination</span>
+                    
+                    <span>PAKDD</span>
+                    
+                </div>
+                <span class="text-link">View work <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+            </div>
+        </a>
+        
+    </section>
 
-</div>
     
 </article>
 
@@ -144,15 +176,15 @@
             <div class="footer-col">
                 <h4>Navigation</h4>
                 
-                <a href="/">首页</a>
+                <a href="/">Home</a>
                 
-                <a href="/archives">文字</a>
+                <a href="/archives">Writing</a>
                 
-                <a href="/projects">作品</a>
+                <a href="/projects">Works</a>
                 
-                <a href="/life">生活</a>
+                <a href="/life">Life</a>
                 
-                <a href="/about">关于</a>
+                <a href="/about">About</a>
                 
             </div>
             <div class="footer-col">

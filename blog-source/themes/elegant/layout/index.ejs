@@ -10,15 +10,15 @@ function getPostTag(post) {
 }
 
 var navMeta = {
-    '首页': { icon: 'fa-house-chimney', tone: 'Home' },
-    '文字': { icon: 'fa-pen-nib', tone: 'Writing' },
-    '作品': { icon: 'fa-layer-group', tone: 'Works' },
-    '生活': { icon: 'fa-compass', tone: 'Life' },
-    '关于': { icon: 'fa-user', tone: 'About' }
+    'Home': { icon: 'fa-house-chimney' },
+    'Writing': { icon: 'fa-pen-nib' },
+    'Works': { icon: 'fa-layer-group' },
+    'Life': { icon: 'fa-compass' },
+    'About': { icon: 'fa-user' }
 };
 
 function getNavMeta(key) {
-    return navMeta[key] || { icon: 'fa-circle', tone: key };
+    return navMeta[key] || { icon: 'fa-circle' };
 }
 
 var lifeHighlights = [
@@ -91,10 +91,10 @@ var lifeHighlights = [
                 </div>
                 <div class="hero-actions">
                     <a href="<%- url_for('/archives') %>" class="hero-btn hero-btn-primary">
-                        <i class="fas fa-pen-nib" aria-hidden="true"></i> 阅读文章
+                        <i class="fas fa-pen-nib" aria-hidden="true"></i> Read Writing
                     </a>
                     <a href="<%- url_for('/projects') %>" class="hero-btn hero-btn-ghost">
-                        <i class="fas fa-layer-group" aria-hidden="true"></i> 查看作品
+                        <i class="fas fa-layer-group" aria-hidden="true"></i> View Works
                     </a>
                 </div>
                 <div class="hero-socials" aria-label="联系方式">
@@ -152,9 +152,9 @@ var lifeHighlights = [
         <div class="section-header section-header-home">
             <div>
                 <p class="section-eyebrow">Life ledger</p>
-                <h2 class="section-title">足迹与兴趣</h2>
+                <h2 class="section-title">Footprints & Interests</h2>
             </div>
-            <a href="<%- url_for('/life') %>" class="section-link">进入生活轨迹 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            <a href="<%- url_for('/life') %>" class="section-link">Open Ledger <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
         </div>
         <div class="life-home-grid">
             <% lifeHighlights.forEach(function(item, index) { %>
@@ -179,10 +179,10 @@ var lifeHighlights = [
         <div class="section-header section-header-home">
             <div>
                 <p class="section-eyebrow">Selected writing</p>
-                <h2 class="section-title">最近文章</h2>
+                <h2 class="section-title">Recent Notes</h2>
             </div>
             <% if (site.posts.length) { %>
-            <a href="<%- url_for('/archives') %>" class="section-link">全部文章 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            <a href="<%- url_for('/archives') %>" class="section-link">All Writing <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             <% } %>
         </div>
         <% if (site.posts.length) { %>
@@ -206,7 +206,7 @@ var lifeHighlights = [
                     <p class="featured-post-excerpt">
                         <%= strip_html(post.excerpt || post.content).substring(0, theme.excerpt_length || 150) %>
                     </p>
-                    <span class="featured-post-link">阅读全文 <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    <span class="featured-post-link">Read Note <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                 </div>
             </a>
             <% } }); %>
@@ -227,7 +227,7 @@ var lifeHighlights = [
                         <p class="compact-post-excerpt">
                             <%= strip_html(post.excerpt || post.content).substring(0, 110) %>
                         </p>
-                        <span class="compact-post-link">继续阅读 <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                        <span class="compact-post-link">Continue <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                     </div>
                 </a>
                 <% } }); %>

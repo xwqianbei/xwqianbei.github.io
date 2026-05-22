@@ -1,18 +1,34 @@
 <article class="about-page">
-
-    <!-- Profile Header -->
-    <div class="about-header">
-        <h1 class="about-name">Xiong Wei <span class="about-name-cn">熊伟</span></h1>
-        <p class="about-role">M.S. in Computer Science · AI Researcher</p>
-        <div class="about-contact">
-            <a href="mailto:2816739071@qq.com"><i class="fas fa-envelope"></i> 2816739071@qq.com</a>
-            <a href="https://github.com/xwqianbei" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+    <header class="about-hero">
+        <div class="about-hero-media">
+            <img src="<%- url_for(theme.avatar || '/images/icons/main.jpg') %>" alt="Xiong Wei" />
         </div>
-    </div>
+        <div class="about-hero-copy">
+            <p class="page-eyebrow">About</p>
+            <h1 class="about-name">Xiong Wei <span>熊伟</span></h1>
+            <p class="about-role">M.S. in Computer Science · AI Researcher · LLM Algorithm Engineer</p>
+            <div class="about-contact">
+                <a href="mailto:2816739071@qq.com"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+                <a href="https://github.com/xwqianbei" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+            </div>
+        </div>
+        <div class="about-hero-stats" aria-label="Profile highlights">
+            <div>
+                <span>Focus</span>
+                <strong>LLM / Search / MARL</strong>
+            </div>
+            <div>
+                <span>Mode</span>
+                <strong>Research to systems</strong>
+            </div>
+        </div>
+    </header>
 
-    <!-- Research Interests -->
     <section class="about-section">
-        <h2 class="about-section-title">Research Interests</h2>
+        <div class="section-heading">
+            <p class="page-eyebrow">Research</p>
+            <h2 class="about-section-title">Interests</h2>
+        </div>
         <div class="interest-tags">
             <span class="interest-tag">Large Language Models</span>
             <span class="interest-tag">Multi-Agent Reinforcement Learning</span>
@@ -21,78 +37,86 @@
         </div>
     </section>
 
-    <!-- Education -->
+    <div class="about-grid">
+        <section class="about-section">
+            <div class="section-heading">
+                <p class="page-eyebrow">Education</p>
+                <h2 class="about-section-title">Academic Path</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-info">
+                            <h3 class="timeline-title">University of Chinese Academy of Sciences</h3>
+                            <p class="timeline-subtitle">M.S. in Software Engineering · Institute of Software, Chinese Academy of Sciences</p>
+                        </div>
+                        <span class="timeline-date">2023.09 - 2026.06</span>
+                    </div>
+                    <p class="timeline-detail">GPA: 3.74 / 4.0 · Second-class Academic Scholarship</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-info">
+                            <h3 class="timeline-title">Jiangxi Normal University</h3>
+                            <p class="timeline-subtitle">B.Eng. in Computer Science and Technology</p>
+                        </div>
+                        <span class="timeline-date">2019.09 - 2023.06</span>
+                    </div>
+                    <p class="timeline-detail">First-class Comprehensive Scholarship · National Encouragement Scholarship · Outstanding Graduate</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="section-heading">
+                <p class="page-eyebrow">Experience</p>
+                <h2 class="about-section-title">Industry Work</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-info">
+                            <h3 class="timeline-title">Meituan</h3>
+                            <p class="timeline-subtitle">LLM Algorithm Intern</p>
+                        </div>
+                        <span class="timeline-date">2025.04 - 2025.10</span>
+                    </div>
+                    <p class="timeline-detail">Built life-service foundation LLM via continual pre-training and post-training on LongCat-8B; scaled to 18B with 12.92pp domain improvement.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-info">
+                            <h3 class="timeline-title">Zhipu AI</h3>
+                            <p class="timeline-subtitle">LLM Algorithm Intern</p>
+                        </div>
+                        <span class="timeline-date">2024.12 - 2025.04</span>
+                    </div>
+                    <p class="timeline-detail">Built AI search agent with multi-step planning-execution loop; trained end-to-end function-call model, reducing bad cases by 75%.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-info">
+                            <h3 class="timeline-title">Du Xiaoman Finance</h3>
+                            <p class="timeline-subtitle">LLM Algorithm Intern</p>
+                        </div>
+                        <span class="timeline-date">2024.04 - 2024.07</span>
+                    </div>
+                    <p class="timeline-detail">Developed role-playing LLM for anime companion app; achieved 15.6pp gain in role-play metrics via data-recipe scaling experiments.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <section class="about-section">
-        <h2 class="about-section-title">Education</h2>
-
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-header">
-                    <div class="timeline-info">
-                        <h3 class="timeline-title">University of Chinese Academy of Sciences</h3>
-                        <p class="timeline-subtitle">M.S. in Software Engineering · Institute of Software, Chinese Academy of Sciences</p>
-                    </div>
-                    <span class="timeline-date">2023.09 – 2026.06</span>
-                </div>
-                <p class="timeline-detail">GPA: 3.74 / 4.0 · Second-class Academic Scholarship</p>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-header">
-                    <div class="timeline-info">
-                        <h3 class="timeline-title">Jiangxi Normal University</h3>
-                        <p class="timeline-subtitle">B.Eng. in Computer Science and Technology</p>
-                    </div>
-                    <span class="timeline-date">2019.09 – 2023.06</span>
-                </div>
-                <p class="timeline-detail">First-class Comprehensive Scholarship · National Encouragement Scholarship · Outstanding Graduate</p>
-            </div>
+        <div class="section-heading">
+            <p class="page-eyebrow">Publications</p>
+            <h2 class="about-section-title">Selected Papers</h2>
         </div>
-    </section>
-
-    <!-- Experience -->
-    <section class="about-section">
-        <h2 class="about-section-title">Experience</h2>
-
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-header">
-                    <div class="timeline-info">
-                        <h3 class="timeline-title">Meituan</h3>
-                        <p class="timeline-subtitle">LLM Algorithm Intern</p>
-                    </div>
-                    <span class="timeline-date">2025.04 – 2025.10</span>
-                </div>
-                <p class="timeline-detail">Built life-service foundation LLM via continual pre-training and post-training on LongCat-8B; scaled to 18B with 12.92pp domain improvement.</p>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-header">
-                    <div class="timeline-info">
-                        <h3 class="timeline-title">Zhipu AI</h3>
-                        <p class="timeline-subtitle">LLM Algorithm Intern</p>
-                    </div>
-                    <span class="timeline-date">2024.12 – 2025.04</span>
-                </div>
-                <p class="timeline-detail">Built AI search agent with multi-step planning-execution loop; trained end-to-end function-call model, reducing bad cases by 75%.</p>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-header">
-                    <div class="timeline-info">
-                        <h3 class="timeline-title">Du Xiaoman Finance</h3>
-                        <p class="timeline-subtitle">LLM Algorithm Intern</p>
-                    </div>
-                    <span class="timeline-date">2024.04 – 2024.07</span>
-                </div>
-                <p class="timeline-detail">Developed role-playing LLM for anime companion app; achieved 15.6pp gain in role-play metrics via data-recipe scaling experiments.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Publications -->
-    <section class="about-section">
-        <h2 class="about-section-title">Publications</h2>
         <ul class="publication-list">
             <li class="publication-item">
                 <span class="pub-title">LLM-Guided Role Assignment and Coordination in Multi-Agent Reinforcement Learning</span>
@@ -104,5 +128,4 @@
             </li>
         </ul>
     </section>
-
 </article>
