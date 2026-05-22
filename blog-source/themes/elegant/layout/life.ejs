@@ -1,149 +1,336 @@
 <%
-var filters = [
-    { key: 'all', label: '全部', icon: 'fa-border-all' },
-    { key: 'travel', label: '旅行', icon: 'fa-route' },
-    { key: 'photo', label: '摄影', icon: 'fa-camera-retro' },
-    { key: 'music', label: '音乐', icon: 'fa-music' },
-    { key: 'film', label: '影视', icon: 'fa-film' },
-    { key: 'book', label: '书籍', icon: 'fa-book-open' }
+var interestTypes = [
+    { key: 'travel', label: '旅行', icon: 'fa-route', tone: 'Trips' },
+    { key: 'photo', label: '摄影', icon: 'fa-camera-retro', tone: 'Frames' },
+    { key: 'music', label: '音乐', icon: 'fa-music', tone: 'Songs' },
+    { key: 'film', label: '影视', icon: 'fa-film', tone: 'Screens' },
+    { key: 'book', label: '书籍', icon: 'fa-book-open', tone: 'Reads' }
 ];
 
 var lifeRecords = [
     {
+        id: 'yunnan-2026',
         kind: 'travel',
         label: '旅行',
         icon: 'fa-route',
         date: '2026.05.14 - 05.23',
+        year: '2026',
         title: '云南十日旅行',
         place: '大理 · 丽江 · 香格里拉',
-        description: '把洱海边的风、古城夜色、雪山和高原路途整理成一段可回看的旅程。之后可以继续补充照片、路线、花费和当时的心情。',
+        focus: '洱海边的风、古城夜色、雪山和高原路途被整理成一段可以回看的旅程。',
+        mood: '高原空气、蓝色湖面、慢下来的脚步',
+        stat: '10 days',
+        cover: '/images/self/life_photo.jpg',
+        details: ['沿洱海把风景和照片收进同一天', '在古城夜色里记录街巷、灯光和人声', '把雪山与高原路途留作 2026 年春末的坐标'],
         tags: ['云南', '旅行', '旅拍', '高原']
     },
     {
+        id: 'hutiancuo-2025',
         kind: 'music',
         label: '音乐',
         icon: 'fa-music',
         date: '2025.03.23 - 03.30',
+        year: '2025',
         title: '循环《花田错》',
         place: '一周旋律记忆',
-        description: '用一首歌给那段时间做索引。以后再听见前奏时，页面能帮我回到那一周的状态和画面。',
+        focus: '用一首歌给那段时间做索引。以后再听见前奏时，页面能把我带回那一周的状态。',
+        mood: '循环播放、旧旋律、时间锚点',
+        stat: '7 days',
+        cover: '',
+        details: ['把《花田错》作为 2025 年 3 月底的听觉标签', '适合记录当周的地点、场景、歌词片段和心情', '之后可以继续补充同一时期喜欢的专辑和歌单'],
         tags: ['花田错', '华语音乐', '循环播放']
     }
 ];
 
-var recordCount = lifeRecords.length;
+var recordCountByKind = {};
+lifeRecords.forEach(function(item) {
+    recordCountByKind[item.kind] = (recordCountByKind[item.kind] || 0) + 1;
+});
+
+var filters = [{ key: 'all', label: '全部', icon: 'fa-border-all', tone: 'All', count: lifeRecords.length }].concat(interestTypes.map(function(item) {
+    return {
+        key: item.key,
+        label: item.label,
+        icon: item.icon,
+        tone: item.tone,
+        count: recordCountByKind[item.key] || 0
+    };
+}));
+
 var yearCount = {};
 lifeRecords.forEach(function(item) {
-    var year = item.date.slice(0, 4);
-    yearCount[year] = true;
+    yearCount[item.year] = true;
 });
-var years = Object.keys(yearCount).length;
+
+var initialRecord = lifeRecords[0];
 %>
 
 <article class="life-page">
     <header class="life-hero">
-        <p class="life-kicker">Life ledger</p>
-        <h1 class="life-title">把远方、旋律和阅读过的日子留下来</h1>
-        <p class="life-intro">
-            这里不是正式简历，而是个人生活的时间索引：旅行、摄影、音乐、影视和书籍都可以按时间沉淀，之后回看时能快速找到某段经历的地点、作品和情绪。
-        </p>
-        <div class="life-summary" aria-label="生活记录概览">
+        <div class="life-hero-copy">
+            <p class="life-kicker">Life ledger</p>
+            <h1 class="life-title">把远方、旋律、影像和阅读过的日子留下来</h1>
+            <p class="life-intro">
+                旅行、摄影、音乐、影视和书籍会在这里按时间沉淀成个人生活档案。每条记录保留日期、地点、作品、标签和当时的情绪，适合长期补充和回看。
+            </p>
+        </div>
+        <div class="life-hero-stats" aria-label="生活记录概览">
             <div>
                 <span>Records</span>
-                <strong><%= recordCount %></strong>
+                <strong><%= lifeRecords.length %></strong>
             </div>
             <div>
                 <span>Years</span>
-                <strong><%= years %></strong>
+                <strong><%= Object.keys(yearCount).length %></strong>
             </div>
             <div>
                 <span>Interests</span>
-                <strong>5</strong>
+                <strong><%= interestTypes.length %></strong>
             </div>
         </div>
     </header>
 
-    <section class="life-filter-panel" aria-label="按兴趣筛选记录">
-        <div class="life-filter-copy">
-            <span>Filter</span>
-            <strong>选择一种兴趣，查看对应的生活片段</strong>
-        </div>
-        <div class="life-filter-list" role="list">
-            <% filters.forEach(function(filter, index) { %>
-            <button class="life-filter<% if (index === 0) { %> active<% } %>" type="button" data-life-filter="<%= filter.key %>">
-                <i class="fas <%= filter.icon %>" aria-hidden="true"></i>
-                <span><%= filter.label %></span>
-            </button>
-            <% }); %>
-        </div>
-    </section>
-
-    <div class="life-layout">
-        <aside class="life-compass" aria-label="兴趣类型">
-            <div class="life-compass-title">记录维度</div>
-            <div class="life-compass-list">
-                <span><i class="fas fa-route" aria-hidden="true"></i> 旅行路线</span>
-                <span><i class="fas fa-camera-retro" aria-hidden="true"></i> 摄影胶片</span>
-                <span><i class="fas fa-music" aria-hidden="true"></i> 循环歌单</span>
-                <span><i class="fas fa-film" aria-hidden="true"></i> 观影片单</span>
-                <span><i class="fas fa-book-open" aria-hidden="true"></i> 阅读书架</span>
+    <section class="life-ledger" data-life-ledger>
+        <aside class="life-focus" aria-live="polite">
+            <div class="life-focus-media">
+                <img src="<%- url_for(initialRecord.cover) %>" alt="<%= initialRecord.title %>" data-focus-cover />
+                <div class="life-focus-art" data-focus-art hidden>
+                    <i class="fas <%= initialRecord.icon %>" aria-hidden="true" data-focus-art-icon></i>
+                    <span data-focus-art-kind><%= initialRecord.label %></span>
+                </div>
+            </div>
+            <div class="life-focus-body">
+                <div class="life-focus-meta">
+                    <span data-focus-kind><%= initialRecord.label %></span>
+                    <span data-focus-date><%= initialRecord.date %></span>
+                </div>
+                <h2 data-focus-title><%= initialRecord.title %></h2>
+                <p class="life-focus-place"><i class="fas fa-location-dot" aria-hidden="true"></i> <span data-focus-place><%= initialRecord.place %></span></p>
+                <p class="life-focus-text" data-focus-text><%= initialRecord.focus %></p>
+                <div class="life-focus-mood">
+                    <span>Memory</span>
+                    <strong data-focus-mood><%= initialRecord.mood %></strong>
+                </div>
+                <div class="life-focus-tags" data-focus-tags aria-label="当前记录标签">
+                    <% initialRecord.tags.forEach(function(tag) { %>
+                    <span><%= tag %></span>
+                    <% }); %>
+                </div>
             </div>
         </aside>
 
-        <section class="life-timeline" aria-live="polite">
-            <% lifeRecords.forEach(function(item) { %>
-            <article class="life-entry" data-life-kind="<%= item.kind %>">
-                <div class="life-entry-node">
-                    <i class="fas <%= item.icon %>" aria-hidden="true"></i>
+        <div class="life-stream">
+            <section class="life-filter-panel" aria-label="兴趣索引">
+                <div class="life-filter-head">
+                    <span>Archive</span>
+                    <strong><span data-life-visible-count><%= lifeRecords.length %></span> / <%= lifeRecords.length %></strong>
                 </div>
-                <div class="life-entry-card">
-                    <div class="life-entry-top">
-                        <span class="life-entry-date"><%= item.date %></span>
-                        <span class="life-entry-kind"><%= item.label %></span>
-                    </div>
-                    <h2><%= item.title %></h2>
-                    <p class="life-entry-place"><i class="fas fa-location-dot" aria-hidden="true"></i> <%= item.place %></p>
-                    <p class="life-entry-desc"><%= item.description %></p>
-                    <div class="life-entry-tags" aria-label="标签">
-                        <% item.tags.forEach(function(tag) { %>
-                        <span><%= tag %></span>
-                        <% }); %>
-                    </div>
+                <div class="life-filter-list" role="list">
+                    <% filters.forEach(function(filter, index) { %>
+                    <button class="life-filter<% if (index === 0) { %> active<% } %>" type="button" data-life-filter="<%= filter.key %>" aria-pressed="<%= index === 0 ? 'true' : 'false' %>">
+                        <i class="fas <%= filter.icon %>" aria-hidden="true"></i>
+                        <span class="life-filter-label"><%= filter.label %></span>
+                        <span class="life-filter-count"><%= filter.count %></span>
+                    </button>
+                    <% }); %>
                 </div>
-            </article>
-            <% }); %>
+            </section>
 
-            <div class="life-empty-filter" hidden>
-                <i class="fas fa-feather-pointed" aria-hidden="true"></i>
-                <p>这个分类还没有公开记录。</p>
-            </div>
-        </section>
-    </div>
+            <section class="life-interest-strip" aria-label="兴趣维度">
+                <% interestTypes.forEach(function(item) { %>
+                <div class="life-interest-item">
+                    <i class="fas <%= item.icon %>" aria-hidden="true"></i>
+                    <span><%= item.label %></span>
+                    <small><%= item.tone %></small>
+                </div>
+                <% }); %>
+            </section>
+
+            <section class="life-timeline" aria-label="生活时间线">
+                <% lifeRecords.forEach(function(item, index) { %>
+                <article
+                    class="life-entry<% if (index === 0) { %> is-active<% } %>"
+                    data-life-entry
+                    data-life-kind="<%= item.kind %>"
+                    data-life-id="<%= item.id %>"
+                    data-title="<%= item.title %>"
+                    data-kind-label="<%= item.label %>"
+                    data-date="<%= item.date %>"
+                    data-place="<%= item.place %>"
+                    data-focus="<%= item.focus %>"
+                    data-mood="<%= item.mood %>"
+                    data-stat="<%= item.stat %>"
+                    data-icon="<%= item.icon %>"
+                    data-cover="<%- item.cover ? url_for(item.cover) : '' %>"
+                    data-tags="<%= item.tags.join('|') %>"
+                    data-details="<%= item.details.join('|') %>"
+                >
+                    <button class="life-entry-card" type="button" data-life-select aria-pressed="<%= index === 0 ? 'true' : 'false' %>">
+                        <span class="life-entry-node">
+                            <i class="fas <%= item.icon %>" aria-hidden="true"></i>
+                        </span>
+                        <span class="life-entry-content">
+                            <span class="life-entry-top">
+                                <span class="life-entry-date"><%= item.date %></span>
+                                <span class="life-entry-kind"><%= item.label %></span>
+                            </span>
+                            <strong><%= item.title %></strong>
+                            <span class="life-entry-place"><i class="fas fa-location-dot" aria-hidden="true"></i> <%= item.place %></span>
+                            <span class="life-entry-desc"><%= item.focus %></span>
+                            <span class="life-entry-tags" aria-label="标签">
+                                <% item.tags.forEach(function(tag) { %>
+                                <span><%= tag %></span>
+                                <% }); %>
+                            </span>
+                        </span>
+                    </button>
+                    <div class="life-entry-details">
+                        <div class="life-entry-stat">
+                            <span><%= item.stat %></span>
+                            <strong><%= item.mood %></strong>
+                        </div>
+                        <ul>
+                            <% item.details.forEach(function(detail) { %>
+                            <li><%= detail %></li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                </article>
+                <% }); %>
+
+                <div class="life-empty-filter" hidden>
+                    <i class="fas fa-feather-pointed" aria-hidden="true"></i>
+                    <p>这个分类还没有公开记录。</p>
+                </div>
+            </section>
+        </div>
+    </section>
 </article>
 
 <script>
     (function() {
-        const filters = document.querySelectorAll('[data-life-filter]');
-        const entries = Array.from(document.querySelectorAll('[data-life-kind]'));
-        const empty = document.querySelector('.life-empty-filter');
+        const root = document.querySelector('[data-life-ledger]');
+        if (!root) return;
+
+        const filters = Array.from(root.querySelectorAll('[data-life-filter]'));
+        const entries = Array.from(root.querySelectorAll('[data-life-entry]'));
+        const empty = root.querySelector('.life-empty-filter');
+        const visibleCount = root.querySelector('[data-life-visible-count]');
+        const focusCover = root.querySelector('[data-focus-cover]');
+        const focusArt = root.querySelector('[data-focus-art]');
+        const focusArtIcon = root.querySelector('[data-focus-art-icon]');
+        const focusArtKind = root.querySelector('[data-focus-art-kind]');
+        const focusTags = root.querySelector('[data-focus-tags]');
+
+        function setText(selector, value) {
+            const target = root.querySelector(selector);
+            if (target) target.textContent = value || '';
+        }
+
+        function fillInlineList(container, values) {
+            if (!container) return;
+            container.innerHTML = '';
+            values.filter(Boolean).forEach(function(value) {
+                const item = document.createElement('span');
+                item.textContent = value;
+                container.appendChild(item);
+            });
+        }
+
+        function updateFocus(entry) {
+            const hasCover = Boolean(entry.dataset.cover);
+            if (focusCover) {
+                focusCover.hidden = !hasCover;
+                if (hasCover) {
+                    focusCover.src = entry.dataset.cover;
+                    focusCover.alt = entry.dataset.title || '';
+                }
+            }
+            if (focusArt) focusArt.hidden = hasCover;
+            if (focusArtIcon) focusArtIcon.className = 'fas ' + (entry.dataset.icon || 'fa-compass');
+            if (focusArtKind) focusArtKind.textContent = entry.dataset.kindLabel || '';
+
+            setText('[data-focus-kind]', entry.dataset.kindLabel);
+            setText('[data-focus-date]', entry.dataset.date);
+            setText('[data-focus-title]', entry.dataset.title);
+            setText('[data-focus-place]', entry.dataset.place);
+            setText('[data-focus-text]', entry.dataset.focus);
+            setText('[data-focus-mood]', entry.dataset.mood);
+            fillInlineList(focusTags, (entry.dataset.tags || '').split('|'));
+        }
+
+        function updateEmptyFocus(label) {
+            if (focusCover) focusCover.hidden = true;
+            if (focusArt) focusArt.hidden = false;
+            if (focusArtIcon) focusArtIcon.className = 'fas fa-feather-pointed';
+            if (focusArtKind) focusArtKind.textContent = label || '生活';
+
+            setText('[data-focus-kind]', label || '生活');
+            setText('[data-focus-date]', '待记录');
+            setText('[data-focus-title]', (label || '生活') + '记录待补充');
+            setText('[data-focus-place]', '下一段值得保存的时间');
+            setText('[data-focus-text]', '这里会保留日期、地点、作品、照片和当时的心情。');
+            setText('[data-focus-mood]', '空白位置');
+            fillInlineList(focusTags, ['待补充']);
+        }
+
+        function selectEntry(entry) {
+            entries.forEach(function(item) {
+                const active = item === entry;
+                item.classList.toggle('is-active', active);
+                const button = item.querySelector('[data-life-select]');
+                if (button) button.setAttribute('aria-pressed', active ? 'true' : 'false');
+            });
+            updateFocus(entry);
+        }
 
         function applyFilter(kind) {
-            let visibleCount = 0;
+            let shown = [];
             entries.forEach(function(entry) {
                 const visible = kind === 'all' || entry.dataset.lifeKind === kind;
                 entry.hidden = !visible;
-                if (visible) visibleCount += 1;
+                if (visible) shown.push(entry);
             });
-            if (empty) empty.hidden = visibleCount !== 0;
+
+            if (visibleCount) visibleCount.textContent = shown.length;
+            if (empty) empty.hidden = shown.length !== 0;
+
             filters.forEach(function(button) {
-                button.classList.toggle('active', button.dataset.lifeFilter === kind);
+                const active = button.dataset.lifeFilter === kind;
+                button.classList.toggle('active', active);
+                button.setAttribute('aria-pressed', active ? 'true' : 'false');
             });
+
+            if (shown.length) {
+                selectEntry(shown[0]);
+                return;
+            }
+
+            const activeFilter = filters.find(function(button) {
+                return button.dataset.lifeFilter === kind;
+            });
+            const label = activeFilter ? activeFilter.querySelector('.life-filter-label').textContent : '';
+            entries.forEach(function(entry) {
+                entry.classList.remove('is-active');
+                const button = entry.querySelector('[data-life-select]');
+                if (button) button.setAttribute('aria-pressed', 'false');
+            });
+            updateEmptyFocus(label);
         }
 
         filters.forEach(function(button) {
             button.addEventListener('click', function() {
                 applyFilter(button.dataset.lifeFilter);
             });
+        });
+
+        entries.forEach(function(entry) {
+            const button = entry.querySelector('[data-life-select]');
+            if (button) {
+                button.addEventListener('click', function() {
+                    selectEntry(entry);
+                });
+            }
         });
     })();
 </script>

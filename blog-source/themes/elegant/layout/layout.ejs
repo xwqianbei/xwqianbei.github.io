@@ -14,6 +14,18 @@ function isNavActive(target) {
     if (targetPath === '/archives/' && /^\/\d{4}\//.test(currentNavPath)) return true;
     return currentNavPath.indexOf(targetPath) === 0;
 }
+
+var navMeta = {
+    '首页': { icon: 'fa-house-chimney', tone: 'Home' },
+    '文字': { icon: 'fa-pen-nib', tone: 'Writing' },
+    '作品': { icon: 'fa-layer-group', tone: 'Works' },
+    '生活': { icon: 'fa-compass', tone: 'Life' },
+    '关于': { icon: 'fa-user', tone: 'About' }
+};
+
+function getNavMeta(key) {
+    return navMeta[key] || { icon: 'fa-circle', tone: key };
+}
 %>
 <!DOCTYPE html>
 <html lang="<%- config.language %>">
@@ -40,9 +52,14 @@ function isNavActive(target) {
     <% } else { %>
     <nav class="main-nav" id="mainNav">
         <div class="nav-inner">
-            <a href="<%- url_for('/') %>" class="logo">
-                <span class="logo-mark"><%= (config.author || 'M').charAt(0) %></span>
-                <span class="logo-text"><%= config.author %></span>
+            <a href="<%- url_for('/') %>" class="logo" aria-label="返回首页">
+                <span class="logo-mark">
+                    <img src="<%- url_for(theme.avatar || '/images/icons/main.jpg') %>" alt="" />
+                </span>
+                <span class="logo-copy">
+                    <strong><%= config.author %></strong>
+                    <small>Personal archive</small>
+                </span>
             </a>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
@@ -53,10 +70,13 @@ function isNavActive(target) {
                 <% var menuKeys = Object.keys(theme.menu); %>
                 <% menuKeys.forEach(function(key) { 
                     var active = isNavActive(theme.menu[key]);
+                    var meta = getNavMeta(key);
                 %>
                 <li>
-                    <a href="<%- url_for(theme.menu[key]) %>" class="nav-link<% if (active) { %> active<% } %>">
-                        <%= key %>
+                    <a href="<%- url_for(theme.menu[key]) %>" class="nav-link<% if (active) { %> active<% } %>"<% if (active) { %> aria-current="page"<% } %>>
+                        <i class="fas <%= meta.icon %>" aria-hidden="true"></i>
+                        <span class="nav-link-label"><%= key %></span>
+                        <span class="nav-link-tone"><%= meta.tone %></span>
                     </a>
                 </li>
                 <% }); %>

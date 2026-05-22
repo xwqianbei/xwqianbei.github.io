@@ -9,6 +9,18 @@ function getPostTag(post) {
     return 'Article';
 }
 
+var navMeta = {
+    '首页': { icon: 'fa-house-chimney', tone: 'Home' },
+    '文字': { icon: 'fa-pen-nib', tone: 'Writing' },
+    '作品': { icon: 'fa-layer-group', tone: 'Works' },
+    '生活': { icon: 'fa-compass', tone: 'Life' },
+    '关于': { icon: 'fa-user', tone: 'About' }
+};
+
+function getNavMeta(key) {
+    return navMeta[key] || { icon: 'fa-circle', tone: key };
+}
+
 var lifeHighlights = [
     {
         kind: '旅行',
@@ -16,7 +28,8 @@ var lifeHighlights = [
         date: '2026.05.14 - 05.23',
         title: '云南十日旅行',
         place: '大理 · 丽江 · 香格里拉',
-        note: '把雪山、古城、湖风和路上的光线收进同一段旅程里。'
+        note: '把雪山、古城、湖风和路上的光线收进同一段旅程里。',
+        tags: ['云南', '旅拍', '高原']
     },
     {
         kind: '音乐',
@@ -24,7 +37,8 @@ var lifeHighlights = [
         date: '2025.03.23 - 03.30',
         title: '循环《花田错》',
         place: '一周旋律记忆',
-        note: '用一首歌给那段时间做索引，之后再听见时能回到当时的心境。'
+        note: '用一首歌给那段时间做索引，之后再听见时能回到当时的心境。',
+        tags: ['华语音乐', '循环播放']
     }
 ];
 %>
@@ -45,8 +59,14 @@ var lifeHighlights = [
                 <% var menuKeys = Object.keys(theme.menu); %>
                 <% menuKeys.forEach(function(key) { 
                     var target = theme.menu[key];
+                    var meta = getNavMeta(key);
                 %>
-                <li><a href="<%- url_for(target) %>" class="hero-nav-link<% if (target === '/') { %> active<% } %>"><%= key %></a></li>
+                <li>
+                    <a href="<%- url_for(target) %>" class="hero-nav-link<% if (target === '/') { %> active<% } %>"<% if (target === '/') { %> aria-current="page"<% } %>>
+                        <i class="fas <%= meta.icon %>" aria-hidden="true"></i>
+                        <span class="hero-nav-text"><%= key %></span>
+                    </a>
+                </li>
                 <% }); %>
             </ul>
             <button class="hero-mobile-toggle" id="heroMobileToggle" aria-label="Toggle menu" aria-expanded="false">
@@ -145,6 +165,11 @@ var lifeHighlights = [
                 <strong><%= item.title %></strong>
                 <span class="life-home-place"><%= item.place %></span>
                 <span class="life-home-note"><%= item.note %></span>
+                <span class="life-home-tags" aria-label="生活标签">
+                    <% item.tags.forEach(function(tag) { %>
+                    <span><%= tag %></span>
+                    <% }); %>
+                </span>
             </a>
             <% }); %>
         </div>
