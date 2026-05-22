@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -40,23 +41,15 @@
             <ul class="hero-nav-links" id="heroNavLinks">
                 
                 
-                <li><a href="/" class="hero-nav-link active">Home</a></li>
+                <li><a href="/" class="hero-nav-link active">首页</a></li>
                 
-                <li class="nav-separator">/</li>
+                <li><a href="/archives" class="hero-nav-link">文字</a></li>
                 
+                <li><a href="/projects" class="hero-nav-link">作品</a></li>
                 
-                <li><a href="/archives" class="hero-nav-link">Words</a></li>
+                <li><a href="/life" class="hero-nav-link">生活</a></li>
                 
-                <li class="nav-separator">/</li>
-                
-                
-                <li><a href="/projects" class="hero-nav-link">Work</a></li>
-                
-                <li class="nav-separator">/</li>
-                
-                
-                <li><a href="/about" class="hero-nav-link">About</a></li>
-                
+                <li><a href="/about" class="hero-nav-link">关于</a></li>
                 
             </ul>
             <button class="hero-mobile-toggle" id="heroMobileToggle" aria-label="Toggle menu" aria-expanded="false">
@@ -131,13 +124,44 @@
         </div>
     </div>
 
-    <a href="#recentPosts" class="hero-scroll-indicator" aria-label="查看最近文章">
+    <a href="#lifeMoments" class="hero-scroll-indicator" aria-label="查看足迹与兴趣">
         <span class="scroll-line"></span>
-        <span>Latest</span>
+        <span>Explore</span>
     </a>
 </section>
 
 <main class="main-content home-main">
+    <section class="section life-home" id="lifeMoments">
+        <div class="section-header section-header-home">
+            <div>
+                <p class="section-eyebrow">Life ledger</p>
+                <h2 class="section-title">足迹与兴趣</h2>
+            </div>
+            <a href="/life" class="section-link">进入生活轨迹 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+        <div class="life-home-grid">
+            
+            <a href="/life" class="life-home-card">
+                <span class="life-home-index">01</span>
+                <span class="life-home-icon"><i class="fas fa-route" aria-hidden="true"></i></span>
+                <span class="life-home-meta">旅行 · 2026.05.14 - 05.23</span>
+                <strong>云南十日旅行</strong>
+                <span class="life-home-place">大理 · 丽江 · 香格里拉</span>
+                <span class="life-home-note">把雪山、古城、湖风和路上的光线收进同一段旅程里。</span>
+            </a>
+            
+            <a href="/life" class="life-home-card">
+                <span class="life-home-index">02</span>
+                <span class="life-home-icon"><i class="fas fa-music" aria-hidden="true"></i></span>
+                <span class="life-home-meta">音乐 · 2025.03.23 - 03.30</span>
+                <strong>循环《花田错》</strong>
+                <span class="life-home-place">一周旋律记忆</span>
+                <span class="life-home-note">用一首歌给那段时间做索引，之后再听见时能回到当时的心境。</span>
+            </a>
+            
+        </div>
+    </section>
+
     <section class="section recent-posts" id="recentPosts">
         <div class="section-header section-header-home">
             <div>
@@ -208,13 +232,15 @@
             <div class="footer-col">
                 <h4>Navigation</h4>
                 
-                <a href="/">Home</a>
+                <a href="/">首页</a>
                 
-                <a href="/archives">Words</a>
+                <a href="/archives">文字</a>
                 
-                <a href="/projects">Work</a>
+                <a href="/projects">作品</a>
                 
-                <a href="/about">About</a>
+                <a href="/life">生活</a>
+                
+                <a href="/about">关于</a>
                 
             </div>
             <div class="footer-col">

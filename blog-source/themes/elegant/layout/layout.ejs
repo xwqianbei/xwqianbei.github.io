@@ -1,3 +1,20 @@
+<%
+function normalizeNavPath(path) {
+    var value = String(path || '/');
+    value = value.replace(/^\/?/, '/').replace(/index\.html$/, '');
+    if (value.length > 1 && value.slice(-1) !== '/') value += '/';
+    return value;
+}
+
+var currentNavPath = is_home() ? '/' : normalizeNavPath(page.path || page.current_url || '');
+
+function isNavActive(target) {
+    var targetPath = normalizeNavPath(target);
+    if (targetPath === '/') return is_home();
+    if (targetPath === '/archives/' && /^\/\d{4}\//.test(currentNavPath)) return true;
+    return currentNavPath.indexOf(targetPath) === 0;
+}
+%>
 <!DOCTYPE html>
 <html lang="<%- config.language %>">
 
@@ -24,7 +41,8 @@
     <nav class="main-nav" id="mainNav">
         <div class="nav-inner">
             <a href="<%- url_for('/') %>" class="logo">
-                <%= config.author %><span class="logo-dot">.</span>
+                <span class="logo-mark"><%= (config.author || 'M').charAt(0) %></span>
+                <span class="logo-text"><%= config.author %></span>
             </a>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
@@ -33,15 +51,14 @@
             </button>
             <ul class="nav-links" id="navLinks">
                 <% var menuKeys = Object.keys(theme.menu); %>
-                <% menuKeys.forEach(function(key, index) { %>
+                <% menuKeys.forEach(function(key) { 
+                    var active = isNavActive(theme.menu[key]);
+                %>
                 <li>
-                    <a href="<%- url_for(theme.menu[key]) %>" class="nav-link">
+                    <a href="<%- url_for(theme.menu[key]) %>" class="nav-link<% if (active) { %> active<% } %>">
                         <%= key %>
                     </a>
                 </li>
-                <% if (index < menuKeys.length - 1) { %>
-                <li class="nav-separator" aria-hidden="true">/</li>
-                <% } %>
                 <% }); %>
             </ul>
         </div>

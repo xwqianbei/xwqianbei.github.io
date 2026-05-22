@@ -1,0 +1,149 @@
+<%
+var filters = [
+    { key: 'all', label: '全部', icon: 'fa-border-all' },
+    { key: 'travel', label: '旅行', icon: 'fa-route' },
+    { key: 'photo', label: '摄影', icon: 'fa-camera-retro' },
+    { key: 'music', label: '音乐', icon: 'fa-music' },
+    { key: 'film', label: '影视', icon: 'fa-film' },
+    { key: 'book', label: '书籍', icon: 'fa-book-open' }
+];
+
+var lifeRecords = [
+    {
+        kind: 'travel',
+        label: '旅行',
+        icon: 'fa-route',
+        date: '2026.05.14 - 05.23',
+        title: '云南十日旅行',
+        place: '大理 · 丽江 · 香格里拉',
+        description: '把洱海边的风、古城夜色、雪山和高原路途整理成一段可回看的旅程。之后可以继续补充照片、路线、花费和当时的心情。',
+        tags: ['云南', '旅行', '旅拍', '高原']
+    },
+    {
+        kind: 'music',
+        label: '音乐',
+        icon: 'fa-music',
+        date: '2025.03.23 - 03.30',
+        title: '循环《花田错》',
+        place: '一周旋律记忆',
+        description: '用一首歌给那段时间做索引。以后再听见前奏时，页面能帮我回到那一周的状态和画面。',
+        tags: ['花田错', '华语音乐', '循环播放']
+    }
+];
+
+var recordCount = lifeRecords.length;
+var yearCount = {};
+lifeRecords.forEach(function(item) {
+    var year = item.date.slice(0, 4);
+    yearCount[year] = true;
+});
+var years = Object.keys(yearCount).length;
+%>
+
+<article class="life-page">
+    <header class="life-hero">
+        <p class="life-kicker">Life ledger</p>
+        <h1 class="life-title">把远方、旋律和阅读过的日子留下来</h1>
+        <p class="life-intro">
+            这里不是正式简历，而是个人生活的时间索引：旅行、摄影、音乐、影视和书籍都可以按时间沉淀，之后回看时能快速找到某段经历的地点、作品和情绪。
+        </p>
+        <div class="life-summary" aria-label="生活记录概览">
+            <div>
+                <span>Records</span>
+                <strong><%= recordCount %></strong>
+            </div>
+            <div>
+                <span>Years</span>
+                <strong><%= years %></strong>
+            </div>
+            <div>
+                <span>Interests</span>
+                <strong>5</strong>
+            </div>
+        </div>
+    </header>
+
+    <section class="life-filter-panel" aria-label="按兴趣筛选记录">
+        <div class="life-filter-copy">
+            <span>Filter</span>
+            <strong>选择一种兴趣，查看对应的生活片段</strong>
+        </div>
+        <div class="life-filter-list" role="list">
+            <% filters.forEach(function(filter, index) { %>
+            <button class="life-filter<% if (index === 0) { %> active<% } %>" type="button" data-life-filter="<%= filter.key %>">
+                <i class="fas <%= filter.icon %>" aria-hidden="true"></i>
+                <span><%= filter.label %></span>
+            </button>
+            <% }); %>
+        </div>
+    </section>
+
+    <div class="life-layout">
+        <aside class="life-compass" aria-label="兴趣类型">
+            <div class="life-compass-title">记录维度</div>
+            <div class="life-compass-list">
+                <span><i class="fas fa-route" aria-hidden="true"></i> 旅行路线</span>
+                <span><i class="fas fa-camera-retro" aria-hidden="true"></i> 摄影胶片</span>
+                <span><i class="fas fa-music" aria-hidden="true"></i> 循环歌单</span>
+                <span><i class="fas fa-film" aria-hidden="true"></i> 观影片单</span>
+                <span><i class="fas fa-book-open" aria-hidden="true"></i> 阅读书架</span>
+            </div>
+        </aside>
+
+        <section class="life-timeline" aria-live="polite">
+            <% lifeRecords.forEach(function(item) { %>
+            <article class="life-entry" data-life-kind="<%= item.kind %>">
+                <div class="life-entry-node">
+                    <i class="fas <%= item.icon %>" aria-hidden="true"></i>
+                </div>
+                <div class="life-entry-card">
+                    <div class="life-entry-top">
+                        <span class="life-entry-date"><%= item.date %></span>
+                        <span class="life-entry-kind"><%= item.label %></span>
+                    </div>
+                    <h2><%= item.title %></h2>
+                    <p class="life-entry-place"><i class="fas fa-location-dot" aria-hidden="true"></i> <%= item.place %></p>
+                    <p class="life-entry-desc"><%= item.description %></p>
+                    <div class="life-entry-tags" aria-label="标签">
+                        <% item.tags.forEach(function(tag) { %>
+                        <span><%= tag %></span>
+                        <% }); %>
+                    </div>
+                </div>
+            </article>
+            <% }); %>
+
+            <div class="life-empty-filter" hidden>
+                <i class="fas fa-feather-pointed" aria-hidden="true"></i>
+                <p>这个分类还没有公开记录。</p>
+            </div>
+        </section>
+    </div>
+</article>
+
+<script>
+    (function() {
+        const filters = document.querySelectorAll('[data-life-filter]');
+        const entries = Array.from(document.querySelectorAll('[data-life-kind]'));
+        const empty = document.querySelector('.life-empty-filter');
+
+        function applyFilter(kind) {
+            let visibleCount = 0;
+            entries.forEach(function(entry) {
+                const visible = kind === 'all' || entry.dataset.lifeKind === kind;
+                entry.hidden = !visible;
+                if (visible) visibleCount += 1;
+            });
+            if (empty) empty.hidden = visibleCount !== 0;
+            filters.forEach(function(button) {
+                button.classList.toggle('active', button.dataset.lifeFilter === kind);
+            });
+        }
+
+        filters.forEach(function(button) {
+            button.addEventListener('click', function() {
+                applyFilter(button.dataset.lifeFilter);
+            });
+        });
+    })();
+</script>

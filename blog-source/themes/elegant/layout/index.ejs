@@ -8,6 +8,25 @@ function getPostTag(post) {
     }
     return 'Article';
 }
+
+var lifeHighlights = [
+    {
+        kind: '旅行',
+        icon: 'fa-route',
+        date: '2026.05.14 - 05.23',
+        title: '云南十日旅行',
+        place: '大理 · 丽江 · 香格里拉',
+        note: '把雪山、古城、湖风和路上的光线收进同一段旅程里。'
+    },
+    {
+        kind: '音乐',
+        icon: 'fa-music',
+        date: '2025.03.23 - 03.30',
+        title: '循环《花田错》',
+        place: '一周旋律记忆',
+        note: '用一首歌给那段时间做索引，之后再听见时能回到当时的心境。'
+    }
+];
 %>
 
 <section class="hero-fullscreen" id="heroSection" aria-label="个人主页">
@@ -24,11 +43,10 @@ function getPostTag(post) {
             </a>
             <ul class="hero-nav-links" id="heroNavLinks">
                 <% var menuKeys = Object.keys(theme.menu); %>
-                <% menuKeys.forEach(function(key, index) { %>
-                <li><a href="<%- url_for(theme.menu[key]) %>" class="hero-nav-link<% if (key === 'Home') { %> active<% } %>"><%= key %></a></li>
-                <% if (index < menuKeys.length - 1) { %>
-                <li class="nav-separator">/</li>
-                <% } %>
+                <% menuKeys.forEach(function(key) { 
+                    var target = theme.menu[key];
+                %>
+                <li><a href="<%- url_for(target) %>" class="hero-nav-link<% if (target === '/') { %> active<% } %>"><%= key %></a></li>
                 <% }); %>
             </ul>
             <button class="hero-mobile-toggle" id="heroMobileToggle" aria-label="Toggle menu" aria-expanded="false">
@@ -103,13 +121,35 @@ function getPostTag(post) {
         </div>
     </div>
 
-    <a href="#recentPosts" class="hero-scroll-indicator" aria-label="查看最近文章">
+    <a href="#lifeMoments" class="hero-scroll-indicator" aria-label="查看足迹与兴趣">
         <span class="scroll-line"></span>
-        <span>Latest</span>
+        <span>Explore</span>
     </a>
 </section>
 
 <main class="main-content home-main">
+    <section class="section life-home" id="lifeMoments">
+        <div class="section-header section-header-home">
+            <div>
+                <p class="section-eyebrow">Life ledger</p>
+                <h2 class="section-title">足迹与兴趣</h2>
+            </div>
+            <a href="<%- url_for('/life') %>" class="section-link">进入生活轨迹 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+        <div class="life-home-grid">
+            <% lifeHighlights.forEach(function(item, index) { %>
+            <a href="<%- url_for('/life') %>" class="life-home-card">
+                <span class="life-home-index"><%= ('0' + (index + 1)).slice(-2) %></span>
+                <span class="life-home-icon"><i class="fas <%= item.icon %>" aria-hidden="true"></i></span>
+                <span class="life-home-meta"><%= item.kind %> · <%= item.date %></span>
+                <strong><%= item.title %></strong>
+                <span class="life-home-place"><%= item.place %></span>
+                <span class="life-home-note"><%= item.note %></span>
+            </a>
+            <% }); %>
+        </div>
+    </section>
+
     <section class="section recent-posts" id="recentPosts">
         <div class="section-header section-header-home">
             <div>
