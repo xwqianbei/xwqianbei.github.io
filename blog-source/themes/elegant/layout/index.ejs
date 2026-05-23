@@ -21,26 +21,18 @@ function getNavMeta(key) {
     return navMeta[key] || { icon: 'fa-circle' };
 }
 
-var lifeHighlights = [
-    {
-        kind: '旅行',
-        icon: 'fa-route',
-        date: '2026.05.14 - 05.23',
-        title: '云南十日旅行',
-        place: '大理 · 丽江 · 香格里拉',
-        note: '把雪山、古城、湖风和路上的光线收进同一段旅程里。',
-        tags: ['云南', '旅拍', '高原']
-    },
-    {
-        kind: '音乐',
-        icon: 'fa-music',
-        date: '2025.03.23 - 03.30',
-        title: '循环《花田错》',
-        place: '一周旋律记忆',
-        note: '用一首歌给那段时间做索引，之后再听见时能回到当时的心境。',
-        tags: ['华语音乐', '循环播放']
-    }
-];
+var lifeData = site.data.life || {};
+var lifeHighlights = (lifeData.records || []).slice(0, 2).map(function(item) {
+    return {
+        kind: item.label || item.kind,
+        icon: item.icon || 'fa-compass',
+        date: item.date,
+        title: item.title,
+        place: item.place,
+        note: item.focus,
+        tags: item.tags || []
+    };
+});
 %>
 
 <section class="hero-fullscreen" id="heroSection" aria-label="个人主页">
@@ -156,6 +148,7 @@ var lifeHighlights = [
             </div>
             <a href="<%- url_for('/life') %>" class="section-link">Open Ledger <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
         </div>
+        <% if (lifeHighlights.length) { %>
         <div class="life-home-grid">
             <% lifeHighlights.forEach(function(item, index) { %>
             <a href="<%- url_for('/life') %>" class="life-home-card">
@@ -173,6 +166,12 @@ var lifeHighlights = [
             </a>
             <% }); %>
         </div>
+        <% } else { %>
+        <div class="empty-state">
+            <i class="fas fa-compass" aria-hidden="true"></i>
+            <p>Life records are waiting to be added.</p>
+        </div>
+        <% } %>
     </section>
 
     <section class="section recent-posts" id="recentPosts">

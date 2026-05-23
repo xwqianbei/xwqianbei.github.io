@@ -6,263 +6,184 @@ layout: false
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hexo Admin Workspace</title>
-    <meta name="description" content="GitHub 驱动的 Hexo 写作台">
+    <title>Content Studio</title>
+    <meta name="description" content="个人网站内容维护平台">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
-<body class="theme-light">
-
-    <div id="auth-overlay" class="auth-overlay active">
+<body>
+    <div id="authOverlay" class="auth-overlay active">
         <section class="auth-card">
-            <div class="auth-badge">GitHub Access</div>
-            <h2>进入写作台</h2>
-            <p>使用 Personal Access Token 连接仓库，编辑、预览并发布 Markdown 文章。</p>
-            <label for="gh-token-input">Personal Access Token</label>
-            <input type="password" id="gh-token-input" placeholder="ghp_xxxxxxxxxxxxxxxxx" />
-            <button id="login-btn" class="primary-btn auth-submit">
-                <i class="ph ph-lock-key"></i>
-                <span>验证并进入</span>
-            </button>
-            <div class="auth-note">Token 仅保存在当前浏览器本地。</div>
-            <div id="auth-error" class="error-msg" role="alert"></div>
+            <p class="eyebrow">GitHub Access</p>
+            <h1>Content Studio</h1>
+            <p>用 GitHub Personal Access Token 维护个人网站内容。Token 只保存在当前浏览器。</p>
+            <label for="tokenInput">Personal Access Token</label>
+            <input id="tokenInput" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxx" autocomplete="off">
+            <button id="loginBtn" class="btn primary"><i class="fas fa-lock"></i><span>连接仓库</span></button>
+            <p id="authError" class="error-msg" role="alert"></p>
         </section>
     </div>
 
-    <div id="app" class="admin-app hidden">
+    <div id="app" class="studio hidden">
         <header class="topbar">
-            <div class="brand-block">
-                <span class="brand-mark">H</span>
+            <div class="brand">
+                <span class="brand-mark">CS</span>
                 <div>
-                    <p class="brand-kicker">GitHub Writing Console</p>
-                    <h1>Hexo Admin Workspace</h1>
+                    <p class="eyebrow">Personal Site</p>
+                    <h1>Content Studio</h1>
                 </div>
             </div>
             <div class="topbar-meta">
-                <span class="status-pill" id="connection-status">Disconnected</span>
-                <span class="repo-chip">xwqianbei / blog-source/source/_posts</span>
-                <span class="save-chip" id="save-status">Auto-save idle</span>
+                <span id="connectionStatus" class="status disconnected">Disconnected</span>
+                <span id="saveStatus" class="status idle">Idle</span>
             </div>
             <div class="topbar-actions">
-                <button class="icon-btn icon-btn-top" id="theme-toggle" aria-label="切换主题" title="切换主题">
-                    <i class="ph ph-moon"></i>
-                </button>
-                <button class="ghost-btn" id="open-repo-btn" title="在 GitHub 中打开">
-                    <i class="ph ph-arrow-square-out"></i>
-                    <span>Repo</span>
-                </button>
-                <button class="primary-btn" id="publish-btn">
-                    <i class="ph ph-upload-simple"></i>
-                    <span>Publish</span>
-                </button>
+                <button id="refreshBtn" class="btn ghost"><i class="fas fa-rotate"></i><span>Refresh</span></button>
+                <button id="openRepoBtn" class="btn ghost"><i class="fas fa-arrow-up-right-from-square"></i><span>Repo</span></button>
+                <button id="publishBtn" class="btn primary"><i class="fas fa-cloud-arrow-up"></i><span>Publish</span></button>
             </div>
         </header>
 
         <div class="workspace">
-            <aside class="panel sidebar-panel">
-                <div class="panel-block">
-                    <div class="panel-head">
-                        <div>
-                            <h2>内容库</h2>
-                            <p>远程文章与本地草稿</p>
-                        </div>
-                        <button class="icon-btn" id="refresh-posts-btn" aria-label="刷新列表" title="刷新列表">
-                            <i class="ph ph-arrows-clockwise"></i>
-                        </button>
-                    </div>
-                    <div class="search-bar">
-                        <i class="ph ph-magnifying-glass"></i>
-                        <input type="search" id="post-search" placeholder="搜索标题、标签或路径" />
-                    </div>
-                    <div class="segmented" id="list-tabs" role="tablist" aria-label="内容切换">
-                        <button class="segmented-btn active" data-list-view="posts">Posts</button>
-                        <button class="segmented-btn" data-list-view="drafts">Drafts</button>
-                    </div>
-                    <div class="mini-stats">
-                        <span><strong id="remote-count">0</strong> Remote</span>
-                        <span><strong id="draft-count">0</strong> Drafts</span>
-                    </div>
-                </div>
-                <div class="doc-list" id="doc-list"></div>
-                <div class="panel-actions">
-                    <button class="ghost-btn" id="new-post-btn">
-                        <i class="ph ph-plus"></i>
-                        <span>New Draft</span>
-                    </button>
-                    <button class="ghost-btn" id="save-draft-btn">
-                        <i class="ph ph-floppy-disk"></i>
-                        <span>Save Draft</span>
-                    </button>
-                </div>
+            <aside class="module-rail" aria-label="内容模块">
+                <button class="module-btn active" data-module="posts"><i class="fas fa-pen-nib"></i><span>Posts</span></button>
+                <button class="module-btn" data-module="life"><i class="fas fa-compass"></i><span>Life</span></button>
+                <button class="module-btn" data-module="works"><i class="fas fa-layer-group"></i><span>Works</span></button>
+                <button class="module-btn" data-module="profile"><i class="fas fa-user"></i><span>Profile</span></button>
             </aside>
 
-            <main class="editor-panel mode-split">
-                <div class="editor-head">
-                    <div class="editor-title-block">
-                        <p class="editor-eyebrow" id="current-file-status">Ready to write</p>
-                        <input type="text" id="post-title" class="title-input" placeholder="输入文章标题" value="未命名文章" />
+            <aside class="library-panel">
+                <div class="panel-head">
+                    <div>
+                        <p class="eyebrow" id="moduleEyebrow">Markdown</p>
+                        <h2 id="moduleTitle">Posts</h2>
                     </div>
-                    <div class="editor-controls">
-                        <div class="segmented" id="mode-tabs" role="tablist" aria-label="编辑模式">
-                            <button class="segmented-btn" data-editor-mode="write">Write</button>
-                            <button class="segmented-btn active" data-editor-mode="split">Split</button>
-                            <button class="segmented-btn" data-editor-mode="preview">Preview</button>
-                        </div>
-                        <button class="icon-btn" id="duplicate-btn" aria-label="复制为草稿" title="复制为草稿">
-                            <i class="ph ph-copy"></i>
-                        </button>
-                    </div>
+                    <button id="addItemBtn" class="icon-btn" title="新增"><i class="fas fa-plus"></i></button>
                 </div>
-                <div class="editor-meta-strip">
-                    <span id="current-path-chip">blog-source/source/_posts</span>
-                    <span id="current-sha-chip">SHA: --</span>
-                    <span id="last-saved-chip">Auto-save idle</span>
+                <div class="search-bar">
+                    <i class="fas fa-magnifying-glass"></i>
+                    <input id="searchInput" type="search" placeholder="Search">
                 </div>
-                <div class="editor-body">
-                    <section class="editor-column write-column" id="write-column">
-                        <div class="editor-textarea-shell">
-                            <textarea id="post-content" class="content-textarea" placeholder="在这里开始写作，支持 Markdown"></textarea>
+                <div id="listMeta" class="list-meta">Ready</div>
+                <div id="itemList" class="item-list"></div>
+            </aside>
+
+            <main class="editor-shell">
+                <section id="postsView" class="module-view active">
+                    <div class="editor-head">
+                        <div>
+                            <p class="eyebrow">Post Editor</p>
+                            <h2>Markdown Article</h2>
                         </div>
-                    </section>
-                    <section class="editor-column preview-column" id="preview-column">
-                        <div class="preview-head">
-                            <div>
-                                <p>Preview</p>
-                                <span id="preview-word-count">0 words</span>
-                            </div>
-                            <span class="preview-badge">Live</span>
+                        <div class="inline-actions">
+                            <button id="saveDraftBtn" class="btn ghost"><i class="fas fa-floppy-disk"></i><span>Save Draft</span></button>
+                            <button id="newPostBtn" class="btn ghost"><i class="fas fa-file-circle-plus"></i><span>New Post</span></button>
                         </div>
-                        <div id="preview" class="preview-body"></div>
-                    </section>
-                </div>
-                <footer class="editor-footer">
-                    <div class="footer-stat-grid">
-                        <span><strong id="word-count">0</strong> Words</span>
-                        <span><strong id="char-count">0</strong> Chars</span>
-                        <span><strong id="line-count">0</strong> Lines</span>
-                        <span><strong id="reading-time">0 min</strong> Read</span>
                     </div>
-                    <div class="footer-badges">
-                        <span id="session-word-count">0</span>
-                        <span id="typing-speed">0 wpm</span>
-                        <span id="writing-time">00:00</span>
+
+                    <div class="form-grid post-meta-grid">
+                        <label>Title<input id="postTitle" type="text" placeholder="文章标题"></label>
+                        <label>Filename<input id="postFilename" type="text" placeholder="2026-05-23-note.md"></label>
+                        <label>Date<input id="postDate" type="datetime-local"></label>
+                        <label>Tags<input id="postTags" type="text" placeholder="AI, LLM"></label>
+                        <label>Categories<input id="postCategories" type="text" placeholder="Research"></label>
+                        <label>Cover<input id="postCover" type="text" placeholder="/images/self/life_photo.jpg"></label>
                     </div>
-                </footer>
+                    <label class="block-field">Excerpt<textarea id="postExcerpt" rows="3" placeholder="文章摘要"></textarea></label>
+                    <div class="split-editor">
+                        <label class="block-field editor-area">Content<textarea id="postContent" placeholder="Markdown content"></textarea></label>
+                        <section class="preview-panel">
+                            <div class="preview-head"><span>Preview</span><strong id="postStats">0 words</strong></div>
+                            <div id="postPreview" class="preview-body"></div>
+                        </section>
+                    </div>
+                </section>
+
+                <section id="lifeView" class="module-view">
+                    <div class="editor-head">
+                        <div>
+                            <p class="eyebrow">Life Ledger</p>
+                            <h2>Travel, Music, Photo, Film, Books</h2>
+                        </div>
+                        <div class="inline-actions">
+                            <button id="duplicateLifeBtn" class="btn ghost"><i class="fas fa-copy"></i><span>Duplicate</span></button>
+                            <button id="deleteLifeBtn" class="btn danger"><i class="fas fa-trash"></i><span>Delete</span></button>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <label>Title<input id="lifeTitle" type="text"></label>
+                        <label>ID<input id="lifeId" type="text"></label>
+                        <label>Kind
+                            <select id="lifeKind">
+                                <option value="travel">travel</option>
+                                <option value="photo">photo</option>
+                                <option value="music">music</option>
+                                <option value="film">film</option>
+                                <option value="book">book</option>
+                            </select>
+                        </label>
+                        <label>Label<input id="lifeLabel" type="text"></label>
+                        <label>Icon<input id="lifeIcon" type="text" placeholder="fa-route"></label>
+                        <label>Date<input id="lifeDate" type="text" placeholder="2026.05.14 - 05.23"></label>
+                        <label>Year<input id="lifeYear" type="text" placeholder="2026"></label>
+                        <label>Stat<input id="lifeStat" type="text" placeholder="10 days"></label>
+                        <label>Place<input id="lifePlace" type="text"></label>
+                        <label>Cover<input id="lifeCover" type="text"></label>
+                    </div>
+                    <label class="block-field">Focus<textarea id="lifeFocus" rows="3"></textarea></label>
+                    <label class="block-field">Mood<textarea id="lifeMood" rows="2"></textarea></label>
+                    <label class="block-field">Tags<input id="lifeTags" type="text" placeholder="云南, 旅行, 旅拍"></label>
+                    <label class="block-field">Details<textarea id="lifeDetails" rows="5" placeholder="每行一条细节"></textarea></label>
+                </section>
+
+                <section id="worksView" class="module-view">
+                    <div class="editor-head">
+                        <div>
+                            <p class="eyebrow">Works</p>
+                            <h2>Project Cards</h2>
+                        </div>
+                        <div class="inline-actions">
+                            <button id="duplicateWorkBtn" class="btn ghost"><i class="fas fa-copy"></i><span>Duplicate</span></button>
+                            <button id="deleteWorkBtn" class="btn danger"><i class="fas fa-trash"></i><span>Delete</span></button>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <label>Title<input id="workTitle" type="text"></label>
+                        <label>Tag<input id="workTag" type="text"></label>
+                        <label>Link<input id="workHref" type="text"></label>
+                        <label>Image<input id="workImage" type="text"></label>
+                    </div>
+                    <label class="block-field">Description<textarea id="workDesc" rows="4"></textarea></label>
+                    <label class="block-field">Stats<input id="workStats" type="text" placeholder="LongCat-8B, 18B scaling, Domain eval"></label>
+                </section>
+
+                <section id="profileView" class="module-view">
+                    <div class="editor-head">
+                        <div>
+                            <p class="eyebrow">Profile</p>
+                            <h2>About Page Data</h2>
+                        </div>
+                        <button id="formatProfileBtn" class="btn ghost"><i class="fas fa-wand-magic-sparkles"></i><span>Format JSON</span></button>
+                    </div>
+                    <div class="form-grid">
+                        <label>Name<input id="profileName" type="text"></label>
+                        <label>Chinese Name<input id="profileNameCn" type="text"></label>
+                        <label>Email<input id="profileEmail" type="text"></label>
+                        <label>GitHub<input id="profileGithub" type="text"></label>
+                        <label>Avatar<input id="profileAvatar" type="text"></label>
+                    </div>
+                    <label class="block-field">Role<input id="profileRole" type="text"></label>
+                    <label class="block-field">Full Profile JSON<textarea id="profileJson" class="json-area" rows="18"></textarea></label>
+                </section>
             </main>
-
-            <aside class="panel inspector-panel">
-                <section class="panel-block">
-                    <div class="panel-head">
-                        <div>
-                            <h2>Front Matter</h2>
-                            <p>文章元数据</p>
-                        </div>
-                    </div>
-                    <div class="field-stack">
-                        <div class="field-group">
-                            <label for="post-filename">文件名</label>
-                            <input type="text" id="post-filename" placeholder="2026-05-02-new-post" />
-                        </div>
-                        <div class="field-group">
-                            <label for="post-date">日期</label>
-                            <input type="datetime-local" id="post-date" />
-                        </div>
-                        <div class="field-group">
-                            <label for="post-tags">标签</label>
-                            <input type="text" id="post-tags" placeholder="AI, LLM, Research" />
-                        </div>
-                        <div class="field-group">
-                            <label for="post-categories">分类</label>
-                            <input type="text" id="post-categories" placeholder="Research, Notes" />
-                        </div>
-                        <div class="field-group">
-                            <label for="post-cover">封面图</label>
-                            <input type="text" id="post-cover" placeholder="/images/self/life_photo.jpg" />
-                        </div>
-                        <div class="field-group">
-                            <label for="post-excerpt">摘要</label>
-                            <textarea id="post-excerpt" rows="4" placeholder="文章摘要（可选）"></textarea>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="panel-block">
-                    <div class="panel-head">
-                        <div>
-                            <h2>Metrics</h2>
-                            <p>内容状态</p>
-                        </div>
-                    </div>
-                    <div class="metric-grid">
-                        <div class="metric-card">
-                            <span>Characters</span>
-                            <strong id="metric-chars">0</strong>
-                        </div>
-                        <div class="metric-card">
-                            <span>Words</span>
-                            <strong id="metric-words">0</strong>
-                        </div>
-                        <div class="metric-card">
-                            <span>Reading time</span>
-                            <strong id="metric-read">0 min</strong>
-                        </div>
-                        <div class="metric-card">
-                            <span>Lines</span>
-                            <strong id="metric-lines">0</strong>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="panel-block">
-                    <div class="panel-head">
-                        <div>
-                            <h2>Actions</h2>
-                            <p>快捷工具</p>
-                        </div>
-                    </div>
-                    <div class="action-grid">
-                        <button class="chip-btn" id="copy-frontmatter-btn">
-                            <i class="ph ph-clipboard-text"></i>
-                            <span>Copy Front Matter</span>
-                        </button>
-                        <button class="chip-btn" id="insert-heading">
-                            <i class="ph ph-hash"></i>
-                            <span>Heading</span>
-                        </button>
-                        <button class="chip-btn" id="insert-quote">
-                            <i class="ph ph-quotes"></i>
-                            <span>Quote</span>
-                        </button>
-                        <button class="chip-btn" id="insert-code">
-                            <i class="ph ph-code"></i>
-                            <span>Code</span>
-                        </button>
-                        <button class="chip-btn" id="insert-divider">
-                            <i class="ph ph-separator-horizontal"></i>
-                            <span>Divider</span>
-                        </button>
-                    </div>
-                </section>
-
-                <section class="panel-block">
-                    <div class="panel-head">
-                        <div>
-                            <h2>Activity</h2>
-                            <p>最近操作</p>
-                        </div>
-                    </div>
-                    <ul class="activity-list" id="activity-list"></ul>
-                </section>
-            </aside>
         </div>
-
-        <div id="toast" class="toast" aria-live="polite"></div>
     </div>
 
-    <script src="app.js" defer></script>
+    <div id="toast" class="toast"></div>
+    <script src="app.js"></script>
 </body>
 </html>

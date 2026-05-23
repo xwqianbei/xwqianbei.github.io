@@ -1,306 +1,382 @@
-// ===== Configuration =====
 const REPO_OWNER = 'xwqianbei';
 const REPO_NAME = 'xwqianbei.github.io';
-const REPO_PATH = 'blog-source/source/_posts/';
-const TOKEN_KEY = 'gh_token';
-const DRAFT_KEY = 'hexo_admin_drafts_v2';
-const THEME_KEY = 'hexo_admin_theme';
+const TOKEN_KEY = 'content_studio_token';
+const DRAFT_KEY = 'content_studio_post_drafts';
 
-const state = {
-    githubToken: localStorage.getItem(TOKEN_KEY) || '',
-    remotePosts: [],
-    drafts: [],
-    currentDoc: null,
-    currentSha: null,
-    currentPath: '',
-    activeListView: 'posts',
-    editorMode: 'split',
-    autosaveTimer: null,
-    writingTimer: null,
-    startTime: null,
-    currentWords: 0,
-    isHydrating: false,
-    activity: []
+const PATHS = {
+    posts: 'blog-source/source/_posts/',
+    life: 'blog-source/source/_data/life.json',
+    works: 'blog-source/source/_data/projects.json',
+    profile: 'blog-source/source/_data/profile.json'
 };
 
-// ===== DOM =====
+const state = {
+    token: localStorage.getItem(TOKEN_KEY) || '',
+    module: 'posts',
+    posts: [],
+    drafts: [],
+    life: { interestTypes: [], records: [] },
+    works: [],
+    profile: {},
+    shas: {},
+    currentPost: null,
+    currentLifeIndex: 0,
+    currentWorkIndex: 0,
+    dirty: false
+};
+
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
 const dom = {
-    authOverlay: $('#auth-overlay'),
+    authOverlay: $('#authOverlay'),
+    tokenInput: $('#tokenInput'),
+    loginBtn: $('#loginBtn'),
+    authError: $('#authError'),
     app: $('#app'),
-    tokenInput: $('#gh-token-input'),
-    loginBtn: $('#login-btn'),
-    authError: $('#auth-error'),
-    connectionStatus: $('#connection-status'),
-    saveStatus: $('#save-status'),
-    themeToggle: $('#theme-toggle'),
-    openRepoBtn: $('#open-repo-btn'),
-    refreshPostsBtn: $('#refresh-posts-btn'),
-    postSearch: $('#post-search'),
-    docList: $('#doc-list'),
-    remoteCount: $('#remote-count'),
-    draftCount: $('#draft-count'),
-    newPostBtn: $('#new-post-btn'),
-    saveDraftBtn: $('#save-draft-btn'),
-    editorPanel: $('.editor-panel'),
-    titleInput: $('#post-title'),
-    contentInput: $('#post-content'),
-    filenameInput: $('#post-filename'),
-    dateInput: $('#post-date'),
-    tagsInput: $('#post-tags'),
-    categoriesInput: $('#post-categories'),
-    coverInput: $('#post-cover'),
-    excerptInput: $('#post-excerpt'),
-    currentFileStatus: $('#current-file-status'),
-    currentPathChip: $('#current-path-chip'),
-    currentShaChip: $('#current-sha-chip'),
-    lastSavedChip: $('#last-saved-chip'),
-    duplicateBtn: $('#duplicate-btn'),
-    publishBtn: $('#publish-btn'),
-    preview: $('#preview'),
-    previewWordCount: $('#preview-word-count'),
-    wordCount: $('#word-count'),
-    charCount: $('#char-count'),
-    lineCount: $('#line-count'),
-    readingTime: $('#reading-time'),
-    metricChars: $('#metric-chars'),
-    metricWords: $('#metric-words'),
-    metricRead: $('#metric-read'),
-    metricLines: $('#metric-lines'),
-    sessionWordCount: $('#session-word-count'),
-    typingSpeed: $('#typing-speed'),
-    writingTime: $('#writing-time'),
-    copyFrontmatterBtn: $('#copy-frontmatter-btn'),
-    insertHeading: $('#insert-heading'),
-    insertQuote: $('#insert-quote'),
-    insertCode: $('#insert-code'),
-    insertDivider: $('#insert-divider'),
-    activityList: $('#activity-list'),
-    toast: $('#toast')
+    connectionStatus: $('#connectionStatus'),
+    saveStatus: $('#saveStatus'),
+    refreshBtn: $('#refreshBtn'),
+    openRepoBtn: $('#openRepoBtn'),
+    publishBtn: $('#publishBtn'),
+    moduleEyebrow: $('#moduleEyebrow'),
+    moduleTitle: $('#moduleTitle'),
+    addItemBtn: $('#addItemBtn'),
+    searchInput: $('#searchInput'),
+    listMeta: $('#listMeta'),
+    itemList: $('#itemList'),
+    toast: $('#toast'),
+    postTitle: $('#postTitle'),
+    postFilename: $('#postFilename'),
+    postDate: $('#postDate'),
+    postTags: $('#postTags'),
+    postCategories: $('#postCategories'),
+    postCover: $('#postCover'),
+    postExcerpt: $('#postExcerpt'),
+    postContent: $('#postContent'),
+    postPreview: $('#postPreview'),
+    postStats: $('#postStats'),
+    saveDraftBtn: $('#saveDraftBtn'),
+    newPostBtn: $('#newPostBtn'),
+    lifeTitle: $('#lifeTitle'),
+    lifeId: $('#lifeId'),
+    lifeKind: $('#lifeKind'),
+    lifeLabel: $('#lifeLabel'),
+    lifeIcon: $('#lifeIcon'),
+    lifeDate: $('#lifeDate'),
+    lifeYear: $('#lifeYear'),
+    lifeStat: $('#lifeStat'),
+    lifePlace: $('#lifePlace'),
+    lifeCover: $('#lifeCover'),
+    lifeFocus: $('#lifeFocus'),
+    lifeMood: $('#lifeMood'),
+    lifeTags: $('#lifeTags'),
+    lifeDetails: $('#lifeDetails'),
+    duplicateLifeBtn: $('#duplicateLifeBtn'),
+    deleteLifeBtn: $('#deleteLifeBtn'),
+    workTitle: $('#workTitle'),
+    workTag: $('#workTag'),
+    workHref: $('#workHref'),
+    workImage: $('#workImage'),
+    workDesc: $('#workDesc'),
+    workStats: $('#workStats'),
+    duplicateWorkBtn: $('#duplicateWorkBtn'),
+    deleteWorkBtn: $('#deleteWorkBtn'),
+    profileName: $('#profileName'),
+    profileNameCn: $('#profileNameCn'),
+    profileEmail: $('#profileEmail'),
+    profileGithub: $('#profileGithub'),
+    profileAvatar: $('#profileAvatar'),
+    profileRole: $('#profileRole'),
+    profileJson: $('#profileJson'),
+    formatProfileBtn: $('#formatProfileBtn')
 };
 
-// ===== Initialization =====
 init();
 
 function init() {
-    loadTheme();
     loadDrafts();
     bindEvents();
-    resetEditor();
-    setEditorMode(state.editorMode);
-    renderDraftCount();
-    renderActivity('写作台已就绪');
-
-    if (state.githubToken) {
-        verifyToken(state.githubToken, { silent: true });
-    }
+    hydrateEmptyPost();
+    if (state.token) verifyToken(state.token, { silent: true });
 }
 
 function bindEvents() {
-    dom.loginBtn.addEventListener('click', handleLogin);
+    dom.loginBtn.addEventListener('click', () => verifyToken(dom.tokenInput.value.trim()));
     dom.tokenInput.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') handleLogin();
+        if (event.key === 'Enter') verifyToken(dom.tokenInput.value.trim());
     });
-
-    dom.themeToggle.addEventListener('click', toggleTheme);
+    dom.refreshBtn.addEventListener('click', loadAll);
     dom.openRepoBtn.addEventListener('click', () => {
-        window.open(`https://github.com/${REPO_OWNER}/${REPO_NAME}/tree/main/${REPO_PATH}`, '_blank', 'noopener');
+        window.open(`https://github.com/${REPO_OWNER}/${REPO_NAME}`, '_blank', 'noopener');
     });
-    dom.refreshPostsBtn.addEventListener('click', loadRemotePosts);
-    dom.postSearch.addEventListener('input', renderDocList);
+    dom.publishBtn.addEventListener('click', publishCurrentModule);
+    dom.addItemBtn.addEventListener('click', addItemForModule);
+    dom.searchInput.addEventListener('input', renderList);
 
-    $$('#list-tabs [data-list-view]').forEach((button) => {
-        button.addEventListener('click', () => setListView(button.dataset.listView));
-    });
-
-    $$('#mode-tabs [data-editor-mode]').forEach((button) => {
-        button.addEventListener('click', () => setEditorMode(button.dataset.editorMode));
+    $$('.module-btn').forEach((button) => {
+        button.addEventListener('click', () => setModule(button.dataset.module));
     });
 
     [
-        dom.titleInput,
-        dom.contentInput,
-        dom.filenameInput,
-        dom.dateInput,
-        dom.tagsInput,
-        dom.categoriesInput,
-        dom.coverInput,
-        dom.excerptInput
-    ].forEach((input) => {
-        input.addEventListener('input', handleEditorInput);
-    });
+        dom.postTitle, dom.postFilename, dom.postDate, dom.postTags, dom.postCategories,
+        dom.postCover, dom.postExcerpt, dom.postContent
+    ].forEach((input) => input.addEventListener('input', handlePostInput));
 
-    dom.titleInput.addEventListener('blur', () => {
-        if (!dom.filenameInput.value.trim() && dom.titleInput.value.trim()) {
-            dom.filenameInput.value = buildFilename(dom.titleInput.value);
-            handleEditorInput();
-        }
-    });
+    [
+        dom.lifeTitle, dom.lifeId, dom.lifeKind, dom.lifeLabel, dom.lifeIcon, dom.lifeDate,
+        dom.lifeYear, dom.lifeStat, dom.lifePlace, dom.lifeCover, dom.lifeFocus,
+        dom.lifeMood, dom.lifeTags, dom.lifeDetails
+    ].forEach((input) => input.addEventListener('input', handleLifeInput));
 
-    dom.newPostBtn.addEventListener('click', newDraft);
-    dom.saveDraftBtn.addEventListener('click', () => saveCurrentDraft(true));
-    dom.duplicateBtn.addEventListener('click', duplicateAsDraft);
-    dom.publishBtn.addEventListener('click', publishPost);
-    dom.copyFrontmatterBtn.addEventListener('click', copyFrontmatter);
-    dom.insertHeading.addEventListener('click', () => insertMarkdown('## ', '', '小标题'));
-    dom.insertQuote.addEventListener('click', () => insertMarkdown('> ', '', '引用内容'));
-    dom.insertCode.addEventListener('click', () => insertMarkdown('```js\n', '\n```', 'console.log("hello");'));
-    dom.insertDivider.addEventListener('click', () => insertMarkdown('\n---\n', '', ''));
+    [dom.workTitle, dom.workTag, dom.workHref, dom.workImage, dom.workDesc, dom.workStats]
+        .forEach((input) => input.addEventListener('input', handleWorkInput));
 
-    document.addEventListener('keydown', (event) => {
-        const primary = event.metaKey || event.ctrlKey;
-        if (!primary) return;
+    [dom.profileName, dom.profileNameCn, dom.profileEmail, dom.profileGithub, dom.profileAvatar, dom.profileRole]
+        .forEach((input) => input.addEventListener('input', handleProfileFieldsInput));
+    dom.profileJson.addEventListener('input', handleProfileJsonInput);
+    dom.formatProfileBtn.addEventListener('click', formatProfileJson);
 
-        if (event.key.toLowerCase() === 's') {
-            event.preventDefault();
-            saveCurrentDraft(true);
-        }
-
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            publishPost();
-        }
-    });
+    dom.saveDraftBtn.addEventListener('click', saveCurrentDraft);
+    dom.newPostBtn.addEventListener('click', newPost);
+    dom.duplicateLifeBtn.addEventListener('click', duplicateLife);
+    dom.deleteLifeBtn.addEventListener('click', deleteLife);
+    dom.duplicateWorkBtn.addEventListener('click', duplicateWork);
+    dom.deleteWorkBtn.addEventListener('click', deleteWork);
 }
 
-// ===== Authentication =====
-function handleLogin() {
-    const token = dom.tokenInput.value.trim();
+async function verifyToken(token, options = {}) {
     if (!token) {
         dom.authError.textContent = 'Token 不能为空';
         return;
     }
-    verifyToken(token);
-}
-
-async function verifyToken(token, options = {}) {
-    setConnectionStatus('connecting', 'Connecting');
-    setButtonLoading(dom.loginBtn, true, '验证中');
+    setConnection('connecting', 'Connecting');
     dom.authError.textContent = '';
 
     try {
-        const response = await fetch('https://api.github.com/user', {
-            headers: githubHeaders(token)
-        });
-
-        if (!response.ok) {
-            throw new Error('Token 无效或已过期');
-        }
-
+        const response = await fetch('https://api.github.com/user', { headers: githubHeaders(token) });
+        if (!response.ok) throw new Error('Token 无效或权限不足');
         const user = await response.json();
-        state.githubToken = token;
+        state.token = token;
         localStorage.setItem(TOKEN_KEY, token);
-        unlockApp(user.login);
+        dom.authOverlay.classList.remove('active');
+        dom.authOverlay.classList.add('hidden');
+        dom.app.classList.remove('hidden');
+        setConnection('connected', user.login || 'Connected');
+        await loadAll();
     } catch (error) {
         localStorage.removeItem(TOKEN_KEY);
-        state.githubToken = '';
-        setConnectionStatus('error', 'Disconnected');
-        dom.authOverlay.classList.remove('hidden');
+        state.token = '';
+        setConnection('disconnected', 'Disconnected');
         dom.authOverlay.classList.add('active');
-        dom.authError.textContent = options.silent ? '保存的 Token 已失效，请重新验证' : error.message;
-    } finally {
-        setButtonLoading(dom.loginBtn, false, '验证并进入');
+        dom.authOverlay.classList.remove('hidden');
+        dom.authError.textContent = options.silent ? '保存的 Token 已失效，请重新连接' : error.message;
     }
 }
 
-function unlockApp(username) {
-    dom.authOverlay.classList.remove('active');
-    setTimeout(() => dom.authOverlay.classList.add('hidden'), 280);
-    dom.app.classList.remove('hidden');
-    setConnectionStatus('ok', username || 'Connected');
-
-    if (!state.startTime) {
-        state.startTime = Date.now();
-        state.writingTimer = setInterval(updateWritingStats, 1000);
-    }
-
-    loadRemotePosts();
+async function loadAll() {
+    setSave('loading', 'Loading');
+    await Promise.all([loadPosts(), loadDataFile('life'), loadDataFile('works'), loadDataFile('profile')]);
+    renderCurrentModule();
+    setSave('idle', 'Loaded');
 }
 
-// ===== Remote Posts =====
-async function loadRemotePosts() {
-    if (!state.githubToken) return;
+async function loadPosts() {
+    const response = await fetch(apiUrl(`contents/${PATHS.posts}`), { headers: githubHeaders() });
+    if (!response.ok) throw new Error('无法读取文章列表');
+    const files = await response.json();
+    state.posts = files
+        .filter((file) => file.type === 'file' && file.name.endsWith('.md'))
+        .map((file) => ({
+            id: file.sha,
+            type: 'remote',
+            title: readableTitle(file.name),
+            filename: file.name,
+            path: file.path,
+            sha: file.sha,
+            url: file.url
+        }))
+        .sort((a, b) => b.filename.localeCompare(a.filename));
+}
 
-    renderListLoading('正在加载远程文章');
-    setConnectionStatus('connecting', 'Syncing');
+async function loadDataFile(module) {
+    const response = await fetch(apiUrl(`contents/${PATHS[module]}`), { headers: githubHeaders() });
+    if (!response.ok) throw new Error(`无法读取 ${PATHS[module]}`);
+    const file = await response.json();
+    state.shas[module] = file.sha;
+    state[module] = JSON.parse(decodeBase64(file.content));
+}
 
-    try {
-        const response = await fetch(apiUrl(`contents/${REPO_PATH}`), {
-            headers: githubHeaders()
-        });
+function setModule(module) {
+    state.module = module;
+    $$('.module-btn').forEach((button) => button.classList.toggle('active', button.dataset.module === module));
+    $$('.module-view').forEach((view) => view.classList.remove('active'));
+    $(`#${module}View`).classList.add('active');
+    dom.searchInput.value = '';
+    renderCurrentModule();
+}
 
-        if (!response.ok) {
-            throw new Error('无法读取远程文章列表');
-        }
+function renderCurrentModule() {
+    const labels = {
+        posts: ['Markdown', 'Posts'],
+        life: ['Structured JSON', 'Life Records'],
+        works: ['Structured JSON', 'Works'],
+        profile: ['Structured JSON', 'Profile']
+    };
+    dom.moduleEyebrow.textContent = labels[state.module][0];
+    dom.moduleTitle.textContent = labels[state.module][1];
+    renderList();
+    if (state.module === 'life') hydrateLife(state.currentLifeIndex);
+    if (state.module === 'works') hydrateWork(state.currentWorkIndex);
+    if (state.module === 'profile') hydrateProfile();
+}
 
-        const files = await response.json();
-        state.remotePosts = files
-            .filter((file) => file.type === 'file' && file.name.endsWith('.md'))
-            .map((file) => ({
-                id: file.sha,
-                type: 'remote',
-                title: readableTitle(file.name),
-                filename: file.name,
-                path: file.path,
-                sha: file.sha,
-                url: file.url,
-                updatedAt: null
-            }))
-            .sort((a, b) => b.filename.localeCompare(a.filename));
+function renderList() {
+    const query = dom.searchInput.value.trim().toLowerCase();
+    let items = [];
+    if (state.module === 'posts') items = state.posts.concat(state.drafts);
+    if (state.module === 'life') items = state.life.records || [];
+    if (state.module === 'works') items = state.works || [];
+    if (state.module === 'profile') items = [{ title: state.profile.name || 'Profile', subtitle: state.profile.role || 'About page' }];
 
-        setConnectionStatus('ok', 'Connected');
-        renderDocList();
-        renderActivity(`同步 ${state.remotePosts.length} 篇远程文章`);
-    } catch (error) {
-        setConnectionStatus('error', 'Sync failed');
-        renderDocList();
-        showToast(error.message, 'error');
+    const filtered = items
+        .map((item, index) => ({ item, index }))
+        .filter(({ item }) => JSON.stringify(item).toLowerCase().includes(query));
+
+    dom.listMeta.textContent = `${filtered.length} item${filtered.length === 1 ? '' : 's'}`;
+    dom.itemList.innerHTML = filtered.map(({ item, index }) => {
+        const title = item.title || item.name || item.filename || 'Untitled';
+        const subtitle = item.subtitle || item.date || item.tag || item.filename || item.role || '';
+        const active = isActiveListItem(item, index) ? 'active' : '';
+        return `
+            <button class="list-item ${active}" data-index="${index}" data-id="${escapeHtml(item.id || item.sha || '')}">
+                <strong>${escapeHtml(title)}</strong>
+                <span>${escapeHtml(subtitle)}</span>
+            </button>
+        `;
+    }).join('');
+
+    $$('.list-item').forEach((button) => {
+        button.addEventListener('click', () => selectListItem(Number(button.dataset.index), button.dataset.id));
+    });
+}
+
+function isActiveListItem(item, index) {
+    if (state.module === 'posts') return state.currentPost && (item.id === state.currentPost.id || item.sha === state.currentPost.sha);
+    if (state.module === 'life') return index === state.currentLifeIndex;
+    if (state.module === 'works') return index === state.currentWorkIndex;
+    return true;
+}
+
+function selectListItem(index, id) {
+    if (state.module === 'posts') {
+        const item = state.posts.concat(state.drafts).find((entry) => entry.id === id || entry.sha === id);
+        if (!item) return;
+        if (item.type === 'draft') hydratePost(item, item);
+        else openRemotePost(item);
     }
+    if (state.module === 'life') hydrateLife(index);
+    if (state.module === 'works') hydrateWork(index);
 }
 
 async function openRemotePost(post) {
-    renderActivity(`打开远程文章 ${post.filename}`);
-    setSaveStatus('loading', 'Loading remote');
-
-    try {
-        const response = await fetch(post.url, {
-            headers: githubHeaders()
-        });
-
-        if (!response.ok) {
-            throw new Error('文章读取失败');
-        }
-
-        const data = await response.json();
-        const raw = decodeBase64(data.content);
-        const parsed = parsePost(raw);
-
-        hydrateEditor({
-            title: parsed.meta.title || post.title,
-            content: parsed.body,
-            filename: post.filename,
-            date: parsed.meta.date || '',
-            tags: normalizeList(parsed.meta.tags).join(', '),
-            categories: normalizeList(parsed.meta.categories).join(', '),
-            cover: parsed.meta.cover || '',
-            excerpt: parsed.meta.excerpt || ''
-        }, {
-            type: 'remote',
-            id: post.sha,
-            sha: post.sha,
-            path: post.path
-        });
-
-        setSaveStatus('saved', 'Remote loaded');
-    } catch (error) {
-        setSaveStatus('error', 'Load failed');
-        showToast(error.message, 'error');
-    }
+    setSave('loading', 'Loading post');
+    const response = await fetch(post.url, { headers: githubHeaders() });
+    if (!response.ok) return showToast('文章读取失败', 'error');
+    const data = await response.json();
+    const parsed = parsePost(decodeBase64(data.content));
+    hydratePost({
+        id: post.sha,
+        type: 'remote',
+        title: parsed.meta.title || post.title,
+        filename: post.filename,
+        date: parsed.meta.date || '',
+        tags: toTextList(parsed.meta.tags),
+        categories: toTextList(parsed.meta.categories),
+        cover: parsed.meta.cover || '',
+        excerpt: parsed.meta.excerpt || '',
+        content: parsed.body,
+        path: post.path,
+        sha: post.sha
+    }, post);
+    setSave('idle', 'Post loaded');
 }
 
-// ===== Drafts =====
+function hydratePost(data, source = {}) {
+    state.currentPost = { id: data.id || createId(), type: data.type || 'draft', path: data.path || source.path || '', sha: data.sha || source.sha || '' };
+    dom.postTitle.value = data.title || '';
+    dom.postFilename.value = ensureMarkdownFilename(data.filename || buildFilename(data.title || 'untitled'));
+    dom.postDate.value = data.date ? toDateTimeLocal(data.date) : toDateTimeLocal(new Date());
+    dom.postTags.value = toTextList(data.tags);
+    dom.postCategories.value = toTextList(data.categories);
+    dom.postCover.value = data.cover || '';
+    dom.postExcerpt.value = data.excerpt || '';
+    dom.postContent.value = data.content || '';
+    updatePostPreview();
+    renderList();
+}
+
+function hydrateEmptyPost() {
+    hydratePost({
+        id: createId(),
+        type: 'draft',
+        title: 'Untitled Note',
+        filename: buildFilename('untitled-note'),
+        date: toDateTimeLocal(new Date()),
+        content: '',
+        tags: '',
+        categories: '',
+        cover: '',
+        excerpt: ''
+    });
+}
+
+function handlePostInput() {
+    if (!dom.postFilename.value.trim()) dom.postFilename.value = buildFilename(dom.postTitle.value || 'untitled');
+    updatePostPreview();
+    setDirty();
+}
+
+function updatePostPreview() {
+    const text = dom.postContent.value || '';
+    const words = countWords(text);
+    dom.postStats.textContent = `${words} words`;
+    if (window.marked && text.trim()) dom.postPreview.innerHTML = window.marked.parse(text);
+    else dom.postPreview.innerHTML = '<p class="preview-empty">Markdown preview will appear here.</p>';
+}
+
+function newPost() {
+    hydrateEmptyPost();
+    setModule('posts');
+}
+
+function saveCurrentDraft() {
+    const draft = buildDraft();
+    const index = state.drafts.findIndex((item) => item.id === draft.id);
+    if (index >= 0) state.drafts[index] = draft;
+    else state.drafts.unshift(draft);
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(state.drafts));
+    state.currentPost = { id: draft.id, type: 'draft' };
+    renderList();
+    showToast('草稿已保存', 'success');
+}
+
+function buildDraft() {
+    return {
+        id: state.currentPost?.type === 'draft' ? state.currentPost.id : createId(),
+        type: 'draft',
+        title: dom.postTitle.value.trim() || 'Untitled Note',
+        filename: ensureMarkdownFilename(dom.postFilename.value.trim()),
+        date: dom.postDate.value,
+        tags: dom.postTags.value,
+        categories: dom.postCategories.value,
+        cover: dom.postCover.value,
+        excerpt: dom.postExcerpt.value,
+        content: dom.postContent.value,
+        updatedAt: new Date().toISOString()
+    };
+}
+
 function loadDrafts() {
     try {
         state.drafts = JSON.parse(localStorage.getItem(DRAFT_KEY) || '[]');
@@ -309,512 +385,307 @@ function loadDrafts() {
     }
 }
 
-function persistDrafts() {
-    localStorage.setItem(DRAFT_KEY, JSON.stringify(state.drafts));
-    renderDraftCount();
+function hydrateLife(index) {
+    const records = state.life.records || [];
+    if (!records.length) records.push(newLifeRecord());
+    state.currentLifeIndex = Math.max(0, Math.min(index || 0, records.length - 1));
+    const item = records[state.currentLifeIndex];
+    dom.lifeTitle.value = item.title || '';
+    dom.lifeId.value = item.id || '';
+    dom.lifeKind.value = item.kind || 'travel';
+    dom.lifeLabel.value = item.label || '';
+    dom.lifeIcon.value = item.icon || '';
+    dom.lifeDate.value = item.date || '';
+    dom.lifeYear.value = item.year || '';
+    dom.lifeStat.value = item.stat || '';
+    dom.lifePlace.value = item.place || '';
+    dom.lifeCover.value = item.cover || '';
+    dom.lifeFocus.value = item.focus || '';
+    dom.lifeMood.value = item.mood || '';
+    dom.lifeTags.value = toTextList(item.tags);
+    dom.lifeDetails.value = (item.details || []).join('\n');
+    renderList();
 }
 
-function newDraft() {
-    saveCurrentDraft(false);
-    resetEditor();
-    state.currentDoc = {
-        type: 'draft',
-        id: createId()
+function handleLifeInput() {
+    const records = state.life.records || [];
+    records[state.currentLifeIndex] = {
+        id: dom.lifeId.value.trim() || slugify(dom.lifeTitle.value || 'life-record'),
+        kind: dom.lifeKind.value,
+        label: dom.lifeLabel.value.trim(),
+        icon: dom.lifeIcon.value.trim() || 'fa-compass',
+        date: dom.lifeDate.value.trim(),
+        year: dom.lifeYear.value.trim(),
+        title: dom.lifeTitle.value.trim(),
+        place: dom.lifePlace.value.trim(),
+        focus: dom.lifeFocus.value.trim(),
+        mood: dom.lifeMood.value.trim(),
+        stat: dom.lifeStat.value.trim(),
+        cover: dom.lifeCover.value.trim(),
+        details: splitLines(dom.lifeDetails.value),
+        tags: splitComma(dom.lifeTags.value)
     };
-    setListView('drafts');
-    saveCurrentDraft(false);
-    renderActivity('新建本地草稿');
-    dom.titleInput.focus();
+    setDirty();
+    renderList();
 }
 
-function saveCurrentDraft(showMessage = false) {
-    if (state.isHydrating) return;
-
-    const draft = buildDraftFromEditor();
-    const existingIndex = state.drafts.findIndex((item) => item.id === draft.id);
-
-    if (existingIndex >= 0) {
-        state.drafts[existingIndex] = draft;
-    } else {
-        state.drafts.unshift(draft);
-    }
-
-    state.currentDoc = { type: 'draft', id: draft.id };
-    persistDrafts();
-    renderDocList();
-    setSaveStatus('saved', `Draft saved ${formatTime(new Date())}`);
-    dom.lastSavedChip.textContent = `Draft saved ${formatTime(new Date())}`;
-
-    if (showMessage) {
-        showToast('草稿已保存', 'success');
-        renderActivity('保存本地草稿');
-    }
-}
-
-function openDraft(draft) {
-    hydrateEditor(draft, {
-        type: 'draft',
-        id: draft.id,
-        sha: draft.sourceSha || null,
-        path: draft.sourcePath || ''
-    });
-    setSaveStatus('saved', 'Draft loaded');
-    renderActivity(`打开草稿 ${draft.title || draft.filename}`);
-}
-
-function duplicateAsDraft() {
-    const duplicate = buildDraftFromEditor();
-    duplicate.id = createId();
-    duplicate.title = `${duplicate.title || '未命名文章'} Copy`;
-    duplicate.filename = buildFilename(duplicate.title);
-    duplicate.createdAt = new Date().toISOString();
-    duplicate.updatedAt = duplicate.createdAt;
-    duplicate.sourceSha = null;
-    duplicate.sourcePath = '';
-    state.drafts.unshift(duplicate);
-    persistDrafts();
-    hydrateEditor(duplicate, { type: 'draft', id: duplicate.id, sha: null, path: '' });
-    setListView('drafts');
-    showToast('已复制为新草稿', 'success');
-    renderActivity('复制当前内容为草稿');
-}
-
-function buildDraftFromEditor() {
-    const now = new Date().toISOString();
-    const id = state.currentDoc?.type === 'draft' ? state.currentDoc.id : createId();
-    const filename = ensureMarkdownFilename(dom.filenameInput.value.trim() || buildFilename(dom.titleInput.value || 'untitled'));
-
+function newLifeRecord() {
     return {
-        id,
-        title: dom.titleInput.value.trim() || '未命名文章',
-        content: dom.contentInput.value,
-        filename,
-        date: dom.dateInput.value,
-        tags: dom.tagsInput.value,
-        categories: dom.categoriesInput.value,
-        cover: dom.coverInput.value,
-        excerpt: dom.excerptInput.value,
-        createdAt: state.drafts.find((item) => item.id === id)?.createdAt || now,
-        updatedAt: now,
-        sourceSha: state.currentSha,
-        sourcePath: state.currentPath
+        id: `life-${Date.now()}`,
+        kind: 'travel',
+        label: '旅行',
+        icon: 'fa-route',
+        date: '',
+        year: String(new Date().getFullYear()),
+        title: 'New Life Record',
+        place: '',
+        focus: '',
+        mood: '',
+        stat: '',
+        cover: '',
+        details: [],
+        tags: []
     };
 }
 
-function scheduleAutosave() {
-    clearTimeout(state.autosaveTimer);
-    setSaveStatus('dirty', 'Unsaved changes');
-    dom.lastSavedChip.textContent = 'Unsaved changes';
-    state.autosaveTimer = setTimeout(() => saveCurrentDraft(false), 900);
+function duplicateLife() {
+    const copy = { ...(state.life.records[state.currentLifeIndex] || newLifeRecord()) };
+    copy.id = `${copy.id || 'life'}-copy-${Date.now()}`;
+    copy.title = `${copy.title || 'Life Record'} Copy`;
+    state.life.records.splice(state.currentLifeIndex + 1, 0, copy);
+    hydrateLife(state.currentLifeIndex + 1);
+    setDirty();
 }
 
-// ===== Editor =====
-function resetEditor() {
-    hydrateEditor({
-        title: '未命名文章',
-        content: '',
-        filename: buildFilename('untitled'),
-        date: toDateTimeLocal(new Date()),
-        tags: '',
-        categories: '',
-        cover: '',
-        excerpt: ''
-    }, {
-        type: 'draft',
-        id: createId(),
-        sha: null,
-        path: ''
+function deleteLife() {
+    if (!confirm('确认删除这条生活记录？')) return;
+    state.life.records.splice(state.currentLifeIndex, 1);
+    hydrateLife(Math.max(0, state.currentLifeIndex - 1));
+    setDirty();
+}
+
+function hydrateWork(index) {
+    if (!state.works.length) state.works.push(newWork());
+    state.currentWorkIndex = Math.max(0, Math.min(index || 0, state.works.length - 1));
+    const item = state.works[state.currentWorkIndex];
+    dom.workTitle.value = item.title || '';
+    dom.workTag.value = item.tag || '';
+    dom.workHref.value = item.href || '';
+    dom.workImage.value = item.image || '';
+    dom.workDesc.value = item.desc || '';
+    dom.workStats.value = toTextList(item.stats);
+    renderList();
+}
+
+function handleWorkInput() {
+    state.works[state.currentWorkIndex] = {
+        title: dom.workTitle.value.trim(),
+        tag: dom.workTag.value.trim(),
+        href: dom.workHref.value.trim(),
+        image: dom.workImage.value.trim(),
+        desc: dom.workDesc.value.trim(),
+        stats: splitComma(dom.workStats.value)
+    };
+    setDirty();
+    renderList();
+}
+
+function newWork() {
+    return { title: 'New Project', tag: 'Project', href: '', image: '/images/self/life_photo.jpg', desc: '', stats: [] };
+}
+
+function duplicateWork() {
+    const copy = { ...(state.works[state.currentWorkIndex] || newWork()) };
+    copy.title = `${copy.title || 'Project'} Copy`;
+    state.works.splice(state.currentWorkIndex + 1, 0, copy);
+    hydrateWork(state.currentWorkIndex + 1);
+    setDirty();
+}
+
+function deleteWork() {
+    if (!confirm('确认删除这个作品？')) return;
+    state.works.splice(state.currentWorkIndex, 1);
+    hydrateWork(Math.max(0, state.currentWorkIndex - 1));
+    setDirty();
+}
+
+function hydrateProfile() {
+    dom.profileName.value = state.profile.name || '';
+    dom.profileNameCn.value = state.profile.nameCn || '';
+    dom.profileEmail.value = state.profile.email || '';
+    dom.profileGithub.value = state.profile.github || '';
+    dom.profileAvatar.value = state.profile.avatar || '';
+    dom.profileRole.value = state.profile.role || '';
+    dom.profileJson.value = JSON.stringify(state.profile, null, 2);
+    renderList();
+}
+
+function handleProfileFieldsInput() {
+    Object.assign(state.profile, {
+        name: dom.profileName.value.trim(),
+        nameCn: dom.profileNameCn.value.trim(),
+        email: dom.profileEmail.value.trim(),
+        github: dom.profileGithub.value.trim(),
+        avatar: dom.profileAvatar.value.trim(),
+        role: dom.profileRole.value.trim()
     });
+    dom.profileJson.value = JSON.stringify(state.profile, null, 2);
+    setDirty();
 }
 
-function hydrateEditor(data, doc) {
-    state.isHydrating = true;
-    state.currentDoc = doc;
-    state.currentSha = doc.sha || null;
-    state.currentPath = doc.path || '';
-
-    dom.titleInput.value = data.title || '未命名文章';
-    dom.contentInput.value = data.content || '';
-    dom.filenameInput.value = ensureMarkdownFilename(data.filename || buildFilename(data.title || 'untitled'));
-    dom.dateInput.value = data.date ? toDateTimeLocal(data.date) : toDateTimeLocal(new Date());
-    dom.tagsInput.value = Array.isArray(data.tags) ? data.tags.join(', ') : (data.tags || '');
-    dom.categoriesInput.value = Array.isArray(data.categories) ? data.categories.join(', ') : (data.categories || '');
-    dom.coverInput.value = data.cover || '';
-    dom.excerptInput.value = data.excerpt || '';
-
-    const path = state.currentPath || `${REPO_PATH}${dom.filenameInput.value}`;
-    dom.currentFileStatus.textContent = doc.type === 'remote' ? 'Editing remote post' : 'Local draft';
-    dom.currentPathChip.textContent = path;
-    dom.currentShaChip.textContent = `SHA: ${state.currentSha ? state.currentSha.slice(0, 7) : '--'}`;
-
-    updateEditorDerivedState();
-    renderDocList();
-    state.isHydrating = false;
-}
-
-function handleEditorInput() {
-    if (!dom.filenameInput.value.trim() && dom.titleInput.value.trim()) {
-        dom.filenameInput.value = buildFilename(dom.titleInput.value);
-    }
-
-    const path = `${REPO_PATH}${ensureMarkdownFilename(dom.filenameInput.value.trim())}`;
-    dom.currentPathChip.textContent = state.currentPath || path;
-    updateEditorDerivedState();
-
-    if (!state.isHydrating) {
-        scheduleAutosave();
-    }
-}
-
-function updateEditorDerivedState() {
-    updateStats();
-    updatePreview();
-}
-
-function updateStats() {
-    const text = dom.contentInput.value;
-    const words = countWords(text);
-    const chars = text.length;
-    const lines = text ? text.split(/\r\n|\r|\n/).length : 0;
-    const read = words ? `${Math.max(1, Math.ceil(words / 450))} min` : '0 min';
-
-    state.currentWords = words;
-    dom.wordCount.textContent = words;
-    dom.charCount.textContent = chars;
-    dom.lineCount.textContent = lines;
-    dom.readingTime.textContent = read;
-    dom.metricWords.textContent = words;
-    dom.metricChars.textContent = chars;
-    dom.metricLines.textContent = lines;
-    dom.metricRead.textContent = read;
-    dom.previewWordCount.textContent = `${words} words`;
-    dom.sessionWordCount.textContent = `${words} words`;
-}
-
-function updatePreview() {
-    const markdown = dom.contentInput.value.trim();
-    if (!markdown) {
-        dom.preview.innerHTML = '<p class="preview-empty">Markdown 预览会实时显示在这里。</p>';
-        return;
-    }
-
-    if (window.marked) {
-        window.marked.setOptions({ breaks: true, gfm: true });
-        dom.preview.innerHTML = window.marked.parse(markdown);
-    } else {
-        dom.preview.innerHTML = `<pre>${escapeHtml(markdown)}</pre>`;
-    }
-}
-
-function setEditorMode(mode) {
-    state.editorMode = mode;
-    dom.editorPanel.classList.remove('mode-write', 'mode-split', 'mode-preview');
-    dom.editorPanel.classList.add(`mode-${mode}`);
-    $$('#mode-tabs [data-editor-mode]').forEach((button) => {
-        button.classList.toggle('active', button.dataset.editorMode === mode);
-    });
-}
-
-function insertMarkdown(before, after = '', fallback = '') {
-    const textarea = dom.contentInput;
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const selected = textarea.value.slice(start, end) || fallback;
-    const next = `${before}${selected}${after}`;
-
-    textarea.setRangeText(next, start, end, 'end');
-    textarea.focus();
-    handleEditorInput();
-}
-
-// ===== Publish =====
-async function publishPost() {
-    const title = dom.titleInput.value.trim();
-    const body = dom.contentInput.value.trim();
-    const filename = ensureMarkdownFilename(dom.filenameInput.value.trim());
-
-    if (!title) return showToast('请输入文章标题', 'error');
-    if (!filename) return showToast('请输入文件名', 'error');
-    if (!body) return showToast('内容不能为空', 'error');
-    if (!state.githubToken) return showToast('请先验证 GitHub Token', 'error');
-
-    setButtonLoading(dom.publishBtn, true, 'Publishing');
-    setSaveStatus('loading', 'Publishing');
-
-    const path = `${REPO_PATH}${filename}`;
-    const content = `${buildFrontmatter()}\n${dom.contentInput.value}`;
-
+function handleProfileJsonInput() {
     try {
-        let sha = state.currentPath === path ? state.currentSha : null;
-
-        if (!sha) {
-            const existing = await fetch(apiUrl(`contents/${path}`), {
-                headers: githubHeaders()
-            });
-
-            if (existing.ok) {
-                const data = await existing.json();
-                sha = data.sha;
-            }
-        }
-
-        const response = await fetch(apiUrl(`contents/${path}`), {
-            method: 'PUT',
-            headers: githubHeaders(),
-            body: JSON.stringify({
-                message: `Publish post: ${title} via Admin UI`,
-                content: encodeBase64(content),
-                sha: sha || undefined
-            })
-        });
-
-        const result = await response.json();
-
-        if (!response.ok) {
-            throw new Error(result.message || '发布失败');
-        }
-
-        state.currentSha = result.content.sha;
-        state.currentPath = result.content.path;
-        dom.currentShaChip.textContent = `SHA: ${state.currentSha.slice(0, 7)}`;
-        dom.currentPathChip.textContent = state.currentPath;
-        setSaveStatus('saved', 'Published');
-        showToast('文章已发布到 GitHub', 'success');
-        renderActivity(`发布文章 ${title}`);
-        await loadRemotePosts();
-    } catch (error) {
-        setSaveStatus('error', 'Publish failed');
-        showToast(error.message, 'error');
-    } finally {
-        setButtonLoading(dom.publishBtn, false, 'Publish');
+        state.profile = JSON.parse(dom.profileJson.value);
+        hydrateProfileFieldsOnly();
+        setDirty();
+    } catch {
+        setSave('error', 'Invalid JSON');
     }
+}
+
+function hydrateProfileFieldsOnly() {
+    dom.profileName.value = state.profile.name || '';
+    dom.profileNameCn.value = state.profile.nameCn || '';
+    dom.profileEmail.value = state.profile.email || '';
+    dom.profileGithub.value = state.profile.github || '';
+    dom.profileAvatar.value = state.profile.avatar || '';
+    dom.profileRole.value = state.profile.role || '';
+}
+
+function formatProfileJson() {
+    try {
+        state.profile = JSON.parse(dom.profileJson.value);
+        dom.profileJson.value = JSON.stringify(state.profile, null, 2);
+        hydrateProfileFieldsOnly();
+        showToast('JSON 已格式化', 'success');
+    } catch {
+        showToast('Profile JSON 格式错误', 'error');
+    }
+}
+
+function addItemForModule() {
+    if (state.module === 'posts') return newPost();
+    if (state.module === 'life') {
+        state.life.records = state.life.records || [];
+        state.life.records.unshift(newLifeRecord());
+        hydrateLife(0);
+        setDirty();
+    }
+    if (state.module === 'works') {
+        state.works.unshift(newWork());
+        hydrateWork(0);
+        setDirty();
+    }
+}
+
+async function publishCurrentModule() {
+    if (!state.token) return showToast('请先连接 GitHub', 'error');
+    if (state.module === 'posts') return publishPost();
+    return publishDataFile(state.module);
+}
+
+async function publishPost() {
+    const title = dom.postTitle.value.trim();
+    const filename = ensureMarkdownFilename(dom.postFilename.value.trim() || buildFilename(title || 'untitled'));
+    if (!title) return showToast('请输入标题', 'error');
+    if (!dom.postContent.value.trim()) return showToast('请输入内容', 'error');
+
+    const path = `${PATHS.posts}${filename}`;
+    const content = `${buildFrontmatter()}\n${dom.postContent.value}`;
+    await putFile(path, content, state.currentPost?.path === path ? state.currentPost.sha : null, `Publish post: ${title}`);
+    await loadPosts();
+    setDirty(false);
+    showToast('文章已发布', 'success');
+}
+
+async function publishDataFile(module) {
+    const payload = module === 'life' ? state.life : module === 'works' ? state.works : state.profile;
+    await putFile(PATHS[module], JSON.stringify(payload, null, 2) + '\n', state.shas[module], `Update ${module} content via Content Studio`);
+    await loadDataFile(module);
+    setDirty(false);
+    showToast(`${module} 已发布`, 'success');
+}
+
+async function putFile(path, content, sha, message) {
+    setSave('loading', 'Publishing');
+    const existingSha = sha || await getExistingSha(path);
+    const response = await fetch(apiUrl(`contents/${path}`), {
+        method: 'PUT',
+        headers: githubHeaders(),
+        body: JSON.stringify({
+            message,
+            content: encodeBase64(content),
+            sha: existingSha || undefined
+        })
+    });
+    const result = await response.json();
+    if (!response.ok) {
+        setSave('error', 'Publish failed');
+        throw new Error(result.message || '发布失败');
+    }
+    setSave('idle', 'Published');
+    return result;
+}
+
+async function getExistingSha(path) {
+    const response = await fetch(apiUrl(`contents/${path}`), { headers: githubHeaders() });
+    if (!response.ok) return null;
+    const data = await response.json();
+    return data.sha;
 }
 
 function buildFrontmatter() {
-    const tags = splitComma(dom.tagsInput.value);
-    const categories = splitComma(dom.categoriesInput.value);
     const lines = [
         '---',
-        `title: ${quoteYaml(dom.titleInput.value.trim() || '未命名文章')}`,
-        `date: ${formatDateForHexo(dom.dateInput.value || new Date())}`
+        `title: ${quoteYaml(dom.postTitle.value.trim() || 'Untitled Note')}`,
+        `date: ${formatDateForHexo(dom.postDate.value || new Date())}`
     ];
-
+    const categories = splitComma(dom.postCategories.value);
+    const tags = splitComma(dom.postTags.value);
     if (categories.length) {
         lines.push('categories:');
         categories.forEach((item) => lines.push(`  - ${quoteYaml(item)}`));
     }
-
     if (tags.length) {
         lines.push('tags:');
         tags.forEach((item) => lines.push(`  - ${quoteYaml(item)}`));
     }
-
-    if (dom.coverInput.value.trim()) {
-        lines.push(`cover: ${quoteYaml(dom.coverInput.value.trim())}`);
-    }
-
-    if (dom.excerptInput.value.trim()) {
-        lines.push(`excerpt: ${quoteYaml(dom.excerptInput.value.trim())}`);
-    }
-
+    if (dom.postCover.value.trim()) lines.push(`cover: ${quoteYaml(dom.postCover.value.trim())}`);
+    if (dom.postExcerpt.value.trim()) lines.push(`excerpt: ${quoteYaml(dom.postExcerpt.value.trim())}`);
     lines.push('---');
     return lines.join('\n');
 }
 
-async function copyFrontmatter() {
-    const frontmatter = buildFrontmatter();
-
-    try {
-        await navigator.clipboard.writeText(frontmatter);
-        showToast('Front Matter 已复制', 'success');
-    } catch {
-        showToast('浏览器不允许复制，请手动选择文本', 'error');
-    }
+function setDirty(value = true) {
+    state.dirty = value;
+    setSave(value ? 'dirty' : 'idle', value ? 'Unsaved' : 'Saved');
 }
 
-// ===== Rendering =====
-function renderDocList() {
-    const query = dom.postSearch.value.trim().toLowerCase();
-    const list = state.activeListView === 'posts' ? state.remotePosts : state.drafts;
-    const filtered = list.filter((item) => {
-        const haystack = [
-            item.title,
-            item.filename,
-            item.path,
-            item.tags,
-            item.categories
-        ].filter(Boolean).join(' ').toLowerCase();
-        return haystack.includes(query);
-    });
-
-    renderDraftCount();
-    dom.remoteCount.textContent = state.remotePosts.length;
-
-    if (!filtered.length) {
-        dom.docList.innerHTML = `
-            <div class="empty-state">
-                <i class="ph ph-file-dashed"></i>
-                <span>${state.activeListView === 'posts' ? '暂无远程文章' : '暂无本地草稿'}</span>
-            </div>
-        `;
-        return;
-    }
-
-    dom.docList.innerHTML = filtered.map((item) => {
-        const active = isActiveDoc(item) ? 'active' : '';
-        const meta = item.type === 'remote'
-            ? `${item.filename} · ${item.sha.slice(0, 7)}`
-            : `Saved ${formatRelative(item.updatedAt)}`;
-        const icon = item.type === 'remote' ? 'ph-file-cloud' : 'ph-note-pencil';
-        return `
-            <button class="doc-item ${active}" data-id="${item.id}" data-type="${item.type}">
-                <span class="doc-icon"><i class="ph ${icon}"></i></span>
-                <span class="doc-copy">
-                    <strong>${escapeHtml(item.title || readableTitle(item.filename))}</strong>
-                    <small>${escapeHtml(meta)}</small>
-                </span>
-            </button>
-        `;
-    }).join('');
-
-    $$('.doc-item').forEach((button) => {
-        button.addEventListener('click', () => {
-            const id = button.dataset.id;
-            const type = button.dataset.type;
-            const collection = type === 'remote' ? state.remotePosts : state.drafts;
-            const doc = collection.find((item) => item.id === id);
-            if (!doc) return;
-            if (type === 'remote') openRemotePost(doc);
-            if (type === 'draft') openDraft(doc);
-        });
-    });
-}
-
-function renderListLoading(text) {
-    dom.docList.innerHTML = `
-        <div class="empty-state">
-            <i class="ph ph-spinner-gap ph-spin"></i>
-            <span>${text}</span>
-        </div>
-    `;
-}
-
-function renderDraftCount() {
-    dom.draftCount.textContent = state.drafts.length;
-}
-
-function renderActivity(message) {
-    state.activity.unshift({
-        message,
-        time: formatTime(new Date())
-    });
-    state.activity = state.activity.slice(0, 6);
-
-    dom.activityList.innerHTML = state.activity.map((item) => `
-        <li>
-            <span>${escapeHtml(item.message)}</span>
-            <time>${item.time}</time>
-        </li>
-    `).join('');
-}
-
-function setListView(view) {
-    state.activeListView = view;
-    $$('#list-tabs [data-list-view]').forEach((button) => {
-        button.classList.toggle('active', button.dataset.listView === view);
-    });
-    renderDocList();
-}
-
-function isActiveDoc(item) {
-    if (!state.currentDoc) return false;
-    if (item.type !== state.currentDoc.type) return false;
-    return item.id === state.currentDoc.id;
-}
-
-function setConnectionStatus(type, label) {
-    dom.connectionStatus.className = `status-pill ${type}`;
+function setConnection(type, label) {
+    dom.connectionStatus.className = `status ${type}`;
     dom.connectionStatus.textContent = label;
 }
 
-function setSaveStatus(type, label) {
-    dom.saveStatus.className = `save-chip ${type}`;
+function setSave(type, label) {
+    dom.saveStatus.className = `status ${type}`;
     dom.saveStatus.textContent = label;
-}
-
-function setButtonLoading(button, loading, label) {
-    button.disabled = loading;
-    if (loading) {
-        button.dataset.originalLabel = button.innerHTML;
-        button.innerHTML = `<i class="ph ph-spinner-gap ph-spin"></i><span>${label}</span>`;
-        return;
-    }
-
-    if (button === dom.loginBtn) {
-        button.innerHTML = '<i class="ph ph-lock-key"></i><span>验证并进入</span>';
-        return;
-    }
-
-    if (button === dom.publishBtn) {
-        button.innerHTML = '<i class="ph ph-upload-simple"></i><span>Publish</span>';
-        return;
-    }
-
-    if (button.dataset.originalLabel) {
-        button.innerHTML = button.dataset.originalLabel;
-    }
 }
 
 function showToast(message, type = 'success') {
     dom.toast.textContent = message;
     dom.toast.className = `toast ${type} show`;
     clearTimeout(showToast.timer);
-    showToast.timer = setTimeout(() => {
-        dom.toast.className = 'toast';
-    }, 2800);
+    showToast.timer = setTimeout(() => dom.toast.className = 'toast', 2600);
 }
 
-function updateWritingStats() {
-    if (!state.startTime) return;
-    const seconds = Math.floor((Date.now() - state.startTime) / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    const wpm = minutes > 0 ? Math.round(state.currentWords / minutes) : 0;
-
-    dom.writingTime.textContent = `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-    dom.typingSpeed.textContent = `${wpm} wpm`;
-}
-
-// ===== Theme =====
-function loadTheme() {
-    const theme = localStorage.getItem(THEME_KEY) || 'light';
-    document.body.classList.toggle('theme-dark', theme === 'dark');
-    document.body.classList.toggle('theme-light', theme !== 'dark');
-    updateThemeIcon();
-}
-
-function toggleTheme() {
-    const dark = !document.body.classList.contains('theme-dark');
-    localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light');
-    document.body.classList.toggle('theme-dark', dark);
-    document.body.classList.toggle('theme-light', !dark);
-    updateThemeIcon();
-}
-
-function updateThemeIcon() {
-    const icon = dom.themeToggle.querySelector('i');
-    icon.className = document.body.classList.contains('theme-dark') ? 'ph ph-sun' : 'ph ph-moon';
-}
-
-// ===== Utilities =====
 function apiUrl(path) {
     return `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/${path}`;
 }
 
-function githubHeaders(token = state.githubToken) {
+function githubHeaders(token = state.token) {
     return {
-        'Authorization': `token ${token}`,
-        'Accept': 'application/vnd.github.v3+json',
+        Authorization: `token ${token}`,
+        Accept: 'application/vnd.github.v3+json',
         'Content-Type': 'application/json'
     };
 }
@@ -822,9 +693,7 @@ function githubHeaders(token = state.githubToken) {
 function encodeBase64(text) {
     const bytes = new TextEncoder().encode(text);
     let binary = '';
-    bytes.forEach((byte) => {
-        binary += String.fromCharCode(byte);
-    });
+    bytes.forEach((byte) => binary += String.fromCharCode(byte));
     return btoa(binary);
 }
 
@@ -836,35 +705,22 @@ function decodeBase64(content) {
 }
 
 function parsePost(raw) {
-    if (!raw.startsWith('---')) {
-        return { meta: {}, body: raw };
-    }
-
+    if (!raw.startsWith('---')) return { meta: {}, body: raw };
     const end = raw.indexOf('\n---', 3);
-    if (end === -1) {
-        return { meta: {}, body: raw };
-    }
-
+    if (end === -1) return { meta: {}, body: raw };
     const frontmatter = raw.slice(3, end).trim();
     const body = raw.slice(raw.indexOf('\n', end + 1) + 1).trimStart();
-    return {
-        meta: parseFrontmatter(frontmatter),
-        body
-    };
+    return { meta: parseFrontmatter(frontmatter), body };
 }
 
 function parseFrontmatter(text) {
     const meta = {};
     const lines = text.split(/\r?\n/);
-
     for (let index = 0; index < lines.length; index += 1) {
-        const line = lines[index];
-        const match = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+        const match = lines[index].match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
         if (!match) continue;
-
         const key = match[1];
         const value = match[2].trim();
-
         if (!value) {
             const list = [];
             while (lines[index + 1] && /^\s+-\s+/.test(lines[index + 1])) {
@@ -876,22 +732,11 @@ function parseFrontmatter(text) {
             meta[key] = stripYamlQuotes(value);
         }
     }
-
     return meta;
 }
 
-function normalizeList(value) {
-    if (Array.isArray(value)) return value;
-    if (!value) return [];
-    return splitComma(String(value));
-}
-
-function splitComma(value) {
-    return value.split(',').map((item) => item.trim()).filter(Boolean);
-}
-
 function stripYamlQuotes(value) {
-    return value.replace(/^['"]|['"]$/g, '');
+    return String(value).replace(/^['"]|['"]$/g, '');
 }
 
 function quoteYaml(value) {
@@ -899,42 +744,41 @@ function quoteYaml(value) {
     return /[:#\[\]{}&,*!|>'"%@`]/.test(text) ? `"${text}"` : text;
 }
 
+function toTextList(value) {
+    if (Array.isArray(value)) return value.join(', ');
+    return value || '';
+}
+
+function splitComma(value) {
+    return String(value || '').split(',').map((item) => item.trim()).filter(Boolean);
+}
+
+function splitLines(value) {
+    return String(value || '').split(/\r?\n/).map((item) => item.trim()).filter(Boolean);
+}
+
 function formatDateForHexo(value) {
-    const date = value instanceof Date ? value : new Date(value);
-    const safeDate = Number.isNaN(date.getTime()) ? new Date() : date;
-    return [
-        safeDate.getFullYear(),
-        String(safeDate.getMonth() + 1).padStart(2, '0'),
-        String(safeDate.getDate()).padStart(2, '0')
-    ].join('-') + ' ' + [
-        String(safeDate.getHours()).padStart(2, '0'),
-        String(safeDate.getMinutes()).padStart(2, '0'),
-        String(safeDate.getSeconds()).padStart(2, '0')
-    ].join(':');
+    const date = value instanceof Date ? value : new Date(String(value).replace(' ', 'T'));
+    const safe = Number.isNaN(date.getTime()) ? new Date() : date;
+    return `${safe.getFullYear()}-${pad(safe.getMonth() + 1)}-${pad(safe.getDate())} ${pad(safe.getHours())}:${pad(safe.getMinutes())}:${pad(safe.getSeconds())}`;
 }
 
 function toDateTimeLocal(value) {
     const date = value instanceof Date ? value : new Date(String(value).replace(' ', 'T'));
-    const safeDate = Number.isNaN(date.getTime()) ? new Date() : date;
-    const offset = safeDate.getTimezoneOffset() * 60000;
-    return new Date(safeDate.getTime() - offset).toISOString().slice(0, 16);
+    const safe = Number.isNaN(date.getTime()) ? new Date() : date;
+    const offset = safe.getTimezoneOffset() * 60000;
+    return new Date(safe.getTime() - offset).toISOString().slice(0, 16);
 }
 
 function countWords(text) {
-    const cjk = text.match(/[\u3400-\u9fff]/g) || [];
-    const western = text.match(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*/g) || [];
+    const cjk = String(text).match(/[\u3400-\u9fff]/g) || [];
+    const western = String(text).match(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*/g) || [];
     return cjk.length + western.length;
 }
 
 function buildFilename(title) {
     const date = new Date().toISOString().slice(0, 10);
-    const slug = String(title)
-        .trim()
-        .toLowerCase()
-        .replace(/[^\w\u3400-\u9fff]+/g, '-')
-        .replace(/^-+|-+$/g, '')
-        .slice(0, 80) || 'untitled';
-    return `${date}-${slug}.md`;
+    return `${date}-${slugify(title || 'untitled')}.md`;
 }
 
 function ensureMarkdownFilename(filename) {
@@ -943,35 +787,28 @@ function ensureMarkdownFilename(filename) {
 }
 
 function readableTitle(filename = '') {
-    return filename
-        .replace(/\.md$/, '')
-        .replace(/^\d{4}-\d{2}-\d{2}-/, '')
-        .replace(/[-_]+/g, ' ')
-        .trim() || '未命名文章';
+    return filename.replace(/\.md$/, '').replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/[-_]+/g, ' ').trim() || 'Untitled';
+}
+
+function slugify(value) {
+    return String(value)
+        .trim()
+        .toLowerCase()
+        .replace(/[^\w\u3400-\u9fff]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 80) || 'untitled';
 }
 
 function createId() {
-    return `draft_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+    return `item_${Date.now()}_${Math.random().toString(16).slice(2)}`;
 }
 
-function formatTime(date) {
-    return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
-}
-
-function formatRelative(value) {
-    if (!value) return 'just now';
-    const date = new Date(value);
-    const diff = Math.max(0, Date.now() - date.getTime());
-    const minutes = Math.floor(diff / 60000);
-
-    if (minutes < 1) return 'just now';
-    if (minutes < 60) return `${minutes}m ago`;
-    if (minutes < 1440) return `${Math.floor(minutes / 60)}h ago`;
-    return `${Math.floor(minutes / 1440)}d ago`;
+function pad(value) {
+    return String(value).padStart(2, '0');
 }
 
 function escapeHtml(value) {
-    return String(value)
+    return String(value || '')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')

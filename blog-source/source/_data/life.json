@@ -1,0 +1,85 @@
+{
+  "interestTypes": [
+    {
+      "key": "travel",
+      "label": "旅行",
+      "icon": "fa-route",
+      "tone": "Trips"
+    },
+    {
+      "key": "photo",
+      "label": "摄影",
+      "icon": "fa-camera-retro",
+      "tone": "Frames"
+    },
+    {
+      "key": "music",
+      "label": "音乐",
+      "icon": "fa-music",
+      "tone": "Songs"
+    },
+    {
+      "key": "film",
+      "label": "影视",
+      "icon": "fa-film",
+      "tone": "Screens"
+    },
+    {
+      "key": "book",
+      "label": "书籍",
+      "icon": "fa-book-open",
+      "tone": "Reads"
+    }
+  ],
+  "records": [
+    {
+      "id": "yunnan-2026",
+      "kind": "travel",
+      "label": "旅行",
+      "icon": "fa-route",
+      "date": "2026.05.14 - 05.23",
+      "year": "2026",
+      "title": "云南十日旅行",
+      "place": "大理 · 丽江 · 香格里拉",
+      "focus": "洱海边的风、古城夜色、雪山和高原路途被整理成一段可以回看的旅程。",
+      "mood": "高原空气、蓝色湖面、慢下来的脚步",
+      "stat": "10 days",
+      "cover": "/images/self/life_photo.jpg",
+      "details": [
+        "沿洱海把风景和照片收进同一天",
+        "在古城夜色里记录街巷、灯光和人声",
+        "把雪山与高原路途留作 2026 年春末的坐标"
+      ],
+      "tags": [
+        "云南",
+        "旅行",
+        "旅拍",
+        "高原"
+      ]
+    },
+    {
+      "id": "hutiancuo-2025",
+      "kind": "music",
+      "label": "音乐",
+      "icon": "fa-music",
+      "date": "2025.03.23 - 03.30",
+      "year": "2025",
+      "title": "循环《花田错》",
+      "place": "一周旋律记忆",
+      "focus": "用一首歌给那段时间做索引。以后再听见前奏时，页面能把我带回那一周的状态。",
+      "mood": "循环播放、旧旋律、时间锚点",
+      "stat": "7 days",
+      "cover": "",
+      "details": [
+        "把《花田错》作为 2025 年 3 月底的听觉标签",
+        "适合记录当周的地点、场景、歌词片段和心情",
+        "之后可以继续补充同一时期喜欢的专辑和歌单"
+      ],
+      "tags": [
+        "花田错",
+        "华语音乐",
+        "循环播放"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "name": "Xiong Wei",
+  "nameCn": "熊伟",
+  "role": "M.S. in Computer Science · AI Researcher · LLM Algorithm Engineer",
+  "avatar": "/images/icons/main.jpg",
+  "email": "2816739071@qq.com",
+  "github": "https://github.com/xwqianbei",
+  "highlights": [
+    {
+      "label": "Focus",
+      "value": "LLM / Search / MARL"
+    },
+    {
+      "label": "Mode",
+      "value": "Research to systems"
+    }
+  ],
+  "interests": [
+    "Large Language Models",
+    "Multi-Agent Reinforcement Learning",
+    "LLM Post-Training",
+    "AI Search & Agents"
+  ],
+  "education": [
+    {
+      "title": "University of Chinese Academy of Sciences",
+      "subtitle": "M.S. in Software Engineering · Institute of Software, Chinese Academy of Sciences",
+      "date": "2023.09 - 2026.06",
+      "detail": "GPA: 3.74 / 4.0 · Second-class Academic Scholarship"
+    },
+    {
+      "title": "Jiangxi Normal University",
+      "subtitle": "B.Eng. in Computer Science and Technology",
+      "date": "2019.09 - 2023.06",
+      "detail": "First-class Comprehensive Scholarship · National Encouragement Scholarship · Outstanding Graduate"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Meituan",
+      "subtitle": "LLM Algorithm Intern",
+      "date": "2025.04 - 2025.10",
+      "detail": "Built life-service foundation LLM via continual pre-training and post-training on LongCat-8B; scaled to 18B with 12.92pp domain improvement."
+    },
+    {
+      "title": "Zhipu AI",
+      "subtitle": "LLM Algorithm Intern",
+      "date": "2024.12 - 2025.04",
+      "detail": "Built AI search agent with multi-step planning-execution loop; trained end-to-end function-call model, reducing bad cases by 75%."
+    },
+    {
+      "title": "Du Xiaoman Finance",
+      "subtitle": "LLM Algorithm Intern",
+      "date": "2024.04 - 2024.07",
+      "detail": "Developed role-playing LLM for anime companion app; achieved 15.6pp gain in role-play metrics via data-recipe scaling experiments."
+    }
+  ],
+  "publications": [
+    {
+      "title": "LLM-Guided Role Assignment and Coordination in Multi-Agent Reinforcement Learning",
+      "venue": "PAKDD (CCF-C) · First Author · Accepted"
+    },
+    {
+      "title": "Perspective-Insensitive Observation Representation and Role Assignment for Multi-Agent Reinforcement Learning",
+      "venue": "PAKDD (CCF-C) · First Author · Accepted"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "tag": "LLM · Post-Training",
+    "title": "Life-Service LLM Post-Training",
+    "desc": "Domain foundation model work across continual pre-training, instruction data recipes, evaluation design, and scaling experiments for life-service scenarios.",
+    "image": "/images/self/life_photo.jpg",
+    "href": "https://github.com/xwqianbei",
+    "stats": [
+      "LongCat-8B",
+      "18B scaling",
+      "Domain eval"
+    ]
+  },
+  {
+    "tag": "Agent · Search",
+    "title": "AI Search Agent",
+    "desc": "A planning-execution search agent focused on function calling, retrieval decisions, bad-case loops, and end-to-end model training.",
+    "image": "/images/self/life_photo.jpg",
+    "href": "https://github.com/xwqianbei",
+    "stats": [
+      "Planning",
+      "Function call",
+      "Retrieval"
+    ]
+  },
+  {
+    "tag": "Research · MARL",
+    "title": "Multi-Agent Role Assignment",
+    "desc": "LLM-guided role assignment and coordination strategies for improving heterogeneous-team stability in multi-agent reinforcement learning.",
+    "image": "/images/self/life_photo.jpg",
+    "href": "https://github.com/xwqianbei",
+    "stats": [
+      "MARL",
+      "Coordination",
+      "PAKDD"
+    ]
+  }
+]

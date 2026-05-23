@@ -1,30 +1,5 @@
 <%
-var projects = [
-    {
-        tag: 'LLM · Post-Training',
-        title: 'Life-Service LLM Post-Training',
-        desc: 'Domain foundation model work across continual pre-training, instruction data recipes, evaluation design, and scaling experiments for life-service scenarios.',
-        image: '/images/self/life_photo.jpg',
-        href: 'https://github.com/xwqianbei',
-        stats: ['LongCat-8B', '18B scaling', 'Domain eval']
-    },
-    {
-        tag: 'Agent · Search',
-        title: 'AI Search Agent',
-        desc: 'A planning-execution search agent focused on function calling, retrieval decisions, bad-case loops, and end-to-end model training.',
-        image: '/images/self/life_photo.jpg',
-        href: 'https://github.com/xwqianbei',
-        stats: ['Planning', 'Function call', 'Retrieval']
-    },
-    {
-        tag: 'Research · MARL',
-        title: 'Multi-Agent Role Assignment',
-        desc: 'LLM-guided role assignment and coordination strategies for improving heterogeneous-team stability in multi-agent reinforcement learning.',
-        image: '/images/self/life_photo.jpg',
-        href: 'https://github.com/xwqianbei',
-        stats: ['MARL', 'Coordination', 'PAKDD']
-    }
-];
+var projects = site.data.projects || [];
 %>
 
 <article class="projects-page">
@@ -40,18 +15,19 @@ var projects = [
         </a>
     </header>
 
+    <% if (projects.length) { %>
     <section class="project-grid" aria-label="Project list">
         <% projects.forEach(function(project) { %>
         <a href="<%= project.href %>" class="project-card" target="_blank" rel="noopener">
             <div class="project-card-media">
-                <img src="<%- url_for(project.image) %>" alt="<%= project.title %>" />
-                <span><%= project.tag %></span>
+                <img src="<%- url_for(project.image || '/images/self/life_photo.jpg') %>" alt="<%= project.title %>" />
+                <span><%= project.tag || 'Project' %></span>
             </div>
             <div class="project-card-body">
                 <h2><%= project.title %></h2>
                 <p><%= project.desc %></p>
                 <div class="project-card-tags" aria-label="Project keywords">
-                    <% project.stats.forEach(function(stat) { %>
+                    <% (project.stats || []).forEach(function(stat) { %>
                     <span><%= stat %></span>
                     <% }); %>
                 </div>
@@ -60,6 +36,12 @@ var projects = [
         </a>
         <% }); %>
     </section>
+    <% } else { %>
+    <div class="empty-state">
+        <i class="fas fa-layer-group" aria-hidden="true"></i>
+        <p>No projects yet.</p>
+    </div>
+    <% } %>
 
     <%- page.content %>
 </article>

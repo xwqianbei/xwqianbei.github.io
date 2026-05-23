@@ -1,26 +1,37 @@
+<%
+var profile = site.data.profile || {};
+var highlights = profile.highlights || [];
+var interests = profile.interests || [];
+var education = profile.education || [];
+var experience = profile.experience || [];
+var publications = profile.publications || [];
+%>
+
 <article class="about-page">
     <header class="about-hero">
         <div class="about-hero-media">
-            <img src="<%- url_for(theme.avatar || '/images/icons/main.jpg') %>" alt="Xiong Wei" />
+            <img src="<%- url_for(profile.avatar || theme.avatar || '/images/icons/main.jpg') %>" alt="<%= profile.name || 'Profile' %>" />
         </div>
         <div class="about-hero-copy">
             <p class="page-eyebrow">About</p>
-            <h1 class="about-name">Xiong Wei <span>熊伟</span></h1>
-            <p class="about-role">M.S. in Computer Science · AI Researcher · LLM Algorithm Engineer</p>
+            <h1 class="about-name"><%= profile.name || 'Xiong Wei' %><% if (profile.nameCn) { %> <span><%= profile.nameCn %></span><% } %></h1>
+            <p class="about-role"><%= profile.role || 'AI Researcher' %></p>
             <div class="about-contact">
-                <a href="mailto:2816739071@qq.com"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
-                <a href="https://github.com/xwqianbei" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+                <% if (profile.email) { %>
+                <a href="mailto:<%= profile.email %>"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+                <% } %>
+                <% if (profile.github) { %>
+                <a href="<%= profile.github %>" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+                <% } %>
             </div>
         </div>
         <div class="about-hero-stats" aria-label="Profile highlights">
+            <% highlights.forEach(function(item) { %>
             <div>
-                <span>Focus</span>
-                <strong>LLM / Search / MARL</strong>
+                <span><%= item.label %></span>
+                <strong><%= item.value %></strong>
             </div>
-            <div>
-                <span>Mode</span>
-                <strong>Research to systems</strong>
-            </div>
+            <% }); %>
         </div>
     </header>
 
@@ -30,10 +41,9 @@
             <h2 class="about-section-title">Interests</h2>
         </div>
         <div class="interest-tags">
-            <span class="interest-tag">Large Language Models</span>
-            <span class="interest-tag">Multi-Agent Reinforcement Learning</span>
-            <span class="interest-tag">LLM Post-Training</span>
-            <span class="interest-tag">AI Search & Agents</span>
+            <% interests.forEach(function(item) { %>
+            <span class="interest-tag"><%= item %></span>
+            <% }); %>
         </div>
     </section>
 
@@ -45,27 +55,18 @@
             </div>
 
             <div class="timeline">
+                <% education.forEach(function(item) { %>
                 <div class="timeline-item">
                     <div class="timeline-header">
                         <div class="timeline-info">
-                            <h3 class="timeline-title">University of Chinese Academy of Sciences</h3>
-                            <p class="timeline-subtitle">M.S. in Software Engineering · Institute of Software, Chinese Academy of Sciences</p>
+                            <h3 class="timeline-title"><%= item.title %></h3>
+                            <p class="timeline-subtitle"><%= item.subtitle %></p>
                         </div>
-                        <span class="timeline-date">2023.09 - 2026.06</span>
+                        <span class="timeline-date"><%= item.date %></span>
                     </div>
-                    <p class="timeline-detail">GPA: 3.74 / 4.0 · Second-class Academic Scholarship</p>
+                    <p class="timeline-detail"><%= item.detail %></p>
                 </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <div class="timeline-info">
-                            <h3 class="timeline-title">Jiangxi Normal University</h3>
-                            <p class="timeline-subtitle">B.Eng. in Computer Science and Technology</p>
-                        </div>
-                        <span class="timeline-date">2019.09 - 2023.06</span>
-                    </div>
-                    <p class="timeline-detail">First-class Comprehensive Scholarship · National Encouragement Scholarship · Outstanding Graduate</p>
-                </div>
+                <% }); %>
             </div>
         </section>
 
@@ -76,38 +77,18 @@
             </div>
 
             <div class="timeline">
+                <% experience.forEach(function(item) { %>
                 <div class="timeline-item">
                     <div class="timeline-header">
                         <div class="timeline-info">
-                            <h3 class="timeline-title">Meituan</h3>
-                            <p class="timeline-subtitle">LLM Algorithm Intern</p>
+                            <h3 class="timeline-title"><%= item.title %></h3>
+                            <p class="timeline-subtitle"><%= item.subtitle %></p>
                         </div>
-                        <span class="timeline-date">2025.04 - 2025.10</span>
+                        <span class="timeline-date"><%= item.date %></span>
                     </div>
-                    <p class="timeline-detail">Built life-service foundation LLM via continual pre-training and post-training on LongCat-8B; scaled to 18B with 12.92pp domain improvement.</p>
+                    <p class="timeline-detail"><%= item.detail %></p>
                 </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <div class="timeline-info">
-                            <h3 class="timeline-title">Zhipu AI</h3>
-                            <p class="timeline-subtitle">LLM Algorithm Intern</p>
-                        </div>
-                        <span class="timeline-date">2024.12 - 2025.04</span>
-                    </div>
-                    <p class="timeline-detail">Built AI search agent with multi-step planning-execution loop; trained end-to-end function-call model, reducing bad cases by 75%.</p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <div class="timeline-info">
-                            <h3 class="timeline-title">Du Xiaoman Finance</h3>
-                            <p class="timeline-subtitle">LLM Algorithm Intern</p>
-                        </div>
-                        <span class="timeline-date">2024.04 - 2024.07</span>
-                    </div>
-                    <p class="timeline-detail">Developed role-playing LLM for anime companion app; achieved 15.6pp gain in role-play metrics via data-recipe scaling experiments.</p>
-                </div>
+                <% }); %>
             </div>
         </section>
     </div>
@@ -118,14 +99,12 @@
             <h2 class="about-section-title">Selected Papers</h2>
         </div>
         <ul class="publication-list">
+            <% publications.forEach(function(item) { %>
             <li class="publication-item">
-                <span class="pub-title">LLM-Guided Role Assignment and Coordination in Multi-Agent Reinforcement Learning</span>
-                <span class="pub-venue">PAKDD (CCF-C) · First Author · Accepted</span>
+                <span class="pub-title"><%= item.title %></span>
+                <span class="pub-venue"><%= item.venue %></span>
             </li>
-            <li class="publication-item">
-                <span class="pub-title">Perspective-Insensitive Observation Representation and Role Assignment for Multi-Agent Reinforcement Learning</span>
-                <span class="pub-venue">PAKDD (CCF-C) · First Author · Accepted</span>
-            </li>
+            <% }); %>
         </ul>
     </section>
 </article>
