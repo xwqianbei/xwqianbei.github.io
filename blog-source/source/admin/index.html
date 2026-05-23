@@ -171,6 +171,17 @@ layout: false
                     <label class="block-field">Mood<textarea id="lifeMood" rows="2"></textarea></label>
                     <label class="block-field">Tags<input id="lifeTags" type="text" placeholder="云南, 旅行, 旅拍"></label>
                     <label class="block-field">Details<textarea id="lifeDetails" rows="5" placeholder="每行一条细节"></textarea></label>
+                    <div class="content-tools">
+                        <div>
+                            <p class="eyebrow">Detail Note</p>
+                            <h3>Markdown content with images</h3>
+                        </div>
+                        <div class="inline-actions">
+                            <button id="insertLifeImageBtn" class="btn ghost" type="button"><i class="fas fa-image"></i><span>Insert Image</span></button>
+                            <button id="insertLifeGalleryBtn" class="btn ghost" type="button"><i class="fas fa-table-cells-large"></i><span>Insert Gallery</span></button>
+                        </div>
+                    </div>
+                    <label class="block-field">Detail Markdown<textarea id="lifeContent" class="markdown-area" rows="14" placeholder="支持 Markdown，也支持上方 Media 面板生成的图片排版块"></textarea></label>
                 </section>
 
                 <section id="worksView" class="module-view">

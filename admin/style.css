@@ -446,6 +446,22 @@ select:focus {
     font-weight: 800;
 }
 
+.content-tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface-soft);
+}
+
+.content-tools h3 {
+    margin: 0;
+    font-size: 0.98rem;
+}
+
 .split-editor {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
@@ -459,7 +475,8 @@ select:focus {
 }
 
 .editor-area textarea,
-.json-area {
+.json-area,
+.markdown-area {
     font-family: "SFMono-Regular", Consolas, monospace;
     font-size: 0.88rem;
 }
@@ -602,7 +619,8 @@ select:focus {
     }
     .module-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .media-head,
-    .media-actions {
+    .media-actions,
+    .content-tools {
         align-items: stretch;
         flex-direction: column;
     }

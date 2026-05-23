@@ -139,6 +139,7 @@ var initialRecord = lifeRecords[0] || {
                     data-cover="<%- item.cover ? url_for(item.cover) : '' %>"
                     data-tags="<%= item.tags.join('|') %>"
                     data-details="<%= item.details.join('|') %>"
+                    data-has-content="<%= item.content ? 'true' : 'false' %>"
                 >
                     <button class="life-entry-card" type="button" data-life-select aria-pressed="<%= index === 0 ? 'true' : 'false' %>">
                         <span class="life-entry-node">
@@ -157,6 +158,14 @@ var initialRecord = lifeRecords[0] || {
                                 <span><%= tag %></span>
                                 <% }); %>
                             </span>
+                            <% if (item.content) { %>
+                            <span class="life-entry-actions">
+                                <span class="life-detail-trigger" data-life-detail-open="<%= item.id %>">
+                                    <i class="fas fa-book-open" aria-hidden="true"></i>
+                                    View detailed note
+                                </span>
+                            </span>
+                            <% } %>
                         </span>
                     </button>
                     <div class="life-entry-details">
@@ -180,6 +189,27 @@ var initialRecord = lifeRecords[0] || {
             </section>
         </div>
     </section>
+
+    <% lifeRecords.forEach(function(item) { if (item.content) { %>
+    <section class="life-detail-modal" data-life-detail-modal="<%= item.id %>" aria-hidden="true">
+        <div class="life-detail-backdrop" data-life-detail-close></div>
+        <article class="life-detail-panel" role="dialog" aria-modal="true" aria-labelledby="life-detail-title-<%= item.id %>">
+            <button class="life-detail-close" type="button" data-life-detail-close aria-label="Close detail">
+                <i class="fas fa-xmark" aria-hidden="true"></i>
+            </button>
+            <header class="life-detail-header">
+                <p class="life-kicker"><%= item.label %> · <%= item.date %></p>
+                <h2 id="life-detail-title-<%= item.id %>"><%= item.title %></h2>
+                <% if (item.place) { %>
+                <p><i class="fas fa-location-dot" aria-hidden="true"></i> <%= item.place %></p>
+                <% } %>
+            </header>
+            <div class="life-detail-content post-content">
+                <%- markdown(item.content || '') %>
+            </div>
+        </article>
+    </section>
+    <% } }); %>
 </article>
 
 <script>
@@ -196,6 +226,7 @@ var initialRecord = lifeRecords[0] || {
         const focusArtIcon = root.querySelector('[data-focus-art-icon]');
         const focusArtKind = root.querySelector('[data-focus-art-kind]');
         const focusTags = root.querySelector('[data-focus-tags]');
+        const detailModals = Array.from(document.querySelectorAll('[data-life-detail-modal]'));
 
         function setText(selector, value) {
             const target = root.querySelector(selector);
@@ -302,10 +333,51 @@ var initialRecord = lifeRecords[0] || {
         entries.forEach(function(entry) {
             const button = entry.querySelector('[data-life-select]');
             if (button) {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function(event) {
+                    const detailTrigger = event.target.closest('[data-life-detail-open]');
+                    if (detailTrigger) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        openDetail(detailTrigger.dataset.lifeDetailOpen);
+                        return;
+                    }
                     selectEntry(entry);
                 });
             }
         });
+
+        document.querySelectorAll('[data-life-detail-open]').forEach(function(trigger) {
+            trigger.addEventListener('click', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                openDetail(trigger.dataset.lifeDetailOpen);
+            });
+        });
+
+        document.querySelectorAll('[data-life-detail-close]').forEach(function(closeButton) {
+            closeButton.addEventListener('click', closeDetail);
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') closeDetail();
+        });
+
+        function openDetail(id) {
+            const modal = detailModals.find(function(item) {
+                return item.dataset.lifeDetailModal === id;
+            });
+            if (!modal) return;
+            modal.classList.add('open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('life-detail-open');
+        }
+
+        function closeDetail() {
+            detailModals.forEach(function(modal) {
+                modal.classList.remove('open');
+                modal.setAttribute('aria-hidden', 'true');
+            });
+            document.body.classList.remove('life-detail-open');
+        }
     })();
 </script>

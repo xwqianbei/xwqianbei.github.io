@@ -83,6 +83,9 @@ const dom = {
     lifeMood: $('#lifeMood'),
     lifeTags: $('#lifeTags'),
     lifeDetails: $('#lifeDetails'),
+    lifeContent: $('#lifeContent'),
+    insertLifeImageBtn: $('#insertLifeImageBtn'),
+    insertLifeGalleryBtn: $('#insertLifeGalleryBtn'),
     duplicateLifeBtn: $('#duplicateLifeBtn'),
     deleteLifeBtn: $('#deleteLifeBtn'),
     workTitle: $('#workTitle'),
@@ -137,7 +140,7 @@ function bindEvents() {
     [
         dom.lifeTitle, dom.lifeId, dom.lifeKind, dom.lifeLabel, dom.lifeIcon, dom.lifeDate,
         dom.lifeYear, dom.lifeStat, dom.lifePlace, dom.lifeCover, dom.lifeFocus,
-        dom.lifeMood, dom.lifeTags, dom.lifeDetails
+        dom.lifeMood, dom.lifeTags, dom.lifeDetails, dom.lifeContent
     ].forEach((input) => input.addEventListener('input', handleLifeInput));
 
     [dom.workTitle, dom.workTag, dom.workHref, dom.workImage, dom.workDesc, dom.workStats]
@@ -154,6 +157,8 @@ function bindEvents() {
     dom.uploadImageBtn.addEventListener('click', uploadSelectedImage);
     dom.insertImageBtn.addEventListener('click', insertImageBlock);
     dom.insertGalleryBtn.addEventListener('click', insertGalleryBlock);
+    dom.insertLifeImageBtn.addEventListener('click', () => insertImageBlock('life'));
+    dom.insertLifeGalleryBtn.addEventListener('click', () => insertGalleryBlock('life'));
     dom.duplicateLifeBtn.addEventListener('click', duplicateLife);
     dom.deleteLifeBtn.addEventListener('click', deleteLife);
     dom.duplicateWorkBtn.addEventListener('click', duplicateWork);
@@ -415,7 +420,7 @@ async function uploadSelectedImage() {
     }
 }
 
-function insertImageBlock() {
+function insertImageBlock(target = 'post') {
     const sitePath = normalizeImageSitePath(dom.imagePathInput.value);
     const alt = dom.imageAltInput.value.trim() || 'Image';
     const caption = dom.imageCaptionInput.value.trim();
@@ -433,16 +438,16 @@ function insertImageBlock() {
         html = buildSingleImageBlock(sitePath, alt, caption, layout);
     }
 
-    insertAtCursor(`\n${html}\n`);
+    insertAtCursor(`\n${html}\n`, target);
     showToast('图片排版块已插入', 'success');
 }
 
-function insertGalleryBlock() {
+function insertGalleryBlock(target = 'post') {
     const first = normalizeImageSitePath(dom.imagePathInput.value);
     const others = splitComma(dom.imageSecondPathInput.value).map(normalizeImageSitePath).filter(Boolean);
     const paths = [first].concat(others).filter(Boolean);
     if (!paths.length) return showToast('请填写至少一张图片路径', 'error');
-    insertAtCursor(`\n${buildGalleryBlock(paths, dom.imageAltInput.value.trim() || 'Gallery', dom.imageCaptionInput.value.trim())}\n`);
+    insertAtCursor(`\n${buildGalleryBlock(paths, dom.imageAltInput.value.trim() || 'Gallery', dom.imageCaptionInput.value.trim())}\n`, target);
     showToast('Gallery 已插入', 'success');
 }
 
@@ -478,13 +483,14 @@ function buildGalleryBlock(paths, alt, caption) {
     ].filter(Boolean).join('\n');
 }
 
-function insertAtCursor(text) {
-    const textarea = dom.postContent;
+function insertAtCursor(text, target = 'post') {
+    const textarea = target === 'life' ? dom.lifeContent : dom.postContent;
     const start = textarea.selectionStart || 0;
     const end = textarea.selectionEnd || 0;
     textarea.setRangeText(text, start, end, 'end');
     textarea.focus();
-    handlePostInput();
+    if (target === 'life') handleLifeInput();
+    else handlePostInput();
 }
 
 function newPost() {
@@ -546,6 +552,7 @@ function hydrateLife(index) {
     dom.lifeMood.value = item.mood || '';
     dom.lifeTags.value = toTextList(item.tags);
     dom.lifeDetails.value = (item.details || []).join('\n');
+    dom.lifeContent.value = item.content || '';
     renderList();
 }
 
@@ -565,6 +572,7 @@ function handleLifeInput() {
         stat: dom.lifeStat.value.trim(),
         cover: dom.lifeCover.value.trim(),
         details: splitLines(dom.lifeDetails.value),
+        content: dom.lifeContent.value.trim(),
         tags: splitComma(dom.lifeTags.value)
     };
     setDirty();
@@ -586,6 +594,7 @@ function newLifeRecord() {
         stat: '',
         cover: '',
         details: [],
+        content: '',
         tags: []
     };
 }
