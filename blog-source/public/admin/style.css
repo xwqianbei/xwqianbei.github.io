@@ -412,6 +412,40 @@ select:focus {
     display: grid;
 }
 
+.media-panel {
+    display: grid;
+    gap: 0.85rem;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface-soft);
+}
+
+.media-head,
+.media-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.media-head h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.media-status {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
 .split-editor {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
@@ -465,6 +499,59 @@ select:focus {
     color: var(--faint);
 }
 
+.preview-body .image-block {
+    margin: 1.4rem 0;
+}
+
+.preview-body .image-block img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: var(--radius);
+}
+
+.preview-body .image-wide {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+}
+
+.preview-body .image-left,
+.preview-body .image-right {
+    max-width: 44%;
+    margin-top: 0.35rem;
+}
+
+.preview-body .image-left {
+    float: left;
+    margin-right: 1rem;
+}
+
+.preview-body .image-right {
+    float: right;
+    margin-left: 1rem;
+}
+
+.preview-body .image-pair-grid,
+.preview-body .image-gallery-grid {
+    display: grid;
+    gap: 0.55rem;
+}
+
+.preview-body .image-pair-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.preview-body .image-gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.preview-body figcaption {
+    margin-top: 0.45rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-align: center;
+}
+
 .toast {
     position: fixed;
     right: 1rem;
@@ -499,6 +586,7 @@ select:focus {
     .module-btn { min-height: 52px; }
     .library-panel { min-height: 360px; }
     .split-editor,
+    .media-grid,
     .post-meta-grid,
     .form-grid { grid-template-columns: 1fr; }
 }
@@ -513,4 +601,20 @@ select:focus {
         flex-wrap: wrap;
     }
     .module-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .media-head,
+    .media-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+    .preview-body .image-left,
+    .preview-body .image-right {
+        float: none;
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .preview-body .image-pair-grid,
+    .preview-body .image-gallery-grid {
+        grid-template-columns: 1fr;
+    }
 }

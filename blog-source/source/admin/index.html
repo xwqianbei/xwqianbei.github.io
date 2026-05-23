@@ -94,6 +94,39 @@ layout: false
                         <label>Cover<input id="postCover" type="text" placeholder="/images/self/life_photo.jpg"></label>
                     </div>
                     <label class="block-field">Excerpt<textarea id="postExcerpt" rows="3" placeholder="文章摘要"></textarea></label>
+
+                    <section class="media-panel" aria-label="图片插入与排版">
+                        <div class="media-head">
+                            <div>
+                                <p class="eyebrow">Media</p>
+                                <h3>Image Layout</h3>
+                            </div>
+                            <button id="uploadImageBtn" class="btn ghost" type="button"><i class="fas fa-cloud-arrow-up"></i><span>Upload Image</span></button>
+                        </div>
+                        <div class="media-grid">
+                            <label>Image File<input id="imageFileInput" type="file" accept="image/*"></label>
+                            <label>Site Path<input id="imagePathInput" type="text" placeholder="/images/posts/2026/my-photo.jpg"></label>
+                            <label>Alt Text<input id="imageAltInput" type="text" placeholder="图片描述"></label>
+                            <label>Caption<input id="imageCaptionInput" type="text" placeholder="图注，可选"></label>
+                            <label>Layout
+                                <select id="imageLayoutSelect">
+                                    <option value="full">Full width</option>
+                                    <option value="wide">Wide feature</option>
+                                    <option value="left">Float left</option>
+                                    <option value="right">Float right</option>
+                                    <option value="two">Two columns</option>
+                                    <option value="gallery">Gallery grid</option>
+                                </select>
+                            </label>
+                            <label>Second Image<input id="imageSecondPathInput" type="text" placeholder="/images/posts/2026/second.jpg"></label>
+                        </div>
+                        <div class="media-actions">
+                            <button id="insertImageBtn" class="btn primary" type="button"><i class="fas fa-image"></i><span>Insert Image Block</span></button>
+                            <button id="insertGalleryBtn" class="btn ghost" type="button"><i class="fas fa-table-cells-large"></i><span>Insert Gallery</span></button>
+                            <span id="imageUploadStatus" class="media-status">No image selected</span>
+                        </div>
+                    </section>
+
                     <div class="split-editor">
                         <label class="block-field editor-area">Content<textarea id="postContent" placeholder="Markdown content"></textarea></label>
                         <section class="preview-panel">

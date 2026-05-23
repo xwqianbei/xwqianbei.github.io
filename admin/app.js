@@ -5,6 +5,7 @@ const DRAFT_KEY = 'content_studio_post_drafts';
 
 const PATHS = {
     posts: 'blog-source/source/_posts/',
+    images: 'blog-source/source/images/',
     life: 'blog-source/source/_data/life.json',
     works: 'blog-source/source/_data/projects.json',
     profile: 'blog-source/source/_data/profile.json'
@@ -56,6 +57,16 @@ const dom = {
     postContent: $('#postContent'),
     postPreview: $('#postPreview'),
     postStats: $('#postStats'),
+    imageFileInput: $('#imageFileInput'),
+    imagePathInput: $('#imagePathInput'),
+    imageAltInput: $('#imageAltInput'),
+    imageCaptionInput: $('#imageCaptionInput'),
+    imageLayoutSelect: $('#imageLayoutSelect'),
+    imageSecondPathInput: $('#imageSecondPathInput'),
+    uploadImageBtn: $('#uploadImageBtn'),
+    insertImageBtn: $('#insertImageBtn'),
+    insertGalleryBtn: $('#insertGalleryBtn'),
+    imageUploadStatus: $('#imageUploadStatus'),
     saveDraftBtn: $('#saveDraftBtn'),
     newPostBtn: $('#newPostBtn'),
     lifeTitle: $('#lifeTitle'),
@@ -139,6 +150,10 @@ function bindEvents() {
 
     dom.saveDraftBtn.addEventListener('click', saveCurrentDraft);
     dom.newPostBtn.addEventListener('click', newPost);
+    dom.imageFileInput.addEventListener('change', handleImageFileChange);
+    dom.uploadImageBtn.addEventListener('click', uploadSelectedImage);
+    dom.insertImageBtn.addEventListener('click', insertImageBlock);
+    dom.insertGalleryBtn.addEventListener('click', insertGalleryBlock);
     dom.duplicateLifeBtn.addEventListener('click', duplicateLife);
     dom.deleteLifeBtn.addEventListener('click', deleteLife);
     dom.duplicateWorkBtn.addEventListener('click', duplicateWork);
@@ -343,6 +358,133 @@ function updatePostPreview() {
     dom.postStats.textContent = `${words} words`;
     if (window.marked && text.trim()) dom.postPreview.innerHTML = window.marked.parse(text);
     else dom.postPreview.innerHTML = '<p class="preview-empty">Markdown preview will appear here.</p>';
+}
+
+function handleImageFileChange() {
+    const file = dom.imageFileInput.files && dom.imageFileInput.files[0];
+    if (!file) {
+        dom.imageUploadStatus.textContent = 'No image selected';
+        return;
+    }
+    if (!file.type.startsWith('image/')) {
+        dom.imageUploadStatus.textContent = '请选择图片文件';
+        return;
+    }
+    const year = new Date().getFullYear();
+    const safeName = sanitizeFilename(file.name);
+    dom.imagePathInput.value = `/images/posts/${year}/${safeName}`;
+    if (!dom.imageAltInput.value.trim()) {
+        dom.imageAltInput.value = file.name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ');
+    }
+    dom.imageUploadStatus.textContent = `${file.name} · ${formatBytes(file.size)}`;
+}
+
+async function uploadSelectedImage() {
+    const file = dom.imageFileInput.files && dom.imageFileInput.files[0];
+    const sitePath = normalizeImageSitePath(dom.imagePathInput.value);
+    if (!file) return showToast('请先选择图片', 'error');
+    if (!sitePath) return showToast('请填写图片路径', 'error');
+    if (!state.token) return showToast('请先连接 GitHub', 'error');
+
+    const repoPath = `blog-source/source${sitePath}`;
+    setSave('loading', 'Uploading image');
+    dom.imageUploadStatus.textContent = 'Uploading...';
+
+    try {
+        const content = await readFileAsBase64(file);
+        const existingSha = await getExistingSha(repoPath);
+        const response = await fetch(apiUrl(`contents/${repoPath}`), {
+            method: 'PUT',
+            headers: githubHeaders(),
+            body: JSON.stringify({
+                message: `Upload image: ${sitePath}`,
+                content,
+                sha: existingSha || undefined
+            })
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || '图片上传失败');
+        dom.imagePathInput.value = sitePath;
+        dom.imageUploadStatus.textContent = `Uploaded ${sitePath}`;
+        setSave('idle', 'Image uploaded');
+        showToast('图片已上传', 'success');
+    } catch (error) {
+        dom.imageUploadStatus.textContent = 'Upload failed';
+        setSave('error', 'Upload failed');
+        showToast(error.message, 'error');
+    }
+}
+
+function insertImageBlock() {
+    const sitePath = normalizeImageSitePath(dom.imagePathInput.value);
+    const alt = dom.imageAltInput.value.trim() || 'Image';
+    const caption = dom.imageCaptionInput.value.trim();
+    const layout = dom.imageLayoutSelect.value || 'full';
+    if (!sitePath) return showToast('请先填写图片路径', 'error');
+
+    let html = '';
+    if (layout === 'two') {
+        const second = normalizeImageSitePath(dom.imageSecondPathInput.value);
+        if (!second) return showToast('Two columns 需要第二张图片路径', 'error');
+        html = buildImagePairBlock(sitePath, second, alt, caption);
+    } else if (layout === 'gallery') {
+        html = buildGalleryBlock([sitePath].concat(splitComma(dom.imageSecondPathInput.value)), alt, caption);
+    } else {
+        html = buildSingleImageBlock(sitePath, alt, caption, layout);
+    }
+
+    insertAtCursor(`\n${html}\n`);
+    showToast('图片排版块已插入', 'success');
+}
+
+function insertGalleryBlock() {
+    const first = normalizeImageSitePath(dom.imagePathInput.value);
+    const others = splitComma(dom.imageSecondPathInput.value).map(normalizeImageSitePath).filter(Boolean);
+    const paths = [first].concat(others).filter(Boolean);
+    if (!paths.length) return showToast('请填写至少一张图片路径', 'error');
+    insertAtCursor(`\n${buildGalleryBlock(paths, dom.imageAltInput.value.trim() || 'Gallery', dom.imageCaptionInput.value.trim())}\n`);
+    showToast('Gallery 已插入', 'success');
+}
+
+function buildSingleImageBlock(src, alt, caption, layout) {
+    return [
+        `<figure class="image-block image-${layout}">`,
+        `  <img src="${escapeAttribute(src)}" alt="${escapeAttribute(alt)}">`,
+        caption ? `  <figcaption>${escapeHtml(caption)}</figcaption>` : '',
+        `</figure>`
+    ].filter(Boolean).join('\n');
+}
+
+function buildImagePairBlock(first, second, alt, caption) {
+    return [
+        `<figure class="image-block image-pair">`,
+        `  <div class="image-pair-grid">`,
+        `    <img src="${escapeAttribute(first)}" alt="${escapeAttribute(alt)}">`,
+        `    <img src="${escapeAttribute(second)}" alt="${escapeAttribute(alt)}">`,
+        `  </div>`,
+        caption ? `  <figcaption>${escapeHtml(caption)}</figcaption>` : '',
+        `</figure>`
+    ].filter(Boolean).join('\n');
+}
+
+function buildGalleryBlock(paths, alt, caption) {
+    return [
+        `<figure class="image-block image-gallery">`,
+        `  <div class="image-gallery-grid">`,
+        paths.map((path, index) => `    <img src="${escapeAttribute(path)}" alt="${escapeAttribute(index === 0 ? alt : `${alt} ${index + 1}`)}">`).join('\n'),
+        `  </div>`,
+        caption ? `  <figcaption>${escapeHtml(caption)}</figcaption>` : '',
+        `</figure>`
+    ].filter(Boolean).join('\n');
+}
+
+function insertAtCursor(text) {
+    const textarea = dom.postContent;
+    const start = textarea.selectionStart || 0;
+    const end = textarea.selectionEnd || 0;
+    textarea.setRangeText(text, start, end, 'end');
+    textarea.focus();
+    handlePostInput();
 }
 
 function newPost() {
@@ -697,6 +839,18 @@ function encodeBase64(text) {
     return btoa(binary);
 }
 
+function readFileAsBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            const value = String(reader.result || '');
+            resolve(value.includes(',') ? value.split(',')[1] : value);
+        };
+        reader.onerror = () => reject(new Error('图片读取失败'));
+        reader.readAsDataURL(file);
+    });
+}
+
 function decodeBase64(content) {
     const clean = content.replace(/\s/g, '');
     const binary = atob(clean);
@@ -781,6 +935,28 @@ function buildFilename(title) {
     return `${date}-${slugify(title || 'untitled')}.md`;
 }
 
+function sanitizeFilename(filename) {
+    const dotIndex = filename.lastIndexOf('.');
+    const ext = dotIndex >= 0 ? filename.slice(dotIndex).toLowerCase().replace(/[^a-z0-9.]/g, '') : '';
+    const base = dotIndex >= 0 ? filename.slice(0, dotIndex) : filename;
+    return `${slugify(base)}${ext || '.jpg'}`;
+}
+
+function normalizeImageSitePath(value) {
+    const text = String(value || '').trim();
+    if (!text) return '';
+    const normalized = text.startsWith('/') ? text : `/${text}`;
+    if (normalized.startsWith('/images/')) return normalized;
+    return `/images/${normalized.replace(/^\/+/, '')}`;
+}
+
+function formatBytes(bytes) {
+    if (!bytes) return '0 B';
+    const units = ['B', 'KB', 'MB', 'GB'];
+    const index = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+    return `${(bytes / Math.pow(1024, index)).toFixed(index ? 1 : 0)} ${units[index]}`;
+}
+
 function ensureMarkdownFilename(filename) {
     if (!filename) return '';
     return filename.endsWith('.md') ? filename : `${filename}.md`;
@@ -814,4 +990,8 @@ function escapeHtml(value) {
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
+}
+
+function escapeAttribute(value) {
+    return escapeHtml(value).replace(/`/g, '&#096;');
 }
