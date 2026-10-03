@@ -1,0 +1,26 @@
+1:"$Sreact.fragment"
+2:I[22016,["/_next/static/chunks/3rfigbgpshptz.js"],""]
+3:I[97367,["/_next/static/chunks/3rfigbgpshptz.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+8:I[97367,["/_next/static/chunks/3rfigbgpshptz.js"],"ViewportBoundary"]
+9:I[97367,["/_next/static/chunks/3rfigbgpshptz.js"],"MetadataBoundary"]
+a:I[27201,["/_next/static/chunks/3rfigbgpshptz.js"],"IconMark"]
+c:I[39756,["/_next/static/chunks/3rfigbgpshptz.js"],"default"]
+d:I[37457,["/_next/static/chunks/3rfigbgpshptz.js"],"default"]
+11:I[63721,["/_next/static/chunks/3rfigbgpshptz.js"],"PublicNav"]
+12:I[43171,["/_next/static/chunks/3rfigbgpshptz.js","/_next/static/chunks/1ikzpl35crf8t.js"],"default"]
+:HL["/_next/static/chunks/0m073-bysazx1.css","style"]
+7:X
+f:X
+f:C
+0:{"buildId":"ykft1wnL_mgoylyKdKFKP","data":[{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"reader-bg","children":["$","article",null,{"className":"reader","children":[["$","$L2",null,{"className":"eyebrow","href":"/writing","children":"← 返回文字"}],["$","div",null,{"className":"reader-meta","children":["生活片段"," / ",["$","time",null,{"dateTime":"2026-10-03T02:28:08.547441+00:00","children":"2026/10/3"}]]}],["$","h1",null,{"children":"开封·万岁山"}],["$","p",null,{"className":"deck","children":"提交毕业论文后的一次开封旅行。万岁山的演出、夜晚和同行的欢笑，留成春天的一段记忆。"}],["$","div",null,{"className":"rule"}],["$","div",null,{"className":"prose","children":["$","div","0",{"children":[["$","p","0",{"children":[["$","span","0",{"children":"2026 年 3 月 22 日至 26 日，提交毕业论文后，我和朋友从北京出发去了开封。"}]]}],["$","p","1",{"children":[["$","span","0",{"children":"万岁山的演出和活动让这段旅程很热闹。那几天的街道、夜晚与欢笑，值得被认真记下。"}]]}]]}]}],["$","div",null,{"className":"rule"}],["$","$L2",null,{"href":"/writing","children":"← 返回文字目录"}]]}]}],null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":"$@6","staleTime":"$7","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$L8",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L9",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"开封·万岁山 — 自成"}],["$","meta","1",{"name":"description","content":"提交毕业论文后的一次开封旅行。万岁山的演出、夜晚和同行的欢笑，留成春天的一段记忆。"}],["$","link","2",{"rel":"icon","href":"/icon.svg?icon.2o4thkv0kfb26.svg","sizes":"any","type":"image/svg+xml"}],["$","$La","3",{}]]}]}]}],null]}],"isPartial":"$@b","staleTime":"$7","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lc",null,{"parallelRouterKey":"children","template":["$","$Ld",null,{}]}]]}],"isPartial":"$@e","staleTime":"$7","varyParams":"$f"},{"rsc":["$","$1","c",{"children":[null,["$","$Lc",null,{"parallelRouterKey":"children","template":["$","$Ld",null,{}]}]]}],"isPartial":"$@10","staleTime":"$7","varyParams":"$f"},{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/0m073-bysazx1.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/3rfigbgpshptz.js","async":true}]],["$","html",null,{"lang":"zh-CN","children":["$","body",null,{"children":[["$","a",null,{"className":"skip","href":"#main","children":"跳到正文"}],["$","div",null,{"className":"mock public","children":[["$","header",null,{"className":"public-header","children":[["$","$L2",null,{"className":"logo","href":"/","children":[["$","span",null,{"className":"logo-mark","children":["自",["$","em",null,{"children":"／"}],"成"]}],["$","span",null,{"className":"logo-sub","children":["BECOMING",["$","br",null,{}],"A LIVING ARCHIVE"]}]]}],["$","$L11",null,{}],["$","div",null,{"className":"header-side","children":["EST. 2026",["$","br",null,{}],"PRIVATE SELF / PUBLIC WINDOW"]}]]}],["$","main",null,{"id":"main","children":["$","$Lc",null,{"parallelRouterKey":"children","error":"$12","errorStyles":[],"errorScripts":[["$","script","script-0",{"src":"/_next/static/chunks/1ikzpl35crf8t.js","async":true}]],"template":["$","$Ld",null,{}],"notFound":[["$","div",null,{"className":"notice-page","children":[["$","h1",null,{"children":"这一页暂时不在这里。"}],["$","p",null,{"children":"内容可能尚未发布，或已经收起。"}],["$","$L2",null,{"className":"button","href":"/","children":"返回近况"}]]}],[]]}]}],["$","footer",null,{"className":"public-footer","children":[["$","span",null,{"children":"自成 / BECOMING"}],["$","span",null,{"children":"仍在成为。 THE STORY IS STILL BEING WRITTEN."}]]}]]}]]}]}]]}],"isPartial":"$@13","staleTime":"$7","varyParams":null}],"isUpgradeableISRFallback":false,"a":"$@14","rootVaryParams":null,"needsRuntimeRequest":"$@15"}
+5:null
+7:300
+15:true
+7:C
+14:0
+b:"$undefined"
+e:"$undefined"
+10:"$undefined"
+13:"$undefined"
+6:"$undefined"

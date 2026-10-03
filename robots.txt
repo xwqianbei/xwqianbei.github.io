@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /posts/__empty/
+Disallow: /media/00000000-0000-0000-0000-000000000000
+
+Sitemap: https://xwqianbei.github.io/sitemap.xml
